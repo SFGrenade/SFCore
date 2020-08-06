@@ -1,5 +1,4 @@
-﻿using System;
-using ModCommon;
+﻿using ModCommon;
 using ModCommon.Util;
 using UnityEngine;
 using HutongGames.PlayMaker;
