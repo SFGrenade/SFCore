@@ -12,7 +12,7 @@ namespace SFCore
     {
         /* 
          * CharmHelper
-         * v 1.1.1.0
+         * v 1.1.1.1
          */
 
         public List<int> charmIDs { get; private set; }
@@ -133,7 +133,7 @@ namespace SFCore
             var leftState = charmsFsm.GetState("Left");
             List<FsmInt> leftCharms = new List<FsmInt>();
             List<FsmEvent> switchEventsLeft = new List<FsmEvent>();
-            for (int i = 1; i <= finalCharmAmount; i += 10)
+            for (int i = 1; i <= (rows * 10); i += 10)
             {
                 leftCharms.Add(i);
                 switchEventsLeft.Add(FsmEvent.FindEvent("TO LEFT"));
@@ -145,7 +145,7 @@ namespace SFCore
             var rightState = charmsFsm.GetState("Right");
             List<FsmInt> rightCharms = new List<FsmInt>();
             List<FsmEvent> switchEventsRight = new List<FsmEvent>();
-            for (int i = 10; i <= finalCharmAmount; i += 10)
+            for (int i = 10; i <= (rows * 10); i += 10)
             {
                 rightCharms.Add(i);
                 switchEventsRight.Add(FsmEvent.FindEvent("TO RIGHT"));
