@@ -142,7 +142,7 @@ namespace SFCore
                     menuAch.text.text = Language.Language.Get("HIDDEN_ACHIEVEMENT", "Achievements");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (ach.type == AchievementType.Normal)
                 {

@@ -108,7 +108,7 @@ namespace SFCore
 
             var tmpCollectedCharmsGo = findChild(charmsGo, "Collected Charms").gameObject;
             int numCharms = tmpCollectedCharmsGo.transform.childCount - 1;
-            Log("numCharms " + numCharms);
+            //Log("numCharms " + numCharms);
 
             int finalCharmAmount = numCharms + customCharms;
 
