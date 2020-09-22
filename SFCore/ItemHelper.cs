@@ -4,6 +4,7 @@ using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Logger = Modding.Logger;
+using System.Collections.Generic;
 
 namespace SFCore
 {
@@ -93,6 +94,63 @@ namespace SFCore
                     equipBuildFsm.ChangeTransition(customStateName, "FINISHED", toState);
                     #endregion
                 }
+            }
+        }
+
+        public static void AddNormalItem(string uniqueName, Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
+        {
+            // May break without preloads, idk
+
+            #region Important Objects, do not touch
+            GameObject invGO = GameObject.Find("_GameCameras").FindGameObjectInChildren("Inv");
+            GameObject equipmentGO = invGO.FindGameObjectInChildren("Equipment");
+            #endregion
+
+            // Item Display Prefab
+            GameObject dashPrefab = equipmentGO.FindGameObjectInChildren("Dash Cloak");
+
+            // Custom name for the GameObject and the FSM State
+            string customStateName = uniqueName;
+
+            // Check if the GameObject already exists
+            GameObject invItemDisplay = equipmentGO.FindGameObjectInChildren(customStateName);
+
+            if (invItemDisplay == null)
+            {
+                #region Customize Item Display GameObject
+                invItemDisplay = GameObject.Instantiate(dashPrefab, equipmentGO.transform, true);
+                invItemDisplay.name = customStateName;
+                invItemDisplay.GetComponent<SpriteRenderer>().sprite = sprite;
+                var fg = invItemDisplay.transform.parent.parent.gameObject.GetComponent<FadeGroup>();
+                List<SpriteRenderer> srList = new List<SpriteRenderer>(fg.spriteRenderers);
+                srList.Add(invItemDisplay.GetComponent<SpriteRenderer>());
+                fg.spriteRenderers = srList.ToArray();
+                invItemDisplay.GetComponent<BoxCollider2D>().size = Vector2.one;
+                invItemDisplay.GetComponent<BoxCollider2D>().offset = Vector2.zero;
+                #endregion
+
+                #region Customize FSM
+                PlayMakerFSM equipBuildFsm = equipmentGO.LocateMyFSM("Build Equipment List");
+                equipBuildFsm.CopyState("Kings Brand", customStateName);
+                equipBuildFsm.GetAction<PlayerDataBoolTest>(customStateName, 0).boolName = playerdataBool;
+                equipBuildFsm.GetAction<FindChild>(customStateName, 1).childName = customStateName;
+                equipBuildFsm.GetAction<SetFsmString>(customStateName, 9).setValue = nameConvo;
+                equipBuildFsm.GetAction<SetFsmString>(customStateName, 10).setValue = descConvo;
+                #endregion
+
+                #region Include custom item in Build Equipment List
+                string toState = "Pause";
+                foreach (FsmTransition transition in equipBuildFsm.GetState("Rancid Egg").Transitions)
+                {
+                    if (transition.EventName == "FINISHED")
+                    {
+                        toState = transition.ToState;
+                    }
+                }
+
+                equipBuildFsm.ChangeTransition("Rancid Egg", "FINISHED", customStateName);
+                equipBuildFsm.ChangeTransition(customStateName, "FINISHED", toState);
+                #endregion
             }
         }
 
