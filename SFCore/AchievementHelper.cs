@@ -21,33 +21,39 @@ namespace SFCore
     {
         /* 
          * AchievementHelper
-         * v 1.0.1.0
+         * v 2.0.0.0
          */
 
-        public List<s_CustomAchievement> customAchievements;
+        private static List<s_CustomAchievement> customAchievements = new List<s_CustomAchievement>();
+        private static bool initialized = false;
 
-        /* 
-         * Example inclusion in your mod's Initialize() function:
-         * 
-         * achHelper = new AchievementHelper();
-         * achHelper.customAchievements.Add(new s_CustomAchievement() {
-         *     key = "",
-         *     sprite = new Sprite(),
-         *     titleConvo = "",
-         *     textConvo = "",
-         *     hidden = false
-         * });
-         */
-
-        public AchievementHelper()
+        public static void Initialize()
         {
-            customAchievements = new List<s_CustomAchievement>();
+            if (!initialized)
+            {
+                initialized = true;
 
-            On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
-            On.AchievementHandler.Awake += OnAchievementHandlerAwake;
+                On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
+                On.AchievementHandler.Awake += OnAchievementHandlerAwake;
+            }
         }
 
-        private void initAchievements(AchievementsList list)
+        public static void AddAchievement(string key, Sprite sprite, string titleConvo, string textConvo, bool hidden)
+        {
+            if (initialized)
+            {
+                customAchievements.Add(new s_CustomAchievement()
+                {
+                    key = key,
+                    sprite = sprite,
+                    titleConvo = titleConvo,
+                    textConvo = textConvo,
+                    hidden = hidden
+                });
+            }
+        }
+
+        private static void initAchievements(AchievementsList list)
         {
             foreach (var ca in customAchievements)
             {
@@ -77,24 +83,24 @@ namespace SFCore
                 }
             }
         }
-        private void OnAchievementHandlerAwake(On.AchievementHandler.orig_Awake orig, AchievementHandler self)
+        private static void OnAchievementHandlerAwake(On.AchievementHandler.orig_Awake orig, AchievementHandler self)
         {
-            Log("!AchievementHandler Awake");
+            //Log("!AchievementHandler Awake");
             orig(self);
             initAchievements(self.achievementsList);
-            Log("~AchievementHandler Awake");
+            //Log("~AchievementHandler Awake");
         }
-        private void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
+        private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
         {
-            Log("!UIManager RefreshAchievementsList");
+            //Log("!UIManager RefreshAchievementsList");
             initAchievements(GameManager.instance.achievementHandler.achievementsList);
             initMenuAchievements(self);
             orig(self);
 
             On.UIManager.RefreshAchievementsList -= OnUIManagerRefreshAchievementsList;
-            Log("~UIManager RefreshAchievementsList");
+            //Log("~UIManager RefreshAchievementsList");
         }
-        private void initMenuAchievements(UIManager manager)
+        private static void initMenuAchievements(UIManager manager)
         {
             // Stolen from the game
             GameManager gm = GameManager.instance;
@@ -115,7 +121,7 @@ namespace SFCore
             }
             manager.menuAchievementsList.MarkInit();
         }
-        private void UpdateMenuAchievementStatus(Achievement ach, MenuAchievement menuAch, Sprite hiddenIcon)
+        private static void UpdateMenuAchievementStatus(Achievement ach, MenuAchievement menuAch, Sprite hiddenIcon)
         {
             // Stolen from the game
             try
@@ -160,13 +166,13 @@ namespace SFCore
             }
         }
 
-        private void Log(string message)
+        private static void Log(string message)
         {
-            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
+            Logger.Log($"[SFCore]:[AchievementHelper] - {message}");
         }
-        private void Log(object message)
+        private static void Log(object message)
         {
-            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message.ToString()}");
+            Logger.Log($"[SFCore]:[AchievementHelper] - {message.ToString()}");
         }
     }
 }
