@@ -73,6 +73,7 @@
     <Compile Include="EnviromentParticleHelper.cs" />
     <Compile Include="ItemHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionConverters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
