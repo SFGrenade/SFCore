@@ -10,10 +10,8 @@ namespace SFCore
     {
         public string key;
         public Sprite sprite;
-
         public string titleConvo;
         public string textConvo;
-
         public bool hidden;
     }
 
@@ -32,7 +30,6 @@ namespace SFCore
             if (!initialized)
             {
                 initialized = true;
-
                 On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
                 On.AchievementHandler.Awake += OnAchievementHandlerAwake;
             }
@@ -66,9 +63,7 @@ namespace SFCore
                     localizedText = ca.textConvo,
                     localizedTitle = ca.titleConvo
                 };
-
                 bool containsCustomAch = false;
-
                 foreach (var ach in list.achievements)
                 {
                     if (ach.key == customAch.key)
@@ -76,7 +71,6 @@ namespace SFCore
                         containsCustomAch = true;
                     }
                 }
-
                 if (!containsCustomAch)
                 {
                     list.achievements.Add(customAch);
@@ -85,20 +79,18 @@ namespace SFCore
         }
         private static void OnAchievementHandlerAwake(On.AchievementHandler.orig_Awake orig, AchievementHandler self)
         {
-            //Log("!AchievementHandler Awake");
             orig(self);
             initAchievements(self.achievementsList);
-            //Log("~AchievementHandler Awake");
+            initAchievements(self.achievementsListPrefab);
         }
         private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
         {
-            //Log("!UIManager RefreshAchievementsList");
             initAchievements(GameManager.instance.achievementHandler.achievementsList);
+            initAchievements(GameManager.instance.achievementHandler.achievementsListPrefab);
             initMenuAchievements(self);
             orig(self);
 
             On.UIManager.RefreshAchievementsList -= OnUIManagerRefreshAchievementsList;
-            //Log("~UIManager RefreshAchievementsList");
         }
         private static void initMenuAchievements(UIManager manager)
         {
