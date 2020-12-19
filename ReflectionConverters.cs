@@ -53,8 +53,6 @@ namespace SFCore
 
                 return users;
             }
-
-            return null;
         }
     }
     public class ReflectionPrivateConverter<T> : JsonConverter where T : new()
@@ -103,8 +101,6 @@ namespace SFCore
 
                 return users;
             }
-
-            return null;
         }
     }
     public class ReflectionConverter<T> : JsonConverter where T : new()
@@ -153,8 +149,6 @@ namespace SFCore
 
                 return users;
             }
-
-            return null;
         }
     }
 }

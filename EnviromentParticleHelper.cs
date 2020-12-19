@@ -49,25 +49,15 @@ namespace SFCore
             try
             {
                 self.footStepsRunAudioSource.clip = customRunAudio[pd.GetInt(nameof(pd.environmentType))];
-                //Log($"Audio set to: {self.footStepsRunAudioSource.clip}");
             }
-            catch (Exception ex)
-            {
-                //Log($"no custom footStepsRunAudio for enviroment {pd.GetInt(nameof(pd.environmentType))}");
-                //Log($"Error: {ex.Message}");
-                //Log($"Stack: {ex.StackTrace}");
-            }
+            catch (Exception)
+            {}
             try
             {
                 self.footStepsWalkAudioSource.clip = customWalkAudio[pd.GetInt(nameof(pd.environmentType))];
-                //Log($"Audio set to: {self.footStepsWalkAudioSource.clip}");
             }
-            catch (Exception ex)
-            {
-                //Log($"no custom footStepsWalkAudio for enviroment {pd.GetInt(nameof(pd.environmentType))}");
-                //Log($"Error: {ex.Message}");
-                //Log($"Stack: {ex.StackTrace}");
-            }
+            catch (Exception)
+            {}
         }
         private static void OnDashEffectOnEnable(On.DashEffect.orig_OnEnable orig, DashEffect self)
         {
@@ -88,14 +78,9 @@ namespace SFCore
                 dashEffectGo.transform.SetParent(self.transform);
                 dashEffectGo.transform.localPosition = Vector3.zero;
                 dashEffectGo.SetActive(true);
-                //Log($"dash effect activated: \"{dashEffectGo}\", at: {dashEffectGo.transform.position}");
             }
-            catch (Exception ex)
-            {
-                //Log($"no custom dashEffect for enviroment {pd.GetInt(nameof(pd.environmentType))}");
-                //Log($"Error: {ex.Message}");
-                //Log($"Stack: {ex.StackTrace}");
-            }
+            catch (Exception)
+            {}
         }
         private static void OnHardLandEffectOnEnable(On.HardLandEffect.orig_OnEnable orig, HardLandEffect self)
         {
@@ -114,12 +99,8 @@ namespace SFCore
                 hardLandEffectGo.SetActive(true);
                 //Log($"hard land effect activated: \"{hardLandEffectGo}\", at: {hardLandEffectGo.transform.position}");
             }
-            catch (Exception ex)
-            {
-                //Log($"no custom hardLandEffect for enviroment {pd.GetInt(nameof(pd.environmentType))}");
-                //Log($"Error: {ex.Message}");
-                //Log($"Stack: {ex.StackTrace}");
-            }
+            catch (Exception)
+            {}
         }
         private static void OnJumpEffectsOnEnable(On.JumpEffects.orig_OnEnable orig, JumpEffects self)
         {
@@ -140,12 +121,8 @@ namespace SFCore
                 jumpEffectGo.SetActive(true);
                 //Log($"jump effect activated: \"{jumpEffectGo}\", at: {jumpEffectGo.transform.position}");
             }
-            catch (Exception ex)
-            {
-                //Log($"no custom jumpEffect for enviroment {pd.GetInt(nameof(pd.environmentType))}");
-                //Log($"Error: {ex.Message}");
-                //Log($"Stack: {ex.StackTrace}");
-            }
+            catch (Exception)
+            {}
         }
         private static void OnSoftLandEffectOnEnable(On.SoftLandEffect.orig_OnEnable orig, SoftLandEffect self)
         {
@@ -166,12 +143,8 @@ namespace SFCore
                 softLandEffectGo.SetActive(true);
                 //Log($"soft land effect activated: \"{softLandEffectGo}\", at: {softLandEffectGo.transform.position}");
             }
-            catch (Exception ex)
-            {
-                //Log($"no custom softLandEffect for enviroment {pd.GetInt(nameof(pd.environmentType))}");
-                //Log($"Error: {ex.Message}");
-                //Log($"Stack: {ex.StackTrace}");
-            }
+            catch (Exception)
+            {}
         }
         private static void OnEventRegisterAwake(On.EventRegister.orig_Awake orig, EventRegister self)
         {
