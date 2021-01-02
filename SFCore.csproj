@@ -77,6 +77,10 @@
     <Compile Include="EnviromentParticleHelper.cs" />
     <Compile Include="ItemHelper.cs" />
     <Compile Include="MenuStyleHelper.cs" />
+    <Compile Include="MonoBehaviours\BlurPlanePatcher.cs" />
+    <Compile Include="MonoBehaviours\PatchMusicRegions.cs" />
+    <Compile Include="MonoBehaviours\SceneMapPatcher.cs" />
+    <Compile Include="MonoBehaviours\SpritePatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionConverters.cs" />
     <Compile Include="TitleLogoHelper.cs" />
@@ -85,6 +89,7 @@
     <None Include=".gitignore" />
     <None Include="ReadMe.md" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
