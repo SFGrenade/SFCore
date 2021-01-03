@@ -45,12 +45,14 @@ namespace SFCore
 
             On.CharmIconList.Start += OnCharmIconListStart;
             On.PlayerData.CalculateNotchesUsed += OnPlayerDataCalculateNotchesUsed;
-            On.BuildEquippedCharms.BuildCharmList += OnBuildEquippedCharmsBuildCharmList;
+            On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
         }
 
-        private void OnBuildEquippedCharmsBuildCharmList(On.BuildEquippedCharms.orig_BuildCharmList orig, BuildEquippedCharms self)
+        private void OnBuildEquippedCharmsStart(On.BuildEquippedCharms.orig_Start orig, BuildEquippedCharms self)
         {
-            Log("!OnBECBCL");
+            Log("!OnBECS");
+
+            orig(self);
 
             #region Edit BuildEquippedCharms
             int numCharms = self.gameObjectList.Count;
@@ -64,7 +66,7 @@ namespace SFCore
                 {
                     var equippedCharmPrefab = GameObject.Instantiate(self.gameObjectList[0]);
                     SetInactive(equippedCharmPrefab);
-                    equippedCharmPrefab.name = "Charm " + (numCharms + i + 1).ToString();
+                    equippedCharmPrefab.name = $"Charm {numCharms + i + 1}";
 
                     var ci = equippedCharmPrefab.GetComponent<CharmItem>();
 
@@ -75,9 +77,8 @@ namespace SFCore
                 }
             }
             #endregion
-            orig(self);
 
-            Log("~OnBECBCL");
+            Log("~OnBECS");
         }
 
         private void OnPlayerDataCalculateNotchesUsed(On.PlayerData.orig_CalculateNotchesUsed orig, PlayerData self)
@@ -113,15 +114,14 @@ namespace SFCore
             int finalCharmAmount = numCharms + customCharms;
 
             CharmIconList cil = CharmIconList.Instance;
-            Sprite[] tmpSpriteList = new Sprite[finalCharmAmount + 1];
-            cil.spriteList.CopyTo(tmpSpriteList, 0);
+            List<Sprite> tmpSpriteList = new List<Sprite>(cil.spriteList);
             for (int i = 0; i < customCharms; i++)
             {
-                tmpSpriteList[numCharms + i + 1] = customSprites[i % customSprites.Length];
-                SetInactive(tmpSpriteList[numCharms + i + 1]);
+                SetInactive(customSprites[i % customSprites.Length]);
+                tmpSpriteList.Add(customSprites[i % customSprites.Length]);
                 charmIDs.Add(numCharms + i + 1);
             }
-            cil.spriteList = tmpSpriteList;
+            cil.spriteList = tmpSpriteList.ToArray();
 
             int rows = (int)Math.Ceiling(finalCharmAmount / 10.0);
 
@@ -175,6 +175,8 @@ namespace SFCore
                     bbT1 = findChild(backboardsGo, "BB " + bbPrefabNum);
                     bbT2 = findChild(backboardsGo, "BB " + (bbPrefabNum - 20));
                     bbPrefab = GameObject.Instantiate(bbT1.gameObject, backboardsGo.transform, true);
+                    AddToCharmFadeGroup(bbPrefab, backboardsGo.transform.parent.gameObject);
+                    AddToCharmFadeGroup(findChild(bbPrefab, "New Item Orb").gameObject, backboardsGo.transform.parent.gameObject);
                     bbPrefab.transform.localPosition = bbT1.localPosition + ((bbT1.localPosition - bbT2.localPosition) * (((i / 10) - (bbPrefabNum / 10)) / 2));
                     bbPrefab.name = "BB " + i;
                     bbPrefab.SetActive(true);
@@ -202,6 +204,7 @@ namespace SFCore
                     bool tmp = ccT1.gameObject.activeSelf;
                     ccT1.gameObject.SetActive(true);
                     ccPrefab = GameObject.Instantiate(ccT1.gameObject, collectedCharmsGo.transform, true);
+                    AddToCharmFadeGroup(findChild(ccPrefab, "Sprite").gameObject, collectedCharmsGo.transform.parent.gameObject);
                     ccT1.gameObject.SetActive(tmp);
                     ccPrefab.SetActive(true);
                     ccPrefab.name = i.ToString();
@@ -209,7 +212,7 @@ namespace SFCore
                     charmShowFsm = ccPrefab.LocateMyFSM("charm_show_if_collected");
                     var ccFsmVars = charmShowFsm.FsmVariables;
                     ccFsmVars.GetFsmInt("ID").Value = i;
-                    ccFsmVars.GetFsmString("Name").Value = "Charm " + i.ToString();
+                    ccFsmVars.GetFsmString("Name").Value = $"Charm {i}";
                     ccFsmVars.GetFsmString("PD Bool Name").Value = "gotCharm_" + i;
                     ccFsmVars.GetFsmGameObject("Charm Sprite").Value = findChild(ccPrefab, "Sprite").gameObject;
                     ccFsmVars.GetFsmGameObject("Glow").Value = findChild(ccPrefab, "Glow").gameObject;
@@ -264,6 +267,15 @@ namespace SFCore
 
             Log("~OnCILS");
             orig(self);
+        }
+        private static void AddToCharmFadeGroup(GameObject spriteGo, GameObject fgGo)
+        {
+            var sr = spriteGo.GetComponent<SpriteRenderer>();
+            sr.sortingLayerID = 629535577;
+            var fg = fgGo.GetComponent<FadeGroup>();
+            var srList = new List<SpriteRenderer>(fg.spriteRenderers);
+            srList.Add(sr);
+            fg.spriteRenderers = srList.ToArray();
         }
 
         private Transform findChild(GameObject parent, string name)
