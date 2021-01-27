@@ -138,7 +138,10 @@ namespace SFCore
             {
                 orig(self, index, fade, false);
             }
-            orig(self, index, fade, save);
+            else
+            {
+                orig(self, index, fade, save);
+            }
             //GameManager.instance.StartCoroutine(UpdateTexturesWhileSwitching(self));
         }
 
