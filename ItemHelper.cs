@@ -1,320 +1,751 @@
-﻿using ModCommon;
-using ModCommon.Util;
+﻿using System;
+using SFCore.Utils;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Logger = Modding.Logger;
 using System.Collections.Generic;
-using IL.InControl;
+using System.Linq;
+using Modding;
+using TMPro;
+using UnityEngine.SceneManagement;
 using UObject = UnityEngine.Object;
+using SFCore.MonoBehaviours;
 
 namespace SFCore
 {
-    public struct s_CustomNormalItem
+    public enum ItemType
     {
-        public string uniqueName;
-        public Sprite sprite;
-
-        public string playerdataBool;
-        public string nameConvo;
-        public string descConvo;
+        Normal,
+        OneTwo,
+        OneTwoBoth,
+        Counted,
+        Flower
     }
 
     public class ItemHelper
     {
-        /* 
-         * ItemHelper
-         * v 1.0.0.0
-         */
-
-        public ItemHelper(s_CustomNormalItem[] customNormalItems)
+        public struct Item
         {
-            foreach (var i in customNormalItems)
+            public ItemType type;
+            public string uniqueName;
+            public Sprite sprite1;
+            public Sprite sprite2;
+            public Sprite spriteBoth;
+            public string playerdataBool1;
+            public string playerdataBool2;
+            public string playerdataInt;
+            public string nameConvo1;
+            public string nameConvo2;
+            public string nameConvoBoth;
+            public string descConvo1;
+            public string descConvo2;
+            public string descConvoBoth;
+        }
+
+        private static Dictionary<string, Sprite> defaultSprites = new Dictionary<string, Sprite>();
+
+        private static List<Item> defaultItemList = new List<Item>();
+        private static List<Item> customItemList = new List<Item>();
+
+        private static bool initialized = false;
+
+        static ItemHelper()
+        {
+            defaultItemList = new List<Item>();
+            customItemList = new List<Item>();
+            ModHooks.Instance.LanguageGetHook += LanguageGetHook;
+            On.GameCameras.Start += GameCamerasOnStart;
+        }
+
+        private static void GameCamerasOnStart(On.GameCameras.orig_Start orig, GameCameras self)
+        {
+            orig(self);
+
+            Log("Starting to change inventory");
+
+            #region Display no equipments
+
+            var equipmentGo = self.gameObject.FindGameObjectInChildren("Equipment");
+            var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
+            if (equipmentFsm.GetState("Init").Fsm == null)
             {
-                AddNormalItem(i.uniqueName, i.sprite, i.playerdataBool, i.nameConvo, i.descConvo);
+                Log("Warning: 'Build Equipment List' Fsm not initialized");
+                equipmentFsm.Preprocess();
             }
+            equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
+
+            #endregion
+
+            InitDefaultItems(equipmentGo);
+
+            var successful = CopyJournalPane(self.gameObject.Find("Inventory"));
+
+            if (successful)
+            {
+                self.gameObject.Find("Inventory").LocateMyFSM("Inventory Control").SetState("Init");
+                Log("Finished to change inventory");
+            }
+            else
+            {
+                Log("Couldn't finish changing inventory");
+            }
+        }
+
+        private static string LanguageGetHook(string key, string sheet)
+        {
+            if (key.Equals("PANE_EQUIPMENT") && sheet.Equals("UI"))
+                return "Equipment";
+            return Language.Language.GetInternal(key, sheet);
+        }
+
+        public static void init() { }
+
+        private static void InitDefaultItems(GameObject equipmentGo)
+        {
+            var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
+
+            if (equipmentFsm.GetState("Dash").Fsm == null || initialized) return;
+
+            Log("Reconstructing Items");
+
+            #region Populate sprite dictionary
+
+            if (defaultSprites.ContainsKey("Dash"))
+                defaultSprites["Dash"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Dash Cloak")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Dash",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Dash Cloak").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("ShadowDash"))
+                defaultSprites["ShadowDash"] =
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Dash", 16).sprite.Value);
+            else
+                defaultSprites.Add("ShadowDash",
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Dash", 16).sprite.Value));
+            if (defaultSprites.ContainsKey("Walljump"))
+                defaultSprites["Walljump"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Mantis Claw")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Walljump",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Mantis Claw").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Super Dash"))
+                defaultSprites["Super Dash"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Super Dash")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Super Dash",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Super Dash").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Double Jump"))
+                defaultSprites["Double Jump"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Double Jump")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Double Jump",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Double Jump").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Lantern"))
+                defaultSprites["Lantern"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Lantern")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Lantern",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Lantern").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Map"))
+                defaultSprites["Map"] =
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map", 1).sprite.Value);
+            else
+                defaultSprites.Add("Map",
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map", 1).sprite.Value));
+            if (defaultSprites.ContainsKey("Quill"))
+                defaultSprites["Quill"] =
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Quill", 1).sprite.Value);
+            else
+                defaultSprites.Add("Quill",
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Quill", 1).sprite.Value));
+            if (defaultSprites.ContainsKey("MapQuill"))
+                defaultSprites["MapQuill"] =
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map and Quill", 1).sprite.Value);
+            else
+                defaultSprites.Add("MapQuill",
+                    (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map and Quill", 1).sprite.Value));
+            if (defaultSprites.ContainsKey("Kings Brand"))
+                defaultSprites["Kings Brand"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Kings Brand")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Kings Brand",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Kings Brand").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Tram Pass"))
+                defaultSprites["Tram Pass"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Tram Pass")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Tram Pass",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Tram Pass").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("City Key"))
+                defaultSprites["City Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("City Key")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("City Key",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("City Key").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Store Key"))
+                defaultSprites["Store Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Store Key")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Store Key",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Store Key").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Love Key"))
+                defaultSprites["Love Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Love Key")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Love Key",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Love Key").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Flower"))
+                defaultSprites["Flower"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
+                    .GetComponent<InvItemDisplay>().inactiveSprite);
+            else
+                defaultSprites.Add("Flower",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<InvItemDisplay>()
+                        .inactiveSprite));
+            if (defaultSprites.ContainsKey("FlowerBroken"))
+                defaultSprites["FlowerBroken"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
+                    .GetComponent<InvItemDisplay>().activeSprite);
+            else
+                defaultSprites.Add("FlowerBroken",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<InvItemDisplay>().activeSprite));
+            if (defaultSprites.ContainsKey("Simple Key"))
+                defaultSprites["Simple Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Simple Key",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Ore"))
+                defaultSprites["Ore"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Ore").GetComponent<SpriteRenderer>()
+                    .sprite);
+            else
+                defaultSprites.Add("Ore",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Ore").GetComponent<SpriteRenderer>().sprite));
+            if (defaultSprites.ContainsKey("Rancid Egg"))
+                defaultSprites["Rancid Egg"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Rancid Egg")
+                    .GetComponent<SpriteRenderer>().sprite);
+            else
+                defaultSprites.Add("Rancid Egg",
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Rancid Egg").GetComponent<SpriteRenderer>().sprite));
+
+            #endregion
+
+            #region Make new inventory
+
+            AddDefaultOneTwoBothItem("Dash",
+                defaultSprites["Dash"], defaultSprites["ShadowDash"], defaultSprites["ShadowDash"],
+                "hasDash", "hasShadowDash",
+                "INV_NAME_DASH", "INV_NAME_SHADOWDASH", "INV_NAME_SHADOWDASH",
+                "INV_DESC_DASH", "INV_DESC_SHADOWDASH", "INV_DESC_SHADOWDASH");
+            AddDefaultNormalItem("Walljump", defaultSprites["Walljump"], "hasWalljump", "INV_NAME_WALLJUMP",
+                "INV_DESC_WALLJUMP");
+            AddDefaultNormalItem("Super Dash", defaultSprites["Super Dash"], "hasSuperDash", "INV_NAME_SUPERDASH",
+                "INV_DESC_SUPERDASH");
+            AddDefaultNormalItem("Double Jump", defaultSprites["Double Jump"], "hasDoubleJump",
+                "INV_NAME_DOUBLEJUMP", "INV_DESC_DOUBLEJUMP");
+            AddDefaultNormalItem("Lantern", defaultSprites["Lantern"], "hasLantern", "INV_NAME_LANTERN",
+                "INV_DESC_LANTERN");
+            AddDefaultOneTwoBothItem("Map Quill",
+                defaultSprites["Map"], defaultSprites["Quill"], defaultSprites["MapQuill"],
+                "hasMap", "hasQuill",
+                "INV_NAME_MAP", "INV_NAME_QUILL", "INV_NAME_MAPQUILL",
+                "INV_DESC_MAP", "INV_DESC_QUILL", "INV_DESC_MAPQUILL");
+            AddDefaultNormalItem("Kings Brand", defaultSprites["Kings Brand"], "hasKingsBrand",
+                "INV_NAME_KINGSBRAND", "INV_DESC_KINGSBRAND");
+            AddDefaultNormalItem("Tram Pass", defaultSprites["Tram Pass"], "hasTramPass", "INV_NAME_TRAM_PASS",
+                "INV_DESC_TRAM_PASS");
+            AddDefaultNormalItem("City Key", defaultSprites["City Key"], "hasCityKey", "INV_NAME_CITYKEY",
+                "INV_DESC_CITYKEY");
+            AddDefaultNormalItem("Store Key", defaultSprites["Store Key"], "hasSlyKey", "INV_NAME_STOREKEY",
+                "INV_DESC_STOREKEY");
+            AddDefaultNormalItem("Love Key", defaultSprites["Love Key"], "hasLoveKey", "INV_NAME_LOVEKEY",
+                "INV_DESC_LOVEKEY");
+            AddDefaultFlowerItem("Xun Flower",
+                defaultSprites["Flower"], defaultSprites["FlowerBroken"],
+                "hasXunFlower", "extraFlowerAppear", "xunFlowerBroken",
+                "INV_NAME_FLOWER", "INV_NAME_FLOWER_BROKEN",
+                "INV_DESC_FLOWER", "INV_DESC_FLOWER_BROKEN", "INV_DESC_FLOWER_QG", "INV_DESC_FLOWER_BROKEN_QG");
+            AddDefaultCountedItem("Simple Key", defaultSprites["Simple Key"], "simpleKeys", "INV_NAME_SIMPLEKEY",
+                "INV_DESC_SIMPLEKEY");
+            AddDefaultCountedItem("Ore", defaultSprites["Ore"], "ore", "INV_NAME_ORE", "INV_DESC_ORE");
+            AddDefaultCountedItem("Rancid Egg", defaultSprites["Rancid Egg"], "rancidEggs", "INV_NAME_RANCIDEGG",
+                "INV_DESC_RANCIDEGG");
+
+            #endregion
+
+            foreach (var pair in defaultSprites)
+            {
+                Log($"Sprite '{pair.Key}': '{pair.Value}'");
+            }
+
+            initialized = true;
+
+            Log("Items Reconstructed");
+        }
+
+        private static bool CopyJournalPane(GameObject inventoryGo)
+        {
+            var inventoryFsm = inventoryGo.LocateMyFSM("Inventory Control");
+            var inventoryFsmVars = inventoryFsm.FsmVariables;
+
+            if (inventoryFsm.GetState("Closed").Fsm == null)
+            {
+                Log("Warning: 'Inventory Control' Fsm not initialized");
+                inventoryFsm.Preprocess();
+            }
+
+            var newPaneGo = GameObject.Instantiate(inventoryGo.FindGameObjectInChildren("Journal"), inventoryGo.transform);
+            newPaneGo.SetActive(false);
+            newPaneGo.name = "ItemList";
+            var newPaneFOD = new FsmOwnerDefault()
+            {
+                GameObject = newPaneGo,
+                OwnerOption = OwnerDefaultOption.SpecifyGameObject
+            };
+
+            var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal");
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+
+            var newListGo = newPaneGo.FindGameObjectInChildren("Enemy List");
+            var newListFOD = new FsmOwnerDefault()
+            {
+                GameObject = newListGo,
+                OwnerOption = OwnerDefaultOption.SpecifyGameObject
+            };
+            UObject.Destroy(newListGo.GetComponent<JournalList>());
+            var cli = newListGo.AddComponent<CustomItemList>();
+            foreach (var item in defaultItemList)
+            {
+                cli.list.Add(item);
+            }
+            foreach (var item in customItemList)
+            {
+                cli.list.Add(item);
+            }
+
+            cli.yDistance = -2;
+            cli.BuildItemList();
+            cli.UpdateItemList();
+            newPaneGo.FindGameObjectInChildren("Enemy Sprite").transform.localScale = new Vector3(3, 3, 3);
+            newPaneGo.FindGameObjectInChildren("hunter_symbol").SetActive(false);
+
+            inventoryFsm.AddGameObjectVariable("ItemList Pane");
+            inventoryFsm.AddGameObjectVariable("ItemList List");
+
+            // Edit Inventory FSM to also save the new child
+            inventoryFsm.InsertAction("Init", new FindChild()
+            {
+                gameObject = inventoryFsm.GetAction<FindChild>("Init", 3).gameObject,
+                childName = "ItemList",
+                storeResult = inventoryFsmVars.FindFsmGameObject("ItemList Pane")
+            }, 12);
+
+            // Edit Inventory FSM to also save the new child
+            inventoryFsm.InsertAction("Init Enemy List", new FindChild()
+            {
+                gameObject = newPaneFOD,
+                childName = "Enemy List",
+                storeResult = inventoryFsmVars.FindFsmGameObject("ItemList List")
+            }, 2);
+            inventoryFsm.InsertAction("Init Enemy List", new CallMethodProper()
+            {
+                gameObject = newListFOD,
+                behaviour = "CustomItemList",
+                methodName = "BuildItemList",
+                parameters = new FsmVar[0],
+                storeResult = new FsmVar()
+            }, 3);
+            inventoryFsm.InsertAction("Init Enemy List", new ActivateGameObject()
+            {
+                gameObject = newPaneFOD,
+                activate = false,
+                recursive = false,
+                resetOnExit = false,
+                everyFrame = false
+            }, 5);
+
+            inventoryFsm.InsertAction("Refresh Enemy List", new CallMethodProper()
+            {
+                gameObject = newListFOD,
+                behaviour = "CustomItemList",
+                methodName = "UpdateItemList",
+                parameters = new FsmVar[0],
+                storeResult = new FsmVar()
+            }, 2);
+
+            #region new Open state
+
+            inventoryFsm.CopyState("Open Journal", "Open Equipment");
+            inventoryFsm.GetAction<GetLanguageString>("Open Equipment", 0).convName = "PANE_EQUIPMENT";
+            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 2).intValue = 4;
+            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 3).intValue = 4;
+            inventoryFsm.GetAction<SetGameObject>("Open Equipment", 4).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
+            inventoryFsm.AddTransition("Check Current Pane", "EQUIPMENT", "Open Equipment");
+
+            #endregion
+
+            #region Check Current Pane state
+
+            var ccp11ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo)
+            {
+                4
+            };
+            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo = ccp11ct.ToArray();
+            var ccp11se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent)
+            {
+                FsmEvent.FindEvent("EQUIPMENT")
+            };
+            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent = ccp11se.ToArray();
+
+            #endregion
+
+            #region new Check R state
+
+            inventoryFsm.CopyState("Next Journal 2", "Next Equipment 2");
+            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 2", 1).convName = "PANE_EQUIPMENT";
+            inventoryFsm.RemoveAction("Next Equipment 2", 0);
+            inventoryFsm.AddTransition("Check R Pane", "EQUIPMENT", "Next Equipment 2");
+
+            inventoryFsm.GetAction<SetIntValue>("Under 2", 0).intValue = 5;
+
+            #endregion
+
+            #region Check R Pane state
+
+            var crp1ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo)
+            {
+                4
+            };
+            crp1ct[5] = 5;
+            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo = crp1ct.ToArray();
+            var crp1se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent)
+            {
+                FsmEvent.FindEvent("EQUIPMENT")
+            };
+            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent = crp1se.ToArray();
+
+            #endregion
+
+            #region new Check L state
+
+            inventoryFsm.CopyState("Next Journal 3", "Next Equipment 3");
+            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 3", 1).convName = "PANE_EQUIPMENT";
+            inventoryFsm.RemoveAction("Next Equipment 3", 0);
+            inventoryFsm.AddTransition("Check L Pane", "EQUIPMENT", "Next Equipment 3");
+
+            inventoryFsm.GetAction<SetIntValue>("Under 3", 0).intValue = 5;
+
+            #endregion
+
+            #region Check L Pane state
+
+            var clp1ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo)
+            {
+                4
+            };
+            clp1ct[5] = 5;
+            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo = clp1ct.ToArray();
+            var clp1se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent)
+            {
+                FsmEvent.FindEvent("EQUIPMENT")
+            };
+            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent = clp1se.ToArray();
+
+            #endregion
+
+            #region new Loop state
+
+            inventoryFsm.CopyState("Next Journal", "Next Equipment");
+            inventoryFsm.GetAction<SetGameObject>("Next Equipment", 2).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
+            inventoryFsm.GetAction<GetLanguageString>("Next Equipment", 3).convName = "PANE_EQUIPMENT";
+            inventoryFsm.RemoveAction("Next Equipment", 0);
+            inventoryFsm.AddTransition("Loop Through", "EQUIPMENT", "Next Equipment");
+
+            inventoryFsm.GetAction<SetIntValue>("Under", 0).intValue = 5;
+
+            #endregion
+
+            #region Check Loop state
+
+            var cls3ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo)
+            {
+                4
+            };
+            cls3ct[5] = 5;
+            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo = cls3ct.ToArray();
+            var cls3se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent)
+            {
+                FsmEvent.FindEvent("EQUIPMENT")
+            };
+            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent = cls3se.ToArray();
+
+            #endregion
+
+            #region Enemy List - Item List Control
+
+            var newListFsm = newListGo.LocateMyFSM("Item List Control");
+            var newListFsmVars = newListFsm.FsmVariables;
+            newListFsm.GetAction<CallMethodProper>("Init", 15).behaviour = "CustomItemList";
+            newListFsm.GetAction<CallMethodProper>("Init", 18).behaviour = "CustomItemList";
+            newListFsm.RemoveAction("Init", 13);
+            newListFsm.GetAction<CallMethodProper>("New Item?", 0).behaviour = "CustomItemList";
+            newListFsm.AddAction("Prev Item", new SetIntValue()
+            {
+                intVariable = newListFsmVars.FindFsmInt("Current Item"),
+                intValue = 0,
+                everyFrame = false
+            });
+            newListFsm.RemoveAction("Prev Item", 0);
+            newListFsm.GetAction<CallMethodProper>("Get Details", 1).behaviour = "CustomItemList";
+            newListFsm.GetAction<GetLanguageString>("Get Details", 2).sheetName = "UI";
+            newListFsm.GetAction<CallMethodProper>("Get Details", 4).behaviour = "CustomItemList";
+            newListFsm.GetAction<CallMethodProper>("Get Details", 5).behaviour = "CustomItemList";
+            newListFsm.GetAction<GetLanguageString>("Get Details", 7).sheetName = "UI";
+            newListFsm.RemoveAction("Get Details", 0);
+
+            newListFsm.GetAction<CallMethodProper>("Notes?", 0).behaviour = "CustomItemList";
+            newListFsm.RemoveAction("Notes?", 1);
+            newListFsm.GetAction<SetTextMeshProText>("Get Notes", 5).textString = "";
+            newListFsm.RemoveAction("Get Notes", 4);
+            newListFsm.RemoveAction("Get Notes", 3);
+            newListFsm.GetAction<BuildString>("Display Kills", 4).stringParts = new FsmString[]
+            {
+                "Amount collected: ",
+                newListFsmVars.FindFsmString("Kills String")
+            };
+
+            newListFsm.ChangeTransition("Display Kills", "FINISHED", "MoveTo");
+            newListFsm.ChangeTransition("Get Notes", "FINISHED", "MoveTo");
+            newListFsm.InsertAction("Init", new CallMethodProper()
+            {
+                gameObject = newListFOD,
+                behaviour = "CustomItemList",
+                methodName = "UpdateItemList",
+                parameters = new FsmVar[0],
+                storeResult = new FsmVar()
+            }, 13);
+
+            #endregion
+
+            inventoryFsm.AddMethod("Close", () =>
+            {
+                uiJournalFsm.SetState("Inactive");
+            });
+
+            newListFsm.MakeLog();
+            inventoryFsm.MakeLog();
+            uiJournalFsm.MakeLog();
+
+            var fg = newPaneGo.GetComponent<FadeGroup>();
+            List<SpriteRenderer> tmpSprites = new List<SpriteRenderer>()
+            {
+                newPaneGo.Find("Arrow D").GetComponent<SpriteRenderer>(),
+                newPaneGo.Find("Arrow U").GetComponent<SpriteRenderer>(),
+                newPaneGo.Find("divider").GetComponent<SpriteRenderer>(),
+                newPaneGo.Find("divider (1)").GetComponent<SpriteRenderer>(),
+                newPaneGo.Find("Enemy Sprite").GetComponent<SpriteRenderer>(),
+                newPaneGo.Find("hunter_symbol").GetComponent<SpriteRenderer>(),
+                newPaneGo.Find("selector").GetComponent<SpriteRenderer>()
+
+            };
+            foreach (var sr in newPaneGo.Find("Cursor").GetComponentsInChildren<SpriteRenderer>())
+            {
+                tmpSprites.Add(sr);
+            }
+            List<TextMeshPro> tmpTextes = new List<TextMeshPro>()
+            {
+                newPaneGo.Find("Text Completion").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Completion").Find("Amount").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Completion").Find("Text Encountered").Find("Amount").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Completion").Find("Text Encountered").Find("Total").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Completion").Find("Total").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Desc").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Name").GetComponent<TextMeshPro>(),
+                newPaneGo.Find("Text Notes").GetComponent<TextMeshPro>(),
+            };
+            fg.spriteRenderers = tmpSprites.ToArray();
+            fg.texts = tmpTextes.ToArray();
+
+            return true;
         }
 
         public static void AddNormalItem(string uniqueName, Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
         {
-            // May break without preloads, idk
-
-            #region Important Objects, do not touch
-            GameObject invGO = GameObject.Find("_GameCameras").FindGameObjectInChildren("Inv");
-            GameObject equipmentGO = invGO.FindGameObjectInChildren("Equipment");
-            #endregion
-
-            // Item Display Prefab
-            GameObject dashPrefab = equipmentGO.FindGameObjectInChildren("Dash Cloak");
-
-            // Custom name for the GameObject and the FSM State
-            string customStateName = uniqueName;
-
-            // Check if the GameObject already exists
-            GameObject invItemDisplay = equipmentGO.FindGameObjectInChildren(customStateName);
-
-            if (invItemDisplay == null)
+            customItemList.Add(new Item()
             {
-                #region Customize Item Display GameObject
-                invItemDisplay = GameObject.Instantiate(dashPrefab, equipmentGO.transform, true);
-                invItemDisplay.name = customStateName;
-                invItemDisplay.GetComponent<SpriteRenderer>().sprite = sprite;
-                AddToInvFadeGroup(invItemDisplay);
-                var fg = invItemDisplay.transform.parent.parent.gameObject.GetComponent<FadeGroup>();
-                List<SpriteRenderer> srList = new List<SpriteRenderer>(fg.spriteRenderers);
-                srList.Add(invItemDisplay.GetComponent<SpriteRenderer>());
-                fg.spriteRenderers = srList.ToArray();
-                invItemDisplay.GetComponent<BoxCollider2D>().size = Vector2.one;
-                invItemDisplay.GetComponent<BoxCollider2D>().offset = Vector2.zero;
-                #endregion
-
-                #region Customize FSM
-                PlayMakerFSM equipBuildFsm = equipmentGO.LocateMyFSM("Build Equipment List");
-                equipBuildFsm.CopyState("Kings Brand", customStateName);
-                equipBuildFsm.GetAction<PlayerDataBoolTest>(customStateName, 0).boolName = playerdataBool;
-                equipBuildFsm.GetAction<FindChild>(customStateName, 1).childName = customStateName;
-                equipBuildFsm.GetAction<SetFsmString>(customStateName, 9).setValue = nameConvo;
-                equipBuildFsm.GetAction<SetFsmString>(customStateName, 10).setValue = descConvo;
-                #endregion
-
-                #region Include custom item in Build Equipment List
-                string toState = "Pause";
-                foreach (FsmTransition transition in equipBuildFsm.GetState("Rancid Egg").Transitions)
-                {
-                    if (transition.EventName == "FINISHED")
-                    {
-                        toState = transition.ToState;
-                    }
-                }
-
-                equipBuildFsm.ChangeTransition("Rancid Egg", "FINISHED", customStateName);
-                equipBuildFsm.ChangeTransition(customStateName, "FINISHED", toState);
-                #endregion
-            }
+                type = ItemType.Normal,
+                uniqueName = uniqueName,
+                sprite1 = sprite,
+                playerdataBool1 = playerdataBool,
+                nameConvo1 = nameConvo,
+                descConvo1 = descConvo
+            });
         }
-
         public static void AddOneTwoItem(string uniqueName, Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)
         {
-            GameObject invGO = GameObjectExtensions.FindGameObjectInChildren(GameObject.Find("_GameCameras"), "Inv");
-            GameObject equipmentGO = GameObjectExtensions.FindGameObjectInChildren(invGO, "Equipment");
-            GameObject dashPrefab = GameObjectExtensions.FindGameObjectInChildren(equipmentGO, "Dash Cloak");
-
-            string customStateName = uniqueName;
-            string customCheckStateName = $"{uniqueName} Check";
-            string customState1Name = $"{uniqueName} 1";
-            string customState2Name = $"{uniqueName} 2";
-
-            GameObject invItemDisplay = equipmentGO.FindGameObjectInChildren(customStateName);
-
-            if (invItemDisplay == null)
+            customItemList.Add(new Item()
             {
-                invItemDisplay = GameObject.Instantiate(dashPrefab, equipmentGO.transform, true);
-                invItemDisplay.name = customStateName;
-                invItemDisplay.GetComponent<SpriteRenderer>().sprite = sprite1;
-                AddToInvFadeGroup(invItemDisplay);
-                invItemDisplay.GetComponent<BoxCollider2D>().size = Vector2.one;
-                invItemDisplay.GetComponent<BoxCollider2D>().offset = Vector2.zero;
-
-                if (invItemDisplay != null)
-                    UObject.DontDestroyOnLoad(invItemDisplay);
-                if (sprite1 != null)
-                    UObject.DontDestroyOnLoad(sprite1);
-                if (sprite2 != null)
-                    UObject.DontDestroyOnLoad(sprite2);
-
-                PlayMakerFSM equipBuildFsm = equipmentGO.LocateMyFSM("Build Equipment List");
-
-                #region Check State
-                equipBuildFsm.CopyState("Map Quill Check", customCheckStateName);
-                equipBuildFsm.GetAction<GetPlayerDataBool>(customCheckStateName, 0).boolName = playerdataBool1;
-                equipBuildFsm.GetAction<GetPlayerDataBool>(customCheckStateName, 1).boolName = playerdataBool2;
-                #endregion
-                #region Single States
-                equipBuildFsm.CopyState("Map", customState1Name);
-                equipBuildFsm.GetAction<FindChild>(customState1Name, 0).childName = customStateName;
-                equipBuildFsm.GetAction<SetSpriteRendererSprite>(customState1Name, 1).sprite = sprite1;
-                equipBuildFsm.GetAction<SetFsmString>(customState1Name, 9).setValue = nameConvo1;
-                equipBuildFsm.GetAction<SetFsmString>(customState1Name, 10).setValue = descConvo1;
-
-                equipBuildFsm.CopyState("Quill", customState2Name);
-                equipBuildFsm.GetAction<FindChild>(customState2Name, 0).childName = customStateName;
-                equipBuildFsm.GetAction<SetSpriteRendererSprite>(customState2Name, 1).sprite = sprite2;
-                equipBuildFsm.GetAction<SetFsmString>(customState2Name, 9).setValue = nameConvo2;
-                equipBuildFsm.GetAction<SetFsmString>(customState2Name, 10).setValue = descConvo2;
-                #endregion
-
-                string toState = "Pause";
-                foreach (FsmTransition transition in equipBuildFsm.GetState("Rancid Egg").Transitions)
-                {
-                    if (transition.EventName == "FINISHED")
-                    {
-                        toState = transition.ToState;
-                    }
-                }
-
-                equipBuildFsm.ChangeTransition("Rancid Egg", "FINISHED", customCheckStateName);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "NONE", toState);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "MAP", customState1Name);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "QUILL", customState2Name);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "MAP AND QUILL", toState);
-                equipBuildFsm.ChangeTransition(customState1Name, "FINISHED", toState);
-                equipBuildFsm.ChangeTransition(customState2Name, "FINISHED", toState);
-            }
+                type = ItemType.OneTwo,
+                uniqueName = uniqueName,
+                sprite1 = sprite1,
+                playerdataBool1 = playerdataBool1,
+                nameConvo1 = nameConvo1,
+                descConvo1 = descConvo1,
+                sprite2 = sprite2,
+                playerdataBool2 = playerdataBool2,
+                nameConvo2 = nameConvo2,
+                descConvo2 = descConvo2
+            });
         }
-        
         public static void AddOneTwoBothItem(string uniqueName, Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)
         {
-            GameObject invGO = GameObjectExtensions.FindGameObjectInChildren(GameObject.Find("_GameCameras"), "Inv");
-            GameObject equipmentGO = GameObjectExtensions.FindGameObjectInChildren(invGO, "Equipment");
-            GameObject dashPrefab = GameObjectExtensions.FindGameObjectInChildren(equipmentGO, "Dash Cloak");
-
-            string customStateName = uniqueName;
-            string customCheckStateName = $"{uniqueName} Check";
-            string customState1Name = $"{uniqueName} 1";
-            string customState2Name = $"{uniqueName} 2";
-            string customStateBothName = $"{uniqueName} Both";
-
-            GameObject invItemDisplay = equipmentGO.FindGameObjectInChildren(customStateName);
-
-            if (invItemDisplay == null)
+            customItemList.Add(new Item()
             {
-                invItemDisplay = GameObject.Instantiate(dashPrefab, equipmentGO.transform, true);
-                invItemDisplay.name = customStateName;
-                invItemDisplay.GetComponent<SpriteRenderer>().sprite = sprite1;
-                AddToInvFadeGroup(invItemDisplay);
-                invItemDisplay.GetComponent<BoxCollider2D>().size = Vector2.one;
-                invItemDisplay.GetComponent<BoxCollider2D>().offset = Vector2.zero;
-
-                if (invItemDisplay != null)
-                    UObject.DontDestroyOnLoad(invItemDisplay);
-                if (sprite1 != null)
-                    UObject.DontDestroyOnLoad(sprite1);
-                if (sprite2 != null)
-                    UObject.DontDestroyOnLoad(sprite2);
-                if (spriteBoth != null)
-                    UObject.DontDestroyOnLoad(spriteBoth);
-
-                PlayMakerFSM equipBuildFsm = equipmentGO.LocateMyFSM("Build Equipment List");
-
-                #region Check State
-                equipBuildFsm.CopyState("Map Quill Check", customCheckStateName);
-                equipBuildFsm.GetAction<GetPlayerDataBool>(customCheckStateName, 0).boolName = playerdataBool1;
-                equipBuildFsm.GetAction<GetPlayerDataBool>(customCheckStateName, 1).boolName = playerdataBool2;
-                #endregion
-                #region Single States
-                equipBuildFsm.CopyState("Map", customState1Name);
-                equipBuildFsm.GetAction<FindChild>(customState1Name, 0).childName = customStateName;
-                equipBuildFsm.GetAction<SetSpriteRendererSprite>(customState1Name, 1).sprite = sprite1;
-                equipBuildFsm.GetAction<SetFsmString>(customState1Name, 9).setValue = nameConvo1;
-                equipBuildFsm.GetAction<SetFsmString>(customState1Name, 10).setValue = descConvo1;
-
-                equipBuildFsm.CopyState("Quill", customState2Name);
-                equipBuildFsm.GetAction<FindChild>(customState2Name, 0).childName = customStateName;
-                equipBuildFsm.GetAction<SetSpriteRendererSprite>(customState2Name, 1).sprite = sprite2;
-                equipBuildFsm.GetAction<SetFsmString>(customState2Name, 9).setValue = nameConvo2;
-                equipBuildFsm.GetAction<SetFsmString>(customState2Name, 10).setValue = descConvo2;
-
-                equipBuildFsm.CopyState("Map and Quill", customStateBothName);
-                equipBuildFsm.GetAction<FindChild>(customStateBothName, 0).childName = customStateName;
-                equipBuildFsm.GetAction<SetSpriteRendererSprite>(customStateBothName, 1).sprite = spriteBoth;
-                equipBuildFsm.GetAction<SetFsmString>(customStateBothName, 9).setValue = nameConvoBoth;
-                equipBuildFsm.GetAction<SetFsmString>(customStateBothName, 10).setValue = descConvoBoth;
-                #endregion
-
-                string toState = "Pause";
-                foreach (FsmTransition transition in equipBuildFsm.GetState("Rancid Egg").Transitions)
-                {
-                    if (transition.EventName == "FINISHED")
-                    {
-                        toState = transition.ToState;
-                    }
-                }
-
-                equipBuildFsm.ChangeTransition("Rancid Egg", "FINISHED", customCheckStateName);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "NONE", toState);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "MAP", customState1Name);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "QUILL", customState2Name);
-                equipBuildFsm.ChangeTransition(customCheckStateName, "MAP AND QUILL", customStateBothName);
-                equipBuildFsm.ChangeTransition(customState1Name, "FINISHED", toState);
-                equipBuildFsm.ChangeTransition(customState2Name, "FINISHED", toState);
-                equipBuildFsm.ChangeTransition(customStateBothName, "FINISHED", toState);
-            }
+                type = ItemType.OneTwoBoth,
+                uniqueName = uniqueName,
+                sprite1 = sprite1,
+                playerdataBool1 = playerdataBool1,
+                nameConvo1 = nameConvo1,
+                descConvo1 = descConvo1,
+                sprite2 = sprite2,
+                playerdataBool2 = playerdataBool2,
+                nameConvo2 = nameConvo2,
+                descConvo2 = descConvo2,
+                spriteBoth = spriteBoth,
+                nameConvoBoth = nameConvoBoth,
+                descConvoBoth = descConvoBoth
+            });
         }
-
         public static void AddCountedItem(string uniqueName, Sprite sprite, string playerdataInt, string nameConvo, string descConvo)
         {
-            // May break without preloads, idk
-
-            #region Important Objects, do not touch
-            GameObject invGO = GameObject.Find("_GameCameras").FindGameObjectInChildren("Inv");
-            GameObject equipmentGO = invGO.FindGameObjectInChildren("Equipment");
-            #endregion
-
-            // Item Display Prefab
-            GameObject eggPrefab = equipmentGO.FindGameObjectInChildren("Rancid Egg");
-
-            // Custom name for the GameObject and the FSM State
-            string customStateName = uniqueName;
-
-            // Check if the GameObject already exists
-            GameObject invItemDisplay = equipmentGO.FindGameObjectInChildren(customStateName);
-
-            if (invItemDisplay == null)
+            customItemList.Add(new Item()
             {
-                #region Customize Item Display GameObject
-                invItemDisplay = GameObject.Instantiate(eggPrefab, equipmentGO.transform, true);
-                invItemDisplay.name = customStateName;
-                invItemDisplay.GetComponent<SpriteRenderer>().sprite = sprite;
-                AddToInvFadeGroup(invItemDisplay);
-                invItemDisplay.GetComponent<BoxCollider2D>().size = Vector2.one;
-                invItemDisplay.GetComponent<BoxCollider2D>().offset = Vector2.zero;
-                invItemDisplay.GetComponent<DisplayItemAmount>().playerDataInt = playerdataInt;
-                invItemDisplay.GetComponent<DisplayItemAmount>().textObject = invItemDisplay.GetComponentInChildren<TMPro.TextMeshPro>();
-                #endregion
-
-                #region Customize FSM
-                PlayMakerFSM equipBuildFsm = equipmentGO.LocateMyFSM("Build Equipment List");
-                equipBuildFsm.CopyState("Rancid Egg", customStateName);
-                equipBuildFsm.GetAction<GetPlayerDataInt>(customStateName, 0).intName = playerdataInt;
-                equipBuildFsm.GetAction<FindChild>(customStateName, 2).childName = customStateName;
-                equipBuildFsm.GetAction<SetFsmString>(customStateName, 10).setValue = nameConvo;
-                equipBuildFsm.GetAction<SetFsmString>(customStateName, 11).setValue = descConvo;
-                #endregion
-
-                #region Include custom item in Build Equipment List
-                string toState = "Pause";
-                foreach (FsmTransition transition in equipBuildFsm.GetState("Rancid Egg").Transitions)
-                {
-                    if (transition.EventName == "FINISHED")
-                    {
-                        toState = transition.ToState;
-                    }
-                }
-
-                equipBuildFsm.ChangeTransition("Rancid Egg", "FINISHED", customStateName);
-                equipBuildFsm.ChangeTransition(customStateName, "FINISHED", toState);
-                #endregion
-            }
+                type = ItemType.Counted,
+                uniqueName = uniqueName,
+                sprite1 = sprite,
+                playerdataInt = playerdataInt,
+                nameConvo1 = nameConvo,
+                descConvo1 = descConvo
+            });
+        }
+        public static void AddFlowerItem(string uniqueName, Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)
+        {
+            customItemList.Add(new Item()
+            {
+                type = ItemType.Flower,
+                uniqueName = uniqueName,
+                sprite1 = sprite,
+                sprite2 = sprite2,
+                playerdataBool1 = playerdataBool1,
+                playerdataBool2 = playerdataBool2,
+                playerdataInt = playerdataBool3,
+                nameConvo1 = nameConvo1,
+                nameConvo2 = nameConvo2,
+                descConvo1 = descConvo1,
+                descConvo2 = descConvo2,
+                nameConvoBoth = descConvo3,
+                descConvoBoth = descConvo4
+            });
         }
 
-        private static void AddToInvFadeGroup(GameObject spriteGo)
+        private static void AddDefaultNormalItem(string uniqueName, Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
         {
-            var sr = spriteGo.GetComponent<SpriteRenderer>();
-            sr.sortingLayerID = 629535577;
-            var invGo = spriteGo.transform.parent.parent.gameObject;
-            var fg = invGo.GetComponent<FadeGroup>();
-            var srList = new List<SpriteRenderer>(fg.spriteRenderers);
-            srList.Add(sr);
-            fg.spriteRenderers = srList.ToArray();
+            defaultItemList.Add(new Item()
+            {
+                type = ItemType.Normal,
+                uniqueName = uniqueName,
+                sprite1 = sprite,
+                playerdataBool1 = playerdataBool,
+                nameConvo1 = nameConvo,
+                descConvo1 = descConvo
+            });
+        }
+        private static void AddDefaultOneTwoItem(string uniqueName, Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)
+        {
+            defaultItemList.Add(new Item()
+            {
+                type = ItemType.OneTwo,
+                uniqueName = uniqueName,
+                sprite1 = sprite1,
+                playerdataBool1 = playerdataBool1,
+                nameConvo1 = nameConvo1,
+                descConvo1 = descConvo1,
+                sprite2 = sprite2,
+                playerdataBool2 = playerdataBool2,
+                nameConvo2 = nameConvo2,
+                descConvo2 = descConvo2
+            });
+        }
+        private static void AddDefaultOneTwoBothItem(string uniqueName, Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)
+        {
+            defaultItemList.Add(new Item()
+            {
+                type = ItemType.OneTwoBoth,
+                uniqueName = uniqueName,
+                sprite1 = sprite1,
+                playerdataBool1 = playerdataBool1,
+                nameConvo1 = nameConvo1,
+                descConvo1 = descConvo1,
+                sprite2 = sprite2,
+                playerdataBool2 = playerdataBool2,
+                nameConvo2 = nameConvo2,
+                descConvo2 = descConvo2,
+                spriteBoth = spriteBoth,
+                nameConvoBoth = nameConvoBoth,
+                descConvoBoth = descConvoBoth
+            });
+        }
+        private static void AddDefaultCountedItem(string uniqueName, Sprite sprite, string playerdataInt, string nameConvo, string descConvo)
+        {
+            defaultItemList.Add(new Item()
+            {
+                type = ItemType.Counted,
+                uniqueName = uniqueName,
+                sprite1 = sprite,
+                playerdataInt = playerdataInt,
+                nameConvo1 = nameConvo,
+                descConvo1 = descConvo
+            });
+        }
+        private static void AddDefaultFlowerItem(string uniqueName, Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)
+        {
+            defaultItemList.Add(new Item()
+            {
+                type = ItemType.Flower,
+                uniqueName = uniqueName,
+                sprite1 = sprite,
+                sprite2 = sprite2,
+                playerdataBool1 = playerdataBool1,
+                playerdataBool2 = playerdataBool2,
+                playerdataInt = playerdataBool3,
+                nameConvo1 = nameConvo1,
+                nameConvo2 = nameConvo2,
+                descConvo1 = descConvo1,
+                descConvo2 = descConvo2,
+                nameConvoBoth = descConvo3,
+                descConvoBoth = descConvo4
+            });
         }
 
         private static void Log(string message)
         {
             Logger.Log($"[SFCore]:[ItemHelper] - {message}");
+            Debug.Log($"[SFCore]:[ItemHelper] - {message}");
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[ItemHelper] - {message.ToString()}");
+            Log($"{message}");
         }
     }
 }

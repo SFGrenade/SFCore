@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ModCommon.Util;
+using SFCore.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
 using Logger = Modding.Logger;

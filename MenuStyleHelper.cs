@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using ModCommon.Util;
+using SFCore.Utils;
 using UnityEngine;
 using Logger = Modding.Logger;
 using System.Collections.Generic;

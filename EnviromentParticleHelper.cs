@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModCommon.Util;
+using SFCore.Utils;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Logger = Modding.Logger;
 using System.Collections;
 using GlobalEnums;
+using Object = UnityEngine.Object;
 
 namespace SFCore
 {
-    public class EnviromentParticleHelper
+    public static class EnviromentParticleHelper
     {
         private static PlayerData pd;
-        private static bool initialized = false;
         private static Dictionary<int, AudioClip> customWalkAudio = new Dictionary<int, AudioClip>();
         private static Dictionary<int, AudioClip> customRunAudio = new Dictionary<int, AudioClip>();
         private static Dictionary<int, GameObject> customDashEffects = new Dictionary<int, GameObject>();
@@ -24,20 +24,21 @@ namespace SFCore
         private static Dictionary<int, GameObject> customRunEffects = new Dictionary<int, GameObject>();
         private static Dictionary<int, string> customRunEffectsPrefabs = new Dictionary<int, string>();
 
+        // Backwards compatability
         public static void Init()
         {
-            if (!initialized)
-            {
-                initialized = true;
-                pd = PlayerData.instance;
+        }
 
-                On.HeroController.checkEnvironment += OnHeroControllercheckEnvironment;
-                On.DashEffect.OnEnable += OnDashEffectOnEnable;
-                On.HardLandEffect.OnEnable += OnHardLandEffectOnEnable;
-                On.JumpEffects.OnEnable += OnJumpEffectsOnEnable;
-                On.SoftLandEffect.OnEnable += OnSoftLandEffectOnEnable;
-                On.EventRegister.Awake += OnEventRegisterAwake;
-            }
+        static EnviromentParticleHelper()
+        {
+            pd = PlayerData.instance;
+
+            On.HeroController.checkEnvironment += OnHeroControllercheckEnvironment;
+            On.DashEffect.OnEnable += OnDashEffectOnEnable;
+            On.HardLandEffect.OnEnable += OnHardLandEffectOnEnable;
+            On.JumpEffects.OnEnable += OnJumpEffectsOnEnable;
+            On.SoftLandEffect.OnEnable += OnSoftLandEffectOnEnable;
+            On.EventRegister.Awake += OnEventRegisterAwake;
         }
 
         #region Hooks
@@ -47,27 +48,33 @@ namespace SFCore
 
             try
             {
-                foreach (var callback in AddCustomWalkAudioHook.GetInvocationList())
+                if (AddCustomWalkAudioHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, runAudio) = ((int enviromentType, AudioClip runAudio))callback.DynamicInvoke(self);
-                    addRunAudio(enviromentType, runAudio);
+                    foreach (var callback in AddCustomWalkAudioHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, runAudio) = ((int enviromentType, AudioClip runAudio)) callback.DynamicInvoke(self);
+                        addRunAudio(enviromentType, runAudio);
+                    }
                 }
-                self.footStepsRunAudioSource.clip = customRunAudio[pd.GetInt(nameof(pd.environmentType))];
+                self.footStepsRunAudioSource.clip = customRunAudio[pd.GetInt("environmentType")];
             }
             catch (Exception)
             {}
             try
             {
-                foreach (var callback in AddCustomWalkAudioHook.GetInvocationList())
+                if (AddCustomWalkAudioHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, walkAudio) = ((int enviromentType, AudioClip walkAudio))callback.DynamicInvoke(self);
-                    addWalkAudio(enviromentType, walkAudio);
+                    foreach (var callback in AddCustomWalkAudioHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, walkAudio) = ((int enviromentType, AudioClip walkAudio)) callback.DynamicInvoke(self);
+                        addWalkAudio(enviromentType, walkAudio);
+                    }
                 }
-                self.footStepsWalkAudioSource.clip = customWalkAudio[pd.GetInt(nameof(pd.environmentType))];
+                self.footStepsWalkAudioSource.clip = customWalkAudio[pd.GetInt("environmentType")];
             }
             catch (Exception)
             {}
@@ -83,14 +90,17 @@ namespace SFCore
 
             try
             {
-                foreach (var callback in AddCustomDashEffectsHook.GetInvocationList())
+                if (AddCustomDashEffectsHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, dashEffects) = ((int enviromentType, GameObject dashEffects))callback.DynamicInvoke(self);
-                    addDashEffects(enviromentType, dashEffects);
+                    foreach (var callback in AddCustomDashEffectsHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, dashEffects) = ((int enviromentType, GameObject dashEffects)) callback.DynamicInvoke(self);
+                        addDashEffects(enviromentType, dashEffects);
+                    }
                 }
-                GameObject dashEffectGo = customDashEffects[pd.GetInt(nameof(pd.environmentType))];
+                GameObject dashEffectGo = customDashEffects[pd.GetInt("environmentType")];
                 self.heroDashPuff.SetActive(false);
                 self.dashDust.SetActive(false);
                 self.heroDashPuff_anim.Stop();
@@ -113,14 +123,17 @@ namespace SFCore
 
             try
             {
-                foreach (var callback in AddCustomHardLandEffectsHook.GetInvocationList())
+                if (AddCustomHardLandEffectsHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, hardLandEffects) = ((int enviromentType, GameObject hardLandEffects))callback.DynamicInvoke(self);
-                    addHardLandEffects(enviromentType, hardLandEffects);
+                    foreach (var callback in AddCustomHardLandEffectsHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, hardLandEffects) = ((int enviromentType, GameObject hardLandEffects)) callback.DynamicInvoke(self);
+                        addHardLandEffects(enviromentType, hardLandEffects);
+                    }
                 }
-                GameObject hardLandEffectGo = customHardLandEffects[pd.GetInt(nameof(pd.environmentType))];
+                GameObject hardLandEffectGo = customHardLandEffects[pd.GetInt("environmentType")];
                 hardLandEffectGo.transform.SetParent(self.transform);
                 hardLandEffectGo.transform.localPosition = Vector3.zero;
                 hardLandEffectGo.SetActive(true);
@@ -140,14 +153,17 @@ namespace SFCore
 
             try
             {
-                foreach (var callback in AddCustomJumpEffectsHook.GetInvocationList())
+                if (AddCustomJumpEffectsHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, jumpEffects) = ((int enviromentType, GameObject jumpEffects))callback.DynamicInvoke(self);
-                    addJumpEffects(enviromentType, jumpEffects);
+                    foreach (var callback in AddCustomJumpEffectsHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, jumpEffects) = ((int enviromentType, GameObject jumpEffects)) callback.DynamicInvoke(self);
+                        addJumpEffects(enviromentType, jumpEffects);
+                    }
                 }
-                GameObject jumpEffectGo = customJumpEffects[pd.GetInt(nameof(pd.environmentType))];
+                GameObject jumpEffectGo = customJumpEffects[pd.GetInt("environmentType")];
                 self.dustEffects.SetActive(false);
 
                 jumpEffectGo.transform.SetParent(self.transform);
@@ -169,14 +185,17 @@ namespace SFCore
 
             try
             {
-                foreach (var callback in AddCustomSoftLandEffectsHook.GetInvocationList())
+                if (AddCustomSoftLandEffectsHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, softLandEffects) = ((int enviromentType, GameObject softLandEffects))callback.DynamicInvoke(self);
-                    addSoftLandEffects(enviromentType, softLandEffects);
+                    foreach (var callback in AddCustomSoftLandEffectsHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, softLandEffects) = ((int enviromentType, GameObject softLandEffects)) callback.DynamicInvoke(self);
+                        addSoftLandEffects(enviromentType, softLandEffects);
+                    }
                 }
-                GameObject softLandEffectGo = customSoftLandEffects[pd.GetInt(nameof(pd.environmentType))];
+                GameObject softLandEffectGo = customSoftLandEffects[pd.GetInt("environmentType")];
                 self.dustEffects.SetActive(false);
 
                 softLandEffectGo.transform.SetParent(self.transform);
@@ -198,118 +217,65 @@ namespace SFCore
                 if (fsm == null)
                     return;
 
-                FsmState state = null;
-                foreach (var tmpState in fsm.FsmStates)
-                {
-                    if (tmpState.Name == "Check Enviro")
-                    {
-                        state = tmpState;
-                    }
-                }
+                FsmState state = fsm.GetState("Check Enviro");
 
                 foreach (var tmpREP in customRunEffectsPrefabs)
                 {
                     int enviromentType = tmpREP.Key;
                     string customEventName = $"CUSTOM_{enviromentType}";
-                    FsmEvent newFsmEvent = null;
-                    var HGPMF = fsm.GetAttr<PlayMakerFSM, Fsm>("fsm");
-                    if (HGPMF.GetEvent(customEventName) == null)
-                    {
-                        newFsmEvent = new FsmEvent(customEventName);
-                        List<FsmEvent> events = new List<FsmEvent>(HGPMF.Events)
-                        {
-                            newFsmEvent
-                        };
-                        HGPMF.Events = events.ToArray();
-                    }
-                    else
-                    {
-                        newFsmEvent = HGPMF.GetEvent(customEventName);
-                    }
+                    FsmEvent newFsmEvent = FsmEvent.GetFsmEvent(customEventName);
 
-                    var intSwitchAction = state.Actions[state.Actions.Length - 1] as IntSwitch;
-                    List<FsmInt> tmpFI = new List<FsmInt>(intSwitchAction.compareTo);
-                    FsmInt tmpFsmInt = new FsmInt(customEventName);
-                    tmpFsmInt = enviromentType;
-                    tmpFI.Add(tmpFsmInt);
+                    var intSwitchAction = fsm.GetAction<IntSwitch>("Check Enviro", 5);
+                    FsmInt tmpFsmInt = new FsmInt(customEventName) { Value = enviromentType };
+
+                    List<FsmInt> tmpFI = new List<FsmInt>(intSwitchAction.compareTo) { tmpFsmInt };
                     intSwitchAction.compareTo = tmpFI.ToArray();
 
-                    List<FsmEvent> tmpFE = new List<FsmEvent>(intSwitchAction.sendEvent)
-                    {
-                        newFsmEvent
-                    };
+                    List<FsmEvent> tmpFE = new List<FsmEvent>(intSwitchAction.sendEvent) { newFsmEvent };
                     intSwitchAction.sendEvent = tmpFE.ToArray();
 
-                    List<FsmTransition> tmpFT = new List<FsmTransition>(fsm.GetState("Check Enviro").Transitions)
-                    {
-                        new FsmTransition() { FsmEvent = newFsmEvent, ToState = customRunEffectsPrefabs[enviromentType] }
-                    };
-                    fsm.GetState("Check Enviro").Transitions = tmpFT.ToArray();
+                    fsm.AddTransition("Check Enviro", customEventName, customRunEffectsPrefabs[enviromentType]);
                 }
-                foreach (var callback in AddCustomRunEffectsHook.GetInvocationList())
+                if (AddCustomRunEffectsHook != null)
                 {
-                    if (callback == null)
-                        continue;
-                    var (enviromentType, runEffects) = ((int enviromentType, GameObject runEffects))callback.DynamicInvoke(self.gameObject);
-                    addRunEffects(enviromentType, runEffects);
+                    foreach (var callback in AddCustomRunEffectsHook.GetInvocationList())
+                    {
+                        if (callback == null)
+                            continue;
+                        var (enviromentType, runEffects) = ((int enviromentType, GameObject runEffects)) callback.DynamicInvoke(self.gameObject);
+                        addRunEffects(enviromentType, runEffects);
+                    }
                 }
                 foreach (var tmpRE in customRunEffects)
                 {
                     var tmpGoUnused = GameObject.Instantiate(tmpRE.Value, self.gameObject.transform);
                     tmpGoUnused.name = $"{tmpRE.Key}";
-                    SetInactive(tmpGoUnused);
-                    tmpGoUnused.SetActive(true);
+                    Object.DontDestroyOnLoad(tmpGoUnused);
                     tmpGoUnused.transform.SetParent(self.gameObject.transform);
 
                     int enviromentType = tmpRE.Key;
                     string customEventName = $"CUSTOM_{enviromentType}";
                     string customStateName = $"CUSTOMSTATE_{enviromentType}";
-                    FsmEvent newFsmEvent = null;
-                    var HGPMF = fsm.GetAttr<PlayMakerFSM, Fsm>("fsm");
-                    if (HGPMF.GetEvent(customEventName) == null)
-                    {
-                        newFsmEvent = new FsmEvent(customEventName);
-                        List<FsmEvent> events = new List<FsmEvent>(HGPMF.Events)
-                        {
-                            newFsmEvent
-                        };
-                        HGPMF.Events = events.ToArray();
-                    }
-                    else
-                    {
-                        newFsmEvent = HGPMF.GetEvent(customEventName);
-                    }
+                    FsmEvent newFsmEvent = FsmEvent.GetFsmEvent(customEventName);
 
-                    #region Add more variable
-                    var fmsVars = fsm.FsmVariables;
-                    List<FsmGameObject> goVars = new List<FsmGameObject>(fmsVars.GameObjectVariables);
-                    goVars.Add(new FsmGameObject($"Custom_{enviromentType}"));
-                    fmsVars.GameObjectVariables = goVars.ToArray();
-                    #endregion
+                    fsm.AddGameObjectVariable($"Custom_{enviromentType}");
 
-                    var customState = fsm.CopyState("Grass", customStateName);
+                    fsm.CopyState("Grass", customStateName);
+
                     #region Edit FindChild Action
-                    (customState.Actions[0] as FindChild).childName = $"{enviromentType}";
+                    fsm.GetAction<FindChild>(customStateName, 0).childName = $"{enviromentType}";
                     #endregion
 
-                    var intSwitchAction = state.Actions[state.Actions.Length - 1] as IntSwitch;
-                    List<FsmInt> tmpFI = new List<FsmInt>(intSwitchAction.compareTo);
-                    FsmInt tmpFsmInt = new FsmInt(customEventName);
-                    tmpFsmInt = enviromentType;
-                    tmpFI.Add(tmpFsmInt);
+                    var intSwitchAction = fsm.GetAction<IntSwitch>("Check Enviro", 5);
+                    FsmInt tmpFsmInt = new FsmInt(customEventName) { Value = enviromentType };
+
+                    List<FsmInt> tmpFI = new List<FsmInt>(intSwitchAction.compareTo) { tmpFsmInt };
                     intSwitchAction.compareTo = tmpFI.ToArray();
 
-                    List<FsmEvent> tmpFE = new List<FsmEvent>(intSwitchAction.sendEvent)
-                    {
-                        newFsmEvent
-                    };
+                    List<FsmEvent> tmpFE = new List<FsmEvent>(intSwitchAction.sendEvent) { newFsmEvent };
                     intSwitchAction.sendEvent = tmpFE.ToArray();
 
-                    List<FsmTransition> tmpFT = new List<FsmTransition>(fsm.GetState("Check Enviro").Transitions)
-                    {
-                        new FsmTransition() { FsmEvent = newFsmEvent, ToState = customStateName }
-                    };
-                    fsm.GetState("Check Enviro").Transitions = tmpFT.ToArray();
+                    fsm.AddTransition("Check Enviro", customEventName, customStateName);
                 }
             }
         }

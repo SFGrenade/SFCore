@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ModCommon.Util;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Logger = Modding.Logger;
+using SFCore.Utils;
 
 namespace SFCore
 {
@@ -38,10 +38,9 @@ namespace SFCore
             initialized = false;
             initializedBuildEquippedCharms = false;
 
-            customCharms = 1;
+            customCharms = 0;
             customSprites = new Sprite[]
             {
-                new Sprite()
             };
             charmIDs = new List<int>();
 
