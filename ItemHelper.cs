@@ -55,7 +55,17 @@ namespace SFCore
             defaultItemList = new List<Item>();
             customItemList = new List<Item>();
             ModHooks.Instance.LanguageGetHook += LanguageGetHook;
+            ModHooks.Instance.GetPlayerBoolHook += GetPlayerBoolHook;
             On.GameCameras.Start += GameCamerasOnStart;
+        }
+
+        private static bool GetPlayerBoolHook(string originalset)
+        {
+            if (originalset.Equals("hasCustomInventoryItem"))
+            {
+                return (CustomItemList.instance != null) && (CustomItemList.instance.hasAtLeastOneItem());
+            }
+            return PlayerData.instance.GetBoolInternal(originalset);
         }
 
         private static void GameCamerasOnStart(On.GameCameras.orig_Start orig, GameCameras self)
@@ -413,8 +423,8 @@ namespace SFCore
             #region new Check R state
 
             inventoryFsm.CopyState("Next Journal 2", "Next Equipment 2");
+            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 2", 0).boolName = "hasCustomInventoryItem";
             inventoryFsm.GetAction<GetLanguageString>("Next Equipment 2", 1).convName = "PANE_EQUIPMENT";
-            inventoryFsm.RemoveAction("Next Equipment 2", 0);
             inventoryFsm.AddTransition("Check R Pane", "EQUIPMENT", "Next Equipment 2");
 
             inventoryFsm.GetAction<SetIntValue>("Under 2", 0).intValue = 5;
@@ -440,8 +450,8 @@ namespace SFCore
             #region new Check L state
 
             inventoryFsm.CopyState("Next Journal 3", "Next Equipment 3");
+            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 3", 0).boolName = "hasCustomInventoryItem";
             inventoryFsm.GetAction<GetLanguageString>("Next Equipment 3", 1).convName = "PANE_EQUIPMENT";
-            inventoryFsm.RemoveAction("Next Equipment 3", 0);
             inventoryFsm.AddTransition("Check L Pane", "EQUIPMENT", "Next Equipment 3");
 
             inventoryFsm.GetAction<SetIntValue>("Under 3", 0).intValue = 5;
@@ -467,9 +477,9 @@ namespace SFCore
             #region new Loop state
 
             inventoryFsm.CopyState("Next Journal", "Next Equipment");
+            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment", 0).boolName = "hasCustomInventoryItem";
             inventoryFsm.GetAction<SetGameObject>("Next Equipment", 2).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
             inventoryFsm.GetAction<GetLanguageString>("Next Equipment", 3).convName = "PANE_EQUIPMENT";
-            inventoryFsm.RemoveAction("Next Equipment", 0);
             inventoryFsm.AddTransition("Loop Through", "EQUIPMENT", "Next Equipment");
 
             inventoryFsm.GetAction<SetIntValue>("Under", 0).intValue = 5;

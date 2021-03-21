@@ -10,6 +10,8 @@ namespace SFCore.MonoBehaviours
 {
     public class CustomItemList : MonoBehaviour
     {
+        public static CustomItemList instance { get; private set; }
+
         public List<ItemHelper.Item> list = new List<ItemHelper.Item>();
         public GameObject[] listInv = new GameObject[0];
         private GameObject[] currentList = new GameObject[0];
@@ -18,6 +20,18 @@ namespace SFCore.MonoBehaviours
         public int itemCount = -1;
         public int firstNewItem;
         private bool built = false;
+
+        public CustomItemList()
+        {
+            instance = this;
+        }
+
+        public bool hasAtLeastOneItem()
+        {
+            if (this.currentList.Length > 0)
+                return this.currentList[0] != null;
+            return false;
+        }
 
         public void BuildItemList()
         {
