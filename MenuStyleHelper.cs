@@ -137,6 +137,7 @@ namespace SFCore
             if (index < 0 || index >= 10)
             {
                 orig(self, index, fade, false);
+                Platform.Current.EncryptedSharedData.SetInt("menuStyle", 0);
             }
             else
             {
