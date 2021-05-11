@@ -112,6 +112,24 @@ namespace SFCore
 				{
 					case LanguageCode.EN:
 						return "Equipment";
+					case LanguageCode.FR:
+						return "Équipement";
+					case LanguageCode.DE:
+						return "Ausrüstung";
+					case LanguageCode.ES:
+						return "Equipo";
+					case LanguageCode.KO:
+						return "장비";
+					case LanguageCode.ZH_CN:
+						return "设备";
+					case LanguageCode.IT:
+						return "Attrezzature";
+					case LanguageCode.PT_BR:
+						return "Equipamento";
+					case LanguageCode.RU:
+						return "Оборудование";
+					case LanguageCode.JA:
+						return "装置";
 				}
 			}
             return Language.Language.GetInternal(key, sheet);
