@@ -183,7 +183,7 @@ namespace SFCore.Utils
             {
                 for (int i = s.Actions.Length - 1; i >= 0; i--)
                 {
-                    self.InsertAction(s.Name, new StatusLog() { text = $"{i} ('{s.Actions[i].Name}')" }, i);
+                    self.InsertAction(s.Name, new StatusLog() { text = $"{i}" }, i);
                     if (additionalLogging)
                     {
                         self.InsertMethod(s.Name, () =>

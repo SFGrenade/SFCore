@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -83,6 +89,7 @@
     <Compile Include="MonoBehaviours\SpritePatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TitleLogoHelper.cs" />
+    <Compile Include="Util\LanguageStrings.cs" />
     <Compile Include="Util\MethodAction.cs" />
     <Compile Include="Util\ActionAction.cs" />
     <Compile Include="Util\LogAction.cs" />
@@ -94,8 +101,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="ReadMe.md" />
+    <EmbeddedResource Include="Resources\Language.json" />
+    <None Include="sgKey.snk" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

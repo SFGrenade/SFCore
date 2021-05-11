@@ -47,9 +47,15 @@ namespace SFCore.Utils
 
         private new void Log(string message)
         {
-            
-            Debug.Log($"[{Fsm.GameObjectName}]:[{Fsm.Name}]:[{State.Name}] - {message}");
-            Logger.Log($"[{Fsm.GameObjectName}]:[{Fsm.Name}]:[{State.Name}] - {message}");
+            string path = Fsm.GameObjectName;
+            Transform t = Fsm.GameObject.transform.parent;
+            while (t != null)
+            {
+                path = $"{t.gameObject.name}/{path}";
+                t = t.parent;
+            }
+            Debug.Log($"[{path}]:[{Fsm.Name}]:[{State.Name}] - {message}");
+            Logger.Log($"[{path}]:[{Fsm.Name}]:[{State.Name}] - {message}");
         }
     }
 }

@@ -49,6 +49,7 @@ namespace SFCore.MonoBehaviours
                 this.itemCount++;
                 GameObject gameObject = MakeGameObject(this.list[i], prefab);
                 gameObject.transform.SetParent(transform, false);
+                gameObject.SetActive(false);
                 this.listInv[this.itemCount] = gameObject;
             }
 
@@ -281,7 +282,7 @@ namespace SFCore.MonoBehaviours
             var item = this.list.First(x => x.uniqueName.Equals(this.currentList[itemNum].name));
             Logger.Log($"[CustomItem] - get int name: {item.type}");
 
-            if (item.type != ItemType.Counted) return "ghostCoins";
+            if (item.type != ItemType.Counted) return "0Return";
             return item.playerdataInt;
         }
 

@@ -1,0 +1,52 @@
+{
+  "DE": {
+    "UI": {
+      "PANE_EQUIPMENT": "Ausrüstung"
+    }
+  },
+  "EN": {
+    "UI": {
+      "PANE_EQUIPMENT": "Equipment"
+    }
+  },
+  "ES": {
+    "UI": {
+      "PANE_EQUIPMENT": "Equipo"
+    }
+  },
+  "FR": {
+    "UI": {
+      "PANE_EQUIPMENT": "Équipement"
+    }
+  },
+  "IT": {
+    "UI": {
+      "PANE_EQUIPMENT": "Attrezzature"
+    }
+  },
+  "JA": {
+    "UI": {
+      "PANE_EQUIPMENT": "装置"
+    }
+  },
+  "KO": {
+    "UI": {
+      "PANE_EQUIPMENT": "장비"
+    }
+  },
+  "PT": {
+    "UI": {
+      "PANE_EQUIPMENT": "Equipamento"
+    }
+  },
+  "RU": {
+    "UI": {
+      "PANE_EQUIPMENT": "Оборудование"
+    }
+  },
+  "ZH": {
+    "UI": {
+      "PANE_EQUIPMENT": "设备"
+    }
+  }
+}

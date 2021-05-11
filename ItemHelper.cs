@@ -1,14 +1,14 @@
-﻿using System;
-using SFCore.Utils;
+﻿using SFCore.Utils;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Logger = Modding.Logger;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using Modding;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UObject = UnityEngine.Object;
 using SFCore.MonoBehaviours;
 
@@ -48,14 +48,20 @@ namespace SFCore
         private static List<Item> defaultItemList = new List<Item>();
         private static List<Item> customItemList = new List<Item>();
 
+        private static LanguageStrings langStrings;
+
         private static bool initialized = false;
 
         static ItemHelper()
         {
             defaultItemList = new List<Item>();
             customItemList = new List<Item>();
+
+            langStrings = new LanguageStrings(Assembly.GetExecutingAssembly(), "SFCore.Resources.Language.json", Encoding.UTF8);
+
             ModHooks.Instance.LanguageGetHook += LanguageGetHook;
             ModHooks.Instance.GetPlayerBoolHook += GetPlayerBoolHook;
+            ModHooks.Instance.GetPlayerIntHook += GetPlayerIntHook;
             On.GameCameras.Start += GameCamerasOnStart;
         }
 
@@ -66,6 +72,15 @@ namespace SFCore
                 return (CustomItemList.instance != null) && (CustomItemList.instance.hasAtLeastOneItem());
             }
             return PlayerData.instance.GetBoolInternal(originalset);
+        }
+
+        private static int GetPlayerIntHook(string originalset)
+        {
+            if (originalset.Equals("0Return"))
+            {
+                return 0;
+            }
+            return PlayerData.instance.GetIntInternal(originalset);
         }
 
         private static void GameCamerasOnStart(On.GameCameras.orig_Start orig, GameCameras self)
@@ -104,8 +119,10 @@ namespace SFCore
 
         private static string LanguageGetHook(string key, string sheet)
         {
-            if (key.Equals("PANE_EQUIPMENT") && sheet.Equals("UI"))
-                return "Equipment";
+            if (langStrings.ContainsKey(key, sheet))
+            {
+                return langStrings.Get(key, sheet);
+            }
             return Language.Language.GetInternal(key, sheet);
         }
 
@@ -299,7 +316,6 @@ namespace SFCore
 
             if (inventoryFsm.GetState("Closed").Fsm == null)
             {
-                Log("Warning: 'Inventory Control' Fsm not initialized");
                 inventoryFsm.Preprocess();
             }
 
@@ -311,21 +327,6 @@ namespace SFCore
                 GameObject = newPaneGo,
                 OwnerOption = OwnerDefaultOption.SpecifyGameObject
             };
-
-            var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal");
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
-            uiJournalFsm.RemoveAction("Completion?", 0);
 
             var newListGo = newPaneGo.FindGameObjectInChildren("Enemy List");
             var newListFOD = new FsmOwnerDefault()
@@ -345,15 +346,24 @@ namespace SFCore
             }
 
             cli.yDistance = -2;
-            cli.BuildItemList();
-            cli.UpdateItemList();
+            //cli.BuildItemList();
+            //cli.UpdateItemList();
+
             newPaneGo.FindGameObjectInChildren("Enemy Sprite").transform.localScale = new Vector3(3, 3, 3);
             newPaneGo.FindGameObjectInChildren("hunter_symbol").SetActive(false);
 
             inventoryFsm.AddGameObjectVariable("ItemList Pane");
             inventoryFsm.AddGameObjectVariable("ItemList List");
 
-            // Edit Inventory FSM to also save the new child
+            int totalPanes = inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo.Last().Value + 1;
+
+            var newListFsm = newListGo.LocateMyFSM("Item List Control");
+            var newListFsmVars = newListFsm.FsmVariables;
+
+            var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal");
+
+            #region Inventory Control - Init
+
             inventoryFsm.InsertAction("Init", new FindChild()
             {
                 gameObject = inventoryFsm.GetAction<FindChild>("Init", 3).gameObject,
@@ -361,29 +371,36 @@ namespace SFCore
                 storeResult = inventoryFsmVars.FindFsmGameObject("ItemList Pane")
             }, 12);
 
-            // Edit Inventory FSM to also save the new child
-            inventoryFsm.InsertAction("Init Enemy List", new FindChild()
+            #endregion
+
+            #region Inventory Control - Init Enemy List
+
+            inventoryFsm.AddAction("Init Enemy List", new FindChild()
             {
                 gameObject = newPaneFOD,
                 childName = "Enemy List",
                 storeResult = inventoryFsmVars.FindFsmGameObject("ItemList List")
-            }, 2);
-            inventoryFsm.InsertAction("Init Enemy List", new CallMethodProper()
+            });
+            inventoryFsm.AddAction("Init Enemy List", new CallMethodProper()
             {
                 gameObject = newListFOD,
                 behaviour = "CustomItemList",
                 methodName = "BuildItemList",
                 parameters = new FsmVar[0],
                 storeResult = new FsmVar()
-            }, 3);
-            inventoryFsm.InsertAction("Init Enemy List", new ActivateGameObject()
+            });
+            inventoryFsm.AddAction("Init Enemy List", new ActivateGameObject()
             {
                 gameObject = newPaneFOD,
                 activate = false,
                 recursive = false,
                 resetOnExit = false,
                 everyFrame = false
-            }, 5);
+            });
+
+            #endregion
+
+            #region Inventory Control - Refresh Enemy List
 
             inventoryFsm.InsertAction("Refresh Enemy List", new CallMethodProper()
             {
@@ -394,50 +411,41 @@ namespace SFCore
                 storeResult = new FsmVar()
             }, 2);
 
-            #region new Open state
-
-            inventoryFsm.CopyState("Open Journal", "Open Equipment");
-            inventoryFsm.GetAction<GetLanguageString>("Open Equipment", 0).convName = "PANE_EQUIPMENT";
-            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 2).intValue = 4;
-            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 3).intValue = 4;
-            inventoryFsm.GetAction<SetGameObject>("Open Equipment", 4).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
-            inventoryFsm.AddTransition("Check Current Pane", "EQUIPMENT", "Open Equipment");
-
             #endregion
 
-            #region Check Current Pane state
+            #region Inventory Control - Check Current Pane
 
             var ccp11ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo)
             {
-                4
+                totalPanes
             };
             inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo = ccp11ct.ToArray();
             var ccp11se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent)
             {
-                FsmEvent.FindEvent("EQUIPMENT")
+                FsmEvent.GetFsmEvent("EQUIPMENT")
             };
             inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent = ccp11se.ToArray();
 
             #endregion
 
-            #region new Check R state
+            #region Inventory Control - Open Journal copy "Open Equipment"
 
-            inventoryFsm.CopyState("Next Journal 2", "Next Equipment 2");
-            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 2", 0).boolName = "hasCustomInventoryItem";
-            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 2", 1).convName = "PANE_EQUIPMENT";
-            inventoryFsm.AddTransition("Check R Pane", "EQUIPMENT", "Next Equipment 2");
-
-            inventoryFsm.GetAction<SetIntValue>("Under 2", 0).intValue = 5;
+            inventoryFsm.CopyState("Open Journal", "Open Equipment");
+            inventoryFsm.GetAction<GetLanguageString>("Open Equipment", 0).convName = "PANE_EQUIPMENT";
+            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 2).intValue = totalPanes;
+            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 3).intValue = totalPanes;
+            inventoryFsm.GetAction<SetGameObject>("Open Equipment", 4).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
+            inventoryFsm.AddTransition("Check Current Pane", "EQUIPMENT", "Open Equipment");
 
             #endregion
 
-            #region Check R Pane state
+            #region Inventory Control - Check R Pane
 
             var crp1ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo)
             {
-                4
+                totalPanes
             };
-            crp1ct[5] = 5;
+            crp1ct[5] = totalPanes + 1;
             inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo = crp1ct.ToArray();
             var crp1se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent)
             {
@@ -447,24 +455,24 @@ namespace SFCore
 
             #endregion
 
-            #region new Check L state
+            #region Inventory Control - Next Journal 2 copy "Next Equipment 2"
 
-            inventoryFsm.CopyState("Next Journal 3", "Next Equipment 3");
-            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 3", 0).boolName = "hasCustomInventoryItem";
-            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 3", 1).convName = "PANE_EQUIPMENT";
-            inventoryFsm.AddTransition("Check L Pane", "EQUIPMENT", "Next Equipment 3");
+            inventoryFsm.CopyState("Next Journal 2", "Next Equipment 2");
+            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 2", 0).boolName = "hasCustomInventoryItem";
+            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 2", 1).convName = "PANE_EQUIPMENT";
+            inventoryFsm.AddTransition("Check R Pane", "EQUIPMENT", "Next Equipment 2");
 
-            inventoryFsm.GetAction<SetIntValue>("Under 3", 0).intValue = 5;
+            inventoryFsm.GetAction<SetIntValue>("Under 2", 0).intValue = totalPanes + 1;
 
             #endregion
 
-            #region Check L Pane state
+            #region Inventory Control - Check L Pane
 
             var clp1ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo)
             {
-                4
+                totalPanes
             };
-            clp1ct[5] = 5;
+            clp1ct[5] = totalPanes + 1;
             inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo = clp1ct.ToArray();
             var clp1se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent)
             {
@@ -474,25 +482,24 @@ namespace SFCore
 
             #endregion
 
-            #region new Loop state
+            #region Inventory Control - Next Journal 3 copy "Next Equipment 3"
 
-            inventoryFsm.CopyState("Next Journal", "Next Equipment");
-            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment", 0).boolName = "hasCustomInventoryItem";
-            inventoryFsm.GetAction<SetGameObject>("Next Equipment", 2).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
-            inventoryFsm.GetAction<GetLanguageString>("Next Equipment", 3).convName = "PANE_EQUIPMENT";
-            inventoryFsm.AddTransition("Loop Through", "EQUIPMENT", "Next Equipment");
+            inventoryFsm.CopyState("Next Journal 3", "Next Equipment 3");
+            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 3", 0).boolName = "hasCustomInventoryItem";
+            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 3", 1).convName = "PANE_EQUIPMENT";
+            inventoryFsm.AddTransition("Check L Pane", "EQUIPMENT", "Next Equipment 3");
 
-            inventoryFsm.GetAction<SetIntValue>("Under", 0).intValue = 5;
+            inventoryFsm.GetAction<SetIntValue>("Under 3", 0).intValue = totalPanes + 1;
 
             #endregion
 
-            #region Check Loop state
+            #region Inventory Control - Loop Through
 
             var cls3ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo)
             {
-                4
+                totalPanes
             };
-            cls3ct[5] = 5;
+            cls3ct[5] = totalPanes + 1;
             inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo = cls3ct.ToArray();
             var cls3se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent)
             {
@@ -502,33 +509,89 @@ namespace SFCore
 
             #endregion
 
+            #region Inventory Control - Next Journal copy "Next Equipment"
+
+            inventoryFsm.CopyState("Next Journal", "Next Equipment");
+            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment", 0).boolName = "hasCustomInventoryItem";
+            inventoryFsm.GetAction<SetGameObject>("Next Equipment", 2).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
+            inventoryFsm.GetAction<GetLanguageString>("Next Equipment", 3).convName = "PANE_EQUIPMENT";
+            inventoryFsm.AddTransition("Loop Through", "EQUIPMENT", "Next Equipment");
+
+            inventoryFsm.GetAction<SetIntValue>("Under", 0).intValue = totalPanes + 1;
+
+            #endregion
+
             #region Enemy List - Item List Control
 
-            var newListFsm = newListGo.LocateMyFSM("Item List Control");
-            var newListFsmVars = newListFsm.FsmVariables;
+            #region Init
+
             newListFsm.GetAction<CallMethodProper>("Init", 15).behaviour = "CustomItemList";
             newListFsm.GetAction<CallMethodProper>("Init", 18).behaviour = "CustomItemList";
+
+            newListFsm.RemoveAction("Init", 28);
+            newListFsm.RemoveAction("Init", 27);
+
             newListFsm.RemoveAction("Init", 13);
+            //newListFsm.InsertAction("Init", new CallMethodProper()
+            //{
+            //    gameObject = newListFOD,
+            //    behaviour = "CustomItemList",
+            //    methodName = "UpdateItemList",
+            //    parameters = new FsmVar[0],
+            //    storeResult = new FsmVar()
+            //}, 13);
+
+            newListFsm.RemoveAction("Init", 12);
+            newListFsm.RemoveAction("Init", 11);
+
+            #endregion
+
+            #region New Item?
+
             newListFsm.GetAction<CallMethodProper>("New Item?", 0).behaviour = "CustomItemList";
-            newListFsm.AddAction("Prev Item", new SetIntValue()
-            {
-                intVariable = newListFsmVars.FindFsmInt("Current Item"),
-                intValue = 0,
-                everyFrame = false
-            });
-            newListFsm.RemoveAction("Prev Item", 0);
+
+            #endregion
+
+            #region Prev Item
+
+            // Don't let it go to "Prev Item"
+            newListFsm.ChangeTransition("New Item?", "CANCEL", "New Item");
+
+            #endregion
+
+            #region Get Details
+
             newListFsm.GetAction<CallMethodProper>("Get Details", 1).behaviour = "CustomItemList";
             newListFsm.GetAction<GetLanguageString>("Get Details", 2).sheetName = "UI";
             newListFsm.GetAction<CallMethodProper>("Get Details", 4).behaviour = "CustomItemList";
             newListFsm.GetAction<CallMethodProper>("Get Details", 5).behaviour = "CustomItemList";
             newListFsm.GetAction<GetLanguageString>("Get Details", 7).sheetName = "UI";
+
             newListFsm.RemoveAction("Get Details", 0);
 
+            #endregion
+
+            #region Notes?
+
             newListFsm.GetAction<CallMethodProper>("Notes?", 0).behaviour = "CustomItemList";
+
             newListFsm.RemoveAction("Notes?", 1);
+
+            #endregion
+
+            #region Get Notes
+
             newListFsm.GetAction<SetTextMeshProText>("Get Notes", 5).textString = "";
+
             newListFsm.RemoveAction("Get Notes", 4);
             newListFsm.RemoveAction("Get Notes", 3);
+
+            newListFsm.ChangeTransition("Get Notes", "FINISHED", "MoveTo");
+
+            #endregion
+
+            #region Display Kills
+
             newListFsm.GetAction<BuildString>("Display Kills", 4).stringParts = new FsmString[]
             {
                 "Amount collected: ",
@@ -536,26 +599,47 @@ namespace SFCore
             };
 
             newListFsm.ChangeTransition("Display Kills", "FINISHED", "MoveTo");
-            newListFsm.ChangeTransition("Get Notes", "FINISHED", "MoveTo");
-            newListFsm.InsertAction("Init", new CallMethodProper()
-            {
-                gameObject = newListFOD,
-                behaviour = "CustomItemList",
-                methodName = "UpdateItemList",
-                parameters = new FsmVar[0],
-                storeResult = new FsmVar()
-            }, 13);
 
             #endregion
 
-            inventoryFsm.AddMethod("Close", () =>
-            {
-                uiJournalFsm.SetState("Inactive");
-            });
+            #region Check Down
 
-            newListFsm.MakeLog();
-            inventoryFsm.MakeLog();
-            uiJournalFsm.MakeLog();
+            newListFsm.InsertAction("Check Down", newListFsm.GetAction<CallMethodProper>("Init", 15), 0);
+
+            #endregion
+
+            #region Check Up
+
+            newListFsm.InsertAction("Check Up", newListFsm.GetAction<CallMethodProper>("Init", 15), 0);
+
+            #endregion
+
+            #endregion
+
+            #region Journal go copy - UI Journal fsm
+
+            uiJournalFsm.RemoveAction("Completion?", 12);
+            uiJournalFsm.RemoveAction("Completion?", 11);
+            uiJournalFsm.RemoveAction("Completion?", 10);
+            uiJournalFsm.RemoveAction("Completion?", 9);
+            uiJournalFsm.RemoveAction("Completion?", 8);
+            uiJournalFsm.RemoveAction("Completion?", 7);
+            uiJournalFsm.RemoveAction("Completion?", 6);
+            uiJournalFsm.RemoveAction("Completion?", 5);
+            uiJournalFsm.RemoveAction("Completion?", 4);
+            uiJournalFsm.RemoveAction("Completion?", 3);
+            uiJournalFsm.RemoveAction("Completion?", 2);
+            uiJournalFsm.RemoveAction("Completion?", 0);
+
+            uiJournalFsm.AddTransition("Active", "DOWN", "Inactive");
+            uiJournalFsm.AddTransition("Active", "CHANGE DOWN", "Inactive");
+
+
+            #endregion
+
+            //newListFsm.MakeLog();
+            //inventoryFsm.MakeLog();
+            //uiJournalFsm.MakeLog();
 
             var fg = newPaneGo.GetComponent<FadeGroup>();
             List<SpriteRenderer> tmpSprites = new List<SpriteRenderer>()
