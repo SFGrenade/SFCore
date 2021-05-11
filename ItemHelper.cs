@@ -11,6 +11,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UObject = UnityEngine.Object;
 using SFCore.MonoBehaviours;
+using Language;
 
 namespace SFCore
 {
@@ -104,8 +105,15 @@ namespace SFCore
 
         private static string LanguageGetHook(string key, string sheet)
         {
-            if (key.Equals("PANE_EQUIPMENT") && sheet.Equals("UI"))
-                return "Equipment";
+			if (key.Equals("PANE_EQUIPMENT") && sheet.Equals("UI"))
+			{
+				LanguageCode languageCode = Language.Language.CurrentLanguage();
+				switch(languageCode)
+				{
+					case LanguageCode.EN:
+						return "Equipment";
+				}
+			}
             return Language.Language.GetInternal(key, sheet);
         }
 
