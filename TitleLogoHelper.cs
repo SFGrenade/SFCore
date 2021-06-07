@@ -7,18 +7,17 @@ namespace SFCore
 {
     public class TitleLogoHelper
     {
-        private static bool initialized = false;
         private static bool isntanceChanged = false;
         private static List<Sprite> customLogos = new List<Sprite>();
 
+        static TitleLogoHelper()
+        {
+            On.MenuStyleTitle.ctor += OnMenuStyleTitleConstructor;
+            On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
+        }
+
         public static void Initialize()
         {
-            if (!initialized)
-            {
-                On.MenuStyleTitle.ctor += OnMenuStyleTitleConstructor;
-                On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
-                initialized = true;
-            }
         }
 
         public static int AddLogo(Sprite logo)

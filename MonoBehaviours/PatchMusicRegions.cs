@@ -11,7 +11,6 @@ namespace SFCore.MonoBehaviours
     public class PatchMusicRegions : MonoBehaviour
     {
         private static AudioMixer am = null;
-        private static Dictionary<string, MusicCue> cues = new Dictionary<string, MusicCue>();
 
         public bool useAlts = false;
         public static bool altMusic = false;
@@ -63,16 +62,16 @@ namespace SFCore.MonoBehaviours
             mr.exitMusicSnapshot = null;
             mr.exitTrackEvent = "";
             mr.exitTransitionTime = 0;
-            if (!cues.ContainsKey(MusicRegionSet))
+            if (!CueHolder.MusicCues.ContainsKey(MusicRegionSet))
             {
                 var tmpMC = ScriptableObject.CreateInstance<MusicCue>();
                 tmpMC.SetAttr<MusicCue, string>("originalMusicEventName", EnterTrackEvent);
                 tmpMC.SetAttr<MusicCue, int>("originalMusicTrackNumber", 2);
-                tmpMC.SetAttr<MusicCue, AudioMixerSnapshot>("snapshot", am.FindSnapshot("Normal"));
+                tmpMC.SetAttr<MusicCue, AudioMixerSnapshot>("snapshot", snapshot);
                 tmpMC.SetAttr<MusicCue, MusicCue.Alternative[]>("alternatives", null);
-                cues.Add(MusicRegionSet, tmpMC);
+                CueHolder.MusicCues.Add(MusicRegionSet, tmpMC);
             }
-            mr.enterMusicCue = cues[MusicRegionSet];
+            mr.enterMusicCue = CueHolder.MusicCues[MusicRegionSet];
 
             MusicCue.MusicChannelInfo[] musicChannelInfos = new MusicCue.MusicChannelInfo[]
             {

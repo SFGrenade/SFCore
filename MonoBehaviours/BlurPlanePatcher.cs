@@ -28,7 +28,9 @@ namespace SFCore.MonoBehaviours
                 blurPlaneMaterials[0].SetInt(Shader.PropertyToID("_StencilReadMask"), 255);
             }
 
-            var bp = gameObject.AddComponent<BlurPlane>();
+            var bp = gameObject.GetComponent<BlurPlane>();
+            if (bp == null)
+                bp = gameObject.AddComponent<BlurPlane>();
             var mr = gameObject.GetComponent<MeshRenderer>();
             mr.materials = blurPlaneMaterials;
             mr.material = blurPlaneMaterials[0];

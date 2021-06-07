@@ -1,4 +1,5 @@
-﻿using SFCore.Utils;
+﻿using System;
+using SFCore.Utils;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
@@ -59,9 +60,9 @@ namespace SFCore
 
             langStrings = new LanguageStrings(Assembly.GetExecutingAssembly(), "SFCore.Resources.Language.json", Encoding.UTF8);
 
-            ModHooks.Instance.LanguageGetHook += LanguageGetHook;
-            ModHooks.Instance.GetPlayerBoolHook += GetPlayerBoolHook;
-            ModHooks.Instance.GetPlayerIntHook += GetPlayerIntHook;
+            ModHooks.LanguageGetHook += LanguageGetHook;
+            ModHooks.GetPlayerBoolHook += GetPlayerBoolHook;
+            ModHooks.GetPlayerIntHook += GetPlayerIntHook;
             On.GameCameras.Start += GameCamerasOnStart;
         }
 

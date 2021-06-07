@@ -1,17 +1,16 @@
-﻿using System;
-using Modding;
+﻿using Modding;
 
 namespace SFCore.Generics
 {
-    public abstract class SaveSettingsMod<TSave> : Mod where TSave : ModSettings, new()
+    public abstract class SaveSettingsMod<TSave> : Mod, ILocalSettings<TSave> where TSave : new()
     {
-        public override ModSettings SaveSettings
-        {
-            get => _saveSettings;
-            set => _saveSettings = (TSave) value;
-        }
-        protected TSave _saveSettings = new TSave();
-        protected Type _saveSettingsType = typeof(TSave);
+        // The save data specific to a certain savefile. This setting will be loaded each time a save is opened.
+        public TSave _saveSettings { get; protected set; }
+        // Implement the LocalSettings interface.
+        // This method gets called when a save is loaded.
+        public void OnLoadLocal(TSave s) => this._saveSettings = s;
+        // This method gets called when the player saves their file.
+        public TSave OnSaveLocal() => this._saveSettings;
 
         public SaveSettingsMod() { }
         public SaveSettingsMod(string name) : base(name) { }

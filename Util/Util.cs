@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
+using Modding;
 using UnityEngine;
 
 namespace SFCore.Utils
@@ -10,11 +11,11 @@ namespace SFCore.Utils
     {
         public static void SetAttr<TSelf, TVal>(this TSelf o, string fieldname, TVal value)
         {
-            typeof(TSelf).GetField(fieldname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).SetValue(o, value);
+            ReflectionHelper.SetAttr<TSelf, TVal>(o, fieldname, value);
         }
         public static TVal GetAttr<TSelf, TVal>(this TSelf o, string fieldname)
         {
-            return (TVal)typeof(TSelf).GetField(fieldname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static).GetValue(o);
+            return ReflectionHelper.GetAttr<TSelf, TVal>(o, fieldname);
         }
 
         public static string GetVersion(Assembly asm)
