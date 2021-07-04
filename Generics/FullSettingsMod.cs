@@ -1,5 +1,4 @@
-﻿using System;
-using Modding;
+﻿using Modding;
 
 namespace SFCore.Generics
 {

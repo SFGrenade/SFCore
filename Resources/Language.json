@@ -1,52 +1,62 @@
 {
   "DE": {
     "UI": {
-      "PANE_EQUIPMENT": "Ausrüstung"
+      "PANE_EQUIPMENT": "Ausrüstung",
+      "ITEMS_COLLECTED": "Gesammelt"
     }
   },
   "EN": {
     "UI": {
-      "PANE_EQUIPMENT": "Equipment"
+      "PANE_EQUIPMENT": "Equipment",
+      "ITEMS_COLLECTED": "Collected"
     }
   },
   "ES": {
     "UI": {
-      "PANE_EQUIPMENT": "Equipo"
+      "PANE_EQUIPMENT": "Equipo",
+      "ITEMS_COLLECTED": "Recogido"
     }
   },
   "FR": {
     "UI": {
-      "PANE_EQUIPMENT": "Équipement"
+      "PANE_EQUIPMENT": "Équipement",
+      "ITEMS_COLLECTED": "Collecté"
     }
   },
   "IT": {
     "UI": {
-      "PANE_EQUIPMENT": "Attrezzature"
+      "PANE_EQUIPMENT": "Attrezzature",
+      "ITEMS_COLLECTED": "Raccolto"
     }
   },
   "JA": {
     "UI": {
-      "PANE_EQUIPMENT": "装置"
+      "PANE_EQUIPMENT": "装置",
+      "ITEMS_COLLECTED": "集めました"
     }
   },
   "KO": {
     "UI": {
-      "PANE_EQUIPMENT": "장비"
+      "PANE_EQUIPMENT": "장비",
+      "ITEMS_COLLECTED": "모은"
     }
   },
   "PT": {
     "UI": {
-      "PANE_EQUIPMENT": "Equipamento"
+      "PANE_EQUIPMENT": "Equipamento",
+      "ITEMS_COLLECTED": "Coletado"
     }
   },
   "RU": {
     "UI": {
-      "PANE_EQUIPMENT": "Оборудование"
+      "PANE_EQUIPMENT": "Оборудование",
+      "ITEMS_COLLECTED": "собраны"
     }
   },
   "ZH": {
     "UI": {
-      "PANE_EQUIPMENT": "设备"
+      "PANE_EQUIPMENT": "设备",
+      "ITEMS_COLLECTED": "集"
     }
   }
 }

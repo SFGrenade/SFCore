@@ -11,11 +11,11 @@ namespace SFCore.Utils
     {
         public static void SetAttr<TSelf, TVal>(this TSelf o, string fieldname, TVal value)
         {
-            ReflectionHelper.SetAttr<TSelf, TVal>(o, fieldname, value);
+            ReflectionHelper.SetField<TSelf, TVal>(o, fieldname, value);
         }
         public static TVal GetAttr<TSelf, TVal>(this TSelf o, string fieldname)
         {
-            return ReflectionHelper.GetAttr<TSelf, TVal>(o, fieldname);
+            return ReflectionHelper.GetField<TSelf, TVal>(o, fieldname);
         }
 
         public static string GetVersion(Assembly asm)

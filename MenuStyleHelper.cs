@@ -4,40 +4,77 @@ using SFCore.Utils;
 using UnityEngine;
 using Logger = Modding.Logger;
 using System.Collections.Generic;
-using System.Linq;
-using Modding;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 using UObject = UnityEngine.Object;
 
 namespace SFCore
 {
-    public class MenuStyleHelper
+    /// <summary>
+    ///     Menu style helper class for easily adding custom menu styles.
+    ///     The mod using this needs to handle the following:
+    ///     1 language string per menu style
+    ///     up to 1 title logo index per menu style
+    /// </summary>
+    public static class MenuStyleHelper
     {
-        private static bool initialized = false;
-
         private static List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> queue = new List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>();
         private static List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>> callbackQueue = new List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>>();
 
         public delegate (string languageString, GameObject styleGo, int titleIndex, string unlockKey, string[] achievementKeys, MenuStyles.MenuStyle.CameraCurves cameraCurves, AudioMixerSnapshot musicSnapshot) Hook(MenuStyles self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom run audio.
+        /// </summary>
+        /// <param name="self">active MenuStyles</param>
+        /// <returns>
+        ///     Tuple of:
+        ///     - Language string of the name of the menu style
+        ///     - GameObject of the menu style
+        ///     - title logo index (use -1 if you're not sure)
+        ///     - unlock key (use "" to have it unlocked by default)
+        ///     - array of achievement keys needed to unlock the menu style (null to have it unlocked by default)
+        ///     - CameraCurves of the colour correction to use when the style is used (null for default)
+        ///     - AudioMixerSnapshot of the snapshot to use when the style is used (null for default)
+        /// </returns>
         public static Hook AddMenuStyleHook;
 
-        public static void Initialize()
+        static MenuStyleHelper()
         {
-            if (!initialized)
-            {
-                initialized = true;
-                On.MenuStyles.Awake += OnMenuStylesAwake;
-                On.MenuStyles.SetStyle += OnMenuStylesSetStyle;
-            }
+            On.MenuStyles.Awake += OnMenuStylesAwake;
+            On.MenuStyles.SetStyle += OnMenuStylesSetStyle;
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom run audio.
+        /// </summary>
+        /// <param name="languageString">Language string of the name of the menu style</param>
+        /// <param name="styleGo">GameObject of the menu style</param>
+        /// <param name="titleIndex">Title logo index</param>
+        /// <param name="unlockKey">Unlock key</param>
+        /// <param name="achievementKeys">Array of achievement keys needed to unlock the menu style</param>
+        /// <param name="cameraCurves">CameraCurves of the colour correction to use when the style is used</param>
+        /// <param name="musicSnapshot">AudioMixerSnapshot of the snapshot to use when the style is used</param>
         public static void AddMenuStyle(string languageString, GameObject styleGo, int titleIndex = -1, string unlockKey = "", string[] achievementKeys = null, MenuStyles.MenuStyle.CameraCurves cameraCurves = null, AudioMixerSnapshot musicSnapshot = null)
         {
             queue.Add((languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot));
             UObject.DontDestroyOnLoad(styleGo);
             UObject.DontDestroyOnLoad(musicSnapshot);
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom run audio.
+        /// </summary>
+        /// <param name="callback">
+        ///     Method that returns tuple of:
+        ///     - Language string of the name of the menu style
+        ///     - GameObject of the menu style
+        ///     - title logo index (use -1 if you're not sure)
+        ///     - unlock key (use "" to have it unlocked by default)
+        ///     - array of achievement keys needed to unlock the menu style (null to have it unlocked by default)
+        ///     - CameraCurves of the colour correction to use when the style is used
+        ///     - AudioMixerSnapshot of the snapshot to use when the style is used (null for default)
+        /// </param>
         public static void AddMenuStyle(Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> callback)
         {
             callbackQueue.Add(callback);

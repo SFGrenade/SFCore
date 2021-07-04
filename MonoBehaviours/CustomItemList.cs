@@ -12,13 +12,13 @@ namespace SFCore.MonoBehaviours
     {
         public static CustomItemList instance { get; private set; }
 
-        public List<ItemHelper.Item> list = new List<ItemHelper.Item>();
-        public GameObject[] listInv = new GameObject[0];
+        public List<ItemHelper.Item> list { get; private set; } = new List<ItemHelper.Item>();
+        public GameObject[] listInv { get; private set; } = new GameObject[0];
         private GameObject[] currentList = new GameObject[0];
         private PlayerData pd = PlayerData.instance;
-        public float yDistance = -1.5f;
-        public int itemCount = -1;
-        public int firstNewItem;
+        public float yDistance { get; private set; } = -2f;
+        public int itemCount { get; private set; } = -1;
+        public int firstNewItem { get; private set; }
         private bool built = false;
 
         public CustomItemList()
@@ -31,6 +31,15 @@ namespace SFCore.MonoBehaviours
             if (this.currentList.Length > 0)
                 return this.currentList[0] != null;
             return false;
+        }
+
+        public int totalItemAmount()
+        {
+            return this.list.Count;
+        }
+        public int gotItemAmount()
+        {
+            return this.itemCount + 1;
         }
 
         public void BuildItemList()
@@ -90,7 +99,6 @@ namespace SFCore.MonoBehaviours
 
         private GameObject MakeGameObject(ItemHelper.Item item, GameObject prefab)
         {
-            //Logger.Log($"[CustomItem] - makego");
             var ret = GameObject.Instantiate(prefab);
             ret.name = item.uniqueName;
             ret.transform.localPosition = Vector3.zero;
@@ -105,7 +113,6 @@ namespace SFCore.MonoBehaviours
 
         private void MakeSpritesText(GameObject go, ItemHelper.Item item)
         {
-            //Logger.Log($"[CustomItem] - Makespritestext");
             var portrait = go.FindGameObjectInChildren("Portrait");
             var portraitSR = portrait.GetComponent<SpriteRenderer>();
             var name = go.FindGameObjectInChildren("Name");
@@ -151,7 +158,7 @@ namespace SFCore.MonoBehaviours
                     nameText.convName = item.nameConvo1;
                     break;
                 case ItemType.Flower:
-                    if (this.pd.GetBool(item.playerdataInt))
+                    if (this.pd.GetBool(item.playerdataInt)) // xunFlowerBroken
                     {
                         portraitSR.sprite = item.sprite2;
                         nameText.convName = item.nameConvo2;
@@ -167,7 +174,6 @@ namespace SFCore.MonoBehaviours
 
         private bool CheckBool(ItemHelper.Item item)
         {
-            //Logger.Log($"[CustomItem] - bool");
             switch (item.type)
             {
                 case ItemType.Normal:
@@ -179,7 +185,7 @@ namespace SFCore.MonoBehaviours
                 case ItemType.Counted:
                     return this.pd.GetInt(item.playerdataInt) > 0;
                 case ItemType.Flower:
-                    return this.pd.GetBool(item.playerdataBool1) && (this.pd.GetBool(item.playerdataBool2) ^ this.pd.GetBool(item.playerdataInt));
+                    return this.pd.GetBool(item.playerdataBool1) && !(this.pd.GetBool(item.playerdataBool2) && this.pd.GetBool(item.playerdataInt));
             }
             return false;
         }
@@ -222,7 +228,14 @@ namespace SFCore.MonoBehaviours
                         }
                         return item.descConvo2;
                     }
-                    break;
+                    else
+                    {
+                        if (this.pd.GetBool(item.playerdataBool2))
+                        {
+                            return item.nameConvoBoth;
+                        }
+                        return item.descConvo1;
+                    }
             }
             return "";
         }

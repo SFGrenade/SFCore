@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace SFCore
 {
+    /// <summary>
+    ///     Structure of data for a single achievement.
+    /// </summary>
     public struct s_CustomAchievement
     {
         public string key;
@@ -15,41 +18,53 @@ namespace SFCore
         public bool hidden;
     }
 
-    public class AchievementHelper
+    /// <summary>
+    ///     Achievement helper class for easily adding custom achievements.
+    ///     The mod using this needs to handle the following:
+    ///     - titleConvo Language string(s)
+    ///     - textConvo Language string(s)
+    /// </summary>
+    public static class AchievementHelper
     {
-        /* 
-         * AchievementHelper
-         * v 2.0.0.0
-         */
-
         private static List<s_CustomAchievement> customAchievements = new List<s_CustomAchievement>();
-        private static bool initialized = false;
 
-        public static void Initialize()
+        /// <inheritdoc />
+        /// <summary>
+        ///     Constructs the helper, hooks needed methods.
+        /// </summary>
+        static AchievementHelper()
         {
-            if (!initialized)
-            {
-                initialized = true;
-                On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
-                On.AchievementHandler.Awake += OnAchievementHandlerAwake;
-            }
+            On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
+            On.AchievementHandler.Awake += OnAchievementHandlerAwake;
+            On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds an achievement to the private list of custom achievements.
+        /// </summary>
+        /// <param name="key">Achievement key, determines if an achievement is unlocked</param>
+        /// <param name="sprite">Sprite of the achievement</param>
+        /// <param name="titleConvo">Language key of the achievement title</param>
+        /// <param name="textConvo">Language key of the achievement description</param>
+        /// <param name="hidden">Determines if the achievement is hidden until unlocked</param>
         public static void AddAchievement(string key, Sprite sprite, string titleConvo, string textConvo, bool hidden)
         {
-            if (initialized)
+            customAchievements.Add(new s_CustomAchievement()
             {
-                customAchievements.Add(new s_CustomAchievement()
-                {
-                    key = key,
-                    sprite = sprite,
-                    titleConvo = titleConvo,
-                    textConvo = textConvo,
-                    hidden = hidden
-                });
-            }
+                key = key,
+                sprite = sprite,
+                titleConvo = titleConvo,
+                textConvo = textConvo,
+                hidden = hidden
+            });
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds the contents of customAchievements to the given AchievementsList
+        /// </summary>
+        /// <param name="list">Achievement list which the custom achievements get added to</param>
         private static void initAchievements(AchievementsList list)
         {
             foreach (var ca in customAchievements)
@@ -77,12 +92,22 @@ namespace SFCore
                 }
             }
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     On hook that initializes achievements.
+        /// </summary>
         private static void OnAchievementHandlerAwake(On.AchievementHandler.orig_Awake orig, AchievementHandler self)
         {
             orig(self);
             initAchievements(self.achievementsList);
             initAchievements(self.achievementsListPrefab);
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     On hook that initializes achievements & achivements in the menu and unhooks itself afterwards.
+        /// </summary>
         private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
         {
             initAchievements(GameManager.instance.achievementHandler.achievementsList);
@@ -92,6 +117,12 @@ namespace SFCore
 
             On.UIManager.RefreshAchievementsList -= OnUIManagerRefreshAchievementsList;
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Initializes menu achievements
+        /// </summary>
+        /// <param name="manager">UI manager</param>
         private static void initMenuAchievements(UIManager manager)
         {
             // Stolen from the game
@@ -113,6 +144,14 @@ namespace SFCore
             }
             manager.menuAchievementsList.MarkInit();
         }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Updates status of achievement
+        /// </summary>
+        /// <param name="ach">The achievement in question</param>
+        /// <param name="menuAch">The menu part of the achievement</param>
+        /// <param name="hiddenIcon">The hidden sprite</param>
         private static void UpdateMenuAchievementStatus(Achievement ach, MenuAchievement menuAch, Sprite hiddenIcon)
         {
             // Stolen from the game

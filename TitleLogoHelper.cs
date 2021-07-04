@@ -5,9 +5,14 @@ using UObject = UnityEngine.Object;
 
 namespace SFCore
 {
-    public class TitleLogoHelper
+    /// <summary>
+    ///     Title logo helper class for easily adding custom title logos.
+    ///     The mod using this needs to handle the following:
+    ///     - save title logo IDs
+    /// </summary>
+    public static class TitleLogoHelper
     {
-        private static bool isntanceChanged = false;
+        private static bool instanceChanged = false;
         private static List<Sprite> customLogos = new List<Sprite>();
 
         static TitleLogoHelper()
@@ -16,10 +21,11 @@ namespace SFCore
             On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
         }
 
-        public static void Initialize()
-        {
-        }
-
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds the custom title logo.
+        /// </summary>
+        /// <returns>ID of the custom title logo</returns>
         public static int AddLogo(Sprite logo)
         {
             customLogos.Add(logo);
@@ -30,33 +36,26 @@ namespace SFCore
         private static void OnMenuStyleTitleConstructor(On.MenuStyleTitle.orig_ctor orig, MenuStyleTitle self)
         {
             orig(self);
-            isntanceChanged = false;
+            instanceChanged = false;
         }
 
         private static void OnMenuStyleTitleSetTitle(On.MenuStyleTitle.orig_SetTitle orig, MenuStyleTitle self, int index)
         {
-            if (!isntanceChanged)
+            if (!instanceChanged)
             {
                 RuntimePlatform[] allPlatforms = new RuntimePlatform[]
                 {
-                    RuntimePlatform.OSXEditor,
                     RuntimePlatform.OSXPlayer,
                     RuntimePlatform.WindowsPlayer,
-                    RuntimePlatform.WindowsEditor,
                     RuntimePlatform.IPhonePlayer,
                     RuntimePlatform.Android,
                     RuntimePlatform.LinuxPlayer,
-                    RuntimePlatform.LinuxEditor,
                     RuntimePlatform.WebGLPlayer,
                     RuntimePlatform.WSAPlayerX86,
                     RuntimePlatform.WSAPlayerX64,
                     RuntimePlatform.WSAPlayerARM,
-                    RuntimePlatform.TizenPlayer,
-                    RuntimePlatform.PSP2,
                     RuntimePlatform.PS4,
-                    RuntimePlatform.PSM,
                     RuntimePlatform.XboxOne,
-                    RuntimePlatform.WiiU,
                     RuntimePlatform.tvOS,
                     RuntimePlatform.Switch
                 };
@@ -85,7 +84,7 @@ namespace SFCore
                 }
                 self.TitleSprites = tmpList.ToArray();
 
-                isntanceChanged = true;
+                instanceChanged = true;
             }
 
             orig(self, index);

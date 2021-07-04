@@ -1,5 +1,4 @@
-﻿using System;
-using SFCore.Utils;
+﻿using SFCore.Utils;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
@@ -15,6 +14,9 @@ using SFCore.MonoBehaviours;
 
 namespace SFCore
 {
+    /// <summary>
+    ///     Enum to determine type of item.
+    /// </summary>
     public enum ItemType
     {
         Normal,
@@ -24,7 +26,15 @@ namespace SFCore
         Flower
     }
 
-    public class ItemHelper
+    /// <summary>
+    ///     Item helper class for easily adding custom items.
+    ///     The mod using this needs to handle the following:
+    ///     - up to 3 PlayerData bools per item
+    ///     - up to 1 PlayerData int per item
+    ///     - up to 3 name language strings per item
+    ///     - up to 4 description language strings per item
+    /// </summary>
+    public static class ItemHelper
     {
         public struct Item
         {
@@ -66,29 +76,35 @@ namespace SFCore
             On.GameCameras.Start += GameCamerasOnStart;
         }
 
-        private static bool GetPlayerBoolHook(string originalset)
+        private static bool GetPlayerBoolHook(string originalset, bool orig)
         {
             if (originalset.Equals("hasCustomInventoryItem"))
             {
                 return (CustomItemList.instance != null) && (CustomItemList.instance.hasAtLeastOneItem());
             }
-            return PlayerData.instance.GetBoolInternal(originalset);
+            return orig;
         }
 
-        private static int GetPlayerIntHook(string originalset)
+        private static int GetPlayerIntHook(string originalset, int orig)
         {
             if (originalset.Equals("0Return"))
             {
                 return 0;
             }
-            return PlayerData.instance.GetIntInternal(originalset);
+            else if (originalset.Equals("customItemListGotAmount"))
+            {
+                return CustomItemList.instance.gotItemAmount();
+            }
+            else if (originalset.Equals("customItemListTotalAmount"))
+            {
+                return CustomItemList.instance.totalItemAmount();
+            }
+            return orig;
         }
 
         private static void GameCamerasOnStart(On.GameCameras.orig_Start orig, GameCameras self)
         {
             orig(self);
-
-            Log("Starting to change inventory");
 
             #region Display no equipments
 
@@ -96,7 +112,6 @@ namespace SFCore
             var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
             if (equipmentFsm.GetState("Init").Fsm == null)
             {
-                Log("Warning: 'Build Equipment List' Fsm not initialized");
                 equipmentFsm.Preprocess();
             }
             equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
@@ -110,7 +125,6 @@ namespace SFCore
             if (successful)
             {
                 self.gameObject.Find("Inventory").LocateMyFSM("Inventory Control").SetState("Init");
-                Log("Finished to change inventory");
             }
             else
             {
@@ -118,24 +132,20 @@ namespace SFCore
             }
         }
 
-        private static string LanguageGetHook(string key, string sheet)
+        private static string LanguageGetHook(string key, string sheet, string orig)
         {
             if (langStrings.ContainsKey(key, sheet))
             {
                 return langStrings.Get(key, sheet);
             }
-            return Language.Language.GetInternal(key, sheet);
+            return orig;
         }
-
-        public static void init() { }
 
         private static void InitDefaultItems(GameObject equipmentGo)
         {
             var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
 
             if (equipmentFsm.GetState("Dash").Fsm == null || initialized) return;
-
-            Log("Reconstructing Items");
 
             #region Populate sprite dictionary
 
@@ -237,11 +247,11 @@ namespace SFCore
                 defaultSprites.Add("FlowerBroken",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<InvItemDisplay>().activeSprite));
             if (defaultSprites.ContainsKey("Simple Key"))
-                defaultSprites["Simple Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
+                defaultSprites["Simple Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Simple Key")
                     .GetComponent<SpriteRenderer>().sprite);
             else
                 defaultSprites.Add("Simple Key",
-                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<SpriteRenderer>().sprite));
+                    (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Simple Key").GetComponent<SpriteRenderer>().sprite));
             if (defaultSprites.ContainsKey("Ore"))
                 defaultSprites["Ore"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Ore").GetComponent<SpriteRenderer>()
                     .sprite);
@@ -300,14 +310,7 @@ namespace SFCore
 
             #endregion
 
-            foreach (var pair in defaultSprites)
-            {
-                Log($"Sprite '{pair.Key}': '{pair.Value}'");
-            }
-
             initialized = true;
-
-            Log("Items Reconstructed");
         }
 
         private static bool CopyJournalPane(GameObject inventoryGo)
@@ -346,7 +349,6 @@ namespace SFCore
                 cli.list.Add(item);
             }
 
-            cli.yDistance = -2;
             //cli.BuildItemList();
             //cli.UpdateItemList();
 
@@ -619,17 +621,21 @@ namespace SFCore
 
             #region Journal go copy - UI Journal fsm
 
+            GameObject.Destroy(newPaneGo.Find("Text Encountered"));
+            newPaneGo.Find("Text Completion").GetComponent<SetTextMeshProGameText>().convName = "ITEMS_COLLECTED";
+
+            uiJournalFsm.RemoveAction("Init", 6);
+            uiJournalFsm.RemoveAction("Init", 5);
+            uiJournalFsm.RemoveAction("Init", 3);
+
+            uiJournalFsm.GetAction<GetPlayerDataInt>("Completion?", 2).intName = "customItemListGotAmount";
+            uiJournalFsm.GetAction<GetPlayerDataInt>("Completion?", 5).intName = "customItemListGotAmount";
+            uiJournalFsm.GetAction<GetPlayerDataInt>("Completion?", 8).intName = "customItemListTotalAmount";
+
             uiJournalFsm.RemoveAction("Completion?", 12);
-            uiJournalFsm.RemoveAction("Completion?", 11);
-            uiJournalFsm.RemoveAction("Completion?", 10);
-            uiJournalFsm.RemoveAction("Completion?", 9);
-            uiJournalFsm.RemoveAction("Completion?", 8);
             uiJournalFsm.RemoveAction("Completion?", 7);
             uiJournalFsm.RemoveAction("Completion?", 6);
             uiJournalFsm.RemoveAction("Completion?", 5);
-            uiJournalFsm.RemoveAction("Completion?", 4);
-            uiJournalFsm.RemoveAction("Completion?", 3);
-            uiJournalFsm.RemoveAction("Completion?", 2);
             uiJournalFsm.RemoveAction("Completion?", 0);
 
             uiJournalFsm.AddTransition("Active", "DOWN", "Inactive");
@@ -675,8 +681,32 @@ namespace SFCore
             return true;
         }
 
-        public static void AddNormalItem(string uniqueName, Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
+        private static string GenerateRandomString(int maxLength = 0xFF)
         {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            var randomString = new string(Enumerable.Repeat(chars, UnityEngine.Random.Range(1, maxLength + 1)).Select(s => s[UnityEngine.Random.Range(0, s.Length)]).ToArray());
+
+            while (customItemList.Select(x => x.uniqueName).Contains(randomString))
+            {
+                randomString = new string(Enumerable.Repeat(chars, UnityEngine.Random.Range(1, maxLength + 1)).Select(s => s[UnityEngine.Random.Range(0, s.Length)]).ToArray());
+            }
+
+            return randomString;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds a normal item. (e.g. King's Brand)
+        ///     You either have it, or you don't.
+        /// </summary>
+        /// <param name="sprite">Sprite for the item</param>
+        /// <param name="playerdataBool">Bool used to determine if the item is acquired</param>
+        /// <param name="nameConvo">Language string for the name</param>
+        /// <param name="descConvo">Language string for the description</param>
+        public static void AddNormalItem(Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
+        {
+            var uniqueName = GenerateRandomString();
             customItemList.Add(new Item()
             {
                 type = ItemType.Normal,
@@ -687,8 +717,22 @@ namespace SFCore
                 descConvo1 = descConvo
             });
         }
-        public static void AddOneTwoItem(string uniqueName, Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds a item of type OneTwo. (Not used ingame)
+        ///     You either have one, the other or none.
+        /// </summary>
+        /// <param name="sprite1">Sprite for the item 1</param>
+        /// <param name="sprite2">Sprite for the item 2</param>
+        /// <param name="playerdataBool1">Bool used to determine if item 1 is acquired</param>
+        /// <param name="playerdataBool2">Bool used to determine if item 2 is acquired</param>
+        /// <param name="nameConvo1">Language string for name 1</param>
+        /// <param name="nameConvo2">Language string for name 2</param>
+        /// <param name="descConvo1">Language string for description 1</param>
+        /// <param name="descConvo2">Language string for description 2</param>
+        public static void AddOneTwoItem(Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)
         {
+            var uniqueName = GenerateRandomString();
             customItemList.Add(new Item()
             {
                 type = ItemType.OneTwo,
@@ -703,8 +747,25 @@ namespace SFCore
                 descConvo2 = descConvo2
             });
         }
-        public static void AddOneTwoBothItem(string uniqueName, Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map & Quill)
+        ///     You can have one, the other, both or none.
+        /// </summary>
+        /// <param name="sprite1">Sprite for the item 1</param>
+        /// <param name="sprite2">Sprite for the item 2</param>
+        /// <param name="spriteBoth">Sprite for the item both</param>
+        /// <param name="playerdataBool1">Bool used to determine if item 1 is acquired</param>
+        /// <param name="playerdataBool2">Bool used to determine if item 2 is acquired</param>
+        /// <param name="nameConvo1">Language string for name 1</param>
+        /// <param name="nameConvo2">Language string for name 2</param>
+        /// <param name="nameConvoBoth">Language string for name both</param>
+        /// <param name="descConvo1">Language string for description 1</param>
+        /// <param name="descConvo2">Language string for description 2</param>
+        /// <param name="descConvoBoth">Language string for description both</param>
+        public static void AddOneTwoBothItem(Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)
         {
+            var uniqueName = GenerateRandomString();
             customItemList.Add(new Item()
             {
                 type = ItemType.OneTwoBoth,
@@ -722,8 +783,18 @@ namespace SFCore
                 descConvoBoth = descConvoBoth
             });
         }
-        public static void AddCountedItem(string uniqueName, Sprite sprite, string playerdataInt, string nameConvo, string descConvo)
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds a counted item. (e.g. Rancid Egg)
+        ///     You either have at least one, or you don't.
+        /// </summary>
+        /// <param name="sprite">Sprite for the item</param>
+        /// <param name="playerdataInt">Int used to determine if and how much of the item is acquired</param>
+        /// <param name="nameConvo">Language string for the name</param>
+        /// <param name="descConvo">Language string for the description</param>
+        public static void AddCountedItem(Sprite sprite, string playerdataInt, string nameConvo, string descConvo)
         {
+            var uniqueName = GenerateRandomString();
             customItemList.Add(new Item()
             {
                 type = ItemType.Counted,
@@ -734,8 +805,26 @@ namespace SFCore
                 descConvo1 = descConvo
             });
         }
-        public static void AddFlowerItem(string uniqueName, Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds a flower item. (e.g. the Delicate Flower)
+        ///     You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
+        ///     bool1 && !(bool2 && bool3) and it will be displayed
+        /// </summary>
+        /// <param name="sprite">Sprite for the 'normal' item</param>
+        /// <param name="sprite2">Sprite for the 'broken' item</param>
+        /// <param name="playerdataBool1">Bool used to determine if the item is acquired</param>
+        /// <param name="playerdataBool2">Bool used to determine if the item is broken</param>
+        /// <param name="playerdataBool3">Bool used to determine if the item is from another source (e.g. Queen's Gardens flowers)</param>
+        /// <param name="nameConvo1">Language string for the 'normal' name</param>
+        /// <param name="nameConvo2">Language string for the 'broken' name</param>
+        /// <param name="descConvo1">Language string for the 'normal' description</param>
+        /// <param name="descConvo2">Language string for the 'broken' description</param>
+        /// <param name="descConvo3">Language string for the 'normal, other source' description</param>
+        /// <param name="descConvo4">Language string for the 'broken, other source' description</param>
+        public static void AddFlowerItem(Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)
         {
+            var uniqueName = GenerateRandomString();
             customItemList.Add(new Item()
             {
                 type = ItemType.Flower,

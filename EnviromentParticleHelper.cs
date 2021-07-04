@@ -4,13 +4,13 @@ using SFCore.Utils;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
-using Logger = Modding.Logger;
-using System.Collections;
-using GlobalEnums;
 using Object = UnityEngine.Object;
 
 namespace SFCore
 {
+    /// <summary>
+    ///     Enviroment particle helper class for easily adding custom enviroment particles.
+    /// </summary>
     public static class EnviromentParticleHelper
     {
         private static PlayerData pd;
@@ -23,11 +23,6 @@ namespace SFCore
 
         private static Dictionary<int, GameObject> customRunEffects = new Dictionary<int, GameObject>();
         private static Dictionary<int, string> customRunEffectsPrefabs = new Dictionary<int, string>();
-
-        // Backwards compatability
-        public static void Init()
-        {
-        }
 
         static EnviromentParticleHelper()
         {
@@ -283,20 +278,68 @@ namespace SFCore
 
         #region Add custom GameObjects
         public delegate (int enviromentType, AudioClip walkAudio) CustomWalkAudioHook(HeroController self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom walk audio.
+        /// </summary>
+        /// <param name="self">active HeroController</param>
+        /// <returns>Tuple of the enviromentType you want to add and AudioClip of the sound you want</returns>
         public static CustomWalkAudioHook AddCustomWalkAudioHook;
         public delegate (int enviromentType, AudioClip runAudio) CustomRunAudioHook(HeroController self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom run audio.
+        /// </summary>
+        /// <param name="self">active HeroController</param>
+        /// <returns>Tuple of the enviromentType you want to add and AudioClip of the sound you want</returns>
         public static CustomRunAudioHook AddCustomRunAudioHook;
         public delegate (int enviromentType, GameObject dashEffects) CustomDashEffectsHook(DashEffect self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom dash effects.
+        /// </summary>
+        /// <param name="self">active DashEffect</param>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the dash effects you want</returns>
         public static CustomDashEffectsHook AddCustomDashEffectsHook;
         public delegate (int enviromentType, GameObject hardLandEffects) CustomHardLandEffectsHook(HardLandEffect self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom hard land effects.
+        /// </summary>
+        /// <param name="self">active HardLandEffect</param>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the hard land effects you want</returns>
         public static CustomHardLandEffectsHook AddCustomHardLandEffectsHook;
         public delegate (int enviromentType, GameObject jumpEffects) CustomJumpEffectsHook(JumpEffects self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom jump effects.
+        /// </summary>
+        /// <param name="self">active JumpEffects</param>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the jump effects you want</returns>
         public static CustomJumpEffectsHook AddCustomJumpEffectsHook;
         public delegate (int enviromentType, GameObject softLandEffects) CustomSoftLandEffectsHook(SoftLandEffect self);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom soft land effects.
+        /// </summary>
+        /// <param name="self">active SoftLandEffect</param>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the soft land effects you want</returns>
         public static CustomSoftLandEffectsHook AddCustomSoftLandEffectsHook;
         public delegate (int enviromentType, GameObject runEffects) CustomRunEffectsHook(GameObject runEffectsGo);
+        /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom run effects.
+        /// </summary>
+        /// <param name="runEffectsGo">active run effects GameObject</param>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the run effects you want</returns>
         public static CustomRunEffectsHook AddCustomRunEffectsHook;
 
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="walkAudio">The custom content</param>
         public static void addWalkAudio(int enviromentType, AudioClip walkAudio)
         {
             if ((enviromentType >= 0) && (enviromentType < 8))
@@ -310,6 +353,12 @@ namespace SFCore
                 customWalkAudio.Add(enviromentType, tmp);
             }
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="runAudio">The custom content</param>
         public static void addRunAudio(int enviromentType, AudioClip runAudio)
         {
             if ((enviromentType >= 0) && (enviromentType < 8))
@@ -323,6 +372,12 @@ namespace SFCore
                 customRunAudio.Add(enviromentType, tmp);
             }
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="dashEffects">The custom content</param>
         public static void addDashEffects(int enviromentType, GameObject dashEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
@@ -336,6 +391,12 @@ namespace SFCore
                 customDashEffects.Add(enviromentType, tmp);
             }
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="hardLandEffects">The custom content</param>
         public static void addHardLandEffects(int enviromentType, GameObject hardLandEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
@@ -349,6 +410,12 @@ namespace SFCore
                 customHardLandEffects.Add(enviromentType, tmp);
             }
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="jumpEffects">The custom content</param>
         public static void addJumpEffects(int enviromentType, GameObject jumpEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
@@ -362,6 +429,12 @@ namespace SFCore
                 customJumpEffects.Add(enviromentType, tmp);
             }
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="softLandEffects">The custom content</param>
         public static void addSoftLandEffects(int enviromentType, GameObject softLandEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
@@ -375,7 +448,12 @@ namespace SFCore
                 customSoftLandEffects.Add(enviromentType, tmp);
             }
         }
-
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="runEffects">The custom content</param>
         public static void addRunEffects(int enviromentType, GameObject runEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
@@ -391,6 +469,12 @@ namespace SFCore
                 customRunEffects.Add(enviromentType, tmp);
             }
         }
+        /// <inheritdoc />
+        /// <summary>
+        ///     Adds custom walk audio.
+        /// </summary>
+        /// <param name="enviromentType">Enviroment type to add the custom content to</param>
+        /// <param name="runEffectsPrefab">Existing run effects you want to have in your custom enviroment</param>
         public static void addRunEffects(int enviromentType, string runEffectsPrefab)
         {
 
