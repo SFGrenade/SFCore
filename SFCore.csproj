@@ -7,8 +7,8 @@
     <Product>SFCore</Product>
     <Description>A Hollow Knight Mod Library</Description>
     <Copyright>Copyright © SFGrenade 2020</Copyright>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <FileVersion>1.5.0.0</FileVersion>
+    <AssemblyVersion>1.5.1.0</AssemblyVersion>
+    <FileVersion>1.5.1.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
