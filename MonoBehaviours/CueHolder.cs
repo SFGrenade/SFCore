@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HutongGames.PlayMaker.Actions;
+﻿using System.Collections.Generic;
 using SFCore.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -18,12 +14,12 @@ namespace SFCore.MonoBehaviours
         {
             if (!MusicCues.ContainsKey(set))
             {
-                var tmpMC = ScriptableObject.CreateInstance<MusicCue>();
-                tmpMC.SetAttr<MusicCue, string>("originalMusicEventName", "CROSSROADS");
-                tmpMC.SetAttr<MusicCue, int>("originalMusicTrackNumber", 2);
-                tmpMC.SetAttr<MusicCue, AudioMixerSnapshot>("snapshot", snapshot);
-                tmpMC.SetAttr<MusicCue, MusicCue.Alternative[]>("alternatives", null);
-                MusicCue.MusicChannelInfo[] musicChannelInfos = new MusicCue.MusicChannelInfo[]
+                var tmpMc = ScriptableObject.CreateInstance<MusicCue>();
+                tmpMc.SetAttr("originalMusicEventName", "CROSSROADS");
+                tmpMc.SetAttr("originalMusicTrackNumber", 2);
+                tmpMc.SetAttr("snapshot", snapshot);
+                tmpMc.SetAttr<MusicCue, MusicCue.Alternative[]>("alternatives", null);
+                MusicCue.MusicChannelInfo[] musicChannelInfos = new[]
                 {
                     new MusicCue.MusicChannelInfo(), new MusicCue.MusicChannelInfo(),
                     new MusicCue.MusicChannelInfo(), new MusicCue.MusicChannelInfo(),
@@ -41,8 +37,8 @@ namespace SFCore.MonoBehaviours
                 musicChannelInfos[(int) MusicChannels.Tension].SetAttr("sync", (MusicChannelSync) syncs[(int) MusicChannels.Tension]);
                 musicChannelInfos[(int) MusicChannels.MainAlt].SetAttr("sync", (MusicChannelSync) syncs[(int) MusicChannels.MainAlt]);
                 musicChannelInfos[(int) MusicChannels.Extra].SetAttr("sync", (MusicChannelSync) syncs[(int) MusicChannels.Extra]);
-                tmpMC.SetAttr<MusicCue, MusicCue.MusicChannelInfo[]>("channelInfos", musicChannelInfos);
-                MusicCues.Add(set, tmpMC);
+                tmpMc.SetAttr("channelInfos", musicChannelInfos);
+                MusicCues.Add(set, tmpMc);
             }
             return MusicCues[set];
         }
@@ -50,10 +46,10 @@ namespace SFCore.MonoBehaviours
         {
             if (!AtmosCues.ContainsKey(set))
             {
-                var tmpAC = ScriptableObject.CreateInstance<AtmosCue>();
-                tmpAC.SetAttr("snapshot", snapshot);
-                tmpAC.SetAttr("isChannelEnabled", isChannelEnabled);
-                AtmosCues.Add(set, tmpAC);
+                var tmpAc = ScriptableObject.CreateInstance<AtmosCue>();
+                tmpAc.SetAttr("snapshot", snapshot);
+                tmpAc.SetAttr("isChannelEnabled", isChannelEnabled);
+                AtmosCues.Add(set, tmpAc);
             }
             return AtmosCues[set];
         }

@@ -6,39 +6,39 @@ namespace SFCore.Utils
 {
     public static class MiscCreator
     {
-        private static AudioMixer musicAM = null;
-        private static AudioMixer atmosAM = null;
-        private static AudioMixer enviroAM = null;
-        private static AudioMixer actorAM = null;
-        private static AudioMixer shadeAM = null;
+        private static AudioMixer _musicAm = null;
+        private static AudioMixer _atmosAm = null;
+        private static AudioMixer _enviroAm = null;
+        private static AudioMixer _actorAm = null;
+        private static AudioMixer _shadeAm = null;
 
         private static void InitAudioMixers()
         {
-            if (musicAM == null)
-                musicAM = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Music");
-            if (atmosAM == null)
-                atmosAM = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Atmos");
-            if (enviroAM == null)
-                enviroAM = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "EnviroEffects");
-            if (actorAM == null)
-                actorAM = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Actors");
-            if (shadeAM == null)
-                shadeAM = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "ShadeMixer");
+            if (_musicAm == null)
+                _musicAm = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Music");
+            if (_atmosAm == null)
+                _atmosAm = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Atmos");
+            if (_enviroAm == null)
+                _enviroAm = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "EnviroEffects");
+            if (_actorAm == null)
+                _actorAm = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Actors");
+            if (_shadeAm == null)
+                _shadeAm = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "ShadeMixer");
         }
 
         public static void ResetSceneManagerAudio(SceneManager sm)
         {
             InitAudioMixers();
 
-            sm.SetAttr<SceneManager, AudioMixerSnapshot>("musicSnapshot", musicAM.FindSnapshot("Silent"));
-            sm.atmosSnapshot = atmosAM.FindSnapshot("at None");
-            sm.enviroSnapshot = enviroAM.FindSnapshot("en Silent");
-            sm.actorSnapshot = actorAM.FindSnapshot("On");
-            sm.shadeSnapshot = shadeAM.FindSnapshot("Away");
+            sm.SetAttr("musicSnapshot", _musicAm.FindSnapshot("Silent"));
+            sm.atmosSnapshot = _atmosAm.FindSnapshot("at None");
+            sm.enviroSnapshot = _enviroAm.FindSnapshot("en Silent");
+            sm.actorSnapshot = _actorAm.FindSnapshot("On");
+            sm.shadeSnapshot = _shadeAm.FindSnapshot("Away");
 
-            sm.SetAttr<SceneManager, AtmosCue>("atmosCue", Resources.FindObjectsOfTypeAll<AtmosCue>().First(x => x.name == "None"));
-            sm.SetAttr<SceneManager, MusicCue>("musicCue", Resources.FindObjectsOfTypeAll<MusicCue>().First(x => x.name == "None"));
-            sm.SetAttr<SceneManager, MusicCue>("infectedMusicCue", Resources.FindObjectsOfTypeAll<MusicCue>().First(x => x.name == "None"));
+            sm.SetAttr("atmosCue", Resources.FindObjectsOfTypeAll<AtmosCue>().First(x => x.name == "None"));
+            sm.SetAttr("musicCue", Resources.FindObjectsOfTypeAll<MusicCue>().First(x => x.name == "None"));
+            sm.SetAttr("infectedMusicCue", Resources.FindObjectsOfTypeAll<MusicCue>().First(x => x.name == "None"));
         }
 
         public static void Set(this Vector3 self, double x, double y, double z)

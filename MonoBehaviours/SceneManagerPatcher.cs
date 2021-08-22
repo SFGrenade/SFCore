@@ -8,11 +8,11 @@ namespace SFCore.MonoBehaviours
 {
     public class SceneManagerPatcher : MonoBehaviour
     {
-        private static AudioMixer MusicAM = null;
-        private static AudioMixer AtmosAM = null;
-        private static AudioMixer EnviroAM = null;
-        private static AudioMixer ActorAM = null;
-        private static AudioMixer ShadeAM = null;
+        private static AudioMixer _musicAm = null;
+        private static AudioMixer _atmosAm = null;
+        private static AudioMixer _enviroAm = null;
+        private static AudioMixer _actorAm = null;
+        private static AudioMixer _shadeAm = null;
 
         [Header("Gameplay Scene Settings")]
         [Tooltip("The area of the map this scene belongs to.")]
@@ -67,14 +67,14 @@ namespace SFCore.MonoBehaviours
         [ArrayForEnum(typeof(MusicChannels))]
         public AudioClip[] MusicCueChannelInfoClips = new AudioClip[] { null, null, null, null, null, null }; // MusicCue
         [ArrayForEnum(typeof(MusicChannels))]
-        public MusicChannelSync[] MusicCueChannelInfoSyncs = new MusicChannelSync[] { MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit }; // MusicCue
+        public MusicChannelSync[] MusicCueChannelInfoSyncs = new[] { MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit }; // MusicCue
         public string InfectedMusicCueSet = "";
         public string InfectedMusicCueSnapshotName = "Silent"; // InfectedMusicCue
         public MusicChoices InfectedMusicCueSnapshotIndex = MusicChoices.Silent; // InfectedMusicCue
         [ArrayForEnum(typeof(MusicChannels))]
         public AudioClip[] InfectedMusicCueChannelInfoClips = new AudioClip[] { null, null, null, null, null, null }; // InfectedMusicCue
         [ArrayForEnum(typeof(MusicChannels))]
-        public MusicChannelSync[] InfectedMusicCueChannelInfoSyncs = new MusicChannelSync[] { MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit }; // InfectedMusicCue
+        public MusicChannelSync[] InfectedMusicCueChannelInfoSyncs = new[] { MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit }; // InfectedMusicCue
         public string MsSnapshotName = "Silent"; // MusicSnapshot
         public MusicChoices MsSnapshotIndex = MusicChoices.Silent; // MusicSnapshot
         public float musicDelayTime = 0;
@@ -95,14 +95,14 @@ namespace SFCore.MonoBehaviours
 
         public void Awake()
         {
-            if (MusicAM == null)
+            if (_musicAm == null)
             {
                 var ams = Resources.FindObjectsOfTypeAll<AudioMixer>();
-                MusicAM = ams.First(x => x.name == "Music");
-                AtmosAM = ams.First(x => x.name == "Atmos");
-                EnviroAM = ams.First(x => x.name == "EnviroEffects");
-                ActorAM = ams.First(x => x.name == "Actors");
-                ShadeAM = ams.First(x => x.name == "ShadeMixer");
+                _musicAm = ams.First(x => x.name == "Music");
+                _atmosAm = ams.First(x => x.name == "Atmos");
+                _enviroAm = ams.First(x => x.name == "EnviroEffects");
+                _actorAm = ams.First(x => x.name == "Actors");
+                _shadeAm = ams.First(x => x.name == "ShadeMixer");
             }
 
             GameObject smGo = new GameObject("_SceneManager");
@@ -126,23 +126,23 @@ namespace SFCore.MonoBehaviours
             sm.noParticles = noParticles;
             sm.overrideParticlesWith = overrideParticlesWith;
             Modding.Logger.Log($"AtmosCueSnapshotName: {AtmosCueSnapshotName}");
-            sm.SetAttr("atmosCue", CueHolder.GetAtmosCue(AtmosCueSet, AtmosAM.FindSnapshot(AtmosCueSnapshotName), AtmosCueIsChannelEnabled));
+            sm.SetAttr("atmosCue", CueHolder.GetAtmosCue(AtmosCueSet, _atmosAm.FindSnapshot(AtmosCueSnapshotName), AtmosCueIsChannelEnabled));
             Modding.Logger.Log($"MusicCueSnapshotName: {MusicCueSnapshotName}");
-            sm.SetAttr("musicCue", CueHolder.GetMusicCue(MusicCueSet, MusicAM.FindSnapshot(MusicCueSnapshotName), MusicCueChannelInfoClips, MusicCueChannelInfoSyncs));
+            sm.SetAttr("musicCue", CueHolder.GetMusicCue(MusicCueSet, _musicAm.FindSnapshot(MusicCueSnapshotName), MusicCueChannelInfoClips, MusicCueChannelInfoSyncs));
             Modding.Logger.Log($"InfectedMusicCueSnapshotName: {InfectedMusicCueSnapshotName}");
-            sm.SetAttr("infectedMusicCue", CueHolder.GetMusicCue(InfectedMusicCueSet, MusicAM.FindSnapshot(InfectedMusicCueSnapshotName), InfectedMusicCueChannelInfoClips, InfectedMusicCueChannelInfoSyncs));
+            sm.SetAttr("infectedMusicCue", CueHolder.GetMusicCue(InfectedMusicCueSet, _musicAm.FindSnapshot(InfectedMusicCueSnapshotName), InfectedMusicCueChannelInfoClips, InfectedMusicCueChannelInfoSyncs));
             Modding.Logger.Log($"MsSnapshotName: {MsSnapshotName}");
-            sm.SetAttr("musicSnapshot", MusicAM.FindSnapshot(MsSnapshotName));
+            sm.SetAttr("musicSnapshot", _musicAm.FindSnapshot(MsSnapshotName));
             sm.SetAttr("musicDelayTime", musicDelayTime);
             sm.SetAttr("musicTransitionTime", musicTransitionTime);
             Modding.Logger.Log($"AtsSnapshotName: {AtsSnapshotName}");
-            sm.atmosSnapshot = AtmosAM.FindSnapshot(AtsSnapshotName);
+            sm.atmosSnapshot = _atmosAm.FindSnapshot(AtsSnapshotName);
             Modding.Logger.Log($"EsSnapshotName: {EsSnapshotName}");
-            sm.enviroSnapshot = EnviroAM.FindSnapshot(EsSnapshotName);
+            sm.enviroSnapshot = _enviroAm.FindSnapshot(EsSnapshotName);
             Modding.Logger.Log($"AcsSnapshotName: {AcsSnapshotName}");
-            sm.actorSnapshot = ActorAM.FindSnapshot(AcsSnapshotName);
+            sm.actorSnapshot = _actorAm.FindSnapshot(AcsSnapshotName);
             Modding.Logger.Log($"SsSnapshotName: {SsSnapshotName}");
-            sm.shadeSnapshot = ShadeAM.FindSnapshot(SsSnapshotName);
+            sm.shadeSnapshot = _shadeAm.FindSnapshot(SsSnapshotName);
             sm.transitionTime = transitionTime;
             sm.borderPrefab = GameObject.Find("SceneBorder");
             sm.manualMapTrigger = manualMapTrigger;
@@ -187,11 +187,11 @@ namespace SFCore.MonoBehaviours
             NormalGramaphone,
             ActionOnly,
             MainOnly,
-            HKDecline2,
-            HKDecline3,
-            HKDecline4,
-            HKDecline5,
-            HKDecline6
+            HK_DECLINE2,
+            HK_DECLINE3,
+            HK_DECLINE4,
+            HK_DECLINE5,
+            HK_DECLINE6
         }
         public enum AtmosChoices
         {

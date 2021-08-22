@@ -17,8 +17,8 @@ namespace SFCore
     /// </summary>
     public static class MenuStyleHelper
     {
-        private static List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> queue = new List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>();
-        private static List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>> callbackQueue = new List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>>();
+        private static List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> _queue = new List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>();
+        private static List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>> _callbackQueue = new List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>>();
 
         public delegate (string languageString, GameObject styleGo, int titleIndex, string unlockKey, string[] achievementKeys, MenuStyles.MenuStyle.CameraCurves cameraCurves, AudioMixerSnapshot musicSnapshot) Hook(MenuStyles self);
         /// <inheritdoc />
@@ -57,7 +57,7 @@ namespace SFCore
         /// <param name="musicSnapshot">AudioMixerSnapshot of the snapshot to use when the style is used</param>
         public static void AddMenuStyle(string languageString, GameObject styleGo, int titleIndex = -1, string unlockKey = "", string[] achievementKeys = null, MenuStyles.MenuStyle.CameraCurves cameraCurves = null, AudioMixerSnapshot musicSnapshot = null)
         {
-            queue.Add((languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot));
+            _queue.Add((languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot));
             UObject.DontDestroyOnLoad(styleGo);
             UObject.DontDestroyOnLoad(musicSnapshot);
         }
@@ -77,7 +77,7 @@ namespace SFCore
         /// </param>
         public static void AddMenuStyle(Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> callback)
         {
-            callbackQueue.Add(callback);
+            _callbackQueue.Add(callback);
         }
 
         private static void OnMenuStylesAwake(On.MenuStyles.orig_Awake orig, MenuStyles self)
@@ -90,7 +90,7 @@ namespace SFCore
         {
             List<MenuStyles.MenuStyle> tmpList = new List<MenuStyles.MenuStyle>(self.styles);
             var tmpMenuStyle = tmpList[0];
-            foreach (var (languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot) in queue)
+            foreach (var (languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot) in _queue)
             {
                 var tmpCameraCurves = cameraCurves ?? tmpMenuStyle.cameraColorCorrection;
                 var tmpMusicSnapshot = musicSnapshot ?? tmpMenuStyle.musicSnapshot;
@@ -109,7 +109,7 @@ namespace SFCore
                 };
                 tmpList.Add(tmpStyle);
             }
-            foreach (var callback in callbackQueue)
+            foreach (var callback in _callbackQueue)
             {
                 var (languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot) =
                     callback(self);
@@ -195,7 +195,6 @@ namespace SFCore
                 GameCameras.instance.colorCorrectionCurves.UpdateTextures();
                 yield return null;
             }
-            yield break;
         }
 
         private static void Log(string message)
@@ -204,7 +203,7 @@ namespace SFCore
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[MenuStyleHelper] - {message.ToString()}");
+            Logger.Log($"[SFCore]:[MenuStyleHelper] - {message}");
         }
     }
 }

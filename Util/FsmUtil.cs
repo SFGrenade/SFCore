@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HutongGames.PlayMaker;
-using UnityEngine;
 using Logger = Modding.Logger;
 
 namespace SFCore.Utils
@@ -142,15 +141,15 @@ namespace SFCore.Utils
         }
         public static void AddVector2Variable(this PlayMakerFSM self, string name)
         {
-            List<FsmVector2> tmpVector2s = new List<FsmVector2>(self.FsmVariables.Vector2Variables);
-            tmpVector2s.Add(new FsmVector2(name));
-            self.FsmVariables.Vector2Variables = tmpVector2s.ToArray();
+            List<FsmVector2> tmpVector2S = new List<FsmVector2>(self.FsmVariables.Vector2Variables);
+            tmpVector2S.Add(new FsmVector2(name));
+            self.FsmVariables.Vector2Variables = tmpVector2S.ToArray();
         }
         public static void AddVector3Variable(this PlayMakerFSM self, string name)
         {
-            List<FsmVector3> tmpVector3s = new List<FsmVector3>(self.FsmVariables.Vector3Variables);
-            tmpVector3s.Add(new FsmVector3(name));
-            self.FsmVariables.Vector3Variables = tmpVector3s.ToArray();
+            List<FsmVector3> tmpVector3S = new List<FsmVector3>(self.FsmVariables.Vector3Variables);
+            tmpVector3S.Add(new FsmVector3(name));
+            self.FsmVariables.Vector3Variables = tmpVector3S.ToArray();
         }
         public static void AddColorVariable(this PlayMakerFSM self, string name)
         {

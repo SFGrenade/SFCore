@@ -8,7 +8,7 @@ namespace SFCore.Utils
 {
     public class LanguageStrings
     {
-        private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> jsonDict;
+        private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> _jsonDict;
 
         public LanguageStrings(Assembly asm, string resourceName, Encoding encoding = null)
         {
@@ -22,33 +22,33 @@ namespace SFCore.Utils
 
                 string json = (encoding == null ? Encoding.Default : encoding).GetString(buffer);
 
-                jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
+                _jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
             }
         }
 
         public LanguageStrings(string json)
         {
-            jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
+            _jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
         }
 
         public string Get(string key, string sheet)
         {
             GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;
             string ret;
-            if (!jsonDict.ContainsKey(lang.ToString()))
+            if (!_jsonDict.ContainsKey(lang.ToString()))
             {
                 // `lang` doesn't exist in dict
-                ret = jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet][key];
+                ret = _jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet][key];
             }
-            else if (!jsonDict[lang.ToString()].ContainsKey(sheet))
+            else if (!_jsonDict[lang.ToString()].ContainsKey(sheet))
             {
                 // `lang` exists, but `sheet` doesn't
-                ret = jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet][key];
+                ret = _jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet][key];
             }
             else
             {
                 // `lang` and `sheet` exist
-                ret = jsonDict[lang.ToString()][sheet][key];
+                ret = _jsonDict[lang.ToString()][sheet][key];
             }
             return ret.Replace("<br>", "\n");
         }
@@ -56,22 +56,22 @@ namespace SFCore.Utils
         public bool ContainsKey(string key, string sheet)
         {
             GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;
-            if (!jsonDict.ContainsKey(lang.ToString()))
+            if (!_jsonDict.ContainsKey(lang.ToString()))
             {
                 // `lang` doesn't exist in dict
-                if (!jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()].ContainsKey(sheet))
+                if (!_jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()].ContainsKey(sheet))
                     return false;
-                return jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet].ContainsKey(key);
+                return _jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet].ContainsKey(key);
             }
-            if (!jsonDict[lang.ToString()].ContainsKey(sheet))
+            if (!_jsonDict[lang.ToString()].ContainsKey(sheet))
             {
                 // `lang` exists, but `sheet` doesn't
-                if (!jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()].ContainsKey(sheet))
+                if (!_jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()].ContainsKey(sheet))
                     return false;
-                return jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet].ContainsKey(key);
+                return _jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet].ContainsKey(key);
             }
             // `lang` and `sheet` exist
-            return jsonDict[lang.ToString()][sheet].ContainsKey(key);
+            return _jsonDict[lang.ToString()][sheet].ContainsKey(key);
         }
     }
 }

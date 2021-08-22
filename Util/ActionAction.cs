@@ -1,13 +1,12 @@
 ﻿using System;
 using HutongGames.PlayMaker;
-using UnityEngine;
 
 namespace SFCore.Utils
 {
-    public class ActionAction<Targ> : FsmStateAction
+    public class ActionAction<TArg> : FsmStateAction
     {
-        public Action<Targ> action;
-        public Targ arg;
+        public Action<TArg> action;
+        public TArg arg;
 
         public override void Reset()
         {

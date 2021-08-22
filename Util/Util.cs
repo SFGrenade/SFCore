@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using Modding;
-using UnityEngine;
 
 namespace SFCore.Utils
 {
@@ -11,7 +10,7 @@ namespace SFCore.Utils
     {
         public static void SetAttr<TSelf, TVal>(this TSelf o, string fieldname, TVal value)
         {
-            ReflectionHelper.SetField<TSelf, TVal>(o, fieldname, value);
+            ReflectionHelper.SetField(o, fieldname, value);
         }
         public static TVal GetAttr<TSelf, TVal>(this TSelf o, string fieldname)
         {

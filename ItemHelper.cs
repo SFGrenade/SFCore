@@ -54,21 +54,21 @@ namespace SFCore
             public string descConvoBoth;
         }
 
-        private static Dictionary<string, Sprite> defaultSprites = new Dictionary<string, Sprite>();
+        private static Dictionary<string, Sprite> _defaultSprites = new Dictionary<string, Sprite>();
 
-        private static List<Item> defaultItemList = new List<Item>();
-        private static List<Item> customItemList = new List<Item>();
+        private static List<Item> _defaultItemList = new List<Item>();
+        private static List<Item> _customItemList = new List<Item>();
 
-        private static LanguageStrings langStrings;
+        private static LanguageStrings _langStrings;
 
-        private static bool initialized = false;
+        private static bool _initialized = false;
 
         static ItemHelper()
         {
-            defaultItemList = new List<Item>();
-            customItemList = new List<Item>();
+            _defaultItemList = new List<Item>();
+            _customItemList = new List<Item>();
 
-            langStrings = new LanguageStrings(Assembly.GetExecutingAssembly(), "SFCore.Resources.Language.json", Encoding.UTF8);
+            _langStrings = new LanguageStrings(Assembly.GetExecutingAssembly(), "SFCore.Resources.Language.json", Encoding.UTF8);
 
             ModHooks.LanguageGetHook += LanguageGetHook;
             ModHooks.GetPlayerBoolHook += GetPlayerBoolHook;
@@ -80,7 +80,7 @@ namespace SFCore
         {
             if (originalset.Equals("hasCustomInventoryItem"))
             {
-                return (CustomItemList.instance != null) && (CustomItemList.instance.hasAtLeastOneItem());
+                return (CustomItemList.Instance != null) && (CustomItemList.Instance.hasAtLeastOneItem());
             }
             return orig;
         }
@@ -93,11 +93,11 @@ namespace SFCore
             }
             else if (originalset.Equals("customItemListGotAmount"))
             {
-                return CustomItemList.instance.gotItemAmount();
+                return CustomItemList.Instance.GotItemAmount();
             }
             else if (originalset.Equals("customItemListTotalAmount"))
             {
-                return CustomItemList.instance.totalItemAmount();
+                return CustomItemList.Instance.TotalItemAmount();
             }
             return orig;
         }
@@ -134,9 +134,9 @@ namespace SFCore
 
         private static string LanguageGetHook(string key, string sheet, string orig)
         {
-            if (langStrings.ContainsKey(key, sheet))
+            if (_langStrings.ContainsKey(key, sheet))
             {
-                return langStrings.Get(key, sheet);
+                return _langStrings.Get(key, sheet);
             }
             return orig;
         }
@@ -145,124 +145,124 @@ namespace SFCore
         {
             var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
 
-            if (equipmentFsm.GetState("Dash").Fsm == null || initialized) return;
+            if (equipmentFsm.GetState("Dash").Fsm == null || _initialized) return;
 
             #region Populate sprite dictionary
 
-            if (defaultSprites.ContainsKey("Dash"))
-                defaultSprites["Dash"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Dash Cloak")
+            if (_defaultSprites.ContainsKey("Dash"))
+                _defaultSprites["Dash"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Dash Cloak")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Dash",
+                _defaultSprites.Add("Dash",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Dash Cloak").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("ShadowDash"))
-                defaultSprites["ShadowDash"] =
+            if (_defaultSprites.ContainsKey("ShadowDash"))
+                _defaultSprites["ShadowDash"] =
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Dash", 16).sprite.Value);
             else
-                defaultSprites.Add("ShadowDash",
+                _defaultSprites.Add("ShadowDash",
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Dash", 16).sprite.Value));
-            if (defaultSprites.ContainsKey("Walljump"))
-                defaultSprites["Walljump"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Mantis Claw")
+            if (_defaultSprites.ContainsKey("Walljump"))
+                _defaultSprites["Walljump"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Mantis Claw")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Walljump",
+                _defaultSprites.Add("Walljump",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Mantis Claw").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Super Dash"))
-                defaultSprites["Super Dash"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Super Dash")
+            if (_defaultSprites.ContainsKey("Super Dash"))
+                _defaultSprites["Super Dash"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Super Dash")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Super Dash",
+                _defaultSprites.Add("Super Dash",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Super Dash").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Double Jump"))
-                defaultSprites["Double Jump"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Double Jump")
+            if (_defaultSprites.ContainsKey("Double Jump"))
+                _defaultSprites["Double Jump"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Double Jump")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Double Jump",
+                _defaultSprites.Add("Double Jump",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Double Jump").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Lantern"))
-                defaultSprites["Lantern"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Lantern")
+            if (_defaultSprites.ContainsKey("Lantern"))
+                _defaultSprites["Lantern"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Lantern")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Lantern",
+                _defaultSprites.Add("Lantern",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Lantern").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Map"))
-                defaultSprites["Map"] =
+            if (_defaultSprites.ContainsKey("Map"))
+                _defaultSprites["Map"] =
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map", 1).sprite.Value);
             else
-                defaultSprites.Add("Map",
+                _defaultSprites.Add("Map",
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map", 1).sprite.Value));
-            if (defaultSprites.ContainsKey("Quill"))
-                defaultSprites["Quill"] =
+            if (_defaultSprites.ContainsKey("Quill"))
+                _defaultSprites["Quill"] =
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Quill", 1).sprite.Value);
             else
-                defaultSprites.Add("Quill",
+                _defaultSprites.Add("Quill",
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Quill", 1).sprite.Value));
-            if (defaultSprites.ContainsKey("MapQuill"))
-                defaultSprites["MapQuill"] =
+            if (_defaultSprites.ContainsKey("MapQuill"))
+                _defaultSprites["MapQuill"] =
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map and Quill", 1).sprite.Value);
             else
-                defaultSprites.Add("MapQuill",
+                _defaultSprites.Add("MapQuill",
                     (Sprite) UObject.Instantiate(equipmentFsm.GetAction<SetSpriteRendererSprite>("Map and Quill", 1).sprite.Value));
-            if (defaultSprites.ContainsKey("Kings Brand"))
-                defaultSprites["Kings Brand"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Kings Brand")
+            if (_defaultSprites.ContainsKey("Kings Brand"))
+                _defaultSprites["Kings Brand"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Kings Brand")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Kings Brand",
+                _defaultSprites.Add("Kings Brand",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Kings Brand").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Tram Pass"))
-                defaultSprites["Tram Pass"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Tram Pass")
+            if (_defaultSprites.ContainsKey("Tram Pass"))
+                _defaultSprites["Tram Pass"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Tram Pass")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Tram Pass",
+                _defaultSprites.Add("Tram Pass",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Tram Pass").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("City Key"))
-                defaultSprites["City Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("City Key")
+            if (_defaultSprites.ContainsKey("City Key"))
+                _defaultSprites["City Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("City Key")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("City Key",
+                _defaultSprites.Add("City Key",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("City Key").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Store Key"))
-                defaultSprites["Store Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Store Key")
+            if (_defaultSprites.ContainsKey("Store Key"))
+                _defaultSprites["Store Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Store Key")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Store Key",
+                _defaultSprites.Add("Store Key",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Store Key").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Love Key"))
-                defaultSprites["Love Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Love Key")
+            if (_defaultSprites.ContainsKey("Love Key"))
+                _defaultSprites["Love Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Love Key")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Love Key",
+                _defaultSprites.Add("Love Key",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Love Key").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Flower"))
-                defaultSprites["Flower"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
+            if (_defaultSprites.ContainsKey("Flower"))
+                _defaultSprites["Flower"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
                     .GetComponent<InvItemDisplay>().inactiveSprite);
             else
-                defaultSprites.Add("Flower",
+                _defaultSprites.Add("Flower",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<InvItemDisplay>()
                         .inactiveSprite));
-            if (defaultSprites.ContainsKey("FlowerBroken"))
-                defaultSprites["FlowerBroken"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
+            if (_defaultSprites.ContainsKey("FlowerBroken"))
+                _defaultSprites["FlowerBroken"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower")
                     .GetComponent<InvItemDisplay>().activeSprite);
             else
-                defaultSprites.Add("FlowerBroken",
+                _defaultSprites.Add("FlowerBroken",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Xun Flower").GetComponent<InvItemDisplay>().activeSprite));
-            if (defaultSprites.ContainsKey("Simple Key"))
-                defaultSprites["Simple Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Simple Key")
+            if (_defaultSprites.ContainsKey("Simple Key"))
+                _defaultSprites["Simple Key"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Simple Key")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Simple Key",
+                _defaultSprites.Add("Simple Key",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Simple Key").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Ore"))
-                defaultSprites["Ore"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Ore").GetComponent<SpriteRenderer>()
+            if (_defaultSprites.ContainsKey("Ore"))
+                _defaultSprites["Ore"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Ore").GetComponent<SpriteRenderer>()
                     .sprite);
             else
-                defaultSprites.Add("Ore",
+                _defaultSprites.Add("Ore",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Ore").GetComponent<SpriteRenderer>().sprite));
-            if (defaultSprites.ContainsKey("Rancid Egg"))
-                defaultSprites["Rancid Egg"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Rancid Egg")
+            if (_defaultSprites.ContainsKey("Rancid Egg"))
+                _defaultSprites["Rancid Egg"] = (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Rancid Egg")
                     .GetComponent<SpriteRenderer>().sprite);
             else
-                defaultSprites.Add("Rancid Egg",
+                _defaultSprites.Add("Rancid Egg",
                     (Sprite) UObject.Instantiate(equipmentGo.FindGameObjectInChildren("Rancid Egg").GetComponent<SpriteRenderer>().sprite));
 
             #endregion
@@ -270,47 +270,47 @@ namespace SFCore
             #region Make new inventory
 
             AddDefaultOneTwoBothItem("Dash",
-                defaultSprites["Dash"], defaultSprites["ShadowDash"], defaultSprites["ShadowDash"],
+                _defaultSprites["Dash"], _defaultSprites["ShadowDash"], _defaultSprites["ShadowDash"],
                 "hasDash", "hasShadowDash",
                 "INV_NAME_DASH", "INV_NAME_SHADOWDASH", "INV_NAME_SHADOWDASH",
                 "INV_DESC_DASH", "INV_DESC_SHADOWDASH", "INV_DESC_SHADOWDASH");
-            AddDefaultNormalItem("Walljump", defaultSprites["Walljump"], "hasWalljump", "INV_NAME_WALLJUMP",
+            AddDefaultNormalItem("Walljump", _defaultSprites["Walljump"], "hasWalljump", "INV_NAME_WALLJUMP",
                 "INV_DESC_WALLJUMP");
-            AddDefaultNormalItem("Super Dash", defaultSprites["Super Dash"], "hasSuperDash", "INV_NAME_SUPERDASH",
+            AddDefaultNormalItem("Super Dash", _defaultSprites["Super Dash"], "hasSuperDash", "INV_NAME_SUPERDASH",
                 "INV_DESC_SUPERDASH");
-            AddDefaultNormalItem("Double Jump", defaultSprites["Double Jump"], "hasDoubleJump",
+            AddDefaultNormalItem("Double Jump", _defaultSprites["Double Jump"], "hasDoubleJump",
                 "INV_NAME_DOUBLEJUMP", "INV_DESC_DOUBLEJUMP");
-            AddDefaultNormalItem("Lantern", defaultSprites["Lantern"], "hasLantern", "INV_NAME_LANTERN",
+            AddDefaultNormalItem("Lantern", _defaultSprites["Lantern"], "hasLantern", "INV_NAME_LANTERN",
                 "INV_DESC_LANTERN");
             AddDefaultOneTwoBothItem("Map Quill",
-                defaultSprites["Map"], defaultSprites["Quill"], defaultSprites["MapQuill"],
+                _defaultSprites["Map"], _defaultSprites["Quill"], _defaultSprites["MapQuill"],
                 "hasMap", "hasQuill",
                 "INV_NAME_MAP", "INV_NAME_QUILL", "INV_NAME_MAPQUILL",
                 "INV_DESC_MAP", "INV_DESC_QUILL", "INV_DESC_MAPQUILL");
-            AddDefaultNormalItem("Kings Brand", defaultSprites["Kings Brand"], "hasKingsBrand",
+            AddDefaultNormalItem("Kings Brand", _defaultSprites["Kings Brand"], "hasKingsBrand",
                 "INV_NAME_KINGSBRAND", "INV_DESC_KINGSBRAND");
-            AddDefaultNormalItem("Tram Pass", defaultSprites["Tram Pass"], "hasTramPass", "INV_NAME_TRAM_PASS",
+            AddDefaultNormalItem("Tram Pass", _defaultSprites["Tram Pass"], "hasTramPass", "INV_NAME_TRAM_PASS",
                 "INV_DESC_TRAM_PASS");
-            AddDefaultNormalItem("City Key", defaultSprites["City Key"], "hasCityKey", "INV_NAME_CITYKEY",
+            AddDefaultNormalItem("City Key", _defaultSprites["City Key"], "hasCityKey", "INV_NAME_CITYKEY",
                 "INV_DESC_CITYKEY");
-            AddDefaultNormalItem("Store Key", defaultSprites["Store Key"], "hasSlyKey", "INV_NAME_STOREKEY",
+            AddDefaultNormalItem("Store Key", _defaultSprites["Store Key"], "hasSlyKey", "INV_NAME_STOREKEY",
                 "INV_DESC_STOREKEY");
-            AddDefaultNormalItem("Love Key", defaultSprites["Love Key"], "hasLoveKey", "INV_NAME_LOVEKEY",
+            AddDefaultNormalItem("Love Key", _defaultSprites["Love Key"], "hasLoveKey", "INV_NAME_LOVEKEY",
                 "INV_DESC_LOVEKEY");
             AddDefaultFlowerItem("Xun Flower",
-                defaultSprites["Flower"], defaultSprites["FlowerBroken"],
+                _defaultSprites["Flower"], _defaultSprites["FlowerBroken"],
                 "hasXunFlower", "extraFlowerAppear", "xunFlowerBroken",
                 "INV_NAME_FLOWER", "INV_NAME_FLOWER_BROKEN",
                 "INV_DESC_FLOWER", "INV_DESC_FLOWER_BROKEN", "INV_DESC_FLOWER_QG", "INV_DESC_FLOWER_BROKEN_QG");
-            AddDefaultCountedItem("Simple Key", defaultSprites["Simple Key"], "simpleKeys", "INV_NAME_SIMPLEKEY",
+            AddDefaultCountedItem("Simple Key", _defaultSprites["Simple Key"], "simpleKeys", "INV_NAME_SIMPLEKEY",
                 "INV_DESC_SIMPLEKEY");
-            AddDefaultCountedItem("Ore", defaultSprites["Ore"], "ore", "INV_NAME_ORE", "INV_DESC_ORE");
-            AddDefaultCountedItem("Rancid Egg", defaultSprites["Rancid Egg"], "rancidEggs", "INV_NAME_RANCIDEGG",
+            AddDefaultCountedItem("Ore", _defaultSprites["Ore"], "ore", "INV_NAME_ORE", "INV_DESC_ORE");
+            AddDefaultCountedItem("Rancid Egg", _defaultSprites["Rancid Egg"], "rancidEggs", "INV_NAME_RANCIDEGG",
                 "INV_DESC_RANCIDEGG");
 
             #endregion
 
-            initialized = true;
+            _initialized = true;
         }
 
         private static bool CopyJournalPane(GameObject inventoryGo)
@@ -323,30 +323,30 @@ namespace SFCore
                 inventoryFsm.Preprocess();
             }
 
-            var newPaneGo = GameObject.Instantiate(inventoryGo.FindGameObjectInChildren("Journal"), inventoryGo.transform);
+            var newPaneGo = Object.Instantiate(inventoryGo.FindGameObjectInChildren("Journal"), inventoryGo.transform);
             newPaneGo.SetActive(false);
             newPaneGo.name = "ItemList";
-            var newPaneFOD = new FsmOwnerDefault()
+            var newPaneFod = new FsmOwnerDefault()
             {
                 GameObject = newPaneGo,
                 OwnerOption = OwnerDefaultOption.SpecifyGameObject
             };
 
             var newListGo = newPaneGo.FindGameObjectInChildren("Enemy List");
-            var newListFOD = new FsmOwnerDefault()
+            var newListFod = new FsmOwnerDefault()
             {
                 GameObject = newListGo,
                 OwnerOption = OwnerDefaultOption.SpecifyGameObject
             };
             UObject.Destroy(newListGo.GetComponent<JournalList>());
             var cli = newListGo.AddComponent<CustomItemList>();
-            foreach (var item in defaultItemList)
+            foreach (var item in _defaultItemList)
             {
-                cli.list.Add(item);
+                cli.List.Add(item);
             }
-            foreach (var item in customItemList)
+            foreach (var item in _customItemList)
             {
-                cli.list.Add(item);
+                cli.List.Add(item);
             }
 
             //cli.BuildItemList();
@@ -380,13 +380,13 @@ namespace SFCore
 
             inventoryFsm.AddAction("Init Enemy List", new FindChild()
             {
-                gameObject = newPaneFOD,
+                gameObject = newPaneFod,
                 childName = "Enemy List",
                 storeResult = inventoryFsmVars.FindFsmGameObject("ItemList List")
             });
             inventoryFsm.AddAction("Init Enemy List", new CallMethodProper()
             {
-                gameObject = newListFOD,
+                gameObject = newListFod,
                 behaviour = "CustomItemList",
                 methodName = "BuildItemList",
                 parameters = new FsmVar[0],
@@ -394,7 +394,7 @@ namespace SFCore
             });
             inventoryFsm.AddAction("Init Enemy List", new ActivateGameObject()
             {
-                gameObject = newPaneFOD,
+                gameObject = newPaneFod,
                 activate = false,
                 recursive = false,
                 resetOnExit = false,
@@ -407,7 +407,7 @@ namespace SFCore
 
             inventoryFsm.InsertAction("Refresh Enemy List", new CallMethodProper()
             {
-                gameObject = newListFOD,
+                gameObject = newListFod,
                 behaviour = "CustomItemList",
                 methodName = "UpdateItemList",
                 parameters = new FsmVar[0],
@@ -418,16 +418,16 @@ namespace SFCore
 
             #region Inventory Control - Check Current Pane
 
-            var ccp11ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo)
+            var ccp11Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo)
             {
                 totalPanes
             };
-            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo = ccp11ct.ToArray();
-            var ccp11se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent)
+            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo = ccp11Ct.ToArray();
+            var ccp11Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent)
             {
                 FsmEvent.GetFsmEvent("EQUIPMENT")
             };
-            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent = ccp11se.ToArray();
+            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent = ccp11Se.ToArray();
 
             #endregion
 
@@ -444,17 +444,17 @@ namespace SFCore
 
             #region Inventory Control - Check R Pane
 
-            var crp1ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo)
+            var crp1Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo)
             {
                 totalPanes
             };
-            crp1ct[5] = totalPanes + 1;
-            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo = crp1ct.ToArray();
-            var crp1se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent)
+            crp1Ct[5] = totalPanes + 1;
+            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo = crp1Ct.ToArray();
+            var crp1Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent)
             {
                 FsmEvent.FindEvent("EQUIPMENT")
             };
-            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent = crp1se.ToArray();
+            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent = crp1Se.ToArray();
 
             #endregion
 
@@ -471,17 +471,17 @@ namespace SFCore
 
             #region Inventory Control - Check L Pane
 
-            var clp1ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo)
+            var clp1Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo)
             {
                 totalPanes
             };
-            clp1ct[5] = totalPanes + 1;
-            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo = clp1ct.ToArray();
-            var clp1se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent)
+            clp1Ct[5] = totalPanes + 1;
+            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo = clp1Ct.ToArray();
+            var clp1Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent)
             {
                 FsmEvent.FindEvent("EQUIPMENT")
             };
-            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent = clp1se.ToArray();
+            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent = clp1Se.ToArray();
 
             #endregion
 
@@ -498,17 +498,17 @@ namespace SFCore
 
             #region Inventory Control - Loop Through
 
-            var cls3ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo)
+            var cls3Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo)
             {
                 totalPanes
             };
-            cls3ct[5] = totalPanes + 1;
-            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo = cls3ct.ToArray();
-            var cls3se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent)
+            cls3Ct[5] = totalPanes + 1;
+            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo = cls3Ct.ToArray();
+            var cls3Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent)
             {
                 FsmEvent.FindEvent("EQUIPMENT")
             };
-            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent = cls3se.ToArray();
+            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent = cls3Se.ToArray();
 
             #endregion
 
@@ -595,7 +595,7 @@ namespace SFCore
 
             #region Display Kills
 
-            newListFsm.GetAction<BuildString>("Display Kills", 4).stringParts = new FsmString[]
+            newListFsm.GetAction<BuildString>("Display Kills", 4).stringParts = new[]
             {
                 "Amount collected: ",
                 newListFsmVars.FindFsmString("Kills String")
@@ -621,7 +621,7 @@ namespace SFCore
 
             #region Journal go copy - UI Journal fsm
 
-            GameObject.Destroy(newPaneGo.Find("Text Encountered"));
+            Object.Destroy(newPaneGo.Find("Text Encountered"));
             newPaneGo.Find("Text Completion").GetComponent<SetTextMeshProGameText>().convName = "ITEMS_COLLECTED";
 
             uiJournalFsm.RemoveAction("Init", 6);
@@ -685,11 +685,11 @@ namespace SFCore
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-            var randomString = new string(Enumerable.Repeat(chars, UnityEngine.Random.Range(1, maxLength + 1)).Select(s => s[UnityEngine.Random.Range(0, s.Length)]).ToArray());
+            var randomString = new string(Enumerable.Repeat(chars, Random.Range(1, maxLength + 1)).Select(s => s[Random.Range(0, s.Length)]).ToArray());
 
-            while (customItemList.Select(x => x.uniqueName).Contains(randomString))
+            while (_customItemList.Select(x => x.uniqueName).Contains(randomString))
             {
-                randomString = new string(Enumerable.Repeat(chars, UnityEngine.Random.Range(1, maxLength + 1)).Select(s => s[UnityEngine.Random.Range(0, s.Length)]).ToArray());
+                randomString = new string(Enumerable.Repeat(chars, Random.Range(1, maxLength + 1)).Select(s => s[Random.Range(0, s.Length)]).ToArray());
             }
 
             return randomString;
@@ -707,7 +707,7 @@ namespace SFCore
         public static void AddNormalItem(Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
         {
             var uniqueName = GenerateRandomString();
-            customItemList.Add(new Item()
+            _customItemList.Add(new Item()
             {
                 type = ItemType.Normal,
                 uniqueName = uniqueName,
@@ -733,7 +733,7 @@ namespace SFCore
         public static void AddOneTwoItem(Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)
         {
             var uniqueName = GenerateRandomString();
-            customItemList.Add(new Item()
+            _customItemList.Add(new Item()
             {
                 type = ItemType.OneTwo,
                 uniqueName = uniqueName,
@@ -766,7 +766,7 @@ namespace SFCore
         public static void AddOneTwoBothItem(Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)
         {
             var uniqueName = GenerateRandomString();
-            customItemList.Add(new Item()
+            _customItemList.Add(new Item()
             {
                 type = ItemType.OneTwoBoth,
                 uniqueName = uniqueName,
@@ -795,7 +795,7 @@ namespace SFCore
         public static void AddCountedItem(Sprite sprite, string playerdataInt, string nameConvo, string descConvo)
         {
             var uniqueName = GenerateRandomString();
-            customItemList.Add(new Item()
+            _customItemList.Add(new Item()
             {
                 type = ItemType.Counted,
                 uniqueName = uniqueName,
@@ -825,7 +825,7 @@ namespace SFCore
         public static void AddFlowerItem(Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)
         {
             var uniqueName = GenerateRandomString();
-            customItemList.Add(new Item()
+            _customItemList.Add(new Item()
             {
                 type = ItemType.Flower,
                 uniqueName = uniqueName,
@@ -845,7 +845,7 @@ namespace SFCore
 
         private static void AddDefaultNormalItem(string uniqueName, Sprite sprite, string playerdataBool, string nameConvo, string descConvo)
         {
-            defaultItemList.Add(new Item()
+            _defaultItemList.Add(new Item()
             {
                 type = ItemType.Normal,
                 uniqueName = uniqueName,
@@ -857,7 +857,7 @@ namespace SFCore
         }
         private static void AddDefaultOneTwoItem(string uniqueName, Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)
         {
-            defaultItemList.Add(new Item()
+            _defaultItemList.Add(new Item()
             {
                 type = ItemType.OneTwo,
                 uniqueName = uniqueName,
@@ -873,7 +873,7 @@ namespace SFCore
         }
         private static void AddDefaultOneTwoBothItem(string uniqueName, Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)
         {
-            defaultItemList.Add(new Item()
+            _defaultItemList.Add(new Item()
             {
                 type = ItemType.OneTwoBoth,
                 uniqueName = uniqueName,
@@ -892,7 +892,7 @@ namespace SFCore
         }
         private static void AddDefaultCountedItem(string uniqueName, Sprite sprite, string playerdataInt, string nameConvo, string descConvo)
         {
-            defaultItemList.Add(new Item()
+            _defaultItemList.Add(new Item()
             {
                 type = ItemType.Counted,
                 uniqueName = uniqueName,
@@ -904,7 +904,7 @@ namespace SFCore
         }
         private static void AddDefaultFlowerItem(string uniqueName, Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)
         {
-            defaultItemList.Add(new Item()
+            _defaultItemList.Add(new Item()
             {
                 type = ItemType.Flower,
                 uniqueName = uniqueName,

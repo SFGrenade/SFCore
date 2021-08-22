@@ -10,85 +10,85 @@ namespace SFCore.MonoBehaviours
 {
     public class CustomItemList : MonoBehaviour
     {
-        public static CustomItemList instance { get; private set; }
+        public static CustomItemList Instance { get; private set; }
 
-        public List<ItemHelper.Item> list { get; private set; } = new List<ItemHelper.Item>();
-        public GameObject[] listInv { get; private set; } = new GameObject[0];
-        private GameObject[] currentList = new GameObject[0];
-        private PlayerData pd = PlayerData.instance;
-        public float yDistance { get; private set; } = -2f;
-        public int itemCount { get; private set; } = -1;
-        public int firstNewItem { get; private set; }
-        private bool built = false;
+        public List<ItemHelper.Item> List { get; private set; } = new List<ItemHelper.Item>();
+        public GameObject[] ListInv { get; private set; } = new GameObject[0];
+        private GameObject[] _currentList = new GameObject[0];
+        private PlayerData _pd = PlayerData.instance;
+        public float YDistance { get; private set; } = -2f;
+        public int ItemCount { get; private set; } = -1;
+        public int FirstNewItem { get; private set; }
+        private bool _built = false;
 
         public CustomItemList()
         {
-            instance = this;
+            Instance = this;
         }
 
         public bool hasAtLeastOneItem()
         {
-            if (this.currentList.Length > 0)
-                return this.currentList[0] != null;
+            if (_currentList.Length > 0)
+                return _currentList[0] != null;
             return false;
         }
 
-        public int totalItemAmount()
+        public int TotalItemAmount()
         {
-            return this.list.Count;
+            return List.Count;
         }
-        public int gotItemAmount()
+        public int GotItemAmount()
         {
-            return this.itemCount + 1;
+            return ItemCount + 1;
         }
 
         public void BuildItemList()
         {
-            Modding.Logger.Log($"[CustomItem] - Build item list");
-            this.pd = PlayerData.instance;
-            this.firstNewItem = -1;
-            this.itemCount = -1;
-            this.listInv = new GameObject[this.list.Count];
-            var prefab = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<JournalEntryStats>()
+            Logger.Log($"[CustomItem] - Build item list");
+            _pd = PlayerData.instance;
+            FirstNewItem = -1;
+            ItemCount = -1;
+            ListInv = new GameObject[List.Count];
+            var prefab = Instantiate(Resources.FindObjectsOfTypeAll<JournalEntryStats>()
                 .First(x => x.gameObject.name.Equals("Journal Crawler")).gameObject);
-            Object.Destroy(prefab.GetComponent<JournalEntryStats>());
+            Destroy(prefab.GetComponent<JournalEntryStats>());
             prefab.FindGameObjectInChildren("Name").GetComponent<SetTextMeshProGameText>().sheetName = "UI";
-            for (int i = 0; i < this.list.Count; i++)
+            for (int i = 0; i < List.Count; i++)
             {
-                this.itemCount++;
-                GameObject gameObject = MakeGameObject(this.list[i], prefab);
+                ItemCount++;
+                GameObject gameObject = MakeGameObject(List[i], prefab);
                 gameObject.transform.SetParent(transform, false);
                 gameObject.SetActive(false);
-                this.listInv[this.itemCount] = gameObject;
+                ListInv[ItemCount] = gameObject;
             }
 
             AddToFadeGroup();
 
-            built = true;
+            _built = true;
         }
 
         public void UpdateItemList()
         {
-            if (!built) BuildItemList();
+            if (!_built) BuildItemList();
 
-            Modding.Logger.Log($"[CustomItem] - Update Item List");
-            this.firstNewItem = 0;
-            this.itemCount = -1;
+            Logger.Log($"[CustomItem] - Update Item List");
+            FirstNewItem = 0;
+            ItemCount = -1;
             float num = 0f;
-            this.currentList = new GameObject[this.listInv.Length];
-            for (int i = 0; i < this.listInv.Length; i++)
+            _currentList = new GameObject[ListInv.Length];
+            for (int i = 0; i < ListInv.Length; i++)
             {
-                GameObject gameObject = this.listInv[i];
-                MakeSpritesText(gameObject, this.list[i]);
+                GameObject gameObject = ListInv[i];
+                MakeSpritesText(gameObject, List[i]);
 
-                var tmpBool = CheckBool(this.list[i]);
+                var tmpBool = CheckBool(List[i]);
                 gameObject.SetActive(tmpBool);
                 if (tmpBool)
                 {
-                    this.itemCount++;
-                    this.currentList[this.itemCount] = gameObject;
+                    ItemCount++;
+                    _currentList[ItemCount] = gameObject;
                     gameObject.transform.localPosition = new Vector3(0f, num, 0f);
-                    num += this.yDistance;
+                    num += YDistance;
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace SFCore.MonoBehaviours
 
         private GameObject MakeGameObject(ItemHelper.Item item, GameObject prefab)
         {
-            var ret = GameObject.Instantiate(prefab);
+            var ret = Instantiate(prefab);
             ret.name = item.uniqueName;
             ret.transform.localPosition = Vector3.zero;
 
@@ -114,58 +114,58 @@ namespace SFCore.MonoBehaviours
         private void MakeSpritesText(GameObject go, ItemHelper.Item item)
         {
             var portrait = go.FindGameObjectInChildren("Portrait");
-            var portraitSR = portrait.GetComponent<SpriteRenderer>();
+            var portraitSr = portrait.GetComponent<SpriteRenderer>();
             var name = go.FindGameObjectInChildren("Name");
             var nameText = name.GetComponent<SetTextMeshProGameText>();
 
             switch (item.type)
             {
                 case ItemType.Normal:
-                    portraitSR.sprite = item.sprite1;
+                    portraitSr.sprite = item.sprite1;
                     nameText.convName = item.nameConvo1;
                     break;
                 case ItemType.OneTwo:
-                    if (this.pd.GetBool(item.playerdataBool1))
+                    if (_pd.GetBool(item.playerdataBool1))
                     {
-                        portraitSR.sprite = item.sprite1;
+                        portraitSr.sprite = item.sprite1;
                         nameText.convName = item.nameConvo1;
                     }
                     else
                     {
-                        portraitSR.sprite = item.sprite2;
+                        portraitSr.sprite = item.sprite2;
                         nameText.convName = item.nameConvo2;
                     }
                     break;
                 case ItemType.OneTwoBoth:
-                    if (this.pd.GetBool(item.playerdataBool1) && !this.pd.GetBool(item.playerdataBool2))
+                    if (_pd.GetBool(item.playerdataBool1) && !_pd.GetBool(item.playerdataBool2))
                     {
-                        portraitSR.sprite = item.sprite1;
+                        portraitSr.sprite = item.sprite1;
                         nameText.convName = item.nameConvo1;
                     }
-                    else if (!this.pd.GetBool(item.playerdataBool1) && this.pd.GetBool(item.playerdataBool2))
+                    else if (!_pd.GetBool(item.playerdataBool1) && _pd.GetBool(item.playerdataBool2))
                     {
-                        portraitSR.sprite = item.sprite2;
+                        portraitSr.sprite = item.sprite2;
                         nameText.convName = item.nameConvo2;
                     }
                     else
                     {
-                        portraitSR.sprite = item.spriteBoth;
+                        portraitSr.sprite = item.spriteBoth;
                         nameText.convName = item.nameConvoBoth;
                     }
                     break;
                 case ItemType.Counted:
-                    portraitSR.sprite = item.sprite1;
+                    portraitSr.sprite = item.sprite1;
                     nameText.convName = item.nameConvo1;
                     break;
                 case ItemType.Flower:
-                    if (this.pd.GetBool(item.playerdataInt)) // xunFlowerBroken
+                    if (_pd.GetBool(item.playerdataInt)) // xunFlowerBroken
                     {
-                        portraitSR.sprite = item.sprite2;
+                        portraitSr.sprite = item.sprite2;
                         nameText.convName = item.nameConvo2;
                     }
                     else
                     {
-                        portraitSR.sprite = item.sprite1;
+                        portraitSr.sprite = item.sprite1;
                         nameText.convName = item.nameConvo1;
                     }
                     break;
@@ -177,52 +177,52 @@ namespace SFCore.MonoBehaviours
             switch (item.type)
             {
                 case ItemType.Normal:
-                    return this.pd.GetBool(item.playerdataBool1);
+                    return _pd.GetBool(item.playerdataBool1);
                 case ItemType.OneTwo:
-                    return this.pd.GetBool(item.playerdataBool1) ^ this.pd.GetBool(item.playerdataBool2);
+                    return _pd.GetBool(item.playerdataBool1) ^ _pd.GetBool(item.playerdataBool2);
                 case ItemType.OneTwoBoth:
-                    return this.pd.GetBool(item.playerdataBool1) || this.pd.GetBool(item.playerdataBool2);
+                    return _pd.GetBool(item.playerdataBool1) || _pd.GetBool(item.playerdataBool2);
                 case ItemType.Counted:
-                    return this.pd.GetInt(item.playerdataInt) > 0;
+                    return _pd.GetInt(item.playerdataInt) > 0;
                 case ItemType.Flower:
-                    return this.pd.GetBool(item.playerdataBool1) && !(this.pd.GetBool(item.playerdataBool2) && this.pd.GetBool(item.playerdataInt));
+                    return _pd.GetBool(item.playerdataBool1) && !(_pd.GetBool(item.playerdataBool2) && _pd.GetBool(item.playerdataInt));
             }
             return false;
         }
 
         public int GetItemCount()
         {
-            Modding.Logger.Log($"[CustomItem] - Itemcount: {this.itemCount}");
-            return this.itemCount;
+            Logger.Log($"[CustomItem] - Itemcount: {ItemCount}");
+            return ItemCount;
         }
 
         public string GetDescConvo(int itemNum)
         {
-            var item = this.list.First(x => x.uniqueName.Equals(this.currentList[itemNum].name));
-            Modding.Logger.Log($"[CustomItem] - Desc: {itemNum}/{this.list.Count}");
+            var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
+            Logger.Log($"[CustomItem] - Desc: {itemNum}/{List.Count}");
 
             switch (item.type)
             {
                 case ItemType.Normal:
                     return item.descConvo1;
                 case ItemType.OneTwo:
-                    if (this.pd.GetBool(item.playerdataBool1))
+                    if (_pd.GetBool(item.playerdataBool1))
                         return item.descConvo1;
                     else
                         return item.descConvo2;
                 case ItemType.OneTwoBoth:
-                    if (this.pd.GetBool(item.playerdataBool1) && !this.pd.GetBool(item.playerdataBool2))
+                    if (_pd.GetBool(item.playerdataBool1) && !_pd.GetBool(item.playerdataBool2))
                         return item.descConvo1;
-                    else if (!this.pd.GetBool(item.playerdataBool1) && this.pd.GetBool(item.playerdataBool2))
+                    else if (!_pd.GetBool(item.playerdataBool1) && _pd.GetBool(item.playerdataBool2))
                         return item.descConvo2;
                     else
                         return item.descConvoBoth;
                 case ItemType.Counted:
                     return item.descConvo1;
                 case ItemType.Flower:
-                    if (this.pd.GetBool(item.playerdataInt))
+                    if (_pd.GetBool(item.playerdataInt))
                     {
-                        if (this.pd.GetBool(item.playerdataBool2))
+                        if (_pd.GetBool(item.playerdataBool2))
                         {
                             return item.descConvoBoth;
                         }
@@ -230,7 +230,7 @@ namespace SFCore.MonoBehaviours
                     }
                     else
                     {
-                        if (this.pd.GetBool(item.playerdataBool2))
+                        if (_pd.GetBool(item.playerdataBool2))
                         {
                             return item.nameConvoBoth;
                         }
@@ -242,29 +242,29 @@ namespace SFCore.MonoBehaviours
 
         public string GetNameConvo(int itemNum)
         {
-            var item = this.list.First(x => x.uniqueName.Equals(this.currentList[itemNum].name));
-            Modding.Logger.Log($"[CustomItem] - Name: {itemNum}/{this.list.Count}");
+            var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
+            Logger.Log($"[CustomItem] - Name: {itemNum}/{List.Count}");
 
             switch (item.type)
             {
                 case ItemType.Normal:
                     return item.nameConvo1;
                 case ItemType.OneTwo:
-                    if (this.pd.GetBool(item.playerdataBool1))
+                    if (_pd.GetBool(item.playerdataBool1))
                         return item.nameConvo1;
                     else
                         return item.nameConvo2;
                 case ItemType.OneTwoBoth:
-                    if (this.pd.GetBool(item.playerdataBool1) && !this.pd.GetBool(item.playerdataBool2))
+                    if (_pd.GetBool(item.playerdataBool1) && !_pd.GetBool(item.playerdataBool2))
                         return item.nameConvo1;
-                    else if (!this.pd.GetBool(item.playerdataBool1) && this.pd.GetBool(item.playerdataBool2))
+                    else if (!_pd.GetBool(item.playerdataBool1) && _pd.GetBool(item.playerdataBool2))
                         return item.nameConvo2;
                     else
                         return item.nameConvoBoth;
                 case ItemType.Counted:
                     return item.nameConvo1;
                 case ItemType.Flower:
-                    if (this.pd.GetBool(item.playerdataInt))
+                    if (_pd.GetBool(item.playerdataInt))
                         return item.nameConvo2;
                     else
                         return item.nameConvo1;
@@ -274,25 +274,25 @@ namespace SFCore.MonoBehaviours
 
         public Sprite GetSprite(int itemNum)
         {
-            Modding.Logger.Log($"[CustomItem] - get sprite");
-            return this.currentList[itemNum].GetComponentInChildren<SpriteRenderer>().sprite;
+            Logger.Log($"[CustomItem] - get sprite");
+            return _currentList[itemNum].GetComponentInChildren<SpriteRenderer>().sprite;
         }
 
         public float GetYDistance()
         {
-            Modding.Logger.Log($"[CustomItem] - get y: {this.yDistance}");
-            return this.yDistance;
+            Logger.Log($"[CustomItem] - get y: {YDistance}");
+            return YDistance;
         }
 
         public int GetFirstNewItem()
         {
-            Modding.Logger.Log($"[CustomItem] - get new: {this.firstNewItem}");
-            return this.firstNewItem;
+            Logger.Log($"[CustomItem] - get new: {FirstNewItem}");
+            return FirstNewItem;
         }
 
         public string GetPlayerDataKillsName(int itemNum)
         {
-            var item = this.list.First(x => x.uniqueName.Equals(this.currentList[itemNum].name));
+            var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
             Logger.Log($"[CustomItem] - get int name: {item.type}");
 
             if (item.type != ItemType.Counted) return "0Return";
@@ -305,7 +305,7 @@ namespace SFCore.MonoBehaviours
             List<SpriteRenderer> srList = new List<SpriteRenderer>(fg.spriteRenderers);
             List<TextMeshPro> tmpList = new List<TextMeshPro>(fg.texts);
 
-            foreach (var o in this.listInv)
+            foreach (var o in ListInv)
             {
                 foreach (var sr in o.GetComponentsInChildren<SpriteRenderer>())
                     srList.Add(sr);

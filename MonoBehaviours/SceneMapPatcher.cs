@@ -4,23 +4,23 @@ namespace SFCore.MonoBehaviours
 {
     class SceneMapPatcher : MonoBehaviour
     {
-        private Material sceneMapMaterial;
-        private bool initialized = false;
+        private Material _sceneMapMaterial;
+        private bool _initialized = false;
         public Texture tex;
 
         public void Start()
         {
-            if (!initialized)
+            if (!_initialized)
             {
-                sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
-                sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
+                _sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
+                _sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
 
-                initialized = true;
+                _initialized = true;
             }
 
             foreach (var cMr in gameObject.GetComponentsInChildren<MeshRenderer>(false))
             {
-                cMr.material = sceneMapMaterial;
+                cMr.material = _sceneMapMaterial;
             }
         }
     }

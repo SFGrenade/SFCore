@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using SFCore.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -10,7 +9,7 @@ namespace SFCore.MonoBehaviours
     [RequireComponent(typeof(BoxCollider2D))]
     public class PatchMusicRegions : MonoBehaviour
     {
-        private static AudioMixer am = null;
+        private static AudioMixer _am = null;
 
         public bool useAlts = false;
         public static bool altMusic = false;
@@ -42,13 +41,13 @@ namespace SFCore.MonoBehaviours
         public void Start()
         {
             gameObject.SetActive(false);
-            if (am == null)
+            if (_am == null)
             {
-                am = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Music");
-                Log(am);
+                _am = Resources.FindObjectsOfTypeAll<AudioMixer>().First(x => x.name == "Music");
+                Log(_am);
             }
 
-            var snapshot = am.FindSnapshot(SnapshotName);
+            var snapshot = _am.FindSnapshot(SnapshotName);
 
             Log(snapshot);
 
@@ -64,16 +63,16 @@ namespace SFCore.MonoBehaviours
             mr.exitTransitionTime = 0;
             if (!CueHolder.MusicCues.ContainsKey(MusicRegionSet))
             {
-                var tmpMC = ScriptableObject.CreateInstance<MusicCue>();
-                tmpMC.SetAttr<MusicCue, string>("originalMusicEventName", EnterTrackEvent);
-                tmpMC.SetAttr<MusicCue, int>("originalMusicTrackNumber", 2);
-                tmpMC.SetAttr<MusicCue, AudioMixerSnapshot>("snapshot", snapshot);
-                tmpMC.SetAttr<MusicCue, MusicCue.Alternative[]>("alternatives", null);
-                CueHolder.MusicCues.Add(MusicRegionSet, tmpMC);
+                var tmpMc = ScriptableObject.CreateInstance<MusicCue>();
+                tmpMc.SetAttr("originalMusicEventName", EnterTrackEvent);
+                tmpMc.SetAttr("originalMusicTrackNumber", 2);
+                tmpMc.SetAttr("snapshot", snapshot);
+                tmpMc.SetAttr<MusicCue, MusicCue.Alternative[]>("alternatives", null);
+                CueHolder.MusicCues.Add(MusicRegionSet, tmpMc);
             }
             mr.enterMusicCue = CueHolder.MusicCues[MusicRegionSet];
 
-            MusicCue.MusicChannelInfo[] musicChannelInfos = new MusicCue.MusicChannelInfo[]
+            MusicCue.MusicChannelInfo[] musicChannelInfos = new[]
             {
                 new MusicCue.MusicChannelInfo(), new MusicCue.MusicChannelInfo(),
                 new MusicCue.MusicChannelInfo(), new MusicCue.MusicChannelInfo(),
@@ -105,7 +104,7 @@ namespace SFCore.MonoBehaviours
                 musicChannelInfos[(int)MusicChannels.MainAlt].SetAttr("clip", MainAlt2);
                 musicChannelInfos[(int)MusicChannels.Extra].SetAttr("clip", Extra2);
             }
-            mr.enterMusicCue.SetAttr<MusicCue, MusicCue.MusicChannelInfo[]>("channelInfos", musicChannelInfos);
+            mr.enterMusicCue.SetAttr("channelInfos", musicChannelInfos);
             gameObject.SetActive(true);
         }
 
@@ -115,7 +114,7 @@ namespace SFCore.MonoBehaviours
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[MonoBehaviours]:[PatchMusicRegions] - {message.ToString()}");
+            Logger.Log($"[SFCore]:[MonoBehaviours]:[PatchMusicRegions] - {message}");
         }
     }
 }

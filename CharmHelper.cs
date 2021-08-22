@@ -22,9 +22,10 @@ namespace SFCore
         /// <summary>
         ///     List of sprites to use for the charms.
         /// </summary>
-        private static List<Sprite> customSprites = new List<Sprite>();
+        private static readonly List<Sprite> CustomSprites = new List<Sprite>();
 
-        /// <inheritdoc />
+        private static bool _first = true;
+        
         /// <summary>
         ///     Constructs the mod and hooks important functions.
         /// </summary>
@@ -34,8 +35,7 @@ namespace SFCore
             On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
             On.GameManager.Start += OnGameManagerStart;
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         ///     Adds a list of sprites as charms.
         /// </summary>
@@ -45,13 +45,12 @@ namespace SFCore
             foreach (var spr in charmSprites)
             {
                 SetInactive(spr);
-                customSprites.Add(spr);
-                ret.Add(40 + customSprites.Count);
+                CustomSprites.Add(spr);
+                ret.Add(40 + CustomSprites.Count);
             }
             return ret;
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     On hook to indicate that the custom charms need to be readded.
         /// </summary>
@@ -59,15 +58,126 @@ namespace SFCore
         {
             orig(self);
 
-            init();
-            initBuildEquippedCharms(GameObject.FindObjectOfType<BuildEquippedCharms>());
+            ClearModdedCharms();
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom charms to the charm board.
         /// </summary>
-        private static void init()
+        private static void ClearModdedCharms()
+        {
+            #region CharmIconList Start
+
+            var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
+            var charmsGo = invGo.Find("Charms");
+            var charmsFsm = charmsGo.LocateMyFSM("UI Charms");
+
+            var tmpCollectedCharmsGo = charmsGo.Find("Collected Charms");
+
+            CharmIconList cil = CharmIconList.Instance;
+            List<Sprite> tmpSpriteList = new List<Sprite>(cil.spriteList);
+            tmpSpriteList.RemoveRange(41, tmpSpriteList.Count - 41);
+            cil.spriteList = tmpSpriteList.ToArray();
+            
+            int rows = 4;
+
+            #region Down State Editing
+
+            charmsFsm.GetAction<IntCompare>("Down", 0).integer2.Value = (rows - 1) * 10;
+
+            #endregion
+            #region Left State Editing
+
+            List<FsmInt> leftCharms = new List<FsmInt>();
+            List<FsmEvent> switchEventsLeft = new List<FsmEvent>();
+            for (int i = 1; i <= (rows * 10); i += 10)
+            {
+                leftCharms.Add(i);
+                switchEventsLeft.Add(FsmEvent.FindEvent("TO LEFT"));
+            }
+            charmsFsm.GetAction<IntSwitch>("Left", 0).compareTo = leftCharms.ToArray();
+            charmsFsm.GetAction<IntSwitch>("Left", 0).sendEvent = switchEventsLeft.ToArray();
+
+            #endregion
+            #region Right State Editing
+
+            List<FsmInt> rightCharms = new List<FsmInt>();
+            List<FsmEvent> switchEventsRight = new List<FsmEvent>();
+            for (int i = 10; i <= (rows * 10); i += 10)
+            {
+                rightCharms.Add(i);
+                switchEventsRight.Add(FsmEvent.FindEvent("TO RIGHT"));
+            }
+            charmsFsm.GetAction<IntSwitch>("Right", 0).compareTo = rightCharms.ToArray();
+            charmsFsm.GetAction<IntSwitch>("Right", 0).sendEvent = switchEventsRight.ToArray();
+
+            #endregion
+            #region Up State Editing
+
+            // Nothing to do
+
+            #endregion
+            #region Update Cursor State Editing
+
+            charmsFsm.GetAction<IntClamp>("Update Cursor", 1).maxValue = rows * 10;
+
+            #endregion
+
+            #region Edit Backboards
+
+            var backboardsGo = charmsGo.Find("Backboards");
+            for (int i = tmpCollectedCharmsGo.transform.childCount; i >= 41; i--)
+            {
+                if (backboardsGo.Find($"BB {i}") != null)
+                {
+                    Object.DestroyImmediate(backboardsGo.Find($"BB {i}"));
+                }
+            }
+
+            #endregion
+            #region Edit Collected Charms
+
+            var collectedCharmsGo = charmsGo.Find("Collected Charms");
+            for (int i = tmpCollectedCharmsGo.transform.childCount; i >= 41; i--)
+            {
+                if (collectedCharmsGo.Find(i.ToString()) != null)
+                {
+                    Object.DestroyImmediate(collectedCharmsGo.Find(i.ToString()));
+                }
+            }
+
+            #endregion
+            
+            // Vanilla has 4 rows
+            float rowDeltaMultiplicator = (float) Mathf.Ceil((40f + CustomSprites.Count) / 10f) / 4f;
+            GameObject backBoardTile, collectedCharmTile;
+            Vector3 bbOldPos, ccOldPos;
+            for (int i = 0; i <= 3; i++)
+            {
+                for (int j = 1; j <= 10; j++)
+                {
+                    backBoardTile = backboardsGo.Find("BB " + ((10 * i) + j));
+                    if (backBoardTile != null)
+                    {
+                        bbOldPos = backBoardTile.transform.localPosition;
+                        float y = ((bbOldPos.y - (-8.37f)) * rowDeltaMultiplicator) + (-8.37f);
+                    }
+                    collectedCharmTile = collectedCharmsGo.Find(((10 * i) + j).ToString());
+                    if (collectedCharmTile != null)
+                    {
+                        ccOldPos = collectedCharmTile.transform.localPosition;
+                        float y = ((ccOldPos.y - (-8.37f)) * rowDeltaMultiplicator) + (-8.37f);
+                    }
+                }
+            }
+
+            #endregion
+        }
+        
+        /// <summary>
+        ///     Adds custom charms to the charm board.
+        /// </summary>
+        private static void Init()
         {
             #region CharmIconList Start
 
@@ -78,18 +188,18 @@ namespace SFCore
             var tmpCollectedCharmsGo = charmsGo.Find("Collected Charms");
             int numCharms = tmpCollectedCharmsGo.transform.childCount - 1;
 
-            int finalCharmAmount = numCharms + customSprites.Count;
+            int finalCharmAmount = numCharms + CustomSprites.Count;
 
             CharmIconList cil = CharmIconList.Instance;
             List<Sprite> tmpSpriteList = new List<Sprite>(cil.spriteList);
-            for (int i = 0; i < customSprites.Count; i++)
+            for (int i = 0; i < CustomSprites.Count; i++)
             {
-                SetInactive(customSprites[i]);
-                tmpSpriteList.Add(customSprites[i]);
+                SetInactive(CustomSprites[i]);
+                tmpSpriteList.Add(CustomSprites[i]);
             }
             cil.spriteList = tmpSpriteList.ToArray();
 
-            int rows = UnityEngine.Mathf.CeilToInt(finalCharmAmount / 10.0f);
+            int rows = Mathf.CeilToInt(finalCharmAmount / 10.0f);
 
             #region Down State Editing
 
@@ -146,7 +256,7 @@ namespace SFCore
                 {
                     bbT1 = backboardsGo.Find($"BB {bbPrefabNum}");
                     bbT2 = backboardsGo.Find($"BB {bbPrefabNum - 20}");
-                    bbPrefab = GameObject.Instantiate(bbT1, backboardsGo.transform, true);
+                    bbPrefab = Object.Instantiate(bbT1, backboardsGo.transform, true);
                     AddToCharmFadeGroup(bbPrefab, backboardsGo.transform.parent.gameObject);
                     AddToCharmFadeGroup(bbPrefab.Find("New Item Orb"), backboardsGo.transform.parent.gameObject);
                     bbPrefab.transform.localPosition = bbT1.transform.localPosition + ((bbT1.transform.localPosition - bbT2.transform.localPosition) * (((i / 10) - (bbPrefabNum / 10)) / 2));
@@ -156,14 +266,14 @@ namespace SFCore
                     var icb = bbPrefab.GetComponent<InvCharmBackboard>();
                     icb.charmNum = i;
                     icb.charmNumString = i.ToString();
-                    if (i > (40 + customSprites.Count))
+                    if (i > (40 + CustomSprites.Count))
                     {
-                        icb.SetAttr<InvCharmBackboard, bool>("blanked", false);
+                        icb.SetAttr("blanked", false);
                         icb.gotCharmString = "openingCreditsPlayed";
                     }
                     else
                     {
-                        icb.SetAttr<InvCharmBackboard, bool>("blanked", true);
+                        icb.SetAttr("blanked", true);
                     }
                     icb.gotCharmString = "gotCharm_" + i;
                     icb.newCharmString = "newCharm_" + i;
@@ -187,7 +297,7 @@ namespace SFCore
                     ccT1 = collectedCharmsGo.Find(ccPrefabNum.ToString());
                     bool tmp = ccT1.activeSelf;
                     ccT1.gameObject.SetActive(true);
-                    ccPrefab = GameObject.Instantiate(ccT1.gameObject, collectedCharmsGo.transform, true);
+                    ccPrefab = Object.Instantiate(ccT1.gameObject, collectedCharmsGo.transform, true);
                     ccPrefab.SetActive(false);
                     AddToCharmFadeGroup(ccPrefab.Find("Sprite"), collectedCharmsGo.transform.parent.gameObject);
                     ccT1.gameObject.SetActive(tmp);
@@ -207,7 +317,7 @@ namespace SFCore
             #endregion
 
             // Shift rows
-            float rowMultiplicator = UnityEngine.Mathf.Ceil(((float) numCharms / 10.0f) / ((float) rows));
+            float rowMultiplicator = Mathf.Ceil(((float) numCharms / 10.0f) / ((float) rows));
             // Vanilla has 4 rows
             float rowDeltaMultiplicator = 4.0f / ((float) rows);
             GameObject backBoardTile, collectedCharmTile;
@@ -242,9 +352,9 @@ namespace SFCore
                         }
                         else
                         {
-                            float x_left = ((i % 2) == 0) ? -7.92f : -7.01f;
+                            float xLeft = ((i % 2) == 0) ? -7.92f : -7.01f;
                             float y = (-8.37f) - (i * 1.42f * rowDeltaMultiplicator);
-                            collectedCharmTile.transform.localPosition = new Vector3(x_left + ((j - 1) * 1.5f), y, ccOldPos.z);
+                            collectedCharmTile.transform.localPosition = new Vector3(xLeft + ((j - 1) * 1.5f), y, ccOldPos.z);
                         }
                     }
                 }
@@ -252,8 +362,7 @@ namespace SFCore
 
             #endregion
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         ///     Adds charm cost of custom charms to notches.
         /// </summary>
@@ -261,7 +370,7 @@ namespace SFCore
         {
             orig(self);
             int num = 0;
-            for (int i = 0; i < customSprites.Count; i++)
+            for (int i = 0; i < CustomSprites.Count; i++)
             {
                 if (self.GetBool("equippedCharm_" + (41 + i)))
                 {
@@ -270,17 +379,16 @@ namespace SFCore
             }
             self.SetInt("charmSlotsFilled", self.GetInt("charmSlotsFilled") + num);
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         ///     Initializes equipped charms.
         /// </summary>
-        private static void initBuildEquippedCharms(BuildEquippedCharms self)
+        private static void InitBuildEquippedCharms(BuildEquippedCharms self)
         {
             List<GameObject> tmplist = new List<GameObject>();
 
             #region Populate tmplist with all existing charms + custom charms as null values
-            int max = 40 + customSprites.Count;
+            int max = 40 + CustomSprites.Count;
             for (int i = 0; i < max; i++)
             {
                 if (i < self.gameObjectList.Count)
@@ -291,9 +399,9 @@ namespace SFCore
             #endregion
 
             #region Fill nulls in tmplist with copies of tmplist[0], but adjusted Charm IDs
-            for (int i = 41; i <= 40 + customSprites.Count; i++)
+            for (int i = 41; i <= 40 + CustomSprites.Count; i++)
             {
-                var equippedCharmPrefab = GameObject.Instantiate(tmplist[0]);
+                var equippedCharmPrefab = Object.Instantiate(tmplist[0]);
 
                 SetInactive(equippedCharmPrefab);
 
@@ -310,21 +418,19 @@ namespace SFCore
 
             self.gameObjectList = tmplist;
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         ///     On hook to initialize charms and equipped charms.
         /// </summary>
         private static void OnBuildEquippedCharmsStart(On.BuildEquippedCharms.orig_Start orig, BuildEquippedCharms self)
         {
-            init();
+            Init();
 
             orig(self);
 
-            initBuildEquippedCharms(self);
+            InitBuildEquippedCharms(self);
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         ///     Adds charm to fade group.
         /// </summary>
@@ -337,23 +443,22 @@ namespace SFCore
             srList.Add(sr);
             fg.spriteRenderers = srList.ToArray();
         }
-
-        /// <inheritdoc />
+        
         /// <summary>
         ///     Makes a gameobject not be destroyed.
         /// </summary>
-        private static void SetInactive(UnityEngine.Object go)
+        private static void SetInactive(Object go)
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                Object.DontDestroyOnLoad(go);
             }
         }
 
         private static void Log(string message)
         {
             Logger.Log($"[{typeof(CharmHelper).FullName.Replace(".", "]:[")}] - {message}");
-            UnityEngine.Debug.Log($"[{typeof(CharmHelper).FullName.Replace(".", "]:[")}] - {message}");
+            Debug.Log($"[{typeof(CharmHelper).FullName.Replace(".", "]:[")}] - {message}");
         }
         private static void Log(object message)
         {

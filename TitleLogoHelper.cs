@@ -12,8 +12,8 @@ namespace SFCore
     /// </summary>
     public static class TitleLogoHelper
     {
-        private static bool instanceChanged = false;
-        private static List<Sprite> customLogos = new List<Sprite>();
+        private static bool _instanceChanged = false;
+        private static List<Sprite> _customLogos = new List<Sprite>();
 
         static TitleLogoHelper()
         {
@@ -28,22 +28,22 @@ namespace SFCore
         /// <returns>ID of the custom title logo</returns>
         public static int AddLogo(Sprite logo)
         {
-            customLogos.Add(logo);
+            _customLogos.Add(logo);
             UObject.DontDestroyOnLoad(logo);
-            return customLogos.Count;
+            return _customLogos.Count;
         }
 
         private static void OnMenuStyleTitleConstructor(On.MenuStyleTitle.orig_ctor orig, MenuStyleTitle self)
         {
             orig(self);
-            instanceChanged = false;
+            _instanceChanged = false;
         }
 
         private static void OnMenuStyleTitleSetTitle(On.MenuStyleTitle.orig_SetTitle orig, MenuStyleTitle self, int index)
         {
-            if (!instanceChanged)
+            if (!_instanceChanged)
             {
-                RuntimePlatform[] allPlatforms = new RuntimePlatform[]
+                RuntimePlatform[] allPlatforms = new[]
                 {
                     RuntimePlatform.OSXPlayer,
                     RuntimePlatform.WindowsPlayer,
@@ -65,26 +65,26 @@ namespace SFCore
                 }
 
                 List<MenuStyleTitle.TitleSpriteCollection> tmpList = new List<MenuStyleTitle.TitleSpriteCollection>(self.TitleSprites);
-                foreach (var s in customLogos)
+                foreach (var s in _customLogos)
                 {
-                    var tmpTSC = new MenuStyleTitle.TitleSpriteCollection();
+                    var tmpTsc = new MenuStyleTitle.TitleSpriteCollection();
 
-                    tmpTSC.PlatformWhitelist = allPlatforms;
-                    tmpTSC.Default = s;
-                    tmpTSC.Chinese = null;
-                    tmpTSC.Russian = null;
-                    tmpTSC.Italian = null;
-                    tmpTSC.Japanese = null;
-                    tmpTSC.Spanish = null;
-                    tmpTSC.Korean = null;
-                    tmpTSC.French = null;
-                    tmpTSC.BrazilianPT = null;
+                    tmpTsc.PlatformWhitelist = allPlatforms;
+                    tmpTsc.Default = s;
+                    tmpTsc.Chinese = null;
+                    tmpTsc.Russian = null;
+                    tmpTsc.Italian = null;
+                    tmpTsc.Japanese = null;
+                    tmpTsc.Spanish = null;
+                    tmpTsc.Korean = null;
+                    tmpTsc.French = null;
+                    tmpTsc.BrazilianPT = null;
 
-                    tmpList.Add(tmpTSC);
+                    tmpList.Add(tmpTsc);
                 }
                 self.TitleSprites = tmpList.ToArray();
 
-                instanceChanged = true;
+                _instanceChanged = true;
             }
 
             orig(self, index);
@@ -96,7 +96,7 @@ namespace SFCore
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[TitleLogoHelper] - {message.ToString()}");
+            Logger.Log($"[SFCore]:[TitleLogoHelper] - {message}");
         }
     }
 }

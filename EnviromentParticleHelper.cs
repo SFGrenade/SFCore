@@ -13,20 +13,20 @@ namespace SFCore
     /// </summary>
     public static class EnviromentParticleHelper
     {
-        private static PlayerData pd;
-        private static Dictionary<int, AudioClip> customWalkAudio = new Dictionary<int, AudioClip>();
-        private static Dictionary<int, AudioClip> customRunAudio = new Dictionary<int, AudioClip>();
-        private static Dictionary<int, GameObject> customDashEffects = new Dictionary<int, GameObject>();
-        private static Dictionary<int, GameObject> customHardLandEffects = new Dictionary<int, GameObject>();
-        private static Dictionary<int, GameObject> customJumpEffects = new Dictionary<int, GameObject>();
-        private static Dictionary<int, GameObject> customSoftLandEffects = new Dictionary<int, GameObject>();
+        private static PlayerData _pd;
+        private static Dictionary<int, AudioClip> _customWalkAudio = new Dictionary<int, AudioClip>();
+        private static Dictionary<int, AudioClip> _customRunAudio = new Dictionary<int, AudioClip>();
+        private static Dictionary<int, GameObject> _customDashEffects = new Dictionary<int, GameObject>();
+        private static Dictionary<int, GameObject> _customHardLandEffects = new Dictionary<int, GameObject>();
+        private static Dictionary<int, GameObject> _customJumpEffects = new Dictionary<int, GameObject>();
+        private static Dictionary<int, GameObject> _customSoftLandEffects = new Dictionary<int, GameObject>();
 
-        private static Dictionary<int, GameObject> customRunEffects = new Dictionary<int, GameObject>();
-        private static Dictionary<int, string> customRunEffectsPrefabs = new Dictionary<int, string>();
+        private static Dictionary<int, GameObject> _customRunEffects = new Dictionary<int, GameObject>();
+        private static Dictionary<int, string> _customRunEffectsPrefabs = new Dictionary<int, string>();
 
         static EnviromentParticleHelper()
         {
-            pd = PlayerData.instance;
+            _pd = PlayerData.instance;
 
             On.HeroController.checkEnvironment += OnHeroControllercheckEnvironment;
             On.DashEffect.OnEnable += OnDashEffectOnEnable;
@@ -50,10 +50,11 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, runAudio) = ((int enviromentType, AudioClip runAudio)) callback.DynamicInvoke(self);
-                        addRunAudio(enviromentType, runAudio);
+                        AddRunAudio(enviromentType, runAudio);
                     }
                 }
-                self.footStepsRunAudioSource.clip = customRunAudio[pd.GetInt("environmentType")];
+                if (_customRunAudio != null)
+                    self.footStepsRunAudioSource.clip = _customRunAudio[_pd.GetInt("environmentType")];
             }
             catch (Exception)
             {}
@@ -66,10 +67,11 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, walkAudio) = ((int enviromentType, AudioClip walkAudio)) callback.DynamicInvoke(self);
-                        addWalkAudio(enviromentType, walkAudio);
+                        AddWalkAudio(enviromentType, walkAudio);
                     }
                 }
-                self.footStepsWalkAudioSource.clip = customWalkAudio[pd.GetInt("environmentType")];
+                if (_customWalkAudio != null)
+                    self.footStepsWalkAudioSource.clip = _customWalkAudio[_pd.GetInt("environmentType")];
             }
             catch (Exception)
             {}
@@ -78,7 +80,7 @@ namespace SFCore
         {
             orig(self);
 
-            foreach (KeyValuePair<int, GameObject> tmp in customDashEffects)
+            foreach (KeyValuePair<int, GameObject> tmp in _customDashEffects)
             {
                 tmp.Value.SetActive(false);
             }
@@ -92,10 +94,10 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, dashEffects) = ((int enviromentType, GameObject dashEffects)) callback.DynamicInvoke(self);
-                        addDashEffects(enviromentType, dashEffects);
+                        AddDashEffects(enviromentType, dashEffects);
                     }
                 }
-                GameObject dashEffectGo = customDashEffects[pd.GetInt("environmentType")];
+                GameObject dashEffectGo = _customDashEffects[_pd.GetInt("environmentType")];
                 self.heroDashPuff.SetActive(false);
                 self.dashDust.SetActive(false);
                 self.heroDashPuff_anim.Stop();
@@ -111,7 +113,7 @@ namespace SFCore
         {
             orig(self);
 
-            foreach (KeyValuePair<int, GameObject> tmp in customHardLandEffects)
+            foreach (KeyValuePair<int, GameObject> tmp in _customHardLandEffects)
             {
                 tmp.Value.SetActive(false);
             }
@@ -125,10 +127,10 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, hardLandEffects) = ((int enviromentType, GameObject hardLandEffects)) callback.DynamicInvoke(self);
-                        addHardLandEffects(enviromentType, hardLandEffects);
+                        AddHardLandEffects(enviromentType, hardLandEffects);
                     }
                 }
-                GameObject hardLandEffectGo = customHardLandEffects[pd.GetInt("environmentType")];
+                GameObject hardLandEffectGo = _customHardLandEffects[_pd.GetInt("environmentType")];
                 hardLandEffectGo.transform.SetParent(self.transform);
                 hardLandEffectGo.transform.localPosition = Vector3.zero;
                 hardLandEffectGo.SetActive(true);
@@ -141,7 +143,7 @@ namespace SFCore
         {
             orig(self);
 
-            foreach (KeyValuePair<int, GameObject> tmp in customJumpEffects)
+            foreach (KeyValuePair<int, GameObject> tmp in _customJumpEffects)
             {
                 tmp.Value.SetActive(false);
             }
@@ -155,10 +157,10 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, jumpEffects) = ((int enviromentType, GameObject jumpEffects)) callback.DynamicInvoke(self);
-                        addJumpEffects(enviromentType, jumpEffects);
+                        AddJumpEffects(enviromentType, jumpEffects);
                     }
                 }
-                GameObject jumpEffectGo = customJumpEffects[pd.GetInt("environmentType")];
+                GameObject jumpEffectGo = _customJumpEffects[_pd.GetInt("environmentType")];
                 self.dustEffects.SetActive(false);
 
                 jumpEffectGo.transform.SetParent(self.transform);
@@ -173,7 +175,7 @@ namespace SFCore
         {
             orig(self);
 
-            foreach (KeyValuePair<int, GameObject> tmp in customSoftLandEffects)
+            foreach (KeyValuePair<int, GameObject> tmp in _customSoftLandEffects)
             {
                 tmp.Value.SetActive(false);
             }
@@ -187,10 +189,10 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, softLandEffects) = ((int enviromentType, GameObject softLandEffects)) callback.DynamicInvoke(self);
-                        addSoftLandEffects(enviromentType, softLandEffects);
+                        AddSoftLandEffects(enviromentType, softLandEffects);
                     }
                 }
-                GameObject softLandEffectGo = customSoftLandEffects[pd.GetInt("environmentType")];
+                GameObject softLandEffectGo = _customSoftLandEffects[_pd.GetInt("environmentType")];
                 self.dustEffects.SetActive(false);
 
                 softLandEffectGo.transform.SetParent(self.transform);
@@ -214,22 +216,22 @@ namespace SFCore
 
                 FsmState state = fsm.GetState("Check Enviro");
 
-                foreach (var tmpREP in customRunEffectsPrefabs)
+                foreach (var tmpRep in _customRunEffectsPrefabs)
                 {
-                    int enviromentType = tmpREP.Key;
+                    int enviromentType = tmpRep.Key;
                     string customEventName = $"CUSTOM_{enviromentType}";
                     FsmEvent newFsmEvent = FsmEvent.GetFsmEvent(customEventName);
 
                     var intSwitchAction = fsm.GetAction<IntSwitch>("Check Enviro", 5);
                     FsmInt tmpFsmInt = new FsmInt(customEventName) { Value = enviromentType };
 
-                    List<FsmInt> tmpFI = new List<FsmInt>(intSwitchAction.compareTo) { tmpFsmInt };
-                    intSwitchAction.compareTo = tmpFI.ToArray();
+                    List<FsmInt> tmpFi = new List<FsmInt>(intSwitchAction.compareTo) { tmpFsmInt };
+                    intSwitchAction.compareTo = tmpFi.ToArray();
 
-                    List<FsmEvent> tmpFE = new List<FsmEvent>(intSwitchAction.sendEvent) { newFsmEvent };
-                    intSwitchAction.sendEvent = tmpFE.ToArray();
+                    List<FsmEvent> tmpFe = new List<FsmEvent>(intSwitchAction.sendEvent) { newFsmEvent };
+                    intSwitchAction.sendEvent = tmpFe.ToArray();
 
-                    fsm.AddTransition("Check Enviro", customEventName, customRunEffectsPrefabs[enviromentType]);
+                    fsm.AddTransition("Check Enviro", customEventName, _customRunEffectsPrefabs[enviromentType]);
                 }
                 if (AddCustomRunEffectsHook != null)
                 {
@@ -238,17 +240,17 @@ namespace SFCore
                         if (callback == null)
                             continue;
                         var (enviromentType, runEffects) = ((int enviromentType, GameObject runEffects)) callback.DynamicInvoke(self.gameObject);
-                        addRunEffects(enviromentType, runEffects);
+                        AddRunEffects(enviromentType, runEffects);
                     }
                 }
-                foreach (var tmpRE in customRunEffects)
+                foreach (var tmpRe in _customRunEffects)
                 {
-                    var tmpGoUnused = GameObject.Instantiate(tmpRE.Value, self.gameObject.transform);
-                    tmpGoUnused.name = $"{tmpRE.Key}";
+                    var tmpGoUnused = Object.Instantiate(tmpRe.Value, self.gameObject.transform);
+                    tmpGoUnused.name = $"{tmpRe.Key}";
                     Object.DontDestroyOnLoad(tmpGoUnused);
                     tmpGoUnused.transform.SetParent(self.gameObject.transform);
 
-                    int enviromentType = tmpRE.Key;
+                    int enviromentType = tmpRe.Key;
                     string customEventName = $"CUSTOM_{enviromentType}";
                     string customStateName = $"CUSTOMSTATE_{enviromentType}";
                     FsmEvent newFsmEvent = FsmEvent.GetFsmEvent(customEventName);
@@ -264,11 +266,11 @@ namespace SFCore
                     var intSwitchAction = fsm.GetAction<IntSwitch>("Check Enviro", 5);
                     FsmInt tmpFsmInt = new FsmInt(customEventName) { Value = enviromentType };
 
-                    List<FsmInt> tmpFI = new List<FsmInt>(intSwitchAction.compareTo) { tmpFsmInt };
-                    intSwitchAction.compareTo = tmpFI.ToArray();
+                    List<FsmInt> tmpFi = new List<FsmInt>(intSwitchAction.compareTo) { tmpFsmInt };
+                    intSwitchAction.compareTo = tmpFi.ToArray();
 
-                    List<FsmEvent> tmpFE = new List<FsmEvent>(intSwitchAction.sendEvent) { newFsmEvent };
-                    intSwitchAction.sendEvent = tmpFE.ToArray();
+                    List<FsmEvent> tmpFe = new List<FsmEvent>(intSwitchAction.sendEvent) { newFsmEvent };
+                    intSwitchAction.sendEvent = tmpFe.ToArray();
 
                     fsm.AddTransition("Check Enviro", customEventName, customStateName);
                 }
@@ -340,17 +342,17 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="walkAudio">The custom content</param>
-        public static void addWalkAudio(int enviromentType, AudioClip walkAudio)
+        public static void AddWalkAudio(int enviromentType, AudioClip walkAudio)
         {
             if ((enviromentType >= 0) && (enviromentType < 8))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 7 are allowed");
             }
-            if (!customWalkAudio.ContainsKey(enviromentType))
+            if (!_customWalkAudio.ContainsKey(enviromentType))
             {
-                var tmp = AudioClip.Instantiate<AudioClip>(walkAudio);
+                var tmp = Object.Instantiate(walkAudio);
                 SetInactive(tmp);
-                customWalkAudio.Add(enviromentType, tmp);
+                _customWalkAudio.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -359,17 +361,17 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="runAudio">The custom content</param>
-        public static void addRunAudio(int enviromentType, AudioClip runAudio)
+        public static void AddRunAudio(int enviromentType, AudioClip runAudio)
         {
             if ((enviromentType >= 0) && (enviromentType < 8))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 7 are allowed");
             }
-            if (!customRunAudio.ContainsKey(enviromentType))
+            if (!_customRunAudio.ContainsKey(enviromentType))
             {
-                var tmp = AudioClip.Instantiate<AudioClip>(runAudio);
+                var tmp = Object.Instantiate(runAudio);
                 SetInactive(tmp);
-                customRunAudio.Add(enviromentType, tmp);
+                _customRunAudio.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -378,17 +380,17 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="dashEffects">The custom content</param>
-        public static void addDashEffects(int enviromentType, GameObject dashEffects)
+        public static void AddDashEffects(int enviromentType, GameObject dashEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
             }
-            if (!customDashEffects.ContainsKey(enviromentType))
+            if (!_customDashEffects.ContainsKey(enviromentType))
             {
-                var tmp = GameObject.Instantiate(dashEffects);
+                var tmp = Object.Instantiate(dashEffects);
                 SetInactive(tmp);
-                customDashEffects.Add(enviromentType, tmp);
+                _customDashEffects.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -397,17 +399,17 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="hardLandEffects">The custom content</param>
-        public static void addHardLandEffects(int enviromentType, GameObject hardLandEffects)
+        public static void AddHardLandEffects(int enviromentType, GameObject hardLandEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
             }
-            if (!customHardLandEffects.ContainsKey(enviromentType))
+            if (!_customHardLandEffects.ContainsKey(enviromentType))
             {
-                var tmp = GameObject.Instantiate(hardLandEffects);
+                var tmp = Object.Instantiate(hardLandEffects);
                 SetInactive(tmp);
-                customHardLandEffects.Add(enviromentType, tmp);
+                _customHardLandEffects.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -416,17 +418,17 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="jumpEffects">The custom content</param>
-        public static void addJumpEffects(int enviromentType, GameObject jumpEffects)
+        public static void AddJumpEffects(int enviromentType, GameObject jumpEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
             }
-            if (!customJumpEffects.ContainsKey(enviromentType))
+            if (!_customJumpEffects.ContainsKey(enviromentType))
             {
-                var tmp = GameObject.Instantiate(jumpEffects);
+                var tmp = Object.Instantiate(jumpEffects);
                 SetInactive(tmp);
-                customJumpEffects.Add(enviromentType, tmp);
+                _customJumpEffects.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -435,17 +437,17 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="softLandEffects">The custom content</param>
-        public static void addSoftLandEffects(int enviromentType, GameObject softLandEffects)
+        public static void AddSoftLandEffects(int enviromentType, GameObject softLandEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
             }
-            if (!customSoftLandEffects.ContainsKey(enviromentType))
+            if (!_customSoftLandEffects.ContainsKey(enviromentType))
             {
-                var tmp = GameObject.Instantiate(softLandEffects);
+                var tmp = Object.Instantiate(softLandEffects);
                 SetInactive(tmp);
-                customSoftLandEffects.Add(enviromentType, tmp);
+                _customSoftLandEffects.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -454,19 +456,19 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="runEffects">The custom content</param>
-        public static void addRunEffects(int enviromentType, GameObject runEffects)
+        public static void AddRunEffects(int enviromentType, GameObject runEffects)
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
             }
-            if (!customRunEffects.ContainsKey(enviromentType))
+            if (!_customRunEffects.ContainsKey(enviromentType))
             {
-                var tmp = GameObject.Instantiate(runEffects);
+                var tmp = Object.Instantiate(runEffects);
                 SetInactive(tmp);
                 tmp.SetActive(true);
                 tmp.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
-                customRunEffects.Add(enviromentType, tmp);
+                _customRunEffects.Add(enviromentType, tmp);
             }
         }
         /// <inheritdoc />
@@ -475,32 +477,32 @@ namespace SFCore
         /// </summary>
         /// <param name="enviromentType">Enviroment type to add the custom content to</param>
         /// <param name="runEffectsPrefab">Existing run effects you want to have in your custom enviroment</param>
-        public static void addRunEffects(int enviromentType, string runEffectsPrefab)
+        public static void AddRunEffects(int enviromentType, string runEffectsPrefab)
         {
 
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
                 throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
             }
-            if (!customRunEffectsPrefabs.ContainsKey(enviromentType))
+            if (!_customRunEffectsPrefabs.ContainsKey(enviromentType))
             {
-                customRunEffectsPrefabs.Add(enviromentType, runEffectsPrefab);
+                _customRunEffectsPrefabs.Add(enviromentType, runEffectsPrefab);
             }
         }
         #endregion
 
-        private static void SetInactive(UnityEngine.Object go)
+        private static void SetInactive(Object go)
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                Object.DontDestroyOnLoad(go);
             }
         }
         private static void SetInactive(GameObject go)
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                Object.DontDestroyOnLoad(go);
                 go.SetActive(false);
             }
         }
