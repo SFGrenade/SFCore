@@ -36,7 +36,8 @@ namespace SFCore
             On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
             //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
         }
-        
+        public static void unusedInit() {}
+
         /// <summary>
         ///     Adds an achievement to the private list of custom achievements.
         /// </summary>

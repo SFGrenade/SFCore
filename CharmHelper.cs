@@ -35,7 +35,8 @@ namespace SFCore
             On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
             On.GameManager.Start += OnGameManagerStart;
         }
-        
+        public static void unusedInit() { }
+
         /// <summary>
         ///     Adds a list of sprites as charms.
         /// </summary>

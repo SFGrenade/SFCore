@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 namespace SFCore.MonoBehaviours
 {
-    internal static class CueHolder
+    public static class CueHolder
     {
         public static Dictionary<string, MusicCue> MusicCues = new Dictionary<string, MusicCue>();
         public static Dictionary<string, AtmosCue> AtmosCues = new Dictionary<string, AtmosCue>();

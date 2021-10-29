@@ -43,6 +43,7 @@ namespace SFCore
             On.MenuStyles.Awake += OnMenuStylesAwake;
             On.MenuStyles.SetStyle += OnMenuStylesSetStyle;
         }
+        public static void unusedInit() { }
 
         /// <inheritdoc />
         /// <summary>
@@ -58,8 +59,10 @@ namespace SFCore
         public static void AddMenuStyle(string languageString, GameObject styleGo, int titleIndex = -1, string unlockKey = "", string[] achievementKeys = null, MenuStyles.MenuStyle.CameraCurves cameraCurves = null, AudioMixerSnapshot musicSnapshot = null)
         {
             _queue.Add((languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot));
-            UObject.DontDestroyOnLoad(styleGo);
-            UObject.DontDestroyOnLoad(musicSnapshot);
+            if (styleGo != null)
+                UObject.DontDestroyOnLoad(styleGo);
+            if (musicSnapshot != null)
+                UObject.DontDestroyOnLoad(musicSnapshot);
         }
         /// <inheritdoc />
         /// <summary>
@@ -130,30 +133,34 @@ namespace SFCore
                 };
                 tmpList.Add(tmpStyle);
             }
-            foreach (var callback in AddMenuStyleHook.GetInvocationList())
-            {
-                if (callback == null)
-                    continue;
 
-                var (languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot) =
-                    ((string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves,
-                        AudioMixerSnapshot))callback.DynamicInvoke(self);
-                var tmpCameraCurves = cameraCurves ?? tmpMenuStyle.cameraColorCorrection;
-                var tmpMusicSnapshot = musicSnapshot ?? tmpMenuStyle.musicSnapshot;
-                styleGo.transform.SetParent(self.transform);
-                var tmpStyle = new MenuStyles.MenuStyle
+            if (AddMenuStyleHook != null)
+            {
+                foreach (var callback in AddMenuStyleHook.GetInvocationList())
                 {
-                    enabled = true,
-                    displayName = languageString,
-                    styleObject = styleGo,
-                    cameraColorCorrection = tmpCameraCurves,
-                    musicSnapshot = tmpMusicSnapshot,
-                    titleIndex = titleIndex,
-                    unlockKey = unlockKey,
-                    achievementKeys = achievementKeys,
-                    initialAudioVolumes = tmpMenuStyle.initialAudioVolumes
-                };
-                tmpList.Add(tmpStyle);
+                    if (callback == null)
+                        continue;
+
+                    var (languageString, styleGo, titleIndex, unlockKey, achievementKeys, cameraCurves, musicSnapshot) =
+                        ((string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves,
+                            AudioMixerSnapshot)) callback.DynamicInvoke(self);
+                    var tmpCameraCurves = cameraCurves ?? tmpMenuStyle.cameraColorCorrection;
+                    var tmpMusicSnapshot = musicSnapshot ?? tmpMenuStyle.musicSnapshot;
+                    styleGo.transform.SetParent(self.transform);
+                    var tmpStyle = new MenuStyles.MenuStyle
+                    {
+                        enabled = true,
+                        displayName = languageString,
+                        styleObject = styleGo,
+                        cameraColorCorrection = tmpCameraCurves,
+                        musicSnapshot = tmpMusicSnapshot,
+                        titleIndex = titleIndex,
+                        unlockKey = unlockKey,
+                        achievementKeys = achievementKeys,
+                        initialAudioVolumes = tmpMenuStyle.initialAudioVolumes
+                    };
+                    tmpList.Add(tmpStyle);
+                }
             }
             self.styles = tmpList.ToArray();
 

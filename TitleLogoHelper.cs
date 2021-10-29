@@ -20,6 +20,7 @@ namespace SFCore
             On.MenuStyleTitle.ctor += OnMenuStyleTitleConstructor;
             On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
         }
+        public static void unusedInit() { }
 
         /// <inheritdoc />
         /// <summary>

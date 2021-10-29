@@ -75,6 +75,7 @@ namespace SFCore
             ModHooks.GetPlayerIntHook += GetPlayerIntHook;
             On.GameCameras.Start += GameCamerasOnStart;
         }
+        public static void unusedInit() { }
 
         private static bool GetPlayerBoolHook(string originalset, bool orig)
         {

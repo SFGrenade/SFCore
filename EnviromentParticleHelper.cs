@@ -35,6 +35,7 @@ namespace SFCore
             On.SoftLandEffect.OnEnable += OnSoftLandEffectOnEnable;
             On.EventRegister.Awake += OnEventRegisterAwake;
         }
+        public static void unusedInit() { }
 
         #region Hooks
         private static void OnHeroControllercheckEnvironment(On.HeroController.orig_checkEnvironment orig, HeroController self)
