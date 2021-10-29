@@ -47,5 +47,26 @@ namespace SFCore.Utils
             self.y = (float)y;
             self.y = (float)z;
         }
+
+        public static void setOriginalMusicEventName(this MusicCue cue, string name)
+        {
+            cue.SetAttr<MusicCue, string>("originalMusicEventName", name);
+        }
+        public static void setOriginalMusicTrackNumber(this MusicCue cue, int number)
+        {
+            cue.SetAttr<MusicCue, int>("originalMusicTrackNumber", number);
+        }
+        public static void setSnapshot(this MusicCue cue, AudioMixerSnapshot snapshot)
+        {
+            cue.SetAttr<MusicCue, AudioMixerSnapshot>("snapshot", snapshot);
+        }
+        public static MusicCue.MusicChannelInfo[] getChannelInfos(this MusicCue cue)
+        {
+            return cue.GetAttr<MusicCue, MusicCue.MusicChannelInfo[]>("channelInfos");
+        }
+        public static void setChannelInfos(this MusicCue cue, MusicCue.MusicChannelInfo[] infos)
+        {
+            cue.SetAttr<MusicCue, MusicCue.MusicChannelInfo[]>("channelInfos", infos);
+        }
     }
 }
