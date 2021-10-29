@@ -125,13 +125,9 @@ namespace SFCore.MonoBehaviours
             sm.heroLightColor = heroLightColor;
             sm.noParticles = noParticles;
             sm.overrideParticlesWith = overrideParticlesWith;
-            Modding.Logger.Log($"AtmosCueSnapshotName: {AtmosCueSnapshotName}");
             sm.SetAttr("atmosCue", CueHolder.GetAtmosCue(AtmosCueSet, _atmosAm.FindSnapshot(AtmosCueSnapshotName), AtmosCueIsChannelEnabled));
-            Modding.Logger.Log($"MusicCueSnapshotName: {MusicCueSnapshotName}");
             sm.SetAttr("musicCue", CueHolder.GetMusicCue(MusicCueSet, _musicAm.FindSnapshot(MusicCueSnapshotName), MusicCueChannelInfoClips, MusicCueChannelInfoSyncs));
-            Modding.Logger.Log($"InfectedMusicCueSnapshotName: {InfectedMusicCueSnapshotName}");
             sm.SetAttr("infectedMusicCue", CueHolder.GetMusicCue(InfectedMusicCueSet, _musicAm.FindSnapshot(InfectedMusicCueSnapshotName), InfectedMusicCueChannelInfoClips, InfectedMusicCueChannelInfoSyncs));
-            Modding.Logger.Log($"MsSnapshotName: {MsSnapshotName}");
             sm.SetAttr("musicSnapshot", _musicAm.FindSnapshot(MsSnapshotName));
             sm.SetAttr("musicDelayTime", musicDelayTime);
             sm.SetAttr("musicTransitionTime", musicTransitionTime);
