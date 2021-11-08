@@ -3,7 +3,7 @@ using HutongGames.PlayMaker;
 
 namespace SFCore.Utils
 {
-    public class ActionAction<TArg> : FsmStateAction
+    public class FunctionAction<TArg> : FsmStateAction
     {
         public Action<TArg> action;
         public TArg arg;
