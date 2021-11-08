@@ -47,6 +47,7 @@ namespace SFCore.Utils
             return null;
         }
 
+        public static GameObject FindGameObjectInChildren(this GameObject o, string name) => o.Find(name);
         public static GameObject Find(this GameObject o, string name)
         {
             if (o == null)
@@ -74,24 +75,20 @@ namespace SFCore.Utils
             return null;
         }
 
-        public static GameObject FindGameObjectInChildren(this GameObject o, string name)
-        {
-            return o.Find(name);
-        }
-
         public static void Log(this UScene scene)
         {
             Logger.Log($"[SceneLog] - Scene \"{scene.name}\"");
-            foreach (var go in scene.GetRootGameObjects()) go.transform.Log();
+            foreach (var go in scene.GetRootGameObjects())
+                go.transform.Log();
         }
 
         public static void Log(this Transform go, string n = "\t")
         {
-            Transform c;
             Logger.Log($"[SceneLog] - {n}\"{go.name}\"");
             foreach (var comp in go.GetComponents<Component>())
                 Logger.Log($"[SceneLog] - {n} => \"{comp.GetType()}\": {comp}");
-            for (var i = 0; i < go.childCount; i++) go.GetChild(i).Log($"{n}\t");
+            for (var i = 0; i < go.childCount; i++)
+                go.GetChild(i).Log($"{n}\t");
         }
     }
 }
