@@ -151,13 +151,13 @@ namespace SFCore.Utils
         {
             FsmStateAction[] origActions = state.Actions;
             FsmStateAction[] actions = new FsmStateAction[origActions.Length + 1];
-
-            for (int i = 0; i < index; i++)
+            int i;
+            for (i = 0; i < index; i++)
             {
                 actions[i] = origActions[i];
             }
             actions[index] = action;
-            for (int i = index; i < actions.Length; i++)
+            for (i = index; i < actions.Length; i++)
             {
                 actions[i + 1] = origActions[i];
             }
@@ -194,9 +194,9 @@ namespace SFCore.Utils
         {
             FsmState[] origStates = fsm.FsmStates;
             FsmState[] newStates = new FsmState[origStates.Length - 1];
-
+            int i;
             int foundInt = 0;
-            for (int i = 0; i < newStates.Length; i++)
+            for (i = 0; i < newStates.Length; i++)
             {
                 if (origStates[i].Name == stateName)
                 {
@@ -215,9 +215,9 @@ namespace SFCore.Utils
         {
             FsmTransition[] origTransitions = state.Transitions;
             FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - 1];
-
+            int i;
             int foundInt = 0;
-            for (int i = 0; i < newTransitions.Length; i++)
+            for (i = 0; i < newTransitions.Length; i++)
             {
                 if (origTransitions[i].EventName == eventName)
                 {
@@ -236,12 +236,12 @@ namespace SFCore.Utils
         {
             FsmStateAction[] origActions = state.Actions;
             FsmStateAction[] actions = new FsmStateAction[origActions.Length - 1];
-
-            for (int i = 0; i < index; i++)
+            int i;
+            for (i = 0; i < index; i++)
             {
                 actions[i] = origActions[i];
             }
-            for (int i = index; i < actions.Length; i++)
+            for (i = index; i < actions.Length; i++)
             {
                 actions[i] = origActions[i + 1];
             }
@@ -334,7 +334,8 @@ namespace SFCore.Utils
         private static TVar findInVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
         {
             int count = orig.Length;
-            for (int i = 0; i < count; i++)
+            int i;
+            for (i = 0; i < count; i++)
             {
                 if (orig[i].Name == name)
                 {
@@ -471,25 +472,26 @@ namespace SFCore.Utils
                             var origRectVariables = fsmVars.RectVariables;
                             var origQuaternionVariables = fsmVars.QuaternionVariables;
                             var origGameObjectVariables = fsmVars.GameObjectVariables;
-                            for (int i = 0; i < origFloatVariables.Length; i++)
+                            int i;
+                            for (i = 0; i < origFloatVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[FloatVariables] - '{origFloatVariables[i].Name}': '{origFloatVariables[i].Value}'");
-                            for (int i = 0; i < origIntVariables.Length; i++)
+                            for (i = 0; i < origIntVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[IntVariables] - '{origIntVariables[i].Name}': '{origIntVariables[i].Value}'");
-                            for (int i = 0; i < origBoolVariables.Length; i++)
+                            for (i = 0; i < origBoolVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[BoolVariables] - '{origBoolVariables[i].Name}': '{origBoolVariables[i].Value}'");
-                            for (int i = 0; i < origStringVariables.Length; i++)
+                            for (i = 0; i < origStringVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[StringVariables] - '{origStringVariables[i].Name}': '{origStringVariables[i].Value}'");
-                            for (int i = 0; i < origVector2Variables.Length; i++)
+                            for (i = 0; i < origVector2Variables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[Vector2Variables] - '{origVector2Variables[i].Name}': '({origVector2Variables[i].Value.x}, {origVector2Variables[i].Value.y})'");
-                            for (int i = 0; i < origVector3Variables.Length; i++)
+                            for (i = 0; i < origVector3Variables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[Vector3Variables] - '{origVector3Variables[i].Name}': '({origVector3Variables[i].Value.x}, {origVector3Variables[i].Value.y}, {origVector3Variables[i].Value.z})'");
-                            for (int i = 0; i < origColorVariables.Length; i++)
+                            for (i = 0; i < origColorVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[ColorVariables] - '{origColorVariables[i].Name}': '{origColorVariables[i].Value}'");
-                            for (int i = 0; i < origRectVariables.Length; i++)
+                            for (i = 0; i < origRectVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[RectVariables] - '{origRectVariables[i].Name}': '{origRectVariables[i].Value}'");
-                            for (int i = 0; i < origQuaternionVariables.Length; i++)
+                            for (i = 0; i < origQuaternionVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[QuaternionVariables] - '{origQuaternionVariables[i].Name}': '{origQuaternionVariables[i].Value}'");
-                            for (int i = 0; i < origGameObjectVariables.Length; i++)
+                            for (i = 0; i < origGameObjectVariables.Length; i++)
                                 Logger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[GameObjectVariables] - '{origGameObjectVariables[i].Name}': '{origGameObjectVariables[i].Value}'");
                         }, i + 1);
                     }

@@ -9,9 +9,17 @@ namespace SFCore.Utils
         public static GameObject FindRoot(this UScene scene, string name)
         {
             if (scene.IsValid())
-                foreach (var go in scene.GetRootGameObjects())
-                    if (go.name == name)
-                        return go;
+            {
+                var rootGos = scene.GetRootGameObjects();
+                var rootGosCount = rootGos.Length;
+                for (int i = 0; i < rootGosCount; i++)
+                {
+                    if (rootGos[i].name == name)
+                    {
+                        return rootGos[i];
+                    }
+                }
+            }
             return null;
         }
 
@@ -20,11 +28,19 @@ namespace SFCore.Utils
             if (scene.IsValid())
             {
                 GameObject retGo;
-                foreach (var go in scene.GetRootGameObjects())
+                var rootGos = scene.GetRootGameObjects();
+                var rootGosCount = rootGos.Length;
+                for (int i = 0; i < rootGosCount; i++)
                 {
-                    if (go.name == name) return go;
-                    retGo = go.Find(name);
-                    if (retGo != null) return retGo;
+                    if (rootGos[i].name == name)
+                    {
+                        return rootGos[i];
+                    }
+                    retGo = rootGos[i].Find(name);
+                    if (retGo != null)
+                    {
+                        return retGo;
+                    }
                 }
             }
 
@@ -33,15 +49,27 @@ namespace SFCore.Utils
 
         public static GameObject Find(this GameObject o, string name)
         {
-            if (o == null) return null;
-            for (int i = 0; i < o.transform.childCount; i++)
-                if (name.Equals(o.transform.GetChild(i).gameObject.name))
-                    return o.transform.GetChild(i).gameObject;
+            if (o == null)
+            {
+                return null;
+            }
+            var count = o.transform.childCount;
+            for (int i = 0; i < count; i++)
+            {
+                var tmp = o.transform.GetChild(i).gameObject;
+                if (name == tmp.name)
+                {
+                    return tmp;
+                }
+            }
 
             for (int i = 0; i < o.transform.childCount; i++)
             {
                 GameObject ret = o.transform.GetChild(i).gameObject.Find(name);
-                if (ret != null) return ret;
+                if (ret != null)
+                {
+                    return ret;
+                }
             }
             return null;
         }
