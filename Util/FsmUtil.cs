@@ -157,7 +157,7 @@ namespace SFCore.Utils
                 actions[i] = origActions[i];
             }
             actions[index] = action;
-            for (i = index; i < actions.Length; i++)
+            for (i = index; i < origActions.Length; i++)
             {
                 actions[i + 1] = origActions[i];
             }
