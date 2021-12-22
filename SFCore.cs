@@ -4,6 +4,9 @@ using SFCore.Utils;
 
 namespace SFCore
 {
+    /// <summary>
+    ///     Used for static initialization.
+    /// </summary>
     public class SFCoreMod : Mod
     {
         static SFCoreMod()
@@ -17,18 +20,22 @@ namespace SFCore
             SFCore.TitleLogoHelper.unusedInit();
         }
 
+        /// <summary>
+        ///     Constructor.
+        /// </summary>
         public SFCoreMod() : base("SFCore")
         {}
 
+        /// <summary>
+        ///     Displays the version.
+        /// </summary>
         public override string GetVersion() => Util.GetVersion(Assembly.GetExecutingAssembly());
 
+        /// <summary>
+        ///     Main menu is loaded.
+        /// </summary>
         public override void Initialize()
         {
-            if (MenuStyles.Instance.styles.Length > 10)
-            {
-                // custom ones are added
-                MenuStyles.Instance.SetStyle(MenuStyles.Instance.styles.Length - 1, false, false);
-            }
         }
     }
 }

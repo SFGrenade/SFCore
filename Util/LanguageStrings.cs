@@ -6,10 +6,20 @@ using System.Text;
 
 namespace SFCore.Utils
 {
+    /// <summary>
+    ///     Helper class to load language strings from a JSON resource.
+    ///     Supports multiple languages.
+    /// </summary>
     public class LanguageStrings
     {
         private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> _jsonDict;
 
+        /// <summary>
+        ///     The constructor. Loads the JSON resource.
+        /// </summary>
+        /// <param name="asm">The assembly to load the resource from</param>
+        /// <param name="resourceName">The name of the resource</param>
+        /// <param name="encoding">The encoding of the resource</param>
         public LanguageStrings(Assembly asm, string resourceName, Encoding encoding = null)
         {
             using (Stream s = asm.GetManifestResourceStream(resourceName))
@@ -26,11 +36,21 @@ namespace SFCore.Utils
             }
         }
 
+        /// <summary>
+        ///     The constructor. Loads the given JSON.
+        /// </summary>
+        /// <param name="json">The JSON to load</param>
         public LanguageStrings(string json)
         {
             _jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
         }
 
+        /// <summary>
+        ///     Get a language string according to a given key and sheet.
+        /// </summary>
+        /// <param name="key">The language key</param>
+        /// <param name="sheet">The sheet that contains the key</param>
+        /// <returns>The language string.</returns>
         public string Get(string key, string sheet)
         {
             GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;
@@ -53,6 +73,12 @@ namespace SFCore.Utils
             return ret.Replace("<br>", "\n");
         }
 
+        /// <summary>
+        ///     Check if a language string according to a given key and sheet is present.
+        /// </summary>
+        /// <param name="key">The language key</param>
+        /// <param name="sheet">The sheet that contains the key</param>
+        /// <returns>True if the language string is present, False if not.</returns>
         public bool ContainsKey(string key, string sheet)
         {
             GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;

@@ -23,8 +23,6 @@ namespace SFCore
         ///     List of sprites to use for the charms.
         /// </summary>
         private static readonly List<Sprite> CustomSprites = new List<Sprite>();
-
-        private static bool _first = true;
         
         /// <summary>
         ///     Constructs the mod and hooks important functions.
@@ -35,6 +33,9 @@ namespace SFCore
             On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
             On.GameManager.Start += OnGameManagerStart;
         }
+        /// <summary>
+        ///     Used for static initialization.
+        /// </summary>
         public static void unusedInit() { }
 
         /// <summary>
@@ -458,8 +459,8 @@ namespace SFCore
 
         private static void Log(string message)
         {
-            Logger.Log($"[{typeof(CharmHelper).FullName.Replace(".", "]:[")}] - {message}");
-            Debug.Log($"[{typeof(CharmHelper).FullName.Replace(".", "]:[")}] - {message}");
+            Logger.LogDebug($"[SFCore]:[CharmHelper] - {message}");
+            Debug.Log($"[SFCore]:[CharmHelper] - {message}");
         }
         private static void Log(object message)
         {

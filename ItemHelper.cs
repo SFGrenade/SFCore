@@ -19,38 +19,60 @@ namespace SFCore
     /// </summary>
     public enum ItemType
     {
+        /// <inheritdoc/>
         Normal,
+        /// <inheritdoc/>
         OneTwo,
+        /// <inheritdoc/>
         OneTwoBoth,
+        /// <inheritdoc/>
         Counted,
+        /// <inheritdoc/>
         Flower
     }
 
     /// <summary>
     ///     Item helper class for easily adding custom items.
     ///     The mod using this needs to handle the following:
-    ///     - up to 3 PlayerData bools per item
-    ///     - up to 1 PlayerData int per item
-    ///     - up to 3 name language strings per item
-    ///     - up to 4 description language strings per item
+    ///     - 0 to 3 PlayerData bools per item
+    ///     - 0 to 1 PlayerData int per item
+    ///     - 1 to 3 name language strings per item
+    ///     - 1 to 4 description language strings per item
     /// </summary>
     public static class ItemHelper
     {
+        /// <summary>
+        ///     Data of one item.
+        /// </summary>
         public struct Item
         {
+            /// <inheritdoc/>
             public ItemType type;
+            /// <inheritdoc/>
             public string uniqueName;
+            /// <inheritdoc/>
             public Sprite sprite1;
+            /// <inheritdoc/>
             public Sprite sprite2;
+            /// <inheritdoc/>
             public Sprite spriteBoth;
+            /// <inheritdoc/>
             public string playerdataBool1;
+            /// <inheritdoc/>
             public string playerdataBool2;
+            /// <inheritdoc/>
             public string playerdataInt;
+            /// <inheritdoc/>
             public string nameConvo1;
+            /// <inheritdoc/>
             public string nameConvo2;
+            /// <inheritdoc/>
             public string nameConvoBoth;
+            /// <inheritdoc/>
             public string descConvo1;
+            /// <inheritdoc/>
             public string descConvo2;
+            /// <inheritdoc/>
             public string descConvoBoth;
         }
 
@@ -75,6 +97,9 @@ namespace SFCore
             ModHooks.GetPlayerIntHook += GetPlayerIntHook;
             On.GameCameras.Start += GameCamerasOnStart;
         }
+        /// <summary>
+        ///     Used for static initialization.
+        /// </summary>
         public static void unusedInit() { }
 
         private static bool GetPlayerBoolHook(string originalset, bool orig)
@@ -750,7 +775,7 @@ namespace SFCore
         }
         /// <inheritdoc />
         /// <summary>
-        ///     Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map & Quill)
+        ///     Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map and Quill)
         ///     You can have one, the other, both or none.
         /// </summary>
         /// <param name="sprite1">Sprite for the item 1</param>
@@ -810,7 +835,7 @@ namespace SFCore
         /// <summary>
         ///     Adds a flower item. (e.g. the Delicate Flower)
         ///     You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
-        ///     bool1 && !(bool2 && bool3) and it will be displayed
+        ///     (bool1 AND !(bool2 AND bool3)) and it will be displayed
         /// </summary>
         /// <param name="sprite">Sprite for the 'normal' item</param>
         /// <param name="sprite2">Sprite for the 'broken' item</param>
@@ -925,7 +950,7 @@ namespace SFCore
 
         private static void Log(string message)
         {
-            Logger.Log($"[SFCore]:[ItemHelper] - {message}");
+            Logger.LogDebug($"[SFCore]:[ItemHelper] - {message}");
             Debug.Log($"[SFCore]:[ItemHelper] - {message}");
         }
         private static void Log(object message)

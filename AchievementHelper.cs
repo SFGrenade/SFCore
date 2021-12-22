@@ -11,10 +11,15 @@ namespace SFCore
     /// </summary>
     public struct SCustomAchievement
     {
+        /// <inheritdoc/>
         public string key;
+        /// <inheritdoc/>
         public Sprite sprite;
+        /// <inheritdoc/>
         public string titleConvo;
+        /// <inheritdoc/>
         public string textConvo;
+        /// <inheritdoc/>
         public bool hidden;
     }
 
@@ -36,6 +41,9 @@ namespace SFCore
             On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
             //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
         }
+        /// <summary>
+        ///     Used for static initialization.
+        /// </summary>
         public static void unusedInit() {}
 
         /// <summary>
@@ -87,7 +95,7 @@ namespace SFCore
         }
         
         /// <summary>
-        ///     On hook that initializes achievements & achivements in the menu and unhooks itself afterwards.
+        ///     On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
         /// </summary>
         private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
         {
@@ -99,11 +107,12 @@ namespace SFCore
         
         private static void Log(string message)
         {
-            Logger.Log($"[SFCore]:[AchievementHelper] - {message}");
+            Logger.LogDebug($"[SFCore]:[AchievementHelper] - {message}");
+            Debug.Log($"[SFCore]:[AchievementHelper] - {message}");
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[AchievementHelper] - {message}");
+            Log($"{message}");
         }
     }
 }

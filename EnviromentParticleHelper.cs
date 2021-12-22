@@ -35,6 +35,9 @@ namespace SFCore
             On.SoftLandEffect.OnEnable += OnSoftLandEffectOnEnable;
             On.EventRegister.Awake += OnEventRegisterAwake;
         }
+        /// <summary>
+        ///     Used for static initialization.
+        /// </summary>
         public static void unusedInit() { }
 
         #region Hooks
@@ -280,64 +283,86 @@ namespace SFCore
         #endregion
 
         #region Add custom GameObjects
-        public delegate (int enviromentType, AudioClip walkAudio) CustomWalkAudioHook(HeroController self);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom walk audio.
         /// </summary>
         /// <param name="self">active HeroController</param>
         /// <returns>Tuple of the enviromentType you want to add and AudioClip of the sound you want</returns>
+        public delegate (int enviromentType, AudioClip walkAudio) CustomWalkAudioHook(HeroController self);
+        /// <summary>
+        ///     Hook to add custom walk audio.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and AudioClip of the sound you want</returns>
         public static CustomWalkAudioHook AddCustomWalkAudioHook;
-        public delegate (int enviromentType, AudioClip runAudio) CustomRunAudioHook(HeroController self);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom run audio.
         /// </summary>
         /// <param name="self">active HeroController</param>
         /// <returns>Tuple of the enviromentType you want to add and AudioClip of the sound you want</returns>
+        public delegate (int enviromentType, AudioClip runAudio) CustomRunAudioHook(HeroController self);
+        /// <summary>
+        ///     Hook to add custom run audio.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and AudioClip of the sound you want</returns>
         public static CustomRunAudioHook AddCustomRunAudioHook;
-        public delegate (int enviromentType, GameObject dashEffects) CustomDashEffectsHook(DashEffect self);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom dash effects.
         /// </summary>
         /// <param name="self">active DashEffect</param>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the dash effects you want</returns>
+        public delegate (int enviromentType, GameObject dashEffects) CustomDashEffectsHook(DashEffect self);
+        /// <summary>
+        ///     Hook to add custom dash effects.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the dash effects you want</returns>
         public static CustomDashEffectsHook AddCustomDashEffectsHook;
-        public delegate (int enviromentType, GameObject hardLandEffects) CustomHardLandEffectsHook(HardLandEffect self);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom hard land effects.
         /// </summary>
         /// <param name="self">active HardLandEffect</param>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the hard land effects you want</returns>
+        public delegate (int enviromentType, GameObject hardLandEffects) CustomHardLandEffectsHook(HardLandEffect self);
+        /// <summary>
+        ///     Hook to add custom hard land effects.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the hard land effects you want</returns>
         public static CustomHardLandEffectsHook AddCustomHardLandEffectsHook;
-        public delegate (int enviromentType, GameObject jumpEffects) CustomJumpEffectsHook(JumpEffects self);
         /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom jump effects.
         /// </summary>
         /// <param name="self">active JumpEffects</param>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the jump effects you want</returns>
-        public static CustomJumpEffectsHook AddCustomJumpEffectsHook;
-        public delegate (int enviromentType, GameObject softLandEffects) CustomSoftLandEffectsHook(SoftLandEffect self);
+        public delegate (int enviromentType, GameObject jumpEffects) CustomJumpEffectsHook(JumpEffects self);
         /// <inheritdoc />
+        /// <summary>
+        ///     Hook to add custom jump effects.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the jump effects you want</returns>
+        public static CustomJumpEffectsHook AddCustomJumpEffectsHook;
         /// <summary>
         ///     Hook to add custom soft land effects.
         /// </summary>
         /// <param name="self">active SoftLandEffect</param>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the soft land effects you want</returns>
+        public delegate (int enviromentType, GameObject softLandEffects) CustomSoftLandEffectsHook(SoftLandEffect self);
+        /// <summary>
+        ///     Hook to add custom soft land effects.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the soft land effects you want</returns>
         public static CustomSoftLandEffectsHook AddCustomSoftLandEffectsHook;
-        public delegate (int enviromentType, GameObject runEffects) CustomRunEffectsHook(GameObject runEffectsGo);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom run effects.
         /// </summary>
         /// <param name="runEffectsGo">active run effects GameObject</param>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the run effects you want</returns>
+        public delegate (int enviromentType, GameObject runEffects) CustomRunEffectsHook(GameObject runEffectsGo);
+        /// <summary>
+        ///     Hook to add custom run effects.
+        /// </summary>
+        /// <returns>Tuple of the enviromentType you want to add and GameObject of the run effects you want</returns>
         public static CustomRunEffectsHook AddCustomRunEffectsHook;
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>

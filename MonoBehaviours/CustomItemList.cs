@@ -8,24 +8,51 @@ using Object = UnityEngine.Object;
 
 namespace SFCore.MonoBehaviours
 {
+    /// <summary>
+    ///     Custom Item List for ItemHelper
+    /// </summary>
     public class CustomItemList : MonoBehaviour
     {
+        /// <summary>
+        ///     Instance
+        /// </summary>
         public static CustomItemList Instance { get; private set; }
 
+        /// <summary>
+        ///     Data List
+        /// </summary>
         public List<ItemHelper.Item> List { get; private set; } = new List<ItemHelper.Item>();
+        /// <summary>
+        ///     GameObject List
+        /// </summary>
         public GameObject[] ListInv { get; private set; } = new GameObject[0];
         private GameObject[] _currentList = new GameObject[0];
         private PlayerData _pd = PlayerData.instance;
+        /// <summary>
+        ///     Y Distance between each GameObject
+        /// </summary>
         public float YDistance { get; private set; } = -2f;
+        /// <summary>
+        ///     Amount of Items
+        /// </summary>
         public int ItemCount { get; private set; } = -1;
+        /// <summary>
+        ///     Index of new item
+        /// </summary>
         public int FirstNewItem { get; private set; }
         private bool _built = false;
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
         public CustomItemList()
         {
             Instance = this;
         }
 
+        /// <summary>
+        ///     True if at least one item is gotten.
+        /// </summary>
         public bool hasAtLeastOneItem()
         {
             if (_currentList.Length > 0)
@@ -33,18 +60,27 @@ namespace SFCore.MonoBehaviours
             return false;
         }
 
+        /// <summary>
+        ///     Total item amount
+        /// </summary>
         public int TotalItemAmount()
         {
             return List.Count;
         }
+        /// <summary>
+        ///     Amount of gotten items
+        /// </summary>
         public int GotItemAmount()
         {
             return ItemCount + 1;
         }
 
+        /// <summary>
+        ///     Build the inv list
+        /// </summary>
         public void BuildItemList()
         {
-            Logger.Log($"[CustomItem] - Build item list");
+            Log($"[CustomItem] - Build item list");
             _pd = PlayerData.instance;
             FirstNewItem = -1;
             ItemCount = -1;
@@ -67,11 +103,14 @@ namespace SFCore.MonoBehaviours
             _built = true;
         }
 
+        /// <summary>
+        ///     Update the inv list
+        /// </summary>
         public void UpdateItemList()
         {
             if (!_built) BuildItemList();
 
-            Logger.Log($"[CustomItem] - Update Item List");
+            Log($"[CustomItem] - Update Item List");
             FirstNewItem = 0;
             ItemCount = -1;
             float num = 0f;
@@ -190,16 +229,22 @@ namespace SFCore.MonoBehaviours
             return false;
         }
 
+        /// <summary>
+        ///     Gets ItemCount
+        /// </summary>
         public int GetItemCount()
         {
-            Logger.Log($"[CustomItem] - Itemcount: {ItemCount}");
+            Log($"[CustomItem] - Itemcount: {ItemCount}");
             return ItemCount;
         }
 
+        /// <summary>
+        ///     Gets description for a specific item
+        /// </summary>
         public string GetDescConvo(int itemNum)
         {
             var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
-            Logger.Log($"[CustomItem] - Desc: {itemNum}/{List.Count}");
+            Log($"[CustomItem] - Desc: {itemNum}/{List.Count}");
 
             switch (item.type)
             {
@@ -240,10 +285,13 @@ namespace SFCore.MonoBehaviours
             return "";
         }
 
+        /// <summary>
+        ///     Gets name for a specific item
+        /// </summary>
         public string GetNameConvo(int itemNum)
         {
             var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
-            Logger.Log($"[CustomItem] - Name: {itemNum}/{List.Count}");
+            Log($"[CustomItem] - Name: {itemNum}/{List.Count}");
 
             switch (item.type)
             {
@@ -272,28 +320,40 @@ namespace SFCore.MonoBehaviours
             return "";
         }
 
+        /// <summary>
+        ///     Gets sprite for a specific item
+        /// </summary>
         public Sprite GetSprite(int itemNum)
         {
-            Logger.Log($"[CustomItem] - get sprite");
+            Log($"[CustomItem] - get sprite");
             return _currentList[itemNum].GetComponentInChildren<SpriteRenderer>().sprite;
         }
 
+        /// <summary>
+        ///     Get y distance
+        /// </summary>
         public float GetYDistance()
         {
-            Logger.Log($"[CustomItem] - get y: {YDistance}");
+            Log($"[CustomItem] - get y: {YDistance}");
             return YDistance;
         }
 
+        /// <summary>
+        ///     Get index of first new item
+        /// </summary>
         public int GetFirstNewItem()
         {
-            Logger.Log($"[CustomItem] - get new: {FirstNewItem}");
+            Log($"[CustomItem] - get new: {FirstNewItem}");
             return FirstNewItem;
         }
 
+        /// <summary>
+        ///     Get amount of counted items
+        /// </summary>
         public string GetPlayerDataKillsName(int itemNum)
         {
             var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
-            Logger.Log($"[CustomItem] - get int name: {item.type}");
+            Log($"[CustomItem] - get int name: {item.type}");
 
             if (item.type != ItemType.Counted) return "0Return";
             return item.playerdataInt;
@@ -315,6 +375,16 @@ namespace SFCore.MonoBehaviours
 
             fg.spriteRenderers = srList.ToArray();
             fg.texts = tmpList.ToArray();
+        }
+
+        private static void Log(string message)
+        {
+            Logger.LogDebug($"[SFCore]:[CustomItemList] - {message}");
+            Debug.Log($"[SFCore]:[CustomItemList] - {message}");
+        }
+        private static void Log(object message)
+        {
+            Log($"{message}");
         }
     }
 }

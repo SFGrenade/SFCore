@@ -2,12 +2,16 @@
 
 namespace SFCore.MonoBehaviours
 {
+    /// <summary>
+    ///     Patching BlurPlane
+    /// </summary>
     [RequireComponent(typeof(MeshRenderer))]
     public class BlurPlanePatcher : MonoBehaviour
     {
         private static Material[] _blurPlaneMaterials;
         private static bool _initialized = false;
 
+        /// <inheritdoc />
         public void Start()
         {
             if (!_initialized)

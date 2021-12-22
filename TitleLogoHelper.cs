@@ -20,6 +20,9 @@ namespace SFCore
             On.MenuStyleTitle.ctor += OnMenuStyleTitleConstructor;
             On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
         }
+        /// <summary>
+        ///     Used for static initialization.
+        /// </summary>
         public static void unusedInit() { }
 
         /// <inheritdoc />
@@ -93,11 +96,12 @@ namespace SFCore
 
         private static void Log(string message)
         {
-            Logger.Log($"[SFCore]:[TitleLogoHelper] - {message}");
+            Logger.LogDebug($"[SFCore]:[TitleLogoHelper] - {message}");
+            Debug.Log($"[SFCore]:[TitleLogoHelper] - {message}");
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[TitleLogoHelper] - {message}");
+            Log($"{message}");
         }
     }
 }

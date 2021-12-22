@@ -20,12 +20,24 @@ namespace SFCore
         private static List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> _queue = new List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>();
         private static List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>> _callbackQueue = new List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>>();
 
-        public delegate (string languageString, GameObject styleGo, int titleIndex, string unlockKey, string[] achievementKeys, MenuStyles.MenuStyle.CameraCurves cameraCurves, AudioMixerSnapshot musicSnapshot) Hook(MenuStyles self);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom run audio.
         /// </summary>
         /// <param name="self">active MenuStyles</param>
+        /// <returns>
+        ///     Tuple of:
+        ///     - Language string of the name of the menu style
+        ///     - GameObject of the menu style
+        ///     - title logo index (use -1 if you're not sure)
+        ///     - unlock key (use "" to have it unlocked by default)
+        ///     - array of achievement keys needed to unlock the menu style (null to have it unlocked by default)
+        ///     - CameraCurves of the colour correction to use when the style is used (null for default)
+        ///     - AudioMixerSnapshot of the snapshot to use when the style is used (null for default)
+        /// </returns>
+        public delegate (string languageString, GameObject styleGo, int titleIndex, string unlockKey, string[] achievementKeys, MenuStyles.MenuStyle.CameraCurves cameraCurves, AudioMixerSnapshot musicSnapshot) Hook(MenuStyles self);
+        /// <summary>
+        ///     Hook to add custom run audio.
+        /// </summary>
         /// <returns>
         ///     Tuple of:
         ///     - Language string of the name of the menu style
@@ -42,10 +54,20 @@ namespace SFCore
         {
             On.MenuStyles.Awake += OnMenuStylesAwake;
             On.MenuStyles.SetStyle += OnMenuStylesSetStyle;
+            On.MenuStyles.Start += (orig, self) =>
+            {
+                orig(self);
+                if (self.styles.Length > 10)
+                {
+                    self.SetStyle(self.styles.Length - 1, false, false);
+                }
+            };
         }
+        /// <summary>
+        ///     Used for static initialization.
+        /// </summary>
         public static void unusedInit() { }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom run audio.
         /// </summary>
@@ -64,7 +86,6 @@ namespace SFCore
             if (musicSnapshot != null)
                 UObject.DontDestroyOnLoad(musicSnapshot);
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom run audio.
         /// </summary>
@@ -187,7 +208,6 @@ namespace SFCore
             {
                 orig(self, index, fade, save);
             }
-            //GameManager.instance.StartCoroutine(UpdateTexturesWhileSwitching(self));
         }
 
         private static IEnumerator UpdateTexturesWhileSwitching(MenuStyles self)
@@ -206,11 +226,12 @@ namespace SFCore
 
         private static void Log(string message)
         {
-            Logger.Log($"[SFCore]:[MenuStyleHelper] - {message}");
+            Logger.LogDebug($"[SFCore]:[MenuStyleHelper] - {message}");
+            Debug.Log($"[SFCore]:[MenuStyleHelper] - {message}");
         }
         private static void Log(object message)
         {
-            Logger.Log($"[SFCore]:[MenuStyleHelper] - {message}");
+            Log($"{message}");
         }
     }
 }
