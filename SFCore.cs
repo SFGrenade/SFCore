@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using Modding;
 using SFCore.Utils;
 
@@ -12,9 +13,9 @@ namespace SFCore
         static SFCoreMod()
         {
             // to load all components
-            SFCore.AchievementHelper.unusedInit();
-            SFCore.CharmHelper.unusedInit();
-            SFCore.EnviromentParticleHelper.unusedInit();
+            //SFCore.AchievementHelper.unusedInit();
+            //SFCore.CharmHelper.unusedInit();
+            //SFCore.EnviromentParticleHelper.unusedInit();
             //SFCore.ItemHelper.unusedInit();
             SFCore.MenuStyleHelper.unusedInit();
             SFCore.TitleLogoHelper.unusedInit();

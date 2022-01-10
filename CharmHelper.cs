@@ -23,16 +23,26 @@ namespace SFCore
         ///     List of sprites to use for the charms.
         /// </summary>
         private static readonly List<Sprite> CustomSprites = new List<Sprite>();
-        
+
+        /// <summary>
+        ///     A detour for a private method that has no body.
+        /// </summary>
+        private static MonoMod.RuntimeDetour.Detour BuildEquippedCharms_Start_hook;
+
         /// <summary>
         ///     Constructs the mod and hooks important functions.
         /// </summary>
         static CharmHelper()
         {
             On.PlayerData.CalculateNotchesUsed += OnPlayerDataCalculateNotchesUsed;
-            On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
+            // i hate this, can't have shit in detroid
+            //On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
+            // workaround, since above isn't working
+            BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Detour(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
+            BuildEquippedCharms_Start_hook.Apply();
             On.GameManager.Start += OnGameManagerStart;
         }
+
         /// <summary>
         ///     Used for static initialization.
         /// </summary>
@@ -420,7 +430,17 @@ namespace SFCore
 
             self.gameObjectList = tmplist;
         }
-        
+
+        /// <summary>
+        ///     On hook to initialize charms and equipped charms.
+        /// </summary>
+        private static void OnBuildEquippedCharmsStart_single()
+        {
+            Init();
+
+            InitBuildEquippedCharms(GameObject.FindObjectOfType<BuildEquippedCharms>(true));
+        }
+
         /// <summary>
         ///     On hook to initialize charms and equipped charms.
         /// </summary>
