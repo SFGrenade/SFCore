@@ -40,6 +40,15 @@ namespace SFCore
         {
             On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
             //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
+            On.DesktopPlatform.IsAchievementUnlocked += (orig, self, key) => {
+                bool? isUnlocked = orig(self, key);
+                if (isUnlocked == null || isUnlocked == false)
+                {
+                    // just check again, to be sure
+                    isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
+                }
+                return isUnlocked;
+            };
         }
         /// <summary>
         ///     Used for static initialization.
