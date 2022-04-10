@@ -63,10 +63,10 @@ namespace SFCore
                     RuntimePlatform.tvOS,
                     RuntimePlatform.Switch
                 };
-                for (int i = 0; i < self.TitleSprites.Length; i++)
-                {
-                    self.TitleSprites[i].PlatformWhitelist = allPlatforms;
-                }
+                //for (int i = 0; i < self.TitleSprites.Length; i++)
+                //{
+                //    self.TitleSprites[i].PlatformWhitelist = allPlatforms;
+                //}
 
                 List<MenuStyleTitle.TitleSpriteCollection> tmpList = new List<MenuStyleTitle.TitleSpriteCollection>(self.TitleSprites);
                 foreach (var s in _customLogos)
