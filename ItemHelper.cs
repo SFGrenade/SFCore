@@ -112,7 +112,7 @@ namespace SFCore
             ModHooks.LanguageGetHook += LanguageGetHook;
             ModHooks.GetPlayerBoolHook += GetPlayerBoolHook;
             ModHooks.GetPlayerIntHook += GetPlayerIntHook;
-            On.GameCameras.Start += GameCamerasOnStart;
+            InventoryHelper.AddInventoryPage(InventoryPageType.Journal, "ItemList", "PANE_EQUIPMENT", "EQUIPMENT", "hasCustomInventoryItem", CreateEquipmentPane);
         }
 
         /// <summary>
@@ -146,36 +146,6 @@ namespace SFCore
                 return CustomItemList.Instance.TotalItemAmount();
             }
             return orig;
-        }
-
-        private static void GameCamerasOnStart(On.GameCameras.orig_Start orig, GameCameras self)
-        {
-            orig(self);
-
-            #region Display no equipments
-
-            var equipmentGo = self.gameObject.FindGameObjectInChildren("Equipment");
-            var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
-            if (equipmentFsm.GetState("Init").Fsm == null)
-            {
-                equipmentFsm.Preprocess();
-            }
-            equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
-
-            #endregion
-
-            InitDefaultItems(equipmentGo);
-
-            var successful = CopyJournalPane(self.gameObject.Find("Inventory"));
-
-            if (successful)
-            {
-                self.gameObject.Find("Inventory").LocateMyFSM("Inventory Control").SetState("Init");
-            }
-            else
-            {
-                Log("Couldn't finish changing inventory");
-            }
         }
 
         private static string LanguageGetHook(string key, string sheet, string orig)
@@ -244,8 +214,15 @@ namespace SFCore
             _initialized = true;
         }
 
-        private static bool CopyJournalPane(GameObject inventoryGo)
+        private static void CreateEquipmentPane(GameObject newPaneGo)
         {
+            GameObject inventoryGo = newPaneGo.transform.parent.gameObject;
+
+            GameObject equipmentGo = inventoryGo.transform.Find("Inv").Find("Equipment").gameObject;
+            var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
+            equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
+            InitDefaultItems(equipmentGo);
+            
             var inventoryFsm = inventoryGo.LocateMyFSM("Inventory Control");
             var inventoryFsmVars = inventoryFsm.FsmVariables;
 
@@ -254,9 +231,6 @@ namespace SFCore
                 inventoryFsm.Preprocess();
             }
 
-            var newPaneGo = Object.Instantiate(inventoryGo.FindGameObjectInChildren("Journal"), inventoryGo.transform);
-            newPaneGo.SetActive(false);
-            newPaneGo.name = "ItemList";
             var newPaneFod = new FsmOwnerDefault()
             {
                 GameObject = newPaneGo,
@@ -289,23 +263,10 @@ namespace SFCore
             inventoryFsm.AddGameObjectVariable("ItemList Pane");
             inventoryFsm.AddGameObjectVariable("ItemList List");
 
-            int totalPanes = inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo.Last().Value + 1;
-
             var newListFsm = newListGo.LocateMyFSM("Item List Control");
             var newListFsmVars = newListFsm.FsmVariables;
 
             var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal");
-
-            #region Inventory Control - Init
-
-            inventoryFsm.InsertAction("Init", new FindChild()
-            {
-                gameObject = inventoryFsm.GetAction<FindChild>("Init", 3).gameObject,
-                childName = "ItemList",
-                storeResult = inventoryFsmVars.FindFsmGameObject("ItemList Pane")
-            }, 12);
-
-            #endregion
 
             #region Inventory Control - Init Enemy List
 
@@ -347,114 +308,6 @@ namespace SFCore
 
             #endregion
 
-            #region Inventory Control - Check Current Pane
-
-            var ccp11Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo)
-            {
-                totalPanes
-            };
-            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo = ccp11Ct.ToArray();
-            var ccp11Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent)
-            {
-                FsmEvent.GetFsmEvent("EQUIPMENT")
-            };
-            inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).sendEvent = ccp11Se.ToArray();
-
-            #endregion
-
-            #region Inventory Control - Open Journal copy "Open Equipment"
-
-            inventoryFsm.CopyState("Open Journal", "Open Equipment");
-            inventoryFsm.GetAction<GetLanguageString>("Open Equipment", 0).convName = "PANE_EQUIPMENT";
-            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 2).intValue = totalPanes;
-            inventoryFsm.GetAction<SetIntValue>("Open Equipment", 3).intValue = totalPanes;
-            inventoryFsm.GetAction<SetGameObject>("Open Equipment", 4).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
-            inventoryFsm.AddTransition("Check Current Pane", "EQUIPMENT", "Open Equipment");
-
-            #endregion
-
-            #region Inventory Control - Check R Pane
-
-            var crp1Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo)
-            {
-                totalPanes
-            };
-            crp1Ct[5] = totalPanes + 1;
-            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).compareTo = crp1Ct.ToArray();
-            var crp1Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent)
-            {
-                FsmEvent.FindEvent("EQUIPMENT")
-            };
-            inventoryFsm.GetAction<IntSwitch>("Check R Pane", 1).sendEvent = crp1Se.ToArray();
-
-            #endregion
-
-            #region Inventory Control - Next Journal 2 copy "Next Equipment 2"
-
-            inventoryFsm.CopyState("Next Journal 2", "Next Equipment 2");
-            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 2", 0).boolName = "hasCustomInventoryItem";
-            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 2", 1).convName = "PANE_EQUIPMENT";
-            inventoryFsm.AddTransition("Check R Pane", "EQUIPMENT", "Next Equipment 2");
-
-            inventoryFsm.GetAction<SetIntValue>("Under 2", 0).intValue = totalPanes + 1;
-
-            #endregion
-
-            #region Inventory Control - Check L Pane
-
-            var clp1Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo)
-            {
-                totalPanes
-            };
-            clp1Ct[5] = totalPanes + 1;
-            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).compareTo = clp1Ct.ToArray();
-            var clp1Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent)
-            {
-                FsmEvent.FindEvent("EQUIPMENT")
-            };
-            inventoryFsm.GetAction<IntSwitch>("Check L Pane", 1).sendEvent = clp1Se.ToArray();
-
-            #endregion
-
-            #region Inventory Control - Next Journal 3 copy "Next Equipment 3"
-
-            inventoryFsm.CopyState("Next Journal 3", "Next Equipment 3");
-            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment 3", 0).boolName = "hasCustomInventoryItem";
-            inventoryFsm.GetAction<GetLanguageString>("Next Equipment 3", 1).convName = "PANE_EQUIPMENT";
-            inventoryFsm.AddTransition("Check L Pane", "EQUIPMENT", "Next Equipment 3");
-
-            inventoryFsm.GetAction<SetIntValue>("Under 3", 0).intValue = totalPanes + 1;
-
-            #endregion
-
-            #region Inventory Control - Loop Through
-
-            var cls3Ct = new List<FsmInt>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo)
-            {
-                totalPanes
-            };
-            cls3Ct[5] = totalPanes + 1;
-            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).compareTo = cls3Ct.ToArray();
-            var cls3Se = new List<FsmEvent>(inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent)
-            {
-                FsmEvent.FindEvent("EQUIPMENT")
-            };
-            inventoryFsm.GetAction<IntSwitch>("Loop Through", 3).sendEvent = cls3Se.ToArray();
-
-            #endregion
-
-            #region Inventory Control - Next Journal copy "Next Equipment"
-
-            inventoryFsm.CopyState("Next Journal", "Next Equipment");
-            inventoryFsm.GetAction<PlayerDataBoolTest>("Next Equipment", 0).boolName = "hasCustomInventoryItem";
-            inventoryFsm.GetAction<SetGameObject>("Next Equipment", 2).gameObject = inventoryFsmVars.FindFsmGameObject("ItemList Pane");
-            inventoryFsm.GetAction<GetLanguageString>("Next Equipment", 3).convName = "PANE_EQUIPMENT";
-            inventoryFsm.AddTransition("Loop Through", "EQUIPMENT", "Next Equipment");
-
-            inventoryFsm.GetAction<SetIntValue>("Under", 0).intValue = totalPanes + 1;
-
-            #endregion
-
             #region Enemy List - Item List Control
 
             #region Init
@@ -466,14 +319,6 @@ namespace SFCore
             newListFsm.RemoveAction("Init", 27);
 
             newListFsm.RemoveAction("Init", 13);
-            //newListFsm.InsertAction("Init", new CallMethodProper()
-            //{
-            //    gameObject = newListFOD,
-            //    behaviour = "CustomItemList",
-            //    methodName = "UpdateItemList",
-            //    parameters = new FsmVar[0],
-            //    storeResult = new FsmVar()
-            //}, 13);
 
             newListFsm.RemoveAction("Init", 12);
             newListFsm.RemoveAction("Init", 11);
@@ -574,10 +419,6 @@ namespace SFCore
 
             #endregion
 
-            //newListFsm.MakeLog();
-            //inventoryFsm.MakeLog();
-            //uiJournalFsm.MakeLog();
-
             var fg = newPaneGo.GetComponent<FadeGroup>();
             List<SpriteRenderer> tmpSprites = new List<SpriteRenderer>()
             {
@@ -607,8 +448,6 @@ namespace SFCore
             };
             fg.spriteRenderers = tmpSprites.ToArray();
             fg.texts = tmpTextes.ToArray();
-
-            return true;
         }
 
         private static string GenerateRandomString(int maxLength = 0xFF)
