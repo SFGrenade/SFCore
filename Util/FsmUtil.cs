@@ -731,25 +731,87 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Logs the fsm and its states and transitions.
+        ///     Logs the fsm and its states, transitions and variables.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         public static void Log(this PlayMakerFSM fsm)
         {
-            Log($"FSM \"{fsm.name}\"");
-            Log($"{fsm.FsmStates.Length} States");
+            Log($"FSM \"{fsm.FsmName}\" on \"{fsm.gameObject.name}\"");
+            Log($"\t{fsm.FsmStates.Length} States");
             foreach (var s in fsm.FsmStates)
             {
-                Log($"\tState \"{s.Name}\"");
+                Log($"\t\tState \"{s.Name}\"");
                 foreach (var t in s.Transitions)
                 {
-                    Log($"\t\t-> \"{t.ToState}\" via \"{t.EventName}\"");
+                    Log($"\t\t\t-> \"{t.ToState}\" via \"{t.EventName}\"");
                 }
             }
-            Log($"{fsm.FsmGlobalTransitions.Length} Global Transitions");
+            Log($"\t{fsm.FsmGlobalTransitions.Length} Global Transitions");
             foreach (var t in fsm.FsmGlobalTransitions)
             {
-                Log($"\tGlobal Transition \"{t.EventName}\" to \"{t.ToState}\"");
+                Log($"\t\tGlobal Transition \"{t.EventName}\" to \"{t.ToState}\"");
+            }
+            Log($"\tVariables");
+            var fsmVar = fsm.FsmVariables;
+            foreach (var t in fsmVar.ArrayVariables)
+            {
+                Log($"\t\tArray \"{t.Name}\": \"{String.Join(", ", t.objectReferences as object[])}\"");
+            }
+            foreach (var t in fsmVar.BoolVariables)
+            {
+                Log($"\t\tBool \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.ColorVariables)
+            {
+                Log($"\t\tColor \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.EnumVariables)
+            {
+                Log($"\t\tEnum \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.FloatVariables)
+            {
+                Log($"\t\tFloat \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.GameObjectVariables)
+            {
+                Log($"\t\tGameObject \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.IntVariables)
+            {
+                Log($"\t\tInt \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.MaterialVariables)
+            {
+                Log($"\t\tMaterial \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.ObjectVariables)
+            {
+                Log($"\t\tObject \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.QuaternionVariables)
+            {
+                Log($"\t\tQuaternion \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.RectVariables)
+            {
+                Log($"\t\tRect \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.StringVariables)
+            {
+                Log($"\t\tString \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.TextureVariables)
+            {
+                Log($"\t\tTexture \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.Vector2Variables)
+            {
+                Log($"\t\tVector2 \"{t.Name}\": {t.Value}");
+            }
+            foreach (var t in fsmVar.Vector3Variables)
+            {
+                Log($"\t\tVector3 \"{t.Name}\": {t.Value}");
             }
         }
 
