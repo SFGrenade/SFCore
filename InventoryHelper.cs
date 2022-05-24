@@ -16,29 +16,35 @@ namespace SFCore
     /// </summary>
     public enum InventoryPageType
     {
-        /// <inheritdoc/>
+        /// <summary>
+        ///     An empty inventory page.
+        ///     See https://discord.com/channels/879125729936298015/880548951521103962/963340255661031464 for specifics.
+        /// </summary>
         Empty,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     A shallow copy of the main inventory page.
+        /// </summary>
         Inventory,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     A shallow copy of the Charms inventory page.
+        /// </summary>
         Charms,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     A shallow copy of the Hunters Journal inventory page.
+        /// </summary>
         Journal,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     A shallow copy of the Map inventory page.
+        /// </summary>
         Map
     }
 
     /// <summary>
     ///     Helper class for easily adding new inventory pages.
     ///     The mod using this needs to handle the following:
-    ///     - 0 to 3 PlayerData bools per item
-    ///     - 0 to 1 PlayerData int per item
-    ///     - 1 to 3 name language strings per item
-    ///     - 1 to 4 description language strings per item
+    ///     - 1 name language string per page
+    ///     - 0 to 1 PlayerData bools per page
+    ///     - 0 to 1 events per item
     /// </summary>
     public static class InventoryHelper
     {
@@ -83,7 +89,7 @@ namespace SFCore
         /// <summary>
         ///     Adds an inventory page with a specified original.
         /// </summary>
-        /// <param name="type">The original to copy. For InventoryPageType.Empty see https://discord.com/channels/879125729936298015/880548951521103962/963340255661031464</param>
+        /// <param name="type">The original to copy</param>
         /// <param name="name">The name of the new page</param>
         /// <param name="convKey">The language key for the new page</param>
         /// <param name="eventName">The event name to use to get to the new page. Needs to be unique</param>

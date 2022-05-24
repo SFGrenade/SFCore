@@ -14,7 +14,9 @@ namespace SFCore.MonoBehaviours
         /// </summary>
         public Texture tex = null;
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Unity method.
+        /// </summary>
         public void Start()
         {
             if (!_initialized)

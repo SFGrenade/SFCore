@@ -104,7 +104,9 @@ namespace SFCore.MonoBehaviours
         /// </summary>
         public float EnterTransitionTime = 3f;
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Unity method.
+        /// </summary>
         public void Start()
         {
             gameObject.SetActive(false);

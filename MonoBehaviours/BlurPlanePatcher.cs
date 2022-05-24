@@ -11,7 +11,9 @@ namespace SFCore.MonoBehaviours
         private static Material[] _blurPlaneMaterials;
         private static bool _initialized = false;
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Unity method.
+        /// </summary>
         public void Start()
         {
             if (!_initialized)

@@ -327,14 +327,12 @@ namespace SFCore
         /// </summary>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the hard land effects you want</returns>
         public static CustomHardLandEffectsHook AddCustomHardLandEffectsHook;
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom jump effects.
         /// </summary>
         /// <param name="self">active JumpEffects</param>
         /// <returns>Tuple of the enviromentType you want to add and GameObject of the jump effects you want</returns>
         public delegate (int enviromentType, GameObject jumpEffects) CustomJumpEffectsHook(JumpEffects self);
-        /// <inheritdoc />
         /// <summary>
         ///     Hook to add custom jump effects.
         /// </summary>
@@ -372,7 +370,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 8))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 7 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 7 are allowed");
             }
             if (!_customWalkAudio.ContainsKey(enviromentType))
             {
@@ -381,7 +379,6 @@ namespace SFCore
                 _customWalkAudio.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -391,7 +388,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 8))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 7 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 7 are allowed");
             }
             if (!_customRunAudio.ContainsKey(enviromentType))
             {
@@ -400,7 +397,6 @@ namespace SFCore
                 _customRunAudio.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -410,7 +406,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
             }
             if (!_customDashEffects.ContainsKey(enviromentType))
             {
@@ -419,7 +415,6 @@ namespace SFCore
                 _customDashEffects.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -429,7 +424,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
             }
             if (!_customHardLandEffects.ContainsKey(enviromentType))
             {
@@ -438,7 +433,6 @@ namespace SFCore
                 _customHardLandEffects.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -448,7 +442,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
             }
             if (!_customJumpEffects.ContainsKey(enviromentType))
             {
@@ -457,7 +451,6 @@ namespace SFCore
                 _customJumpEffects.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -467,7 +460,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
             }
             if (!_customSoftLandEffects.ContainsKey(enviromentType))
             {
@@ -476,7 +469,6 @@ namespace SFCore
                 _customSoftLandEffects.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -486,7 +478,7 @@ namespace SFCore
         {
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
             }
             if (!_customRunEffects.ContainsKey(enviromentType))
             {
@@ -497,7 +489,6 @@ namespace SFCore
                 _customRunEffects.Add(enviromentType, tmp);
             }
         }
-        /// <inheritdoc />
         /// <summary>
         ///     Adds custom walk audio.
         /// </summary>
@@ -508,7 +499,7 @@ namespace SFCore
 
             if ((enviromentType >= 0) && (enviromentType < 7))
             {
-                throw new ArgumentOutOfRangeException("Only Integers smaller than 0 and larger than 6 are allowed");
+                throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
             }
             if (!_customRunEffectsPrefabs.ContainsKey(enviromentType))
             {

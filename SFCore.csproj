@@ -47,8 +47,10 @@
       <Output TaskParameter="Items" ItemName="ZipFilesWithHashes" />
     </GetFileHash>
     <WriteLinesToFile File="$(ExportDir)/$(TargetName)/SHA.txt" Lines="$(OutputFileString);@(FilesWithHashes->'%(FileHash)');$(OutputZipString);@(ZipFilesWithHashes->'%(FileHash)')" Overwrite="true" Encoding="UTF-8" />
+    <RemoveDir Condition="$([MSBuild]::IsOSPlatform('Windows'))" Directories="$(ProjectDir)docfx_project\obj" />
+    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" WorkingDirectory="docfx_project\" Command="docfx &quot;$(ProjectDir)docfx_project\docfx.json&quot;" />
   </Target>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

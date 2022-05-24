@@ -11,15 +11,25 @@ namespace SFCore
     /// </summary>
     public struct SCustomAchievement
     {
-        /// <inheritdoc/>
+        /// <summary>
+        ///     The achievement key used to award the achievement.
+        /// </summary>
         public string key;
-        /// <inheritdoc/>
+        /// <summary>
+        ///     The sprite used for the achievement.
+        /// </summary>
         public Sprite sprite;
-        /// <inheritdoc/>
+        /// <summary>
+        ///     The title language key for the achievement.
+        /// </summary>
         public string titleConvo;
-        /// <inheritdoc/>
+        /// <summary>
+        ///     The text language key for the achievement.
+        /// </summary>
         public string textConvo;
-        /// <inheritdoc/>
+        /// <summary>
+        ///     A flag to indicate whether or not to display the text when the achievement is not yet acquired.
+        /// </summary>
         public bool hidden;
     }
 

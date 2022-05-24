@@ -19,7 +19,9 @@ namespace SFCore.MonoBehaviours
         /// </summary>
         public float Scale = 1.0f;
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Unity method.
+        /// </summary>
         public void Start()
         {
             if (!_materials.ContainsKey(shader))

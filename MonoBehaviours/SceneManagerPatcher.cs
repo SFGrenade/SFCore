@@ -228,7 +228,9 @@ namespace SFCore.MonoBehaviours
         [Space(6f)]
         public bool manualMapTrigger = false;
 
-        /// <inheritdoc />
+        /// <summary>
+        ///     Unity method.
+        /// </summary>
         public void Awake()
         {
             if (_musicAm == null)

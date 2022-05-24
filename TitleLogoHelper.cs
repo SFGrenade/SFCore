@@ -25,7 +25,6 @@ namespace SFCore
         /// </summary>
         public static void unusedInit() { }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds the custom title logo.
         /// </summary>

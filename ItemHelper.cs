@@ -19,19 +19,33 @@ namespace SFCore
     /// </summary>
     public enum ItemType
     {
-        /// <inheritdoc/>
+        /// <summary>
+        ///     A normal item with a single PD bool to indicate whether or not the item was acquired.
+        /// </summary>
         Normal,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     An item with 2 PD bools to indicate whether or not one item or another was acquired, not both.
+        /// </summary>
         OneTwo,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     An item with 2 PD bools to indicate whether or not one, another or both items were acquired.
+        /// </summary>
         OneTwoBoth,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     An item with a single PD int to indicate whether or not and how many of an item were acquired.
+        /// </summary>
         Counted,
-
-        /// <inheritdoc/>
+        /// <summary>
+        ///     An item to mimic the delicate flower.
+        ///     It has 2 sprites, 2 names and 4 descriptions.
+        ///     The item counts as acquired when playerdataBool1 is true and either of playerdataBool2 and playerdataBool3 (playerdataInt) is false.
+        ///     sprite1 is used when playerdataBool3 (playerdataInt) is false. Otherwise sprite2 is used.
+        ///     nameConvo1 is used when playerdataBool3 (playerdataInt) is false. Otherwise nameConvo2 is used.
+        ///     descConvo1 is used when both playerdataBool3 (playerdataInt) and playerdataBool2 are false.
+        ///     descConvo2 is used when playerdataBool3 (playerdataInt) is true and playerdataBool2 is false.
+        ///     descConvo3 (nameConvoBoth) is used when playerdataBool3 (playerdataInt) is false and playerdataBool2 is true.
+        ///     descConvo4 (descConvoBoth) is used when both playerdataBool3 (playerdataInt) and playerdataBool2 are true.
+        /// </summary>
         Flower
     }
 
@@ -50,46 +64,74 @@ namespace SFCore
         /// </summary>
         public struct Item
         {
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Type of the item.
+            /// </summary>
             public ItemType type;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Unique name for FSM purposes.
+            /// </summary>
             public string uniqueName;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Main sprite.
+            /// </summary>
             public Sprite sprite1;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Alternative sprite.
+            /// </summary>
             public Sprite sprite2;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Another alternative sprite.
+            /// </summary>
             public Sprite spriteBoth;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     PlayerData bool.
+            /// </summary>
             public string playerdataBool1;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     PlayerData bool.
+            /// </summary>
             public string playerdataBool2;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     PlayerData int, sometimes used for a bool.
+            /// </summary>
             public string playerdataInt;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Main name language key.
+            /// </summary>
             public string nameConvo1;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Alternative name language key.
+            /// </summary>
             public string nameConvo2;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Another alternative name language key, sometimes used for a description.
+            /// </summary>
             public string nameConvoBoth;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Main description language key.
+            /// </summary>
             public string descConvo1;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Alternative description language key.
+            /// </summary>
             public string descConvo2;
 
-            /// <inheritdoc/>
+            /// <summary>
+            ///     Another alternative description language key.
+            /// </summary>
             public string descConvoBoth;
         }
 
@@ -464,7 +506,6 @@ namespace SFCore
             return randomString;
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds a normal item. (e.g. King's Brand)
         ///     You either have it, or you don't.
@@ -487,7 +528,6 @@ namespace SFCore
             });
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds a item of type OneTwo. (Not used ingame)
         ///     You either have one, the other or none.
@@ -518,7 +558,6 @@ namespace SFCore
             });
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map and Quill)
         ///     You can have one, the other, both or none.
@@ -555,7 +594,6 @@ namespace SFCore
             });
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds a counted item. (e.g. Rancid Egg)
         ///     You either have at least one, or you don't.
@@ -578,7 +616,6 @@ namespace SFCore
             });
         }
 
-        /// <inheritdoc />
         /// <summary>
         ///     Adds a flower item. (e.g. the Delicate Flower)
         ///     You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
