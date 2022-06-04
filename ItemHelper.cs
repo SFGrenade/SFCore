@@ -305,10 +305,10 @@ namespace SFCore
             inventoryFsm.AddGameObjectVariable("ItemList Pane");
             inventoryFsm.AddGameObjectVariable("ItemList List");
 
-            var newListFsm = newListGo.LocateMyFSM("Item List Control");
+            var newListFsm = newListGo.LocateMyFSM("Item List Control Custom");
             var newListFsmVars = newListFsm.FsmVariables;
 
-            var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal");
+            var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal Custom");
 
             #region Inventory Control - Init Enemy List
 

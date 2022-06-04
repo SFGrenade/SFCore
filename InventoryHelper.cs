@@ -163,6 +163,26 @@ namespace SFCore
                 OwnerOption = OwnerDefaultOption.SpecifyGameObject
             };
 
+            switch (type)
+            {
+                case InventoryPageType.Empty:
+                    prefabGoName = "Inv";
+                    break;
+                case InventoryPageType.Inventory:
+                    prefabGoName = "Inv";
+                    break;
+                case InventoryPageType.Charms:
+                    prefabGoName = "Charms";
+                    break;
+                case InventoryPageType.Journal:
+                    prefabGoName = "Journal";
+                    break;
+                case InventoryPageType.Map:
+                    prefabGoName = "Map";
+                    break;
+                default:
+                    return null;
+            }
             if (type == InventoryPageType.Empty)
             {
                 var emptyInventoryFsm = newPaneGo.LocateMyFSM("UI Inventory");
@@ -375,6 +395,28 @@ namespace SFCore
                 UObject.DestroyImmediate(newPaneGo.LocateMyFSM("Button Control"));
                 UObject.DestroyImmediate(newPaneGo.LocateMyFSM("Update Text"));
                 emptyInventoryFsm.FsmName = "Empty UI";
+            }
+            else if (type == InventoryPageType.Inventory)
+            {
+                var uiInventoryFsm = newPaneGo.LocateMyFSM("UI Inventory");
+                uiInventoryFsm.FsmName = "UI Inventory Custom";
+            }
+            else if (type == InventoryPageType.Charms)
+            {
+                var uiInventoryFsm = newPaneGo.LocateMyFSM("UI Charms");
+                uiInventoryFsm.FsmName = "UI Charms Custom";
+            }
+            else if (type == InventoryPageType.Journal)
+            {
+                var uiInventoryFsm = newPaneGo.LocateMyFSM("UI Journal");
+                uiInventoryFsm.FsmName = "UI Journal Custom";
+                var itemListControlFsm = newPaneGo.Find("Enemy List").LocateMyFSM("Item List Control");
+                itemListControlFsm.FsmName = "Item List Control Custom";
+            }
+            else if (type == InventoryPageType.Map)
+            {
+                var uiInventoryFsm = newPaneGo.Find("World Map").LocateMyFSM("UI Control");
+                uiInventoryFsm.FsmName = "UI Control Custom";
             }
 
             string fsmVarNamePane = $"{name} Pane";
