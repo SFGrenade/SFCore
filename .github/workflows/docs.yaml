@@ -28,12 +28,9 @@ jobs:
         run: |
           wget https://github.com/dotnet/docfx/releases/latest/download/docfx.zip -O docfx.zip
           unzip docfx.zip -d docfx
-      - name: Install dependencies
-        run: dotnet restore
       - name: Build docs
         working-directory: docs
         run: |
-          export VSINSTALLDIR=
           mono docfx/docfx.exe 
       - name: Publish
         uses: peaceiris/actions-gh-pages@v3
