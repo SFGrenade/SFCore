@@ -54,7 +54,7 @@
         ]
       }
     ],
-    "dest": "DocFX",
+    "dest": "_site",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
