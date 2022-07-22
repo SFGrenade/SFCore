@@ -144,7 +144,10 @@ namespace SFCore.Utils
         public static FsmEvent AddTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.AddFsmTransition(stateName, eventName, toState);
         /// <inheritdoc cref="AddTransition(FsmState, string, string)"/>
         public static FsmEvent AddFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetFsmState(stateName).AddFsmTransition(eventName, toState);
-        /// <inheritdoc cref="AddTransition(FsmState, string, string)"/>
+        /// <inheritdoc cref="AddTransition(PlayMakerFSM, string, string)"/>
+        /// <param name="state">The fsm state</param>
+        /// <param name="eventName">The name of transition event</param>
+        /// <param name="toState">The name of the new state</param>
         public static FsmEvent AddTransition(this FsmState state, string eventName, string toState) => state.AddFsmTransition(eventName, toState);
         /// <inheritdoc cref="AddTransition(FsmState, string, string)"/>
         public static FsmEvent AddFsmTransition(this FsmState state, string eventName, string toState)

@@ -69,7 +69,7 @@ namespace SFCore.Utils
         /// <param name="name">The name of the GameObject</param>
         /// <returns>The found GameObject, null if none is found.</returns>
         public static GameObject FindGameObjectInChildren(this GameObject o, string name) => o.Find(name);
-        /// <inheritdoc cref="FindGameObjectInChildren"/>
+        /// <inheritdoc cref="FindGameObjectInChildren(GameObject, string)"/>
         public static GameObject Find(this GameObject o, string name)
         {
             if (o == null)
