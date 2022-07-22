@@ -1,3 +1,3 @@
 # Welcome to SFCore
 
-Click "API Documentation" above to view the API docs.
+This is a library for adding custom content to the game.
