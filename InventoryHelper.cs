@@ -429,6 +429,18 @@ namespace SFCore
             
             int totalPanes = inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo.Last().Value + 1;
             
+            #region Inv - UI Inventory - Any Other Panes?
+
+            var origUiInventoryFsm = inventoryGo.FindGameObjectInChildren("Inv").LocateMyFSM("UI Inventory");
+            origUiInventoryFsm.InsertAction("Any Other Panes?", new PlayerDataBoolTest()
+            {
+                gameObject = origUiInventoryFsm.GetAction<PlayerDataBoolTest>("Any Other Panes?", 2).gameObject,
+                boolName = isAvailablePdBool,
+                isTrue = origUiInventoryFsm.GetAction<PlayerDataBoolTest>("Any Other Panes?", 2).isTrue
+            }, 3);
+
+            #endregion
+
             #region Inventory Control - Init
 
             inventoryFsm.InsertAction("Init", new FindChild()
