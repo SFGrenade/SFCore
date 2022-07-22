@@ -4,7 +4,7 @@
       "src": [
         {
           "files": [
-            "SFCore/**.csproj"
+            "**.csproj"
           ],
           "exclude": [
             "**/bin",
