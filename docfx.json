@@ -6,11 +6,16 @@
           "files": [
             "**.csproj"
           ],
+          "exclude": [
+            "**/bin",
+            "**/obj/",
+            "Examples/"
+          ],
           "src": ".."
         }
       ],
       "dest": "api",
-      "disableGitFeatures": false,
+      "disableGitFeatures": true,
       "disableDefaultFilter": false
     }
   ],
@@ -45,11 +50,11 @@
         ],
         "exclude": [
           "obj/**",
-          "_site/**"
+          "DocFX/**"
         ]
       }
     ],
-    "dest": "_site",
+    "dest": "DocFX",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
