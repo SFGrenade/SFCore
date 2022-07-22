@@ -7,13 +7,13 @@
     <Product>SFCore</Product>
     <Description>A Hollow Knight Mod Library</Description>
     <Copyright>Copyright © SFGrenade 2019-2021</Copyright>
-    <AssemblyVersion>1.5.3.2</AssemblyVersion>
-    <FileVersion>1.5.3.2</FileVersion>
+    <AssemblyVersion>1.5.3.3</AssemblyVersion>
+    <FileVersion>1.5.3.3</FileVersion>
     <OutputPath>bin/$(Configuration)/</OutputPath>
     <LangVersion>latest</LangVersion>
-    <HollowKnightRefs Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/.steam/steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/</HollowKnightRefs>
+    <HollowKnightRefs Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/Games/gog/hollow-knight/game/Hollow Knight_Data/Managed/</HollowKnightRefs>
     <HollowKnightRefs Condition="$([MSBuild]::IsOSPlatform('Windows'))">E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/</HollowKnightRefs>
-    <ExportDir Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/Projects/_Export/</ExportDir>
+    <ExportDir Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/Documents/Projects/__Exports/</ExportDir>
     <ExportDir Condition="$([MSBuild]::IsOSPlatform('Windows'))">E:/Github_Projects/__Exports/</ExportDir>
     <DocumentationFile>$(OutputPath)/$(AssemblyTitle).xml</DocumentationFile>
   </PropertyGroup>
@@ -47,8 +47,8 @@
       <Output TaskParameter="Items" ItemName="ZipFilesWithHashes" />
     </GetFileHash>
     <WriteLinesToFile File="$(ExportDir)/$(TargetName)/SHA.txt" Lines="$(OutputFileString);@(FilesWithHashes->'%(FileHash)');$(OutputZipString);@(ZipFilesWithHashes->'%(FileHash)')" Overwrite="true" Encoding="UTF-8" />
-    <RemoveDir Condition="$([MSBuild]::IsOSPlatform('Windows'))" Directories="$(ProjectDir)docfx_project\obj" />
-    <Exec Condition="$([MSBuild]::IsOSPlatform('Windows'))" WorkingDirectory="docfx_project\" Command="docfx &quot;$(ProjectDir)docfx_project\docfx.json&quot;" />
+    <!--<RemoveDir Directories="$(ProjectDir)/docfx_project/obj" />
+    <Exec WorkingDirectory="docfx_project/" Command="docfx &quot;$(ProjectDir)/docfx_project/docfx.json&quot;" />-->
   </Target>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <SignAssembly>true</SignAssembly>

@@ -439,6 +439,38 @@ namespace SFCore
             }, 12);
 
             #endregion
+            
+            #region Inventory Control - Single Pane?
+
+            inventoryFsm.InsertAction("Single Pane?", new PlayerDataBoolTest()
+            {
+                gameObject = inventoryFsm.GetAction<PlayerDataBoolTest>("Single Pane?", 8).gameObject,
+                boolName = isAvailablePdBool,
+                isTrue = inventoryFsm.GetAction<PlayerDataBoolTest>("Single Pane?", 8).isTrue
+            }, 9);
+
+            #endregion
+
+            #region Inventory Control - Regain Control & Regain Control 2
+
+            inventoryFsm.InsertAction("Regain Control", new ActivateGameObject()
+            {
+                gameObject = newPaneFod,
+                activate = false,
+                recursive = false,
+                resetOnExit = false,
+                everyFrame = false
+            }, 5);
+            inventoryFsm.InsertAction("Regain Control 2", new ActivateGameObject()
+            {
+                gameObject = newPaneFod,
+                activate = false,
+                recursive = false,
+                resetOnExit = false,
+                everyFrame = false
+            }, 4);
+
+            #endregion
 
             #region Inventory Control - Check Current Pane
 
