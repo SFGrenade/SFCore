@@ -690,7 +690,8 @@ namespace SFCore.Utils
             {
                 for (int i = s.Actions.Length - 1; i >= 0; i--)
                 {
-                    fsm.InsertAction(s.Name, new StatusLog() { text = $"{i}" }, i);
+                    string actionTypeName = fsm.GetState(s.Name).Actions[i].GetType().FullName;
+                    fsm.InsertAction(s.Name, new StatusLog() { text = $"{i} - {actionTypeName}" }, i);
                     if (additionalLogging)
                     {
                         fsm.InsertMethod(s.Name, () =>
@@ -708,25 +709,25 @@ namespace SFCore.Utils
                             var origGameObjectVariables = fsmVars.GameObjectVariables;
                             int i;
                             for (i = 0; i < origFloatVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[FloatVariables] - '{origFloatVariables[i].Name}': '{origFloatVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "FloatVariables", $"'{origFloatVariables[i].Name}': '{origFloatVariables[i].Value}'");
                             for (i = 0; i < origIntVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[IntVariables] - '{origIntVariables[i].Name}': '{origIntVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "IntVariables", $"'{origIntVariables[i].Name}': '{origIntVariables[i].Value}'");
                             for (i = 0; i < origBoolVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[BoolVariables] - '{origBoolVariables[i].Name}': '{origBoolVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "BoolVariables", $"'{origBoolVariables[i].Name}': '{origBoolVariables[i].Value}'");
                             for (i = 0; i < origStringVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[StringVariables] - '{origStringVariables[i].Name}': '{origStringVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "StringVariables", $"'{origStringVariables[i].Name}': '{origStringVariables[i].Value}'");
                             for (i = 0; i < origVector2Variables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[Vector2Variables] - '{origVector2Variables[i].Name}': '({origVector2Variables[i].Value.x}, {origVector2Variables[i].Value.y})'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "Vector2Variables", $"'{origVector2Variables[i].Name}': '({origVector2Variables[i].Value.x}, {origVector2Variables[i].Value.y})'");
                             for (i = 0; i < origVector3Variables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[Vector3Variables] - '{origVector3Variables[i].Name}': '({origVector3Variables[i].Value.x}, {origVector3Variables[i].Value.y}, {origVector3Variables[i].Value.z})'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "Vector3Variables", $"'{origVector3Variables[i].Name}': '({origVector3Variables[i].Value.x}, {origVector3Variables[i].Value.y}, {origVector3Variables[i].Value.z})'");
                             for (i = 0; i < origColorVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[ColorVariables] - '{origColorVariables[i].Name}': '{origColorVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "ColorVariables", $"'{origColorVariables[i].Name}': '{origColorVariables[i].Value}'");
                             for (i = 0; i < origRectVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[RectVariables] - '{origRectVariables[i].Name}': '{origRectVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "RectVariables", $"'{origRectVariables[i].Name}': '{origRectVariables[i].Value}'");
                             for (i = 0; i < origQuaternionVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[QuaternionVariables] - '{origQuaternionVariables[i].Name}': '{origQuaternionVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "QuaternionVariables", $"'{origQuaternionVariables[i].Name}': '{origQuaternionVariables[i].Value}'");
                             for (i = 0; i < origGameObjectVariables.Length; i++)
-                                Logger.LogDebug($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[GameObjectVariables] - '{origGameObjectVariables[i].Name}': '{origGameObjectVariables[i].Value}'");
+                                Log(fsm.gameObject.name, fsm.FsmName, "GameObjectVariables", $"'{origGameObjectVariables[i].Name}': '{origGameObjectVariables[i].Value}'");
                         }, i + 1);
                     }
                 }
@@ -818,6 +819,11 @@ namespace SFCore.Utils
             }
         }
 
+        private static void Log(string goName, string fsmName, string part, string msg)
+        {
+            Logger.LogDebug($"[{goName}]:[{fsmName}]:[{part}] - {msg}");
+            UnityEngine.Debug.Log($"[{goName}]:[{fsmName}]:[{part}] - {msg}");
+        }
         private static void Log(string msg)
         {
             Logger.LogDebug($"[SFCore]:[Util]:[FsmUtil]:{msg}");
