@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
+using Modding;
 using Logger = Modding.Logger;
 using SFCore.Utils;
+using Object = UnityEngine.Object;
 
 namespace SFCore
 {
@@ -41,6 +44,25 @@ namespace SFCore
             BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Detour(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
             BuildEquippedCharms_Start_hook.Apply();
             On.GameManager.Start += OnGameManagerStart;
+            ModHooks.GetPlayerVariableHook += ModHooksOnGetPlayerVariableHook;
+        }
+
+        private static object ModHooksOnGetPlayerVariableHook(Type type, string name, object value)
+        {
+            if (type == typeof(List<int>) && name == "equippedCharms")
+            {
+                List<int> charms = value as List<int>;
+                List<int> actualCharms = new();
+                foreach (var charmId in charms)
+                {
+                    if (PlayerData.instance.GetBool($"gotCharm_{charmId}"))
+                    {
+                        actualCharms.Add(charmId);
+                    }
+                }
+                return actualCharms;
+            }
+            return value;
         }
 
         /// <summary>
