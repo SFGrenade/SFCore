@@ -304,8 +304,9 @@ namespace SFCore
             {
                 ccPrefabNum = ((i - 1) % 20) + 21;
                 //if (backboardsGo.Find(ccPrefabNum.ToString()) == null)
-                if (collectedCharmsGo.Find(ccPrefabNum.ToString()) != null)
+                if (collectedCharmsGo.Find(ccPrefabNum.ToString()) != null && collectedCharmsGo.Find(i.ToString()) == null)
                 {
+                    // Create new charm gameobject
                     ccT1 = collectedCharmsGo.Find(ccPrefabNum.ToString());
                     bool tmp = ccT1.activeSelf;
                     ccT1.gameObject.SetActive(true);
@@ -313,6 +314,23 @@ namespace SFCore
                     ccPrefab.SetActive(false);
                     AddToCharmFadeGroup(ccPrefab.Find("Sprite"), collectedCharmsGo.transform.parent.gameObject);
                     ccT1.gameObject.SetActive(tmp);
+                    ccPrefab.name = i.ToString();
+
+                    charmShowFsm = ccPrefab.LocateMyFSM("charm_show_if_collected");
+                    var ccFsmVars = charmShowFsm.FsmVariables;
+                    ccFsmVars.GetFsmInt("ID").Value = i;
+                    ccFsmVars.GetFsmString("Name").Value = $"Charm {i}";
+                    ccFsmVars.GetFsmString("PD Bool Name").Value = "gotCharm_" + i;
+                    ccFsmVars.GetFsmGameObject("Charm Sprite").Value = ccPrefab.Find("Sprite");
+                    ccFsmVars.GetFsmGameObject("Glow").Value = ccPrefab.Find("Glow");
+                    ccPrefab.SetActive(true);
+                }
+                else if (collectedCharmsGo.Find(i.ToString()) != null)
+                {
+                    // Use already existing one and just change stuff
+                    ccPrefab = collectedCharmsGo.Find(i.ToString());
+                    ccPrefab.SetActive(false);
+                    AddToCharmFadeGroup(ccPrefab.Find("Sprite"), collectedCharmsGo.transform.parent.gameObject);
                     ccPrefab.name = i.ToString();
 
                     charmShowFsm = ccPrefab.LocateMyFSM("charm_show_if_collected");
