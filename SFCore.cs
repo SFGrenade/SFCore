@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Modding;
+using SFCore.Generics;
 using SFCore.Utils;
 
 namespace SFCore
@@ -8,8 +9,15 @@ namespace SFCore
     /// <summary>
     ///     Used for static initialization.
     /// </summary>
-    public class SFCoreMod : Mod
+    public class SFCoreMod : GlobalSettingsMod<SFCoreSettings>
     {
+        internal static SFCoreMod Instance = null;
+
+        internal SFCoreSettings GetGlobalSettings
+        {
+            get => GlobalSettings;
+        }
+
         static SFCoreMod()
         {
             // to load all components
@@ -25,7 +33,9 @@ namespace SFCore
         ///     Constructor.
         /// </summary>
         public SFCoreMod() : base("SFCore")
-        {}
+        {
+            Instance = this;
+        }
 
         /// <summary>
         ///     Displays the version.
@@ -38,5 +48,10 @@ namespace SFCore
         public override void Initialize()
         {
         }
+    }
+
+    public class SFCoreSettings
+    {
+        public int MaxCustomCharms = 0;
     }
 }
