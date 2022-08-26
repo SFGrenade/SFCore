@@ -57,13 +57,16 @@ namespace SFCore
                 {
                     if (PlayerData.instance.GetBool($"gotCharm_{charmId}"))
                     {
+                        // only when charm gotten, charm in equipped list
+                        // could add a check here to only do so for charmid 41+, so only custom charms, but meh
                         actualCharms.Add(charmId);
                     }
                 }
                 for (int charmId = 41; charmId <= 40 + SFCoreMod.Instance.GetGlobalSettings.MaxCustomCharms; charmId++)
                 {
-                    if (PlayerData.instance.GetBool($"gotCharm_{charmId}"))
+                    if (!PlayerData.instance.GetBool($"gotCharm_{charmId}"))
                     {
+                        // when charm not gotten, charm not equipped, simple as that
                         PlayerData.instance.SetBool($"equippedCharm_{charmId}", false);
                     }
                 }
