@@ -11,13 +11,6 @@ namespace SFCore
     /// </summary>
     public class SFCoreMod : GlobalSettingsMod<SFCoreSettings>
     {
-        internal static SFCoreMod Instance = null;
-
-        internal SFCoreSettings GetGlobalSettings
-        {
-            get => GlobalSettings;
-        }
-
         static SFCoreMod()
         {
             // to load all components
@@ -32,10 +25,7 @@ namespace SFCore
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public SFCoreMod() : base("SFCore")
-        {
-            Instance = this;
-        }
+        public SFCoreMod() : base("SFCore") {}
 
         /// <summary>
         ///     Displays the version.

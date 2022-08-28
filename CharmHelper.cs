@@ -62,7 +62,7 @@ namespace SFCore
                         actualCharms.Add(charmId);
                     }
                 }
-                for (int charmId = 41; charmId <= 40 + SFCoreMod.Instance.GetGlobalSettings.MaxCustomCharms; charmId++)
+                for (int charmId = 41; charmId <= 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
                 {
                     if (!PlayerData.instance.GetBool($"gotCharm_{charmId}"))
                     {
@@ -100,7 +100,7 @@ namespace SFCore
         /// </summary>
         private static void OnGameManagerStart(On.GameManager.orig_Start orig, GameManager self)
         {
-            SFCoreMod.Instance.GetGlobalSettings.MaxCustomCharms = Mathf.Max(SFCoreMod.Instance.GetGlobalSettings.MaxCustomCharms, CustomSprites.Count);
+            SFCoreMod.GlobalSettings.MaxCustomCharms = Mathf.Max(SFCoreMod.GlobalSettings.MaxCustomCharms, CustomSprites.Count);
             orig(self);
 
             ClearModdedCharms();
