@@ -44,39 +44,34 @@ namespace SFCore
             BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Detour(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
             BuildEquippedCharms_Start_hook.Apply();
             On.GameManager.Start += OnGameManagerStart;
-            ModHooks.GetPlayerVariableHook += ModHooksOnGetPlayerVariableHook;
+            ModHooks.AfterSavegameLoadHook += ModHooksOnAfterSavegameLoadHook;
+            ModHooks.BeforeSavegameSaveHook += ModHooksOnBeforeSavegameSaveHook;
         }
 
-        private static object ModHooksOnGetPlayerVariableHook(Type type, string name, object value)
+        private static void ModHooksOnBeforeSavegameSaveHook(SaveGameData obj)
         {
-            if (type == typeof(List<int>) && name == "equippedCharms")
+            for (int i = obj.playerData.equippedCharms.Count - 1; i >= 0; i--)
             {
-                List<int> charms = value as List<int>;
-                List<int> actualCharms = new();
-                foreach (var charmId in charms)
+                if (obj.playerData.equippedCharms[i] > 40)
                 {
-                    if (charmId <= 40)
-                    {
-                        actualCharms.Add(charmId);
-                        continue;
-                    }
-                    if (PlayerData.instance.GetBool($"gotCharm_{charmId}"))
-                    {
-                        // only when charm gotten, charm in equipped list
-                        actualCharms.Add(charmId);
-                    }
+                    // remove all custom charms (charmid > 40) from being saved
+                    obj.playerData.equippedCharms.RemoveAt(i);
                 }
-                for (int charmId = 41; charmId <= 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
-                {
-                    if (!PlayerData.instance.GetBool($"gotCharm_{charmId}"))
-                    {
-                        // when charm not gotten, charm not equipped, simple as that
-                        PlayerData.instance.SetBool($"equippedCharm_{charmId}", false);
-                    }
-                }
-                return actualCharms;
             }
-            return value;
+        }
+
+        private static void ModHooksOnAfterSavegameLoadHook(SaveGameData obj)
+        {
+            for (int charmId = 41; charmId < 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
+            {
+                if (!obj.playerData.equippedCharms.Contains(charmId) &&
+                    PlayerData.instance.GetBool($"gotCharm_{charmId}") &&
+                    PlayerData.instance.GetBool($"equippedCharm_{charmId}"))
+                {
+                    // add custom charms after loading if they are acquired and equipped
+                    obj.playerData.equippedCharms.Add(charmId);
+                }
+            }
         }
 
         /// <summary>
