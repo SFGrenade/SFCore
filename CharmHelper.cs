@@ -46,6 +46,21 @@ namespace SFCore
             On.GameManager.Start += OnGameManagerStart;
             ModHooks.AfterSavegameLoadHook += ModHooksOnAfterSavegameLoadHook;
             ModHooks.BeforeSavegameSaveHook += ModHooksOnBeforeSavegameSaveHook;
+            ModHooks.SavegameSaveHook += ModHooksOnSavegameSaveHook;
+        }
+
+        private static void ModHooksOnSavegameSaveHook(int obj)
+        {
+            for (int charmId = 41; charmId < 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
+            {
+                if (!PlayerData.instance.equippedCharms.Contains(charmId) &&
+                    PlayerData.instance.GetBool($"gotCharm_{charmId}") &&
+                    PlayerData.instance.GetBool($"equippedCharm_{charmId}"))
+                {
+                    // add custom charms after loading if they are acquired and equipped
+                    PlayerData.instance.equippedCharms.Add(charmId);
+                }
+            }
         }
 
         private static void ModHooksOnBeforeSavegameSaveHook(SaveGameData obj)
