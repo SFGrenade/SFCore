@@ -42,6 +42,9 @@ namespace SFCore
 
     public class SFCoreSettings
     {
+        // CharmHelper settings
         public int MaxCustomCharms = 0;
+        // MenuStyleHelper settings
+        public string SelectedMenuTheme = "UI_MENU_STYLE_CLASSIC";
     }
 }

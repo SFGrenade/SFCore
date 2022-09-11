@@ -4,6 +4,7 @@ using SFCore.Utils;
 using UnityEngine;
 using Logger = Modding.Logger;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.Audio;
 using UObject = UnityEngine.Object;
 
@@ -17,8 +18,9 @@ namespace SFCore
     /// </summary>
     public static class MenuStyleHelper
     {
-        private static List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> _queue = new List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>();
-        private static List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>> _callbackQueue = new List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>>();
+        private static List<(string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)> _queue = new ();
+        private static List<Func<MenuStyles, (string, GameObject, int, string, string[], MenuStyles.MenuStyle.CameraCurves, AudioMixerSnapshot)>> _callbackQueue = new ();
+        private static bool _menuStylesStarted = false;
 
         /// <summary>
         ///     Hook to add custom run audio.
@@ -56,11 +58,28 @@ namespace SFCore
             On.MenuStyles.SetStyle += OnMenuStylesSetStyle;
             On.MenuStyles.Start += (orig, self) =>
             {
+                _menuStylesStarted = false;
                 orig(self);
                 if (self.styles.Length > 10)
                 {
-                    self.SetStyle(self.styles.Length - 1, false, false);
+                    // custom styles installed
+                    int selectedStyleIndex = 0;
+                    for (int i = 0; i < self.styles.Length; i++)
+                    {
+                        if (self.styles[i].displayName == SFCoreMod.GlobalSettings.SelectedMenuTheme)
+                        {
+                            selectedStyleIndex = i;
+                        }
+                    }
+                    self.SetStyle(selectedStyleIndex, false, false);
                 }
+                _menuStylesStarted = true;
+            };
+            On.MenuStyles.SetStyle += (orig, self, index, fade, save) =>
+            {
+                orig(self, index, fade, save);
+                if (!_menuStylesStarted) return;
+                SFCoreMod.GlobalSettings.SelectedMenuTheme = self.styles[index].displayName;
             };
         }
         /// <summary>
