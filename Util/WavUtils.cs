@@ -34,7 +34,7 @@ public class WavUtils
         }
 
         /// <summary>
-        ///     Load PCM format *.wav audio file (using Unity's Application data path) and convert to AudioClip.
+        ///     Load PCM format *.wav audio file and convert to AudioClip.
         /// </summary>
         /// <returns>The AudioClip.</returns>
         /// <param name="filePath">Local file path to .wav file</param>
@@ -44,6 +44,12 @@ public class WavUtils
             return ToAudioClip(fileBytes, Path.GetFileNameWithoutExtension(filePath));
         }
 
+        /// <summary>
+        ///     Convert PCM format *.wav audio bytes to AudioClip.
+        /// </summary>
+        /// <returns>The AudioClip.</returns>
+        /// <param name="fileBytes">The bytes of the wav file</param>
+        /// <param name="name">Name of the wav file, for logging reasons</param>
         public static AudioClip ToAudioClip(byte[] fileBytes, string name = "wav")
         {
             string RiffChunkID = Encoding.ASCII.GetString(new byte[] {0x52, 0x49, 0x46, 0x46}, 0, 4);
