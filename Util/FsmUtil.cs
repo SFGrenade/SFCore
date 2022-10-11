@@ -212,6 +212,7 @@ namespace SFCore.Utils
             origActions.CopyTo(actions, 0);
             actions[origActions.Length] = action;
             state.Actions = actions;
+            action.Init(state);
         }
 
         /// <summary>
@@ -265,6 +266,7 @@ namespace SFCore.Utils
             }
 
             state.Actions = actions;
+            action.Init(state);
         }
 
         /// <summary>
