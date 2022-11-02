@@ -7,8 +7,8 @@
     <Product>SFCore</Product>
     <Description>A Hollow Knight Mod Library</Description>
     <Copyright>Copyright © SFGrenade 2019-2021</Copyright>
-    <AssemblyVersion>1.5.4.4</AssemblyVersion>
-    <FileVersion>1.5.4.4</FileVersion>
+    <AssemblyVersion>1.5.4.5</AssemblyVersion>
+    <FileVersion>1.5.4.5</FileVersion>
     <OutputPath>bin/$(Configuration)/</OutputPath>
     <LangVersion>latest</LangVersion>
     <HollowKnightRefs Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/Games/gog/hollow-knight/game/Hollow Knight_Data/Managed/</HollowKnightRefs>

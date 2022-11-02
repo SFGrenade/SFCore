@@ -177,7 +177,7 @@ namespace SFCore.Utils
         /// <inheritdoc cref="AddGlobalTransition(PlayMakerFSM, string, string)"/>
         public static FsmEvent AddFsmGlobalTransitions(this PlayMakerFSM fsm, string globalEventName, string toState)
         {
-            var ret = new FsmEvent(globalEventName) { IsGlobal = true };
+            var ret = FsmEvent.GetFsmEvent(globalEventName);
             FsmTransition[] origTransitions = fsm.FsmGlobalTransitions;
             FsmTransition[] transitions = new FsmTransition[origTransitions.Length + 1];
             origTransitions.CopyTo(transitions, 0);
