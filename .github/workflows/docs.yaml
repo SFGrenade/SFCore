@@ -11,16 +11,16 @@ jobs:
     
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3
         with:
           ref: master
       - name: Checkout docs
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3
         with:
           ref: docs
           path: docs
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3.0.3
+        uses: actions/setup-dotnet@v3
       - name: Setup ms-build, mono
         run: sudo apt-get install -y nuget mono-devel mono-xbuild
       - name: Download DocFX
@@ -33,7 +33,7 @@ jobs:
         run: |
           mono docfx/docfx.exe 
       - name: Publish
-        uses: peaceiris/actions-gh-pages@v3.9.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_site
