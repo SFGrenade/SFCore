@@ -51,42 +51,46 @@ namespace SFCore
 
         private static void ModHooksOnSavegameSaveHook(int obj)
         {
-            for (int charmId = 41; charmId < 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
-            {
-                if (!PlayerData.instance.equippedCharms.Contains(charmId) &&
-                    PlayerData.instance.GetBool($"gotCharm_{charmId}") &&
-                    PlayerData.instance.GetBool($"equippedCharm_{charmId}"))
-                {
-                    // add custom charms after loading if they are acquired and equipped
-                    PlayerData.instance.equippedCharms.Add(charmId);
-                }
-            }
+            AddCustomCharmsToPlayerData(PlayerData.instance);
         }
 
         private static void ModHooksOnBeforeSavegameSaveHook(SaveGameData obj)
         {
-            for (int i = obj.playerData.equippedCharms.Count - 1; i >= 0; i--)
-            {
-                if (obj.playerData.equippedCharms[i] > 40)
-                {
-                    // remove all custom charms (charmid > 40) from being saved
-                    obj.playerData.equippedCharms.RemoveAt(i);
-                }
-            }
+            RemoveCustomCharmsFromPlayerData(obj.playerData);
         }
 
         private static void ModHooksOnAfterSavegameLoadHook(SaveGameData obj)
         {
-            for (int charmId = 41; charmId < 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
+            AddCustomCharmsToPlayerData(obj.playerData);
+        }
+
+        private static void RemoveCustomCharmsFromPlayerData(PlayerData pd)
+        {
+            for (int i = pd.equippedCharms.Count - 1; i >= 0; i--)
             {
-                if (!obj.playerData.equippedCharms.Contains(charmId) &&
+                if (pd.equippedCharms[i] > 40)
+                {
+                    // remove all custom charms (charmid > 40) from being saved
+                    SFCoreMod.instance.SaveSettings.EquippedCustomCharms.Add(pd.equippedCharms[i]);
+                    pd.equippedCharms.RemoveAt(i);
+                }
+            }
+        }
+
+        private static void AddCustomCharmsToPlayerData(PlayerData pd)
+        {
+            for (int charmId = 41; charmId <= 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
+            {
+                if (!pd.equippedCharms.Contains(charmId) &&
+                    SFCoreMod.instance.SaveSettings.EquippedCustomCharms.Contains(charmId) &&
                     PlayerData.instance.GetBool($"gotCharm_{charmId}") &&
                     PlayerData.instance.GetBool($"equippedCharm_{charmId}"))
                 {
                     // add custom charms after loading if they are acquired and equipped
-                    obj.playerData.equippedCharms.Add(charmId);
+                    pd.equippedCharms.Add(charmId);
                 }
             }
+            SFCoreMod.instance.SaveSettings.EquippedCustomCharms.Clear();
         }
 
         /// <summary>
@@ -106,6 +110,7 @@ namespace SFCore
                 CustomSprites.Add(spr);
                 ret.Add(40 + CustomSprites.Count);
             }
+            SFCoreMod.GlobalSettings.MaxCustomCharms = Mathf.Max(SFCoreMod.GlobalSettings.MaxCustomCharms, CustomSprites.Count);
             return ret;
         }
 
@@ -128,12 +133,16 @@ namespace SFCore
             #region CharmIconList Start
 
             var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
+            if (invGo == null) return;
             var charmsGo = invGo.Find("Charms");
+            if (charmsGo == null) return;
             var charmsFsm = charmsGo.LocateMyFSM("UI Charms");
+            if (charmsFsm == null) return;
 
             var tmpCollectedCharmsGo = charmsGo.Find("Collected Charms");
 
             CharmIconList cil = CharmIconList.Instance;
+            if (cil == null) return;
             List<Sprite> tmpSpriteList = new List<Sprite>(cil.spriteList);
             tmpSpriteList.RemoveRange(41, tmpSpriteList.Count - 41);
             cil.spriteList = tmpSpriteList.ToArray();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Modding;
 using SFCore.Generics;
@@ -9,8 +10,9 @@ namespace SFCore
     /// <summary>
     ///     Used for static initialization.
     /// </summary>
-    public class SFCoreMod : GlobalSettingsMod<SFCoreSettings>
+    public class SFCoreMod : FullSettingsMod<SFCoreSaveSettings, SFCoreGlobalSettings>
     {
+        internal static SFCoreMod instance = null;
         static SFCoreMod()
         {
             // to load all components
@@ -25,7 +27,10 @@ namespace SFCore
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public SFCoreMod() : base("SFCore") {}
+        public SFCoreMod() : base("SFCore")
+        {
+            instance = this;
+        }
 
         /// <summary>
         ///     Displays the version.
@@ -40,11 +45,29 @@ namespace SFCore
         }
     }
 
-    public class SFCoreSettings
+    /// <summary>
+    ///     Global settings for SFCore
+    /// </summary>
+    public class SFCoreGlobalSettings
     {
-        // CharmHelper settings
+        /// <summary>
+        ///     Important to clear and reapply custom charms.
+        /// </summary>
         public int MaxCustomCharms = 0;
-        // MenuStyleHelper settings
+        /// <summary>
+        ///     Important to reapply the wanted menu theme.
+        /// </summary>
         public string SelectedMenuTheme = "UI_MENU_STYLE_CLASSIC";
+    }
+
+    /// <summary>
+    ///     Save specific settings for SFCore
+    /// </summary>
+    public class SFCoreSaveSettings
+    {
+        /// <summary>
+        ///     Important to clear and reapply custom charms.
+        /// </summary>
+        public List<int> EquippedCustomCharms = new ();
     }
 }
