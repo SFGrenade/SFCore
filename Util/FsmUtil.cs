@@ -445,6 +445,33 @@ namespace SFCore.Utils
         }
 
         /// <summary>
+        ///     Removes a global transition in a PlayMakerFSM.
+        /// </summary>
+        /// <param name="fsm">The fsm</param>
+        /// <param name="eventName">The event of the global transition</param>
+        [UsedImplicitly]
+        public static void RemoveGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.RemoveFsmGlobalTransition(eventName);
+        /// <inheritdoc cref="RemoveGlobalTransition(PlayMakerFSM, string)"/>
+        [UsedImplicitly]
+        public static void RemoveFsmGlobalTransition(this PlayMakerFSM fsm, string eventName)
+        {
+            FsmTransition[] origTransitions = fsm.FsmGlobalTransitions;
+            FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - 1];
+            int i;
+            int foundInt = 0;
+            for (i = 0; i < newTransitions.Length; i++)
+            {
+                if (origTransitions[i].EventName == eventName)
+                {
+                    foundInt = 1;
+                }
+                newTransitions[i] = origTransitions[i + foundInt];
+            }
+
+            fsm.Fsm.GlobalTransitions = newTransitions;
+        }
+
+        /// <summary>
         ///     Removes an action in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
