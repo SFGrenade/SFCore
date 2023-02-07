@@ -26,12 +26,12 @@ jobs:
       - name: Download DocFX
         working-directory: docs
         run: |
-          wget https://github.com/dotnet/docfx/releases/latest/download/docfx.zip -O docfx.zip
+          wget https://github.com/dotnet/docfx/releases/download/v2.61.0/docfx-linux-x64-v2.61.0.zip -O docfx.zip
           unzip docfx.zip -d docfx
       - name: Build docs
         working-directory: docs
         run: |
-          mono docfx/docfx.exe 
+          docfx/docfx
       - name: Publish
         uses: peaceiris/actions-gh-pages@v3
         with:
