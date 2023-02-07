@@ -28,9 +28,9 @@ namespace SFCore
         private static readonly List<Sprite> CustomSprites = new List<Sprite>();
 
         /// <summary>
-        ///     A detour for a private method that has no body.
+        ///     A hook for a private method that has no body.
         /// </summary>
-        private static MonoMod.RuntimeDetour.Detour BuildEquippedCharms_Start_hook;
+        private static MonoMod.RuntimeDetour.Hook BuildEquippedCharms_Start_hook;
 
         /// <summary>
         ///     Constructs the mod and hooks important functions.
@@ -41,7 +41,7 @@ namespace SFCore
             // i hate this, can't have shit in detroid
             //On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
             // workaround, since above isn't working
-            BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Detour(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
+            BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
             BuildEquippedCharms_Start_hook.Apply();
             On.GameManager.Start += OnGameManagerStart;
             ModHooks.AfterSavegameLoadHook += ModHooksOnAfterSavegameLoadHook;
@@ -508,11 +508,13 @@ namespace SFCore
         /// <summary>
         ///     On hook to initialize charms and equipped charms.
         /// </summary>
-        private static void OnBuildEquippedCharmsStart_single()
+        private static void OnBuildEquippedCharmsStart_single(Action<BuildEquippedCharms> orig, BuildEquippedCharms self)
         {
             Init();
 
-            InitBuildEquippedCharms(GameObject.FindObjectOfType<BuildEquippedCharms>(true));
+            InitBuildEquippedCharms(self);
+
+            orig(self);
         }
 
         /// <summary>
