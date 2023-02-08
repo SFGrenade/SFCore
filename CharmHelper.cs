@@ -47,6 +47,16 @@ namespace SFCore
             ModHooks.AfterSavegameLoadHook += ModHooksOnAfterSavegameLoadHook;
             ModHooks.BeforeSavegameSaveHook += ModHooksOnBeforeSavegameSaveHook;
             ModHooks.SavegameSaveHook += ModHooksOnSavegameSaveHook;
+
+            On.BuildEquippedCharms.BuildCharmList += (orig, self) =>
+            {
+                // apparently BuildEquippedCharms.BuildCharmList() is called before BuildEquippedCharms.Start()
+                if (self.gameObjectList.Count <= 40)
+                {
+                    InitBuildEquippedCharms(self);
+                }
+                orig(self);
+            };
         }
 
         private static void ModHooksOnSavegameSaveHook(int obj)
@@ -512,23 +522,11 @@ namespace SFCore
         {
             Init();
 
-            InitBuildEquippedCharms(self);
-
-            orig(self);
-        }
-
-        /// <summary>
-        ///     On hook to initialize charms and equipped charms.
-        /// </summary>
-        private static void OnBuildEquippedCharmsStart(On.BuildEquippedCharms.orig_Start orig, BuildEquippedCharms self)
-        {
-            Init();
-
             orig(self);
 
             InitBuildEquippedCharms(self);
         }
-        
+
         /// <summary>
         ///     Adds charm to fade group.
         /// </summary>
