@@ -33,9 +33,9 @@ namespace SFCore
         private static MonoMod.RuntimeDetour.Hook BuildEquippedCharms_Start_hook;
 
         /// <summary>
-        ///     A hook for a private method that has no body.
+        ///     A hook for a private method.
         /// </summary>
-        private static MonoMod.RuntimeDetour.Hook CharmVibrations_Start_hook;
+        private static MonoMod.RuntimeDetour.Hook GameCameras_Start_hook;
 
         /// <summary>
         ///     Constructs the mod and hooks important functions.
@@ -53,8 +53,12 @@ namespace SFCore
             ModHooks.BeforeSavegameSaveHook += ModHooksOnBeforeSavegameSaveHook;
             ModHooks.SavegameSaveHook += ModHooksOnSavegameSaveHook;
 
-            //CharmVibrations_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(CharmVibrations).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(CharmVibrationsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
-            //CharmVibrations_Start_hook.Apply();
+            GameCameras_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(GameCameras).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(GameCamerasStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
+            GameCameras_Start_hook.Apply();
+            if (GameCameras.instance != null)
+            {
+                GameCamerasStart_single(cameras => { }, GameCameras.instance);
+            }
 
             On.BuildEquippedCharms.BuildCharmList += (orig, self) =>
             {
@@ -541,12 +545,12 @@ namespace SFCore
         /// <summary>
         ///     On hook to add more detail cost notches.
         /// </summary>
-        private static void CharmVibrationsStart_single(Action<CharmVibrations> orig, CharmVibrations self)
+        private static void GameCamerasStart_single(Action<GameCameras> orig, GameCameras self)
         {
             orig(self);
-            return; // todo until this is done
-            GameObject charmDetailCost = self.gameObject.Find("Details").Find("Cost");
+            GameObject charmDetailCost = self.gameObject.Find("HudCamera").Find("Inventory").Find("Charms").Find("Details").Find("Cost");
             PlayMakerFSM charmDetailCostFsm = charmDetailCost.LocateMyFSM("Charm Details Cost");
+            charmDetailCostFsm.Preprocess();
             for (int i = 7; i <= 20; i++)
             {
                 string prefabCostName = $"Cost {i - 1}";
@@ -554,51 +558,96 @@ namespace SFCore
                 string newCostVariableName = $"C{i}";
                 string newCostPositionVariableName = $"{i} X";
 
-                if (charmDetailCost.Find(newCostName) == null)
+                GameObject charmDetailCostCopied = GameObject.Instantiate(charmDetailCost.Find(prefabCostName));
+                charmDetailCostCopied.name = newCostName;
+                charmDetailCostCopied.transform.localPosition = new Vector3(11.5f + (i * 0.75f), -3.54f, -5.63f);
+                charmDetailCostCopied.transform.SetParent(charmDetailCost.transform, false);
+
+                FsmGameObject newChildFsmVariable = charmDetailCostFsm.AddFsmGameObjectVariable(newCostVariableName);
+                FindChild initFindChildAction = new FindChild();
+                initFindChildAction.gameObject = charmDetailCostFsm.GetAction<FindChild>("Init", 0).gameObject;
+                initFindChildAction.childName = newCostName;
+                initFindChildAction.storeResult = newChildFsmVariable;
+                charmDetailCostFsm.InsertAction("Init", initFindChildAction, i - 1);
+
+                FsmFloat newPositionFsmVariable = charmDetailCostFsm.AddFsmFloatVariable(newCostPositionVariableName);
+                newPositionFsmVariable.Value = (0.82f+1.02f)-((0.82f+1.02f)*((i-1f)/5f))-1.02f;
+
+                IntSwitch checkIntSwitch = charmDetailCostFsm.GetAction<IntSwitch>("Check", 1);
+                List<FsmInt> checkIntSwitchCompareToNewList = new List<FsmInt>(checkIntSwitch.compareTo);
+                checkIntSwitchCompareToNewList.Add(i);
+                checkIntSwitch.compareTo = checkIntSwitchCompareToNewList.ToArray();
+                List<FsmEvent> checkIntSwitchSendEventNewList = new List<FsmEvent>(checkIntSwitch.sendEvent);
+                checkIntSwitchSendEventNewList.Add(FsmEvent.GetFsmEvent($"{i}"));
+                checkIntSwitch.sendEvent = checkIntSwitchSendEventNewList.ToArray();
+
+                charmDetailCostFsm.CopyState(prefabCostName, newCostName);
+                charmDetailCostFsm.AddTransition("Check", $"{i}", newCostName);
+                charmDetailCostFsm.GetAction<SetPosition>(newCostName, 0).x = newPositionFsmVariable;
+
+                FsmFloat absentFloatVariable = charmDetailCostFsm.FindFsmFloatVariable("Absent Y");
+                FsmFloat presentFloatVariable = charmDetailCostFsm.FindFsmFloatVariable("Present Y");
+                SetPosition costNewSetPositionPresent = new SetPosition
                 {
-                    GameObject charmDetailCostCopied = GameObject.Instantiate(charmDetailCost.Find(prefabCostName), charmDetailCost.transform, true);
-                    charmDetailCostCopied.name = newCostName;
-                    charmDetailCostCopied.transform.localPosition = new Vector3(11.5f + (i * 0.75f), -3.54f, -5.63f);
-                }
-
-                if (charmDetailCostFsm.FindFsmGameObjectVariable(newCostVariableName) == null)
+                    gameObject = new FsmOwnerDefault()
+                    {
+                        OwnerOption = OwnerDefaultOption.SpecifyGameObject,
+                        GameObject = newChildFsmVariable
+                    },
+                    vector = new FsmVector3()
+                    {
+                        Name = "",
+                        UseVariable = true
+                    },
+                    x = new FsmFloat()
+                    {
+                        Name = "",
+                        UseVariable = true
+                    },
+                    y = presentFloatVariable,
+                    z = new FsmFloat()
+                    {
+                        Name = "",
+                        UseVariable = true
+                    },
+                    space = Space.Self,
+                    everyFrame = false,
+                    lateUpdate = false
+                };
+                SetPosition costNewSetPositionAbsent = new SetPosition
                 {
-                    FsmGameObject newChildFsmVariable = charmDetailCostFsm.AddFsmGameObjectVariable(newCostVariableName);
-                    FindChild initFindChildAction = new FindChild();
-                    initFindChildAction.gameObject = charmDetailCostFsm.GetAction<FindChild>("Init", 0).gameObject;
-                    initFindChildAction.childName = newCostName;
-                    initFindChildAction.storeResult = newChildFsmVariable;
-                    charmDetailCostFsm.InsertAction("Init", initFindChildAction, i - 1);
-                }
+                    gameObject = new FsmOwnerDefault()
+                    {
+                        OwnerOption = OwnerDefaultOption.SpecifyGameObject,
+                        GameObject = newChildFsmVariable
+                    },
+                    vector = new FsmVector3()
+                    {
+                        Name = "",
+                        UseVariable = true
+                    },
+                    x = new FsmFloat()
+                    {
+                        Name = "",
+                        UseVariable = true
+                    },
+                    y = absentFloatVariable,
+                    z = new FsmFloat()
+                    {
+                        Name = "",
+                        UseVariable = true
+                    },
+                    space = Space.Self,
+                    everyFrame = false,
+                    lateUpdate = false
+                };
 
-                if (charmDetailCostFsm.AddFsmFloatVariable(newCostPositionVariableName) == null)
+                for (int j = 0; j < i; j++)
                 {
-                    FsmFloat newPositionFsmVariable = charmDetailCostFsm.AddFsmFloatVariable(newCostPositionVariableName);
-                    newPositionFsmVariable.Value = (0.82f+1.02f)-((0.82f+1.02f)*((i-1f)/5f))-1.02f;
+                    string tmpStateName = $"Cost {j}";
+                    charmDetailCostFsm.AddAction(tmpStateName, costNewSetPositionAbsent);
                 }
-
-                if (charmDetailCostFsm.GetState(newCostName) == null)
-                {
-                    FsmFloat newPositionFsmVariable = charmDetailCostFsm.FindFsmFloatVariable(newCostPositionVariableName);
-
-                    IntSwitch checkIntSwitch = charmDetailCostFsm.GetAction<IntSwitch>("Check", 1);
-                    List<FsmInt> checkIntSwitchCompareToNewList = new List<FsmInt>(checkIntSwitch.compareTo);
-                    checkIntSwitchCompareToNewList.Add(i);
-                    checkIntSwitch.compareTo = checkIntSwitchCompareToNewList.ToArray();
-                    List<FsmEvent> checkIntSwitchSendEventNewList = new List<FsmEvent>(checkIntSwitch.sendEvent);
-                    checkIntSwitchSendEventNewList.Add(FsmEvent.GetFsmEvent($"{i}"));
-                    checkIntSwitch.sendEvent = checkIntSwitchSendEventNewList.ToArray();
-
-                    charmDetailCostFsm.CopyState(prefabCostName, newCostName);
-                    charmDetailCostFsm.AddTransition("Check", $"{i}", newCostName);
-                    charmDetailCostFsm.GetAction<SetPosition>(newCostName, 0).x = newPositionFsmVariable;
-
-                    FsmFloat absentFloatVariable = charmDetailCostFsm.FindFsmFloatVariable("Absent Y");
-                    FsmFloat presentFloatVariable = charmDetailCostFsm.FindFsmFloatVariable("Present Y");
-                    SetPosition costNewSetPositionAbsent = new SetPosition();
-                    SetPosition costNewSetPositionPresent = new SetPosition();
-                    // todo missing
-                }
+                charmDetailCostFsm.AddAction(newCostName, costNewSetPositionPresent);
             }
         }
 
