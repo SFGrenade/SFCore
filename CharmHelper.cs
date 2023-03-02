@@ -53,8 +53,8 @@ namespace SFCore
             ModHooks.BeforeSavegameSaveHook += ModHooksOnBeforeSavegameSaveHook;
             ModHooks.SavegameSaveHook += ModHooksOnSavegameSaveHook;
 
-            CharmVibrations_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(CharmVibrations).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(CharmVibrationsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
-            CharmVibrations_Start_hook.Apply();
+            //CharmVibrations_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(CharmVibrations).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(CharmVibrationsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
+            //CharmVibrations_Start_hook.Apply();
 
             On.BuildEquippedCharms.BuildCharmList += (orig, self) =>
             {
@@ -162,8 +162,11 @@ namespace SFCore
             CharmIconList cil = CharmIconList.Instance;
             if (cil == null) return;
             List<Sprite> tmpSpriteList = new List<Sprite>(cil.spriteList);
-            tmpSpriteList.RemoveRange(41, tmpSpriteList.Count - 41);
-            cil.spriteList = tmpSpriteList.ToArray();
+            if (tmpSpriteList.Count > 41)
+            {
+                tmpSpriteList.RemoveRange(41, tmpSpriteList.Count - 41);
+                cil.spriteList = tmpSpriteList.ToArray();
+            }
             
             int rows = 4;
 
@@ -340,12 +343,12 @@ namespace SFCore
                 bbPrefabNum = ((i - 1) % 20) + 21;
                 if (backboardsGo.Find($"BB {i}") == null)
                 {
-                    bbT1 = backboardsGo.Find($"BB {bbPrefabNum}");
-                    bbT2 = backboardsGo.Find($"BB {bbPrefabNum - 20}");
+                    bbT1 = backboardsGo.Find($"BB {bbPrefabNum}"); // "BB 21" - "BB 40"
+                    bbT2 = backboardsGo.Find($"BB {bbPrefabNum - 20}"); // "BB 1" - "BB 20"
                     bbPrefab = Object.Instantiate(bbT1, backboardsGo.transform, true);
                     AddToCharmFadeGroup(bbPrefab, backboardsGo.transform.parent.gameObject);
                     AddToCharmFadeGroup(bbPrefab.Find("New Item Orb"), backboardsGo.transform.parent.gameObject);
-                    bbPrefab.transform.localPosition = bbT1.transform.localPosition + ((bbT1.transform.localPosition - bbT2.transform.localPosition) * (((i / 10) - (bbPrefabNum / 10)) / 2));
+                    bbPrefab.transform.localPosition = bbT1.transform.localPosition + ((bbT1.transform.localPosition - bbT2.transform.localPosition) * (((i / 10f) - (bbPrefabNum / 10f)) / 2f));
                     bbPrefab.name = $"BB {i}";
                     bbPrefab.SetActive(true);
 
@@ -355,7 +358,7 @@ namespace SFCore
                     if (i > (40 + CustomSprites.Count))
                     {
                         icb.SetAttr("blanked", false);
-                        icb.gotCharmString = "openingCreditsPlayed";
+                        icb.gotCharmString = "";
                     }
                     else
                     {
@@ -541,6 +544,7 @@ namespace SFCore
         private static void CharmVibrationsStart_single(Action<CharmVibrations> orig, CharmVibrations self)
         {
             orig(self);
+            return; // todo until this is done
             GameObject charmDetailCost = self.gameObject.Find("Details").Find("Cost");
             PlayMakerFSM charmDetailCostFsm = charmDetailCost.LocateMyFSM("Charm Details Cost");
             for (int i = 7; i <= 20; i++)
