@@ -735,16 +735,16 @@ namespace SFCore
                 descConvoBoth = descConvo4
             });
         }
-
-        private static void Log(string message)
-        {
-            Logger.LogDebug($"[SFCore]:[ItemHelper] - {message}");
-            Debug.Log($"[SFCore]:[ItemHelper] - {message}");
-        }
-
-        private static void Log(object message)
-        {
-            Log($"{message}");
-        }
+        
+        private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[ItemHelper]");
+        private static void LogFine(object message) => LogFine($"{message}");
+        private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[ItemHelper]");
+        private static void LogDebug(object message) => LogDebug($"{message}");
+        private static void Log(string message) => InternalLogger.Log(message, "[SFCore]:[ItemHelper]");
+        private static void Log(object message) => Log($"{message}");
+        private static void LogWarn(string message) => InternalLogger.LogWarn(message, "[SFCore]:[ItemHelper]");
+        private static void LogWarn(object message) => LogWarn($"{message}");
+        private static void LogError(string message) => InternalLogger.LogError(message, "[SFCore]:[ItemHelper]");
+        private static void LogError(object message) => LogError($"{message}");
     }
 }

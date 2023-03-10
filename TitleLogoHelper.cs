@@ -92,15 +92,16 @@ namespace SFCore
 
             orig(self, index);
         }
-
-        private static void Log(string message)
-        {
-            Logger.LogDebug($"[SFCore]:[TitleLogoHelper] - {message}");
-            Debug.Log($"[SFCore]:[TitleLogoHelper] - {message}");
-        }
-        private static void Log(object message)
-        {
-            Log($"{message}");
-        }
+        
+        private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[TitleLogoHelper]");
+        private static void LogFine(object message) => LogFine($"{message}");
+        private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[TitleLogoHelper]");
+        private static void LogDebug(object message) => LogDebug($"{message}");
+        private static void Log(string message) => InternalLogger.Log(message, "[SFCore]:[TitleLogoHelper]");
+        private static void Log(object message) => Log($"{message}");
+        private static void LogWarn(string message) => InternalLogger.LogWarn(message, "[SFCore]:[TitleLogoHelper]");
+        private static void LogWarn(object message) => LogWarn($"{message}");
+        private static void LogError(string message) => InternalLogger.LogError(message, "[SFCore]:[TitleLogoHelper]");
+        private static void LogError(object message) => LogError($"{message}");
     }
 }

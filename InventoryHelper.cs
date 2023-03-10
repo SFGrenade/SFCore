@@ -594,16 +594,16 @@ namespace SFCore
 
             return newPaneGo;
         }
-
-        private static void Log(string message)
-        {
-            Logger.LogDebug($"[SFCore]:[InventoryHelper] - {message}");
-            Debug.Log($"[SFCore]:[InventoryHelper] - {message}");
-        }
-
-        private static void Log(object message)
-        {
-            Log($"{message}");
-        }
+        
+        private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[InventoryHelper]");
+        private static void LogFine(object message) => LogFine($"{message}");
+        private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[InventoryHelper]");
+        private static void LogDebug(object message) => LogDebug($"{message}");
+        private static void Log(string message) => InternalLogger.Log(message, "[SFCore]:[InventoryHelper]");
+        private static void Log(object message) => Log($"{message}");
+        private static void LogWarn(string message) => InternalLogger.LogWarn(message, "[SFCore]:[InventoryHelper]");
+        private static void LogWarn(object message) => LogWarn($"{message}");
+        private static void LogError(string message) => InternalLogger.LogError(message, "[SFCore]:[InventoryHelper]");
+        private static void LogError(object message) => LogError($"{message}");
     }
 }
