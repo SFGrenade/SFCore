@@ -1,36 +1,35 @@
 ﻿using UnityEngine;
 
-namespace SFCore.MonoBehaviours
+namespace SFCore.MonoBehaviours;
+
+/// <summary>
+/// Patching SceneMap MeshRenderer
+/// </summary>
+class SceneMapPatcher : MonoBehaviour
 {
+    private Material _sceneMapMaterial;
+    private bool _initialized = false;
     /// <summary>
-    /// Patching SceneMap MeshRenderer
+    /// Texture to apply to all MeshRenderers on this GameObject and children
     /// </summary>
-    class SceneMapPatcher : MonoBehaviour
+    public Texture tex = null;
+
+    /// <summary>
+    /// Unity method.
+    /// </summary>
+    public void Start()
     {
-        private Material _sceneMapMaterial;
-        private bool _initialized = false;
-        /// <summary>
-        /// Texture to apply to all MeshRenderers on this GameObject and children
-        /// </summary>
-        public Texture tex = null;
-
-        /// <summary>
-        /// Unity method.
-        /// </summary>
-        public void Start()
+        if (!_initialized)
         {
-            if (!_initialized)
-            {
-                _sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
-                _sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
+            _sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
+            _sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
 
-                _initialized = true;
-            }
+            _initialized = true;
+        }
 
-            foreach (var cMr in gameObject.GetComponentsInChildren<MeshRenderer>(false))
-            {
-                cMr.material = _sceneMapMaterial;
-            }
+        foreach (var cMr in gameObject.GetComponentsInChildren<MeshRenderer>(false))
+        {
+            cMr.material = _sceneMapMaterial;
         }
     }
 }

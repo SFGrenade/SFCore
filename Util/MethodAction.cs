@@ -1,35 +1,34 @@
 ﻿using System;
 using HutongGames.PlayMaker;
 
-namespace SFCore.Utils
+namespace SFCore.Utils;
+
+/// <summary>
+/// FsmStateAction that invokes methods.
+/// </summary>
+public class MethodAction : FsmStateAction
 {
     /// <summary>
-    /// FsmStateAction that invokes methods.
+    /// The method to invoke.
     /// </summary>
-    public class MethodAction : FsmStateAction
+    public Action method;
+
+    /// <summary>
+    /// Resets the action.
+    /// </summary>
+    public override void Reset()
     {
-        /// <summary>
-        /// The method to invoke.
-        /// </summary>
-        public Action method;
+        method = null;
 
-        /// <summary>
-        /// Resets the action.
-        /// </summary>
-        public override void Reset()
-        {
-            method = null;
+        base.Reset();
+    }
 
-            base.Reset();
-        }
-
-        /// <summary>
-        /// Called when the action is being processed.
-        /// </summary>
-        public override void OnEnter()
-        {
-            if (method != null) method.Invoke();
-            Finish();
-        }
+    /// <summary>
+    /// Called when the action is being processed.
+    /// </summary>
+    public override void OnEnter()
+    {
+        if (method != null) method.Invoke();
+        Finish();
     }
 }
