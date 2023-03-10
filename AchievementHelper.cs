@@ -48,22 +48,31 @@ namespace SFCore
         /// </summary>
         static AchievementHelper()
         {
+            LogFine("!cctor");
             On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
             //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
             On.DesktopPlatform.IsAchievementUnlocked += (orig, self, key) => {
+                LogFine("!OnDesktopPlatformIsAchievementUnlocked");
                 bool? isUnlocked = orig(self, key);
                 if (isUnlocked == null || isUnlocked == false)
                 {
                     // just check again, to be sure
                     isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
                 }
+                LogFine("~OnDesktopPlatformIsAchievementUnlocked");
                 return isUnlocked;
             };
+            LogFine("~cctor");
         }
+
         /// <summary>
         ///     Used for static initialization.
         /// </summary>
-        public static void unusedInit() {}
+        public static void unusedInit()
+        {
+            LogFine("!unusedInit");
+            LogFine("~unusedInit");
+        }
 
         /// <summary>
         ///     Adds an achievement to the private list of custom achievements.
@@ -75,7 +84,8 @@ namespace SFCore
         /// <param name="hidden">Determines if the achievement is hidden until unlocked</param>
         public static void AddAchievement(string key, Sprite sprite, string titleConvo, string textConvo, bool hidden)
         {
-            Log($"Adding achievement '{key}'");
+            LogFine("!AddAchievement");
+            LogDebug($"Adding achievement '{key}'");
             _customAchievements.Add(new SCustomAchievement()
             {
                 key = key,
@@ -84,6 +94,7 @@ namespace SFCore
                 textConvo = textConvo,
                 hidden = hidden
             });
+            LogFine("~AddAchievement");
         }
         
         /// <summary>
@@ -92,7 +103,7 @@ namespace SFCore
         /// <param name="list">Achievement list which the custom achievements get added to</param>
         private static void InitAchievements(AchievementsList list)
         {
-            Log("!OnUIManagerRefreshAchievementsList");
+            LogFine("!InitAchievements");
             foreach (var ca in _customAchievements)
             {
                 Achievement customAch = new Achievement
@@ -110,7 +121,7 @@ namespace SFCore
                     list.achievements.Add(customAch);
                 }
             }
-            Log("~OnUIManagerRefreshAchievementsList");
+            LogFine("~InitAchievements");
         }
         
         /// <summary>
@@ -118,20 +129,21 @@ namespace SFCore
         /// </summary>
         private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
         {
-            Log("!OnUIManagerRefreshAchievementsList");
+            LogFine("!OnUIManagerRefreshAchievementsList");
             InitAchievements(GameManager.instance.achievementHandler.achievementsList);
             orig(self);
-            Log("~OnUIManagerRefreshAchievementsList");
+            LogFine("~OnUIManagerRefreshAchievementsList");
         }
         
-        private static void Log(string message)
-        {
-            Logger.LogDebug($"[SFCore]:[AchievementHelper] - {message}");
-            Debug.Log($"[SFCore]:[AchievementHelper] - {message}");
-        }
-        private static void Log(object message)
-        {
-            Log($"{message}");
-        }
+        private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[AchievementHelper]");
+        private static void LogFine(object message) => LogFine($"{message}");
+        private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[AchievementHelper]");
+        private static void LogDebug(object message) => LogDebug($"{message}");
+        private static void Log(string message) => InternalLogger.Log(message, "[SFCore]:[AchievementHelper]");
+        private static void Log(object message) => Log($"{message}");
+        private static void LogWarn(string message) => InternalLogger.LogWarn(message, "[SFCore]:[AchievementHelper]");
+        private static void LogWarn(object message) => LogWarn($"{message}");
+        private static void LogError(string message) => InternalLogger.LogError(message, "[SFCore]:[AchievementHelper]");
+        private static void LogError(object message) => LogError($"{message}");
     }
 }

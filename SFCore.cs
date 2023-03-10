@@ -65,9 +65,5 @@ namespace SFCore
     /// </summary>
     public class SFCoreSaveSettings
     {
-        /// <summary>
-        ///     Important to clear and reapply custom charms.
-        /// </summary>
-        public List<int> EquippedCustomCharms = new ();
     }
 }

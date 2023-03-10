@@ -42,6 +42,7 @@ namespace SFCore
         /// </summary>
         static CharmHelper()
         {
+            LogFine("!cctor");
             On.PlayerData.CalculateNotchesUsed += OnPlayerDataCalculateNotchesUsed;
             // i hate this, can't have shit in detroid
             //On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
@@ -62,49 +63,59 @@ namespace SFCore
 
             On.BuildEquippedCharms.BuildCharmList += (orig, self) =>
             {
+                LogFine("!OnBuildEquippedCharmsBuildCharmList");
                 // apparently BuildEquippedCharms.BuildCharmList() is called before BuildEquippedCharms.Start()
                 if (self.gameObjectList.Count <= 40)
                 {
                     InitBuildEquippedCharms(self);
                 }
                 orig(self);
+                LogFine("~OnBuildEquippedCharmsBuildCharmList");
             };
+            LogFine("~cctor");
         }
 
         private static void ModHooksOnSavegameSaveHook(int obj)
         {
+            LogFine("!ModHooksOnSavegameSaveHook");
             AddCustomCharmsToPlayerData(PlayerData.instance);
+            LogFine("~ModHooksOnSavegameSaveHook");
         }
 
         private static void ModHooksOnBeforeSavegameSaveHook(SaveGameData obj)
         {
+            LogFine("!ModHooksOnBeforeSavegameSaveHook");
             RemoveCustomCharmsFromPlayerData(obj.playerData);
+            LogFine("~ModHooksOnBeforeSavegameSaveHook");
         }
 
         private static void ModHooksOnAfterSavegameLoadHook(SaveGameData obj)
         {
+            LogFine("!ModHooksOnAfterSavegameLoadHook");
             AddCustomCharmsToPlayerData(obj.playerData);
+            LogFine("~ModHooksOnAfterSavegameLoadHook");
         }
 
         private static void RemoveCustomCharmsFromPlayerData(PlayerData pd)
         {
+            LogFine("!RemoveCustomCharmsFromPlayerData");
             for (int i = pd.equippedCharms.Count - 1; i >= 0; i--)
             {
                 if (pd.equippedCharms[i] > 40)
                 {
                     // remove all custom charms (charmid > 40) from being saved
-                    SFCoreMod.instance.SaveSettings.EquippedCustomCharms.Add(pd.equippedCharms[i]);
                     pd.equippedCharms.RemoveAt(i);
                 }
             }
+            LogFine("~RemoveCustomCharmsFromPlayerData");
         }
 
         private static void AddCustomCharmsToPlayerData(PlayerData pd)
         {
+            LogFine("!AddCustomCharmsToPlayerData");
             for (int charmId = 41; charmId <= 40 + SFCoreMod.GlobalSettings.MaxCustomCharms; charmId++)
             {
                 if (!pd.equippedCharms.Contains(charmId) &&
-                    SFCoreMod.instance.SaveSettings.EquippedCustomCharms.Contains(charmId) &&
                     PlayerData.instance.GetBool($"gotCharm_{charmId}") &&
                     PlayerData.instance.GetBool($"equippedCharm_{charmId}"))
                 {
@@ -112,19 +123,25 @@ namespace SFCore
                     pd.equippedCharms.Add(charmId);
                 }
             }
-            SFCoreMod.instance.SaveSettings.EquippedCustomCharms.Clear();
+            LogFine("~AddCustomCharmsToPlayerData");
         }
 
         /// <summary>
         ///     Used for static initialization.
         /// </summary>
-        public static void unusedInit() { }
+        public static void unusedInit()
+        {
+            LogFine("!unusedInit");
+            LogFine("~unusedInit");
+        }
 
         /// <summary>
         ///     Adds a list of sprites as charms.
         /// </summary>
         public static List<int> AddSprites(params Sprite[] charmSprites)
         {
+            LogFine("!AddSprites");
+            LogDebug($"Adding {charmSprites.Length} charm sprites");
             List<int> ret = new List<int>();
             foreach (var spr in charmSprites)
             {
@@ -133,6 +150,7 @@ namespace SFCore
                 ret.Add(40 + CustomSprites.Count);
             }
             SFCoreMod.GlobalSettings.MaxCustomCharms = Mathf.Max(SFCoreMod.GlobalSettings.MaxCustomCharms, CustomSprites.Count);
+            LogFine("~AddSprites");
             return ret;
         }
 
@@ -141,10 +159,12 @@ namespace SFCore
         /// </summary>
         private static void OnGameManagerStart(On.GameManager.orig_Start orig, GameManager self)
         {
+            LogFine("!OnGameManagerStart");
             SFCoreMod.GlobalSettings.MaxCustomCharms = Mathf.Max(SFCoreMod.GlobalSettings.MaxCustomCharms, CustomSprites.Count);
             orig(self);
 
             ClearModdedCharms();
+            LogFine("~OnGameManagerStart");
         }
 
         /// <summary>
@@ -152,6 +172,7 @@ namespace SFCore
         /// </summary>
         private static void ClearModdedCharms()
         {
+            LogFine("!ClearModdedCharms");
             #region CharmIconList Start
 
             var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
@@ -171,7 +192,7 @@ namespace SFCore
                 tmpSpriteList.RemoveRange(41, tmpSpriteList.Count - 41);
                 cil.spriteList = tmpSpriteList.ToArray();
             }
-            
+
             int rows = 4;
 
             #region Down State Editing
@@ -240,9 +261,9 @@ namespace SFCore
             }
 
             #endregion
-            
+
             // Vanilla has 4 rows
-            float rowDeltaMultiplicator = (float) Mathf.Ceil((40f + CustomSprites.Count) / 10f) / 4f;
+            float rowDeltaMultiplicator = (float)Mathf.Ceil((40f + CustomSprites.Count) / 10f) / 4f;
             GameObject backBoardTile, collectedCharmTile;
             Vector3 bbOldPos, ccOldPos;
             for (int i = 0; i <= 3; i++)
@@ -265,13 +286,15 @@ namespace SFCore
             }
 
             #endregion
+            LogFine("~ClearModdedCharms");
         }
-        
+
         /// <summary>
         ///     Adds custom charms to the charm board.
         /// </summary>
         private static void Init()
         {
+            LogFine("!Init");
             #region CharmIconList Start
 
             var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
@@ -428,9 +451,9 @@ namespace SFCore
             #endregion
 
             // Shift rows
-            float rowMultiplicator = Mathf.Ceil(((float) numCharms / 10.0f) / ((float) rows));
+            float rowMultiplicator = Mathf.Ceil(((float)numCharms / 10.0f) / ((float)rows));
             // Vanilla has 4 rows
-            float rowDeltaMultiplicator = 4.0f / ((float) rows);
+            float rowDeltaMultiplicator = 4.0f / ((float)rows);
             GameObject backBoardTile, collectedCharmTile;
             Vector3 bbOldPos, ccOldPos;
             for (int i = 0; i <= rows; i++)
@@ -472,13 +495,15 @@ namespace SFCore
             }
 
             #endregion
+            LogFine("~Init");
         }
-        
+
         /// <summary>
         ///     Adds charm cost of custom charms to notches.
         /// </summary>
         private static void OnPlayerDataCalculateNotchesUsed(On.PlayerData.orig_CalculateNotchesUsed orig, PlayerData self)
         {
+            LogFine("!OnPlayerDataCalculateNotchesUsed");
             orig(self);
             int num = 0;
             for (int i = 0; i < CustomSprites.Count; i++)
@@ -489,13 +514,15 @@ namespace SFCore
                 }
             }
             self.SetInt("charmSlotsFilled", self.GetInt("charmSlotsFilled") + num);
+            LogFine("~OnPlayerDataCalculateNotchesUsed");
         }
-        
+
         /// <summary>
         ///     Initializes equipped charms.
         /// </summary>
         private static void InitBuildEquippedCharms(BuildEquippedCharms self)
         {
+            LogFine("!InitBuildEquippedCharms");
             List<GameObject> tmplist = new List<GameObject>();
 
             #region Populate tmplist with all existing charms + custom charms as null values
@@ -528,6 +555,7 @@ namespace SFCore
             #endregion
 
             self.gameObjectList = tmplist;
+            LogFine("~InitBuildEquippedCharms");
         }
 
         /// <summary>
@@ -535,11 +563,13 @@ namespace SFCore
         /// </summary>
         private static void OnBuildEquippedCharmsStart_single(Action<BuildEquippedCharms> orig, BuildEquippedCharms self)
         {
+            LogFine("!OnBuildEquippedCharmsStart_single");
             Init();
 
             orig(self);
 
             InitBuildEquippedCharms(self);
+            LogFine("~OnBuildEquippedCharmsStart_single");
         }
 
         /// <summary>
@@ -547,6 +577,7 @@ namespace SFCore
         /// </summary>
         private static void GameCamerasStart_single(Action<GameCameras> orig, GameCameras self)
         {
+            LogFine("!GameCamerasStart_single");
             orig(self);
             GameObject charmDetailCost = self.gameObject.Find("HudCamera").Find("Inventory").Find("Charms").Find("Details").Find("Cost");
             PlayMakerFSM charmDetailCostFsm = charmDetailCost.LocateMyFSM("Charm Details Cost");
@@ -571,7 +602,7 @@ namespace SFCore
                 charmDetailCostFsm.InsertAction("Init", initFindChildAction, i - 1);
 
                 FsmFloat newPositionFsmVariable = charmDetailCostFsm.AddFsmFloatVariable(newCostPositionVariableName);
-                newPositionFsmVariable.Value = (0.82f+1.02f)-((0.82f+1.02f)*((i-1f)/5f))-1.02f;
+                newPositionFsmVariable.Value = (0.82f + 1.02f) - ((0.82f + 1.02f) * ((i - 1f) / 5f)) - 1.02f;
 
                 IntSwitch checkIntSwitch = charmDetailCostFsm.GetAction<IntSwitch>("Check", 1);
                 List<FsmInt> checkIntSwitchCompareToNewList = new List<FsmInt>(checkIntSwitch.compareTo);
@@ -649,6 +680,7 @@ namespace SFCore
                 }
                 charmDetailCostFsm.AddAction(newCostName, costNewSetPositionPresent);
             }
+            LogFine("~GameCamerasStart_single");
         }
 
         /// <summary>
@@ -656,33 +688,39 @@ namespace SFCore
         /// </summary>
         private static void AddToCharmFadeGroup(GameObject spriteGo, GameObject fgGo)
         {
+            LogFine("!AddToCharmFadeGroup");
             var sr = spriteGo.GetComponent<SpriteRenderer>();
             sr.sortingLayerID = 629535577;
             var fg = fgGo.GetComponent<FadeGroup>();
             var srList = new List<SpriteRenderer>(fg.spriteRenderers);
             srList.Add(sr);
             fg.spriteRenderers = srList.ToArray();
+            LogFine("~AddToCharmFadeGroup");
         }
-        
+
         /// <summary>
         ///     Makes a gameobject not be destroyed.
         /// </summary>
         private static void SetInactive(Object go)
         {
+            LogFine("!SetInactive");
             if (go != null)
             {
                 Object.DontDestroyOnLoad(go);
             }
+
+            LogFine("~SetInactive");
         }
 
-        private static void Log(string message)
-        {
-            Logger.LogDebug($"[SFCore]:[CharmHelper] - {message}");
-            Debug.Log($"[SFCore]:[CharmHelper] - {message}");
-        }
-        private static void Log(object message)
-        {
-            Log($"{message}");
-        }
+        private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[CharmHelper]");
+        private static void LogFine(object message) => LogFine($"{message}");
+        private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[CharmHelper]");
+        private static void LogDebug(object message) => LogDebug($"{message}");
+        private static void Log(string message) => InternalLogger.Log(message, "[SFCore]:[CharmHelper]");
+        private static void Log(object message) => Log($"{message}");
+        private static void LogWarn(string message) => InternalLogger.LogWarn(message, "[SFCore]:[CharmHelper]");
+        private static void LogWarn(object message) => LogWarn($"{message}");
+        private static void LogError(string message) => InternalLogger.LogError(message, "[SFCore]:[CharmHelper]");
+        private static void LogError(object message) => LogError($"{message}");
     }
 }
