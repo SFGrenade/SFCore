@@ -32,7 +32,7 @@ namespace SFCore
     /// </summary>
     public abstract class EasyCharm
     {
-        private Sprite Sprite;
+        private Sprite _sprite;
         /// <summary>
         /// The Id of the charm, this is not fixed across sessions.
         /// </summary>
@@ -77,11 +77,11 @@ namespace SFCore
         /// <returns>The charm sprite</returns>
         public Sprite GetSprite()
         {
-            if (Sprite == null)
+            if (_sprite == null)
             {
-                Sprite = GetSpriteInternal();
+                _sprite = GetSpriteInternal();
             }
-            return Sprite;
+            return _sprite;
         }
         /// <summary>
         /// Constructor
@@ -167,11 +167,11 @@ namespace SFCore
         /// <summary>
         /// Give the player this charm
         /// </summary>
-        /// <param name="IsNew">Should this charm be considered new</param>
-        public void GiveCharm(bool IsNew = false)
+        /// <param name="consideredNew">Should this charm be considered new</param>
+        public void GiveCharm(bool consideredNew = false)
         {
             PlayerData.instance.SetBool($"gotCharm_{Id}", true);
-            PlayerData.instance.SetBool($"newCharm_{Id}", IsNew);
+            PlayerData.instance.SetBool($"newCharm_{Id}", consideredNew);
         }
         /// <summary>
         /// Take the charm away from the player
