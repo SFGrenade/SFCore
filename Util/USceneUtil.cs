@@ -5,12 +5,12 @@ using UScene = UnityEngine.SceneManagement.Scene;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     Utils specifically for Unity Scenes and GameObjects.
+    /// Utils specifically for Unity Scenes and GameObjects.
     /// </summary>
     public static class USceneUtil
     {
         /// <summary>
-        ///     Finds a GameObject in a given scene at the root level.
+        /// Finds a GameObject in a given scene at the root level.
         /// </summary>
         /// <param name="scene">The scene to search in</param>
         /// <param name="name">The name of the GameObject</param>
@@ -33,7 +33,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Finds a GameObject in a given scene.
+        /// Finds a GameObject in a given scene.
         /// </summary>
         /// <param name="scene">The scene to search in</param>
         /// <param name="name">The name of the GameObject</param>
@@ -63,7 +63,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Finds a child GameObject of a given GameObject.
+        /// Finds a child GameObject of a given GameObject.
         /// </summary>
         /// <param name="o">The GameObject to start the search from</param>
         /// <param name="name">The name of the GameObject</param>
@@ -98,7 +98,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Logs a scene with all GameObjects and Components on them.
+        /// Logs a scene with all GameObjects and Components on them.
         /// </summary>
         /// <param name="scene">The scene to log</param>
         public static void Log(this UScene scene)
@@ -109,7 +109,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Logs a transform and all children with their Components.
+        /// Logs a transform and all children with their Components.
         /// </summary>
         /// <param name="go">The Transform to log</param>
         /// <param name="n">The indentation to use</param>

@@ -7,44 +7,44 @@ using System.Linq;
 namespace SFCore
 {
     /// <summary>
-    ///     Structure of data for a single achievement.
+    /// Structure of data for a single achievement.
     /// </summary>
     public struct SCustomAchievement
     {
         /// <summary>
-        ///     The achievement key used to award the achievement.
+        /// The achievement key used to award the achievement.
         /// </summary>
         public string key;
         /// <summary>
-        ///     The sprite used for the achievement.
+        /// The sprite used for the achievement.
         /// </summary>
         public Sprite sprite;
         /// <summary>
-        ///     The title language key for the achievement.
+        /// The title language key for the achievement.
         /// </summary>
         public string titleConvo;
         /// <summary>
-        ///     The text language key for the achievement.
+        /// The text language key for the achievement.
         /// </summary>
         public string textConvo;
         /// <summary>
-        ///     A flag to indicate whether or not to display the text when the achievement is not yet acquired.
+        /// A flag to indicate whether or not to display the text when the achievement is not yet acquired.
         /// </summary>
         public bool hidden;
     }
 
     /// <summary>
-    ///     Achievement helper class for easily adding custom achievements.
-    ///     The mod using this needs to handle the following:
-    ///     - titleConvo Language string(s)
-    ///     - textConvo Language string(s)
+    /// Achievement helper class for easily adding custom achievements.
+    /// The mod using this needs to handle the following:
+    /// - titleConvo Language string(s)
+    /// - textConvo Language string(s)
     /// </summary>
     public static class AchievementHelper
     {
         private static List<SCustomAchievement> _customAchievements = new List<SCustomAchievement>();
         
         /// <summary>
-        ///     Constructs the helper, hooks needed methods.
+        /// Constructs the helper, hooks needed methods.
         /// </summary>
         static AchievementHelper()
         {
@@ -66,7 +66,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Used for static initialization.
+        /// Used for static initialization.
         /// </summary>
         public static void unusedInit()
         {
@@ -75,7 +75,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds an achievement to the private list of custom achievements.
+        /// Adds an achievement to the private list of custom achievements.
         /// </summary>
         /// <param name="key">Achievement key, determines if an achievement is unlocked</param>
         /// <param name="sprite">Sprite of the achievement</param>
@@ -98,7 +98,7 @@ namespace SFCore
         }
         
         /// <summary>
-        ///     Adds the contents of customAchievements to the given AchievementsList
+        /// Adds the contents of customAchievements to the given AchievementsList
         /// </summary>
         /// <param name="list">Achievement list which the custom achievements get added to</param>
         private static void InitAchievements(AchievementsList list)
@@ -125,7 +125,7 @@ namespace SFCore
         }
         
         /// <summary>
-        ///     On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
+        /// On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
         /// </summary>
         private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
         {

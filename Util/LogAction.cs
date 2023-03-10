@@ -5,17 +5,17 @@ using Logger = Modding.Logger;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     FsmStateAction that logs the value of an FsmString.
+    /// FsmStateAction that logs the value of an FsmString.
     /// </summary>
     public class LogAction : FsmStateAction
     {
         /// <summary>
-        ///     The text to log.
+        /// The text to log.
         /// </summary>
         public FsmString text;
 
         /// <summary>
-        ///     Resets the action.
+        /// Resets the action.
         /// </summary>
         public override void Reset()
         {
@@ -25,7 +25,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Called when the action is being processed.
+        /// Called when the action is being processed.
         /// </summary>
         public override void OnEnter()
         {
@@ -41,17 +41,17 @@ namespace SFCore.Utils
     }
 
     /// <summary>
-    ///     FsmStateAction that logs the value of an FsmString and gives context of which GameObject with which Fsm in which State produces the log.
+    /// FsmStateAction that logs the value of an FsmString and gives context of which GameObject with which Fsm in which State produces the log.
     /// </summary>
     public class StatusLog : FsmStateAction
     {
         /// <summary>
-        ///     Resets the action.
+        /// Resets the action.
         /// </summary>
         public FsmString text;
 
         /// <summary>
-        ///     Resets the action.
+        /// Resets the action.
         /// </summary>
         public override void Reset()
         {
@@ -61,7 +61,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Called when the action is being processed.
+        /// Called when the action is being processed.
         /// </summary>
         public override void OnEnter()
         {

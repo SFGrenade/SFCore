@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     Utils specifically for creating or resetting Hollow Knight MonoBehaviours.
+    /// Utils specifically for creating or resetting Hollow Knight MonoBehaviours.
     /// </summary>
     public static class MiscCreator
     {
@@ -30,7 +30,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Resets AudioMixerSnapshots and Cues on a SceneManager.
+        /// Resets AudioMixerSnapshots and Cues on a SceneManager.
         /// </summary>
         /// <param name="sm">The SceneManager</param>
         public static void ResetSceneManagerAudio(SceneManager sm)
@@ -49,7 +49,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Sets X/Y/Z on a given Vector3.
+        /// Sets X/Y/Z on a given Vector3.
         /// </summary>
         /// <param name="self">The Vector3</param>
         /// <param name="x">X</param>
@@ -63,7 +63,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Sets the original music event name of a MusicCue.
+        /// Sets the original music event name of a MusicCue.
         /// </summary>
         /// <param name="cue">The Cue</param>
         /// <param name="name">The name</param>
@@ -72,7 +72,7 @@ namespace SFCore.Utils
             cue.SetAttr<MusicCue, string>("originalMusicEventName", name);
         }
         /// <summary>
-        ///     Sets the original music track number of a MusicCue.
+        /// Sets the original music track number of a MusicCue.
         /// </summary>
         /// <param name="cue">The Cue</param>
         /// <param name="number">The number</param>
@@ -81,7 +81,7 @@ namespace SFCore.Utils
             cue.SetAttr<MusicCue, int>("originalMusicTrackNumber", number);
         }
         /// <summary>
-        ///     Sets the AudioMixerSnapshot of a MusicCue.
+        /// Sets the AudioMixerSnapshot of a MusicCue.
         /// </summary>
         /// <param name="cue">The Cue</param>
         /// <param name="snapshot">The AudioMixerSnapshot</param>
@@ -90,7 +90,7 @@ namespace SFCore.Utils
             cue.SetAttr<MusicCue, AudioMixerSnapshot>("snapshot", snapshot);
         }
         /// <summary>
-        ///     Gets the channel infos of a MusicCue.
+        /// Gets the channel infos of a MusicCue.
         /// </summary>
         /// <param name="cue">The Cue</param>
         /// <returns>The MusicChannelInfos.</returns>
@@ -99,7 +99,7 @@ namespace SFCore.Utils
             return cue.GetAttr<MusicCue, MusicCue.MusicChannelInfo[]>("channelInfos");
         }
         /// <summary>
-        ///     Sets the channel infos of a MusicCue.
+        /// Sets the channel infos of a MusicCue.
         /// </summary>
         /// <param name="cue">The Cue</param>
         /// <param name="infos">The infos</param>

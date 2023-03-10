@@ -9,41 +9,41 @@ using Object = UnityEngine.Object;
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     Custom Item List for ItemHelper
+    /// Custom Item List for ItemHelper
     /// </summary>
     public class CustomItemList : MonoBehaviour
     {
         /// <summary>
-        ///     Instance
+        /// Instance
         /// </summary>
         public static CustomItemList Instance { get; private set; }
 
         /// <summary>
-        ///     Data List
+        /// Data List
         /// </summary>
         public List<ItemHelper.Item> List { get; private set; } = new List<ItemHelper.Item>();
         /// <summary>
-        ///     GameObject List
+        /// GameObject List
         /// </summary>
         public GameObject[] ListInv { get; private set; } = new GameObject[0];
         private GameObject[] _currentList = new GameObject[0];
         private PlayerData _pd = PlayerData.instance;
         /// <summary>
-        ///     Y Distance between each GameObject
+        /// Y Distance between each GameObject
         /// </summary>
         public float YDistance { get; private set; } = -2f;
         /// <summary>
-        ///     Amount of Items
+        /// Amount of Items
         /// </summary>
         public int ItemCount { get; private set; } = -1;
         /// <summary>
-        ///     Index of new item
+        /// Index of new item
         /// </summary>
         public int FirstNewItem { get; private set; }
         private bool _built = false;
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         public CustomItemList()
         {
@@ -51,7 +51,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     True if at least one item is gotten.
+        /// True if at least one item is gotten.
         /// </summary>
         public bool hasAtLeastOneItem()
         {
@@ -61,14 +61,14 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Total item amount
+        /// Total item amount
         /// </summary>
         public int TotalItemAmount()
         {
             return List.Count;
         }
         /// <summary>
-        ///     Amount of gotten items
+        /// Amount of gotten items
         /// </summary>
         public int GotItemAmount()
         {
@@ -76,7 +76,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Build the inv list
+        /// Build the inv list
         /// </summary>
         public void BuildItemList()
         {
@@ -104,7 +104,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Update the inv list
+        /// Update the inv list
         /// </summary>
         public void UpdateItemList()
         {
@@ -230,7 +230,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Gets ItemCount
+        /// Gets ItemCount
         /// </summary>
         public int GetItemCount()
         {
@@ -239,7 +239,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Gets description for a specific item
+        /// Gets description for a specific item
         /// </summary>
         public string GetDescConvo(int itemNum)
         {
@@ -286,7 +286,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Gets name for a specific item
+        /// Gets name for a specific item
         /// </summary>
         public string GetNameConvo(int itemNum)
         {
@@ -321,7 +321,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Gets sprite for a specific item
+        /// Gets sprite for a specific item
         /// </summary>
         public Sprite GetSprite(int itemNum)
         {
@@ -330,7 +330,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Get y distance
+        /// Get y distance
         /// </summary>
         public float GetYDistance()
         {
@@ -339,7 +339,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Get index of first new item
+        /// Get index of first new item
         /// </summary>
         public int GetFirstNewItem()
         {
@@ -348,7 +348,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Get amount of counted items
+        /// Get amount of counted items
         /// </summary>
         public string GetPlayerDataKillsName(int itemNum)
         {

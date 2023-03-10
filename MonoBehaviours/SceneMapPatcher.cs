@@ -3,19 +3,19 @@
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     Patching SceneMap MeshRenderer
+    /// Patching SceneMap MeshRenderer
     /// </summary>
     class SceneMapPatcher : MonoBehaviour
     {
         private Material _sceneMapMaterial;
         private bool _initialized = false;
         /// <summary>
-        ///     Texture to apply to all MeshRenderers on this GameObject and children
+        /// Texture to apply to all MeshRenderers on this GameObject and children
         /// </summary>
         public Texture tex = null;
 
         /// <summary>
-        ///     Unity method.
+        /// Unity method.
         /// </summary>
         public void Start()
         {

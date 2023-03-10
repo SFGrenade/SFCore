@@ -6,21 +6,21 @@ using UnityEngine.Audio;
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     This class is for managing dynamically created MusicCue and AtmosCue instances
+    /// This class is for managing dynamically created MusicCue and AtmosCue instances
     /// </summary>
     public static class CueHolder
     {
         /// <summary>
-        ///     Map of MusicCues
+        /// Map of MusicCues
         /// </summary>
         public static Dictionary<string, MusicCue> MusicCues = new Dictionary<string, MusicCue>();
         /// <summary>
-        ///     Map of AtmosCues
+        /// Map of AtmosCues
         /// </summary>
         public static Dictionary<string, AtmosCue> AtmosCues = new Dictionary<string, AtmosCue>();
 
         /// <summary>
-        ///     Get or add an entry to the MusicCue map.
+        /// Get or add an entry to the MusicCue map.
         /// </summary>
         /// <param name="set">The set of MusicCue, will be used to determine if it should be added or retrieved from the map</param>
         /// <param name="snapshot">The Snapshot to use in the cue</param>
@@ -60,7 +60,7 @@ namespace SFCore.MonoBehaviours
             return MusicCues[set];
         }
         /// <summary>
-        ///     Get or add an entry to the AtmosCue map.
+        /// Get or add an entry to the AtmosCue map.
         /// </summary>
         /// <param name="set">The set of AtmosCue, will be used to determine if it should be added or retrieved from the map</param>
         /// <param name="snapshot">The Snapshot to use in the cue</param>

@@ -4,17 +4,17 @@ using HutongGames.PlayMaker;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     FsmStateAction that invokes methods.
+    /// FsmStateAction that invokes methods.
     /// </summary>
     public class MethodAction : FsmStateAction
     {
         /// <summary>
-        ///     The method to invoke.
+        /// The method to invoke.
         /// </summary>
         public Action method;
 
         /// <summary>
-        ///     Resets the action.
+        /// Resets the action.
         /// </summary>
         public override void Reset()
         {
@@ -24,7 +24,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Called when the action is being processed.
+        /// Called when the action is being processed.
         /// </summary>
         public override void OnEnter()
         {

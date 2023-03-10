@@ -34,7 +34,7 @@ public class WavUtils
         }
 
         /// <summary>
-        ///     Load PCM format *.wav audio file and convert to AudioClip.
+        /// Load PCM format *.wav audio file and convert to AudioClip.
         /// </summary>
         /// <returns>The AudioClip.</returns>
         /// <param name="filePath">Local file path to .wav file</param>
@@ -45,7 +45,7 @@ public class WavUtils
         }
 
         /// <summary>
-        ///     Convert PCM format *.wav audio bytes to AudioClip.
+        /// Convert PCM format *.wav audio bytes to AudioClip.
         /// </summary>
         /// <returns>The AudioClip.</returns>
         /// <param name="fileBytes">The bytes of the wav file</param>

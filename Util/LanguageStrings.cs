@@ -7,15 +7,15 @@ using System.Text;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     Helper class to load language strings from a JSON resource.
-    ///     Supports multiple languages.
+    /// Helper class to load language strings from a JSON resource.
+    /// Supports multiple languages.
     /// </summary>
     public class LanguageStrings
     {
         private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> _jsonDict;
 
         /// <summary>
-        ///     The constructor. Loads the JSON resource.
+        /// The constructor. Loads the JSON resource.
         /// </summary>
         /// <param name="asm">The assembly to load the resource from</param>
         /// <param name="resourceName">The name of the resource</param>
@@ -37,7 +37,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     The constructor. Loads the given JSON.
+        /// The constructor. Loads the given JSON.
         /// </summary>
         /// <param name="json">The JSON to load</param>
         public LanguageStrings(string json)
@@ -46,7 +46,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Get a language string according to a given key and sheet.
+        /// Get a language string according to a given key and sheet.
         /// </summary>
         /// <param name="key">The language key</param>
         /// <param name="sheet">The sheet that contains the key</param>
@@ -74,7 +74,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Check if a language string according to a given key and sheet is present.
+        /// Check if a language string according to a given key and sheet is present.
         /// </summary>
         /// <param name="key">The language key</param>
         /// <param name="sheet">The sheet that contains the key</param>

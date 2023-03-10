@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     Patching SceneManager
+    /// Patching SceneManager
     /// </summary>
     public class SceneManagerPatcher : MonoBehaviour
     {
@@ -18,77 +18,77 @@ namespace SFCore.MonoBehaviours
         private static AudioMixer _shadeAm = null;
 
         /// <summary>
-        ///     The area of the map this scene belongs to.
+        /// The area of the map this scene belongs to.
         /// </summary>
         [Header("Gameplay Scene Settings")]
         [Tooltip("The area of the map this scene belongs to.")]
         [Space(6f)]
         public MapZone mapZone = MapZone.TOWN;
         /// <summary>
-        ///     Determines if this area is currently windy.
+        /// Determines if this area is currently windy.
         /// </summary>
         [Tooltip("Determines if this area is currently windy.")]
         public bool isWindy = false;
         /// <summary>
-        ///     Determines if this level experiences tremors.
+        /// Determines if this level experiences tremors.
         /// </summary>
         [Tooltip("Determines if this level experiences tremors.")]
         public bool isTremorZone = false;
         /// <summary>
-        ///     Set environment type on scene entry.
+        /// Set environment type on scene entry.
         /// </summary>
         [Tooltip("Set environment type on scene entry.")]
         public EnviromentType environmentType = EnviromentType.Dust;
         /// <summary>
-        ///     Set darkness level on scene entry.
+        /// Set darkness level on scene entry.
         /// </summary>
         [Tooltip("Set darkness level on scene entry.")]
         public DarknessLevel darknessLevel = DarknessLevel.Normal;
         /// <summary>
-        ///     Determines if the lantern is deactivated.
+        /// Determines if the lantern is deactivated.
         /// </summary>
         [Tooltip("Determines if the lantern is deactivated.")]
         public bool noLantern = false;
 
         /// <summary>
-        ///     Saturation
+        /// Saturation
         /// </summary>
         [Header("Camera Color Correction Curves")]
         [Range(0f, 5f)]
         public float saturation = 0.7f;
         /// <summary>
-        ///     Ignore Platform Saturation Modifiers
+        /// Ignore Platform Saturation Modifiers
         /// </summary>
         public bool ignorePlatformSaturationModifiers = false;
         /// <summary>
-        ///     Red Channel
+        /// Red Channel
         /// </summary>
         public AnimationCurve redChannel = AnimationCurve.Linear(0, 0, 1, 1);
         /// <summary>
-        ///     Green Channel
+        /// Green Channel
         /// </summary>
         public AnimationCurve greenChannel = AnimationCurve.Linear(0, 0, 1, 1);
         /// <summary>
-        ///     Blue Channel
+        /// Blue Channel
         /// </summary>
         public AnimationCurve blueChannel = AnimationCurve.Linear(0, 0, 1, 1);
 
         /// <summary>
-        ///     The default ambient light colour for this scene.
+        /// The default ambient light colour for this scene.
         /// </summary>
         [Header("Ambient Light")]
         [Tooltip("The default ambient light colour for this scene.")]
         [Space(6f)]
         public Color defaultColor = new Color(1, 1, 1, 1);
         /// <summary>
-        ///     The intensity of the ambient light in this scene.
+        /// The intensity of the ambient light in this scene.
         /// </summary>
         [Tooltip("The intensity of the ambient light in this scene.")]
         [Range(0f, 1f)]
         public float defaultIntensity = 0.8f;
 
         /// <summary>
-        ///     Color of the hero's light gradient (not point lights).
+        /// Color of the hero's light gradient (not point lights).
         /// </summary>
         [Header("Hero Light")]
         [Tooltip("Color of the hero's light gradient (not point lights)")]
@@ -96,140 +96,140 @@ namespace SFCore.MonoBehaviours
         public Color heroLightColor = new Color(1, 1, 1, 0.48f);
 
         /// <summary>
-        ///     No Particles
+        /// No Particles
         /// </summary>
         [Header("Scene Particles")]
         public bool noParticles = false;
         /// <summary>
-        ///     Override Particles With
+        /// Override Particles With
         /// </summary>
         public MapZone overrideParticlesWith = MapZone.NONE;
 
         /// <summary>
-        ///     Atmos Cue Set
+        /// Atmos Cue Set
         /// </summary>
         [Header("Audio Snapshots")]
         [Space(6f)]
         public string AtmosCueSet = "";
         /// <summary>
-        ///     Atmos Cue Snapshot Name
+        /// Atmos Cue Snapshot Name
         /// </summary>
         public string AtmosCueSnapshotName = "at Surface"; // AtmosCue
         /// <summary>
-        ///     Atmos Cue Snapshot Index
+        /// Atmos Cue Snapshot Index
         /// </summary>
         public AtmosChoices AtmosCueSnapshotIndex = AtmosChoices.Surface; // AtmosCue
         /// <summary>
-        ///     Atmos Cue Is Channel Enabled
+        /// Atmos Cue Is Channel Enabled
         /// </summary>
         [ArrayForEnum(typeof(AtmosChannels))]
         public bool[] AtmosCueIsChannelEnabled = new[] { false, true, false, true, false, true, true, false, false, false, false, false, false, false, false, false }; // AtmosCue
         /// <summary>
-        ///     Music Cue Set
+        /// Music Cue Set
         /// </summary>
         public string MusicCueSet = "";
         /// <summary>
-        ///     Music Cue Snapshot Name
+        /// Music Cue Snapshot Name
         /// </summary>
         public string MusicCueSnapshotName = "Silent"; // MusicCue
         /// <summary>
-        ///     Music Cue Snapshot Index
+        /// Music Cue Snapshot Index
         /// </summary>
         public MusicChoices MusicCueSnapshotIndex = MusicChoices.Silent; // MusicCue
         /// <summary>
-        ///     Music Cue Channel Info Clips
+        /// Music Cue Channel Info Clips
         /// </summary>
         [ArrayForEnum(typeof(MusicChannels))]
         public AudioClip[] MusicCueChannelInfoClips = new AudioClip[] { null, null, null, null, null, null }; // MusicCue
         /// <summary>
-        ///     Music Cue Channel Info Syncs
+        /// Music Cue Channel Info Syncs
         /// </summary>
         [ArrayForEnum(typeof(MusicChannels))]
         public MusicChannelSync[] MusicCueChannelInfoSyncs = new[] { MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit }; // MusicCue
         /// <summary>
-        ///     Infected Music Cue Set
+        /// Infected Music Cue Set
         /// </summary>
         public string InfectedMusicCueSet = "";
         /// <summary>
-        ///     Infected Music Cue Snapshot Name
+        /// Infected Music Cue Snapshot Name
         /// </summary>
         public string InfectedMusicCueSnapshotName = "Silent"; // InfectedMusicCue
         /// <summary>
-        ///     Infected Music Cue Snapshot Index
+        /// Infected Music Cue Snapshot Index
         /// </summary>
         public MusicChoices InfectedMusicCueSnapshotIndex = MusicChoices.Silent; // InfectedMusicCue
         /// <summary>
-        ///     Infected Music Cue Channel Info Clips
+        /// Infected Music Cue Channel Info Clips
         /// </summary>
         [ArrayForEnum(typeof(MusicChannels))]
         public AudioClip[] InfectedMusicCueChannelInfoClips = new AudioClip[] { null, null, null, null, null, null }; // InfectedMusicCue
         /// <summary>
-        ///     Infected Music Cue Channel Info Syncs
+        /// Infected Music Cue Channel Info Syncs
         /// </summary>
         [ArrayForEnum(typeof(MusicChannels))]
         public MusicChannelSync[] InfectedMusicCueChannelInfoSyncs = new[] { MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit, MusicChannelSync.Implicit }; // InfectedMusicCue
         /// <summary>
-        ///     Music Snapshot Snapshot Name
+        /// Music Snapshot Snapshot Name
         /// </summary>
         public string MsSnapshotName = "Silent"; // MusicSnapshot
         /// <summary>
-        ///     Music Snapshot Snapshot Index
+        /// Music Snapshot Snapshot Index
         /// </summary>
         public MusicChoices MsSnapshotIndex = MusicChoices.Silent; // MusicSnapshot
         /// <summary>
-        ///     Music Delay Time
+        /// Music Delay Time
         /// </summary>
         public float musicDelayTime = 0;
         /// <summary>
-        ///     Music Transition Time
+        /// Music Transition Time
         /// </summary>
         public float musicTransitionTime = 3;
         /// <summary>
-        ///     Atmos Snapshot Snapshot Name
+        /// Atmos Snapshot Snapshot Name
         /// </summary>
         public string AtsSnapshotName = "at Surface"; // AtmosSnapshot
         /// <summary>
-        ///     Atmos Snapshot Snapshot Index
+        /// Atmos Snapshot Snapshot Index
         /// </summary>
         public AtmosChoices AtsSnapshotIndex = AtmosChoices.Surface; // AtmosSnapshot
         /// <summary>
-        ///     Enviro Snapshot Snapshot Name
+        /// Enviro Snapshot Snapshot Name
         /// </summary>
         public string EsSnapshotName = "en Cliffs"; // EnviroSnapshot
         /// <summary>
-        ///     Enviro Snapshot Snapshot Index
+        /// Enviro Snapshot Snapshot Index
         /// </summary>
         public EnviroChoices EsSnapshotIndex = EnviroChoices.Cliffs; // EnviroSnapshot
         /// <summary>
-        ///     Actor Snapshot Snapshot Name
+        /// Actor Snapshot Snapshot Name
         /// </summary>
         public string AcsSnapshotName = "On"; // ActorSnapshot
         /// <summary>
-        ///     Actor Snapshot Snapshot Index
+        /// Actor Snapshot Snapshot Index
         /// </summary>
         public ActorChoices AcsSnapshotIndex = ActorChoices.On; // ActorSnapshot
         /// <summary>
-        ///     Shade Snapshot Snapshot Name
+        /// Shade Snapshot Snapshot Name
         /// </summary>
         public string SsSnapshotName = "Away"; // ShadeSnapshot
         /// <summary>
-        ///     Shade Snapshot Snapshot Index
+        /// Shade Snapshot Snapshot Index
         /// </summary>
         public ShadeChoices SsSnapshotIndex = ShadeChoices.Away; // ShadeSnapshot
         /// <summary>
-        ///     Transition Time
+        /// Transition Time
         /// </summary>
         public float transitionTime = 0.5f;
 
         /// <summary>
-        ///     Manual Map Trigger
+        /// Manual Map Trigger
         /// </summary>
         [Header("Mapping")]
         [Space(6f)]
         public bool manualMapTrigger = false;
 
         /// <summary>
-        ///     Unity method.
+        /// Unity method.
         /// </summary>
         public void Awake()
         {
@@ -287,7 +287,7 @@ namespace SFCore.MonoBehaviours
         }
 
         /// <summary>
-        ///     Replacement for private ingame enums
+        /// Replacement for private ingame enums
         /// </summary>
         public enum EnviromentType
         {
@@ -307,7 +307,7 @@ namespace SFCore.MonoBehaviours
             Wet
         }
         /// <summary>
-        ///     Replacement for private ingame enums
+        /// Replacement for private ingame enums
         /// </summary>
         public enum DarknessLevel
         {
@@ -321,7 +321,7 @@ namespace SFCore.MonoBehaviours
             Dark2
         }
         /// <summary>
-        ///     Replacement for AudioMixerSnapshots
+        /// Replacement for AudioMixerSnapshots
         /// </summary>
         public enum MusicChoices
         {
@@ -369,7 +369,7 @@ namespace SFCore.MonoBehaviours
             HK_DECLINE6
         }
         /// <summary>
-        ///     Replacement for AudioMixerSnapshots
+        /// Replacement for AudioMixerSnapshots
         /// </summary>
         public enum AtmosChoices
         {
@@ -423,7 +423,7 @@ namespace SFCore.MonoBehaviours
             MiscWind
         }
         /// <summary>
-        ///     Replacement for AudioMixerSnapshots
+        /// Replacement for AudioMixerSnapshots
         /// </summary>
         public enum EnviroChoices
         {
@@ -447,7 +447,7 @@ namespace SFCore.MonoBehaviours
             Silent
         }
         /// <summary>
-        ///     Replacement for AudioMixerSnapshots
+        /// Replacement for AudioMixerSnapshots
         /// </summary>
         public enum ActorChoices
         {
@@ -457,7 +457,7 @@ namespace SFCore.MonoBehaviours
             Off
         }
         /// <summary>
-        ///     Replacement for AudioMixerSnapshots
+        /// Replacement for AudioMixerSnapshots
         /// </summary>
         public enum ShadeChoices
         {
@@ -467,7 +467,7 @@ namespace SFCore.MonoBehaviours
             Close
         }
         /// <summary>
-        ///     Replacement for private ingame enums
+        /// Replacement for private ingame enums
         /// </summary>
         public enum AtmosChannels
         {
@@ -505,7 +505,7 @@ namespace SFCore.MonoBehaviours
             MiscWind
         }
         /// <summary>
-        ///     Replacement for private ingame enums
+        /// Replacement for private ingame enums
         /// </summary>
         public enum MusicChannelSync
         {

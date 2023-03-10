@@ -6,14 +6,14 @@ using JetBrains.Annotations;
 namespace SFCore.ModInterOp
 {
     /// <summary>
-    ///     Class that handles mod interop.
+    /// Class that handles mod interop.
     /// </summary>
     public static class MIOController
     {
         private static Dictionary<string, InterOpItem> m_methodMap = new();
 
         /// <summary>
-        ///     Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.
+        /// Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.
         /// </summary>
         /// <param name="d">The Delegate that is going to be invoked.</param>
         /// <param name="n">The unique name that is used to invoke the Delegate.</param>
@@ -214,7 +214,7 @@ namespace SFCore.ModInterOp
         }
 
         /// <summary>
-        ///     Invokes a Delegate of the Mod Interop Enviroment that has no return value.
+        /// Invokes a Delegate of the Mod Interop Enviroment that has no return value.
         /// </summary>
         /// <param name="name">The unique name of the Delegate.</param>
         /// <param name="params">The parameters that are given to the Delegate.</param>
@@ -234,7 +234,7 @@ namespace SFCore.ModInterOp
             return true;
         }
         /// <summary>
-        ///     Invokes a Delegate of the Mod Interop Enviroment that has a return value.
+        /// Invokes a Delegate of the Mod Interop Enviroment that has a return value.
         /// </summary>
         /// <param name="name">The unique name of the Delegate.</param>
         /// <param name="res">The return value of the Delegate.</param>

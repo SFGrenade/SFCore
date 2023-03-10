@@ -7,7 +7,7 @@ using Logger = Modding.Logger;
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     Patching MusicRegion
+    /// Patching MusicRegion
     /// </summary>
     [RequireComponent(typeof(BoxCollider2D))]
     public class PatchMusicRegions : MonoBehaviour
@@ -15,97 +15,97 @@ namespace SFCore.MonoBehaviours
         private static AudioMixer _am = null;
 
         /// <summary>
-        ///     Use alternative background music.
+        /// Use alternative background music.
         /// </summary>
         public bool useAlts = false;
         /// <summary>
-        ///     State of alternative background music.
+        /// State of alternative background music.
         /// </summary>
         public static bool altMusic = false;
 
         /// <summary>
-        ///     Snapshot Name.
+        /// Snapshot Name.
         /// </summary>
         public string SnapshotName = "Silent";
         /// <summary>
-        ///     Snapshot Index.
+        /// Snapshot Index.
         /// </summary>
         public int SnapshotIndex = 9;
 
         /// <summary>
-        ///     Music Region Set.
+        /// Music Region Set.
         /// </summary>
         public string MusicRegionSet = "";
 
         /// <summary>
-        ///     Main.
+        /// Main.
         /// </summary>
         public AudioClip Main;
         /// <summary>
-        ///     Action.
+        /// Action.
         /// </summary>
         public AudioClip Action;
         /// <summary>
-        ///     Sub.
+        /// Sub.
         /// </summary>
         public AudioClip Sub;
         /// <summary>
-        ///     Tension.
+        /// Tension.
         /// </summary>
         public AudioClip Tension;
         /// <summary>
-        ///     Main Alt.
+        /// Main Alt.
         /// </summary>
         public AudioClip MainAlt;
         /// <summary>
-        ///     Extra.
+        /// Extra.
         /// </summary>
         public AudioClip Extra;
 
         /// <summary>
-        ///     Alternative Main.
+        /// Alternative Main.
         /// </summary>
         public AudioClip Main2;
         /// <summary>
-        ///     Alternative Action.
+        /// Alternative Action.
         /// </summary>
         public AudioClip Action2;
         /// <summary>
-        ///     Alternative Sub.
+        /// Alternative Sub.
         /// </summary>
         public AudioClip Sub2;
         /// <summary>
-        ///     Alternative Tension.
+        /// Alternative Tension.
         /// </summary>
         public AudioClip Tension2;
         /// <summary>
-        ///     Alternative Main Alt.
+        /// Alternative Main Alt.
         /// </summary>
         public AudioClip MainAlt2;
         /// <summary>
-        ///     Alternative Extra.
+        /// Alternative Extra.
         /// </summary>
         public AudioClip Extra2;
 
         /// <summary>
-        ///     Dirtmouth.
+        /// Dirtmouth.
         /// </summary>
         public bool Dirtmouth = false;
         /// <summary>
-        ///     Mines Delay.
+        /// Mines Delay.
         /// </summary>
         public bool MinesDelay = false;
         /// <summary>
-        ///     Enter Track Event.
+        /// Enter Track Event.
         /// </summary>
         public string EnterTrackEvent = "CROSSROADS";
         /// <summary>
-        ///     Enter Transition Time.
+        /// Enter Transition Time.
         /// </summary>
         public float EnterTransitionTime = 3f;
 
         /// <summary>
-        ///     Unity method.
+        /// Unity method.
         /// </summary>
         public void Start()
         {

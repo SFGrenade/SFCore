@@ -8,7 +8,7 @@ using UObject = UnityEngine.Object;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     Utils specifically for Sprites and Textures.
+    /// Utils specifically for Sprites and Textures.
     /// </summary>
     public static class SpriteUtil
     {
@@ -21,7 +21,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Calculates the area between 3 integer points.
+        /// Calculates the area between 3 integer points.
         /// </summary>
         /// <param name="a">A point of the triangle</param>
         /// <param name="b">A point of the triangle</param>
@@ -33,7 +33,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Returns a new Texture2D that is cropped.
+        /// Returns a new Texture2D that is cropped.
         /// </summary>
         /// <param name="tex">The texture to crop</param>
         /// <param name="x">Left offset</param>
@@ -60,7 +60,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Extracts a sprite from a texture, returns a new texture which is cropped to only the sprite according to its UV values.
+        /// Extracts a sprite from a texture, returns a new texture which is cropped to only the sprite according to its UV values.
         /// </summary>
         /// <param name="sprite">The sprite to extract</param>
         /// <returns>A texture with just the sprite on it.</returns>

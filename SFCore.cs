@@ -8,7 +8,7 @@ using SFCore.Utils;
 namespace SFCore
 {
     /// <summary>
-    ///     Used for static initialization.
+    /// Used for static initialization.
     /// </summary>
     public class SFCoreMod : FullSettingsMod<SFCoreSaveSettings, SFCoreGlobalSettings>
     {
@@ -25,7 +25,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Constructor.
+        /// Constructor.
         /// </summary>
         public SFCoreMod() : base("SFCore")
         {
@@ -33,12 +33,12 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Displays the version.
+        /// Displays the version.
         /// </summary>
         public override string GetVersion() => Util.GetVersion(Assembly.GetExecutingAssembly());
 
         /// <summary>
-        ///     Main menu is loaded.
+        /// Main menu is loaded.
         /// </summary>
         public override void Initialize()
         {
@@ -46,22 +46,22 @@ namespace SFCore
     }
 
     /// <summary>
-    ///     Global settings for SFCore
+    /// Global settings for SFCore
     /// </summary>
     public class SFCoreGlobalSettings
     {
         /// <summary>
-        ///     Important to clear and reapply custom charms.
+        /// Important to clear and reapply custom charms.
         /// </summary>
         public int MaxCustomCharms = 0;
         /// <summary>
-        ///     Important to reapply the wanted menu theme.
+        /// Important to reapply the wanted menu theme.
         /// </summary>
         public string SelectedMenuTheme = "UI_MENU_STYLE_CLASSIC";
     }
 
     /// <summary>
-    ///     Save specific settings for SFCore
+    /// Save specific settings for SFCore
     /// </summary>
     public class SFCoreSaveSettings
     {

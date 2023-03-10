@@ -4,23 +4,23 @@ using UnityEngine;
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     Patching Sprites from assetbundles
+    /// Patching Sprites from assetbundles
     /// </summary>
     class SpritePatcher : MonoBehaviour
     {
         private static Dictionary<string, Material> _materials = new Dictionary<string, Material>();
 
         /// <summary>
-        ///     Shader to apply to all SpriteRenderers on this GameObject and children
+        /// Shader to apply to all SpriteRenderers on this GameObject and children
         /// </summary>
         public string shader = "Sprites/Default";
         /// <summary>
-        ///     Scale to apply to all Transforms on this GameObject and children
+        /// Scale to apply to all Transforms on this GameObject and children
         /// </summary>
         public float Scale = 1.0f;
 
         /// <summary>
-        ///     Unity method.
+        /// Unity method.
         /// </summary>
         public void Start()
         {

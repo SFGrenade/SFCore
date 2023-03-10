@@ -6,14 +6,14 @@ using Logger = Modding.Logger;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     Utils specifically for PlayMakerFSMs.
+    /// Utils specifically for PlayMakerFSMs.
     /// </summary>
     public static class FsmUtil
     {
         #region Get
 
         /// <summary>
-        ///     Gets a state in a PlayMakerFSM.
+        /// Gets a state in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state</param>
@@ -38,7 +38,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Gets a transtition in a PlayMakerFSM.
+        /// Gets a transtition in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the from state</param>
@@ -72,7 +72,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Gets an action in a PlayMakerFSM.
+        /// Gets an action in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state</param>
@@ -92,7 +92,7 @@ namespace SFCore.Utils
         #region Add
 
         /// <summary>
-        ///     Adds a state in a PlayMakerFSM.
+        /// Adds a state in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state</param>
@@ -120,7 +120,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Copies a state in a PlayMakerFSM.
+        /// Copies a state in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="fromState">The name of the state to copy</param>
@@ -149,7 +149,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Adds a transition in a PlayMakerFSM.
+        /// Adds a transition in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state from which the transition starts</param>
@@ -186,7 +186,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Adds a global transition in a PlayMakerFSM.
+        /// Adds a global transition in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="globalEventName">The name of transition event</param>
@@ -213,7 +213,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Adds an action in a PlayMakerFSM.
+        /// Adds an action in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state in which the action is added</param>
@@ -241,7 +241,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Adds a method in a PlayMakerFSM.
+        /// Adds a method in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state in which the method is added</param>
@@ -262,7 +262,7 @@ namespace SFCore.Utils
         #region Insert
 
         /// <summary>
-        ///     Inserts an action in a PlayMakerFSM.
+        /// Inserts an action in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state in which the action is added</param>
@@ -301,7 +301,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Inserts an action in a PlayMakerFSM.
+        /// Inserts an action in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state in which the method is added</param>
@@ -324,7 +324,7 @@ namespace SFCore.Utils
         #region Change
 
         /// <summary>
-        ///     Changes a transition endpoint in a PlayMakerFSM.
+        /// Changes a transition endpoint in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state from which the transition starts</param>
@@ -355,7 +355,7 @@ namespace SFCore.Utils
         #region Remove
 
         /// <summary>
-        ///     Removes a state in a PlayMakerFSM.
+        /// Removes a state in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state to remove</param>
@@ -409,7 +409,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Removes a transition in a PlayMakerFSM.
+        /// Removes a transition in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state from which the transition starts</param>
@@ -445,7 +445,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Removes a global transition in a PlayMakerFSM.
+        /// Removes a global transition in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="eventName">The event of the global transition</param>
@@ -472,7 +472,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Removes an action in a PlayMakerFSM.
+        /// Removes an action in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state with the action</param>
@@ -518,7 +518,7 @@ namespace SFCore.Utils
             return newArray;
         }
         /// <summary>
-        ///     Adds a fsm variable in a PlayMakerFSM.
+        /// Adds a fsm variable in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="name">The name of the new variable</param>
@@ -627,7 +627,7 @@ namespace SFCore.Utils
             return null;
         }
         /// <summary>
-        ///     Finds a fsm variable in a PlayMakerFSM.
+        /// Finds a fsm variable in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="name">The name of the variable</param>
@@ -673,7 +673,7 @@ namespace SFCore.Utils
         public static FsmGameObject FindFsmGameObjectVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmGameObject>(fsm.FsmVariables.GameObjectVariables, name);
 
         /// <summary>
-        ///     Gets a fsm variable in a PlayMakerFSM. Creates a new one if none with the name are present.
+        /// Gets a fsm variable in a PlayMakerFSM. Creates a new one if none with the name are present.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="name">The name of the variable</param>
@@ -783,7 +783,7 @@ namespace SFCore.Utils
         #region Log
 
         /// <summary>
-        ///     Adds actions to a PlayMakerFSM so it gives a log message before and after every single normal action.
+        /// Adds actions to a PlayMakerFSM so it gives a log message before and after every single normal action.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="additionalLogging">Flag if, additionally, every log should also log the state of all fsm variables</param>
@@ -838,7 +838,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Logs the fsm and its states, transitions and variables.
+        /// Logs the fsm and its states, transitions and variables.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         public static void Log(this PlayMakerFSM fsm)

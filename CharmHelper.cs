@@ -11,34 +11,34 @@ using Object = UnityEngine.Object;
 namespace SFCore
 {
     /// <summary>
-    ///     Charm helper class for easily adding custom charms.
-    ///     The mod using this needs to handle the following:
-    ///     - "CHARM_NAME_{ID}" Language string(s)
-    ///     - "CHARM_DESC_{ID}" Language string(s)
-    ///     - "gotCharm_{ID}" PlayerData bool(s)
-    ///     - "newCharm_{ID}" PlayerData bool(s)
-    ///     - "equippedCharm_{ID}" PlayerData bool(s)
-    ///     - "charmCost_{ID}" PlayerData int(s)
+    /// Charm helper class for easily adding custom charms.
+    /// The mod using this needs to handle the following:
+    /// - "CHARM_NAME_{ID}" Language string(s)
+    /// - "CHARM_DESC_{ID}" Language string(s)
+    /// - "gotCharm_{ID}" PlayerData bool(s)
+    /// - "newCharm_{ID}" PlayerData bool(s)
+    /// - "equippedCharm_{ID}" PlayerData bool(s)
+    /// - "charmCost_{ID}" PlayerData int(s)
     /// </summary>
     public static class CharmHelper
     {
         /// <summary>
-        ///     List of sprites to use for the charms.
+        /// List of sprites to use for the charms.
         /// </summary>
         private static readonly List<Sprite> CustomSprites = new List<Sprite>();
 
         /// <summary>
-        ///     A hook for a private method that has no body.
+        /// A hook for a private method that has no body.
         /// </summary>
         private static MonoMod.RuntimeDetour.Hook BuildEquippedCharms_Start_hook;
 
         /// <summary>
-        ///     A hook for a private method.
+        /// A hook for a private method.
         /// </summary>
         private static MonoMod.RuntimeDetour.Hook GameCameras_Start_hook;
 
         /// <summary>
-        ///     Constructs the mod and hooks important functions.
+        /// Constructs the mod and hooks important functions.
         /// </summary>
         static CharmHelper()
         {
@@ -127,7 +127,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Used for static initialization.
+        /// Used for static initialization.
         /// </summary>
         public static void unusedInit()
         {
@@ -136,7 +136,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds a list of sprites as charms.
+        /// Adds a list of sprites as charms.
         /// </summary>
         public static List<int> AddSprites(params Sprite[] charmSprites)
         {
@@ -155,7 +155,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     On hook to indicate that the custom charms need to be readded.
+        /// On hook to indicate that the custom charms need to be readded.
         /// </summary>
         private static void OnGameManagerStart(On.GameManager.orig_Start orig, GameManager self)
         {
@@ -168,7 +168,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds custom charms to the charm board.
+        /// Adds custom charms to the charm board.
         /// </summary>
         private static void ClearModdedCharms()
         {
@@ -290,7 +290,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds custom charms to the charm board.
+        /// Adds custom charms to the charm board.
         /// </summary>
         private static void Init()
         {
@@ -499,7 +499,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds charm cost of custom charms to notches.
+        /// Adds charm cost of custom charms to notches.
         /// </summary>
         private static void OnPlayerDataCalculateNotchesUsed(On.PlayerData.orig_CalculateNotchesUsed orig, PlayerData self)
         {
@@ -518,7 +518,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Initializes equipped charms.
+        /// Initializes equipped charms.
         /// </summary>
         private static void InitBuildEquippedCharms(BuildEquippedCharms self)
         {
@@ -559,7 +559,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     On hook to initialize charms and equipped charms.
+        /// On hook to initialize charms and equipped charms.
         /// </summary>
         private static void OnBuildEquippedCharmsStart_single(Action<BuildEquippedCharms> orig, BuildEquippedCharms self)
         {
@@ -573,7 +573,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     On hook to add more detail cost notches.
+        /// On hook to add more detail cost notches.
         /// </summary>
         private static void GameCamerasStart_single(Action<GameCameras> orig, GameCameras self)
         {
@@ -684,7 +684,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds charm to fade group.
+        /// Adds charm to fade group.
         /// </summary>
         private static void AddToCharmFadeGroup(GameObject spriteGo, GameObject fgGo)
         {
@@ -699,7 +699,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Makes a gameobject not be destroyed.
+        /// Makes a gameobject not be destroyed.
         /// </summary>
         private static void SetInactive(Object go)
         {

@@ -7,12 +7,12 @@ using Modding;
 namespace SFCore.Utils
 {
     /// <summary>
-    ///     Misc utils to use.
+    /// Misc utils to use.
     /// </summary>
     public static class Util
     {
         /// <summary>
-        ///     Sets a nonpublic member of an Object to a specified value.
+        /// Sets a nonpublic member of an Object to a specified value.
         /// </summary>
         /// <param name="o">The object that has the nonpublic member</param>
         /// <param name="fieldname">The name of the nonpublic member</param>
@@ -22,7 +22,7 @@ namespace SFCore.Utils
             ReflectionHelper.SetField(o, fieldname, value);
         }
         /// <summary>
-        ///     Gets the value of a nonpublic member of an Object.
+        /// Gets the value of a nonpublic member of an Object.
         /// </summary>
         /// <param name="o">The object that has the nonpublic member</param>
         /// <param name="fieldname">The name of the nonpublic member</param>
@@ -33,7 +33,7 @@ namespace SFCore.Utils
         }
 
         /// <summary>
-        ///     Gets the version of an Assembly.
+        /// Gets the version of an Assembly.
         /// </summary>
         /// <param name="asm">The Assembly of which to get the version</param>
         /// <returns>"{Assembly.Version}-{SHA1(assembly binary)}"</returns>

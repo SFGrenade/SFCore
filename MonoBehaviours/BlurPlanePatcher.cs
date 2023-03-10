@@ -3,7 +3,7 @@
 namespace SFCore.MonoBehaviours
 {
     /// <summary>
-    ///     Patching BlurPlane
+    /// Patching BlurPlane
     /// </summary>
     [RequireComponent(typeof(MeshRenderer))]
     public class BlurPlanePatcher : MonoBehaviour
@@ -12,7 +12,7 @@ namespace SFCore.MonoBehaviours
         private static bool _initialized = false;
 
         /// <summary>
-        ///     Unity method.
+        /// Unity method.
         /// </summary>
         public void Start()
         {

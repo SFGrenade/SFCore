@@ -12,39 +12,39 @@ using UObject = UnityEngine.Object;
 namespace SFCore
 {
     /// <summary>
-    ///     Enum to determine type of the inventory page.
+    /// Enum to determine type of the inventory page.
     /// </summary>
     public enum InventoryPageType
     {
         /// <summary>
-        ///     An empty inventory page.
-        ///     See https://discord.com/channels/879125729936298015/880548951521103962/963340255661031464 for specifics.
+        /// An empty inventory page.
+        /// See https://discord.com/channels/879125729936298015/880548951521103962/963340255661031464 for specifics.
         /// </summary>
         Empty,
         /// <summary>
-        ///     A shallow copy of the main inventory page.
+        /// A shallow copy of the main inventory page.
         /// </summary>
         Inventory,
         /// <summary>
-        ///     A shallow copy of the Charms inventory page.
+        /// A shallow copy of the Charms inventory page.
         /// </summary>
         Charms,
         /// <summary>
-        ///     A shallow copy of the Hunters Journal inventory page.
+        /// A shallow copy of the Hunters Journal inventory page.
         /// </summary>
         Journal,
         /// <summary>
-        ///     A shallow copy of the Map inventory page.
+        /// A shallow copy of the Map inventory page.
         /// </summary>
         Map
     }
 
     /// <summary>
-    ///     Helper class for easily adding new inventory pages.
-    ///     The mod using this needs to handle the following:
-    ///     - 1 name language string per page
-    ///     - 0 to 1 PlayerData bools per page
-    ///     - 0 to 1 events per item
+    /// Helper class for easily adding new inventory pages.
+    /// The mod using this needs to handle the following:
+    /// - 1 name language string per page
+    /// - 0 to 1 PlayerData bools per page
+    /// - 0 to 1 events per item
     /// </summary>
     public static class InventoryHelper
     {
@@ -80,14 +80,14 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Used for static initialization.
+        /// Used for static initialization.
         /// </summary>
         public static void unusedInit()
         {
         }
 
         /// <summary>
-        ///     Adds an inventory page with a specified original.
+        /// Adds an inventory page with a specified original.
         /// </summary>
         /// <param name="type">The original to copy</param>
         /// <param name="name">The name of the new page</param>

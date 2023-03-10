@@ -6,9 +6,9 @@ using UObject = UnityEngine.Object;
 namespace SFCore
 {
     /// <summary>
-    ///     Title logo helper class for easily adding custom title logos.
-    ///     The mod using this needs to handle the following:
-    ///     - save title logo IDs
+    /// Title logo helper class for easily adding custom title logos.
+    /// The mod using this needs to handle the following:
+    /// - save title logo IDs
     /// </summary>
     public static class TitleLogoHelper
     {
@@ -21,12 +21,12 @@ namespace SFCore
             On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
         }
         /// <summary>
-        ///     Used for static initialization.
+        /// Used for static initialization.
         /// </summary>
         public static void unusedInit() { }
 
         /// <summary>
-        ///     Adds the custom title logo.
+        /// Adds the custom title logo.
         /// </summary>
         /// <returns>ID of the custom title logo</returns>
         public static int AddLogo(Sprite logo)

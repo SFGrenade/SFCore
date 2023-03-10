@@ -15,122 +15,122 @@ using SFCore.MonoBehaviours;
 namespace SFCore
 {
     /// <summary>
-    ///     Enum to determine type of item.
+    /// Enum to determine type of item.
     /// </summary>
     public enum ItemType
     {
         /// <summary>
-        ///     A normal item with a single PD bool to indicate whether or not the item was acquired.
+        /// A normal item with a single PD bool to indicate whether or not the item was acquired.
         /// </summary>
         Normal,
         /// <summary>
-        ///     An item with 2 PD bools to indicate whether or not one item or another was acquired, not both.
+        /// An item with 2 PD bools to indicate whether or not one item or another was acquired, not both.
         /// </summary>
         OneTwo,
         /// <summary>
-        ///     An item with 2 PD bools to indicate whether or not one, another or both items were acquired.
+        /// An item with 2 PD bools to indicate whether or not one, another or both items were acquired.
         /// </summary>
         OneTwoBoth,
         /// <summary>
-        ///     An item with a single PD int to indicate whether or not and how many of an item were acquired.
+        /// An item with a single PD int to indicate whether or not and how many of an item were acquired.
         /// </summary>
         Counted,
         /// <summary>
-        ///     An item to mimic the delicate flower.
-        ///     It has 2 sprites, 2 names and 4 descriptions.
-        ///     The item counts as acquired when playerdataBool1 is true and either of playerdataBool2 and playerdataBool3 (playerdataInt) is false.
-        ///     sprite1 is used when playerdataBool3 (playerdataInt) is false. Otherwise sprite2 is used.
-        ///     nameConvo1 is used when playerdataBool3 (playerdataInt) is false. Otherwise nameConvo2 is used.
-        ///     descConvo1 is used when both playerdataBool3 (playerdataInt) and playerdataBool2 are false.
-        ///     descConvo2 is used when playerdataBool3 (playerdataInt) is true and playerdataBool2 is false.
-        ///     descConvo3 (nameConvoBoth) is used when playerdataBool3 (playerdataInt) is false and playerdataBool2 is true.
-        ///     descConvo4 (descConvoBoth) is used when both playerdataBool3 (playerdataInt) and playerdataBool2 are true.
+        /// An item to mimic the delicate flower.
+        /// It has 2 sprites, 2 names and 4 descriptions.
+        /// The item counts as acquired when playerdataBool1 is true and either of playerdataBool2 and playerdataBool3 (playerdataInt) is false.
+        /// sprite1 is used when playerdataBool3 (playerdataInt) is false. Otherwise sprite2 is used.
+        /// nameConvo1 is used when playerdataBool3 (playerdataInt) is false. Otherwise nameConvo2 is used.
+        /// descConvo1 is used when both playerdataBool3 (playerdataInt) and playerdataBool2 are false.
+        /// descConvo2 is used when playerdataBool3 (playerdataInt) is true and playerdataBool2 is false.
+        /// descConvo3 (nameConvoBoth) is used when playerdataBool3 (playerdataInt) is false and playerdataBool2 is true.
+        /// descConvo4 (descConvoBoth) is used when both playerdataBool3 (playerdataInt) and playerdataBool2 are true.
         /// </summary>
         Flower
     }
 
     /// <summary>
-    ///     Item helper class for easily adding custom items.
-    ///     The mod using this needs to handle the following:
-    ///     - 0 to 3 PlayerData bools per item
-    ///     - 0 to 1 PlayerData int per item
-    ///     - 1 to 3 name language strings per item
-    ///     - 1 to 4 description language strings per item
+    /// Item helper class for easily adding custom items.
+    /// The mod using this needs to handle the following:
+    /// - 0 to 3 PlayerData bools per item
+    /// - 0 to 1 PlayerData int per item
+    /// - 1 to 3 name language strings per item
+    /// - 1 to 4 description language strings per item
     /// </summary>
     public static class ItemHelper
     {
         /// <summary>
-        ///     Data of one item.
+        /// Data of one item.
         /// </summary>
         public struct Item
         {
             /// <summary>
-            ///     Type of the item.
+            /// Type of the item.
             /// </summary>
             public ItemType type;
 
             /// <summary>
-            ///     Unique name for FSM purposes.
+            /// Unique name for FSM purposes.
             /// </summary>
             public string uniqueName;
 
             /// <summary>
-            ///     Main sprite.
+            /// Main sprite.
             /// </summary>
             public Sprite sprite1;
 
             /// <summary>
-            ///     Alternative sprite.
+            /// Alternative sprite.
             /// </summary>
             public Sprite sprite2;
 
             /// <summary>
-            ///     Another alternative sprite.
+            /// Another alternative sprite.
             /// </summary>
             public Sprite spriteBoth;
 
             /// <summary>
-            ///     PlayerData bool.
+            /// PlayerData bool.
             /// </summary>
             public string playerdataBool1;
 
             /// <summary>
-            ///     PlayerData bool.
+            /// PlayerData bool.
             /// </summary>
             public string playerdataBool2;
 
             /// <summary>
-            ///     PlayerData int, sometimes used for a bool.
+            /// PlayerData int, sometimes used for a bool.
             /// </summary>
             public string playerdataInt;
 
             /// <summary>
-            ///     Main name language key.
+            /// Main name language key.
             /// </summary>
             public string nameConvo1;
 
             /// <summary>
-            ///     Alternative name language key.
+            /// Alternative name language key.
             /// </summary>
             public string nameConvo2;
 
             /// <summary>
-            ///     Another alternative name language key, sometimes used for a description.
+            /// Another alternative name language key, sometimes used for a description.
             /// </summary>
             public string nameConvoBoth;
 
             /// <summary>
-            ///     Main description language key.
+            /// Main description language key.
             /// </summary>
             public string descConvo1;
 
             /// <summary>
-            ///     Alternative description language key.
+            /// Alternative description language key.
             /// </summary>
             public string descConvo2;
 
             /// <summary>
-            ///     Another alternative description language key.
+            /// Another alternative description language key.
             /// </summary>
             public string descConvoBoth;
         }
@@ -158,7 +158,7 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Used for static initialization.
+        /// Used for static initialization.
         /// </summary>
         public static void unusedInit()
         {
@@ -507,8 +507,8 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds a normal item. (e.g. King's Brand)
-        ///     You either have it, or you don't.
+        /// Adds a normal item. (e.g. King's Brand)
+        /// You either have it, or you don't.
         /// </summary>
         /// <param name="sprite">Sprite for the item</param>
         /// <param name="playerdataBool">Bool used to determine if the item is acquired</param>
@@ -529,8 +529,8 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds a item of type OneTwo. (Not used ingame)
-        ///     You either have one, the other or none.
+        /// Adds a item of type OneTwo. (Not used ingame)
+        /// You either have one, the other or none.
         /// </summary>
         /// <param name="sprite1">Sprite for the item 1</param>
         /// <param name="sprite2">Sprite for the item 2</param>
@@ -559,8 +559,8 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map and Quill)
-        ///     You can have one, the other, both or none.
+        /// Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map and Quill)
+        /// You can have one, the other, both or none.
         /// </summary>
         /// <param name="sprite1">Sprite for the item 1</param>
         /// <param name="sprite2">Sprite for the item 2</param>
@@ -595,8 +595,8 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds a counted item. (e.g. Rancid Egg)
-        ///     You either have at least one, or you don't.
+        /// Adds a counted item. (e.g. Rancid Egg)
+        /// You either have at least one, or you don't.
         /// </summary>
         /// <param name="sprite">Sprite for the item</param>
         /// <param name="playerdataInt">Int used to determine if and how much of the item is acquired</param>
@@ -617,9 +617,9 @@ namespace SFCore
         }
 
         /// <summary>
-        ///     Adds a flower item. (e.g. the Delicate Flower)
-        ///     You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
-        ///     (bool1 AND !(bool2 AND bool3)) and it will be displayed
+        /// Adds a flower item. (e.g. the Delicate Flower)
+        /// You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
+        /// (bool1 AND !(bool2 AND bool3)) and it will be displayed
         /// </summary>
         /// <param name="sprite">Sprite for the 'normal' item</param>
         /// <param name="sprite2">Sprite for the 'broken' item</param>
