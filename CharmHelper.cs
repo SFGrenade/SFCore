@@ -29,7 +29,7 @@ public static class CharmHelper
     /// <summary>
     /// A hook for a private method that has no body.
     /// </summary>
-    private static MonoMod.RuntimeDetour.Hook BuildEquippedCharms_Start_hook;
+    private static MonoMod.RuntimeDetour.Detour BuildEquippedCharms_Start_hook;
 
     /// <summary>
     /// A hook for a private method.
@@ -46,7 +46,7 @@ public static class CharmHelper
         // i hate this, can't have shit in detroid
         //On.BuildEquippedCharms.Start += OnBuildEquippedCharmsStart;
         // workaround, since above isn't working
-        BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
+        BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Detour(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
         BuildEquippedCharms_Start_hook.Apply();
         On.GameManager.Start += OnGameManagerStart;
         ModHooks.AfterSavegameLoadHook += ModHooksOnAfterSavegameLoadHook;
@@ -560,14 +560,15 @@ public static class CharmHelper
     /// <summary>
     /// On hook to initialize charms and equipped charms.
     /// </summary>
-    private static void OnBuildEquippedCharmsStart_single(Action<BuildEquippedCharms> orig, BuildEquippedCharms self)
+    //private static void OnBuildEquippedCharmsStart_single(Action<BuildEquippedCharms> orig, BuildEquippedCharms self)
+    private static void OnBuildEquippedCharmsStart_single()
     {
         LogFine("!OnBuildEquippedCharmsStart_single");
         Init();
 
-        orig(self);
+        //orig(self);
 
-        InitBuildEquippedCharms(self);
+        InitBuildEquippedCharms(UnityEngine.Object.FindObjectOfType<BuildEquippedCharms>(true));
         LogFine("~OnBuildEquippedCharmsStart_single");
     }
 
