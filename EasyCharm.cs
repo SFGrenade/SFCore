@@ -150,7 +150,7 @@ public abstract class EasyCharm
             return GetName();
         }
         // Check if the charm description is wanted
-        else if (key == $"CHARM_DESC_{Id}")
+        if (key == $"CHARM_DESC_{Id}")
         {
             return GetDescription();
         }

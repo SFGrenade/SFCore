@@ -4,15 +4,12 @@ internal static class InternalLogger
 {
     private static string FormatOriginator(object originator, string message)
     {
-        if (originator == null)
+        return originator switch
         {
-            return message;
-        }
-        if (originator is string)
-        {
-            return $"{originator} - {message}";
-        }
-        return $"[{originator.GetType().FullName?.Replace(".", "]:[")}] - {message}";
+            null => message,
+            string => $"{originator} - {message}",
+            _ => $"[{originator.GetType().FullName?.Replace(".", "]:[")}] - {message}"
+        };
     }
     internal static void LogFine(string message, object originator = null)
     {
