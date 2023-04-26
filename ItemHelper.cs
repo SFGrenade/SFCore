@@ -242,7 +242,7 @@ public static class ItemHelper
         AddDefaultNormalItem("Kings Brand", _defaultSprites["Kings Brand"], "hasKingsBrand", "INV_NAME_KINGSBRAND", "INV_DESC_KINGSBRAND");
         AddDefaultNormalItem("Tram Pass", _defaultSprites["Tram Pass"], "hasTramPass", "INV_NAME_TRAM_PASS", "INV_DESC_TRAM_PASS");
         AddDefaultNormalItem("City Key", _defaultSprites["City Key"], "hasCityKey", "INV_NAME_CITYKEY", "INV_DESC_CITYKEY");
-        AddDefaultNormalItem("Store Key", _defaultSprites["Store Key"], "hasSlyKey", "INV_NAME_STOREKEY", "INV_DESC_STOREKEY");
+        AddDefaultNormalItem("Store Key", _defaultSprites["Store Key"], "hasSlykey", "INV_NAME_STOREKEY", "INV_DESC_STOREKEY");
         AddDefaultNormalItem("White Key", _defaultSprites["White Key"], "hasWhiteKey", "INV_NAME_WHITEKEY", "INV_DESC_WHITEKEY");
         AddDefaultNormalItem("Love Key", _defaultSprites["Love Key"], "hasLoveKey", "INV_NAME_LOVEKEY", "INV_DESC_LOVEKEY");
         AddDefaultFlowerItem("Xun Flower", _defaultSprites["Flower"], _defaultSprites["FlowerBroken"], "hasXunFlower", "extraFlowerAppear", "xunFlowerBroken", "INV_NAME_FLOWER", "INV_NAME_FLOWER_BROKEN", "INV_DESC_FLOWER", "INV_DESC_FLOWER_BROKEN", "INV_DESC_FLOWER_QG", "INV_DESC_FLOWER_BROKEN_QG");
