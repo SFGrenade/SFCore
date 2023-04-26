@@ -232,23 +232,23 @@ public static class ItemHelper
 
         #region Make new inventory
 
-        AddDefaultOneTwoBothItem("Dash", _defaultSprites["Dash"], _defaultSprites["ShadowDash"], _defaultSprites["ShadowDash"], "hasDash", "hasShadowDash", "INV_NAME_DASH", "INV_NAME_SHADOWDASH", "INV_NAME_SHADOWDASH", "INV_DESC_DASH", "INV_DESC_SHADOWDASH", "INV_DESC_SHADOWDASH");
-        AddDefaultNormalItem("Walljump", _defaultSprites["Walljump"], "hasWalljump", "INV_NAME_WALLJUMP", "INV_DESC_WALLJUMP");
-        AddDefaultNormalItem("Super Dash", _defaultSprites["Super Dash"], "hasSuperDash", "INV_NAME_SUPERDASH", "INV_DESC_SUPERDASH");
-        AddDefaultNormalItem("Double Jump", _defaultSprites["Double Jump"], "hasDoubleJump", "INV_NAME_DOUBLEJUMP", "INV_DESC_DOUBLEJUMP");
-        AddDefaultNormalItem("Acid Armour", _defaultSprites["Acid Armour"], "hasAcidArmour", "INV_NAME_ACIDARMOUR", "INV_DESC_ACIDARMOUR");
-        AddDefaultNormalItem("Lantern", _defaultSprites["Lantern"], "hasLantern", "INV_NAME_LANTERN", "INV_DESC_LANTERN");
-        AddDefaultOneTwoBothItem("Map Quill", _defaultSprites["Map"], _defaultSprites["Quill"], _defaultSprites["MapQuill"], "hasMap", "hasQuill", "INV_NAME_MAP", "INV_NAME_QUILL", "INV_NAME_MAPQUILL", "INV_DESC_MAP", "INV_DESC_QUILL", "INV_DESC_MAPQUILL");
-        AddDefaultNormalItem("Kings Brand", _defaultSprites["Kings Brand"], "hasKingsBrand", "INV_NAME_KINGSBRAND", "INV_DESC_KINGSBRAND");
-        AddDefaultNormalItem("Tram Pass", _defaultSprites["Tram Pass"], "hasTramPass", "INV_NAME_TRAM_PASS", "INV_DESC_TRAM_PASS");
-        AddDefaultNormalItem("City Key", _defaultSprites["City Key"], "hasCityKey", "INV_NAME_CITYKEY", "INV_DESC_CITYKEY");
-        AddDefaultNormalItem("Store Key", _defaultSprites["Store Key"], "hasSlykey", "INV_NAME_STOREKEY", "INV_DESC_STOREKEY");
-        AddDefaultNormalItem("White Key", _defaultSprites["White Key"], "hasWhiteKey", "INV_NAME_WHITEKEY", "INV_DESC_WHITEKEY");
-        AddDefaultNormalItem("Love Key", _defaultSprites["Love Key"], "hasLoveKey", "INV_NAME_LOVEKEY", "INV_DESC_LOVEKEY");
-        AddDefaultFlowerItem("Xun Flower", _defaultSprites["Flower"], _defaultSprites["FlowerBroken"], "hasXunFlower", "extraFlowerAppear", "xunFlowerBroken", "INV_NAME_FLOWER", "INV_NAME_FLOWER_BROKEN", "INV_DESC_FLOWER", "INV_DESC_FLOWER_BROKEN", "INV_DESC_FLOWER_QG", "INV_DESC_FLOWER_BROKEN_QG");
-        AddDefaultCountedItem("Simple Key", _defaultSprites["Simple Key"], "simpleKeys", "INV_NAME_SIMPLEKEY", "INV_DESC_SIMPLEKEY");
-        AddDefaultCountedItem("Ore", _defaultSprites["Ore"], "ore", "INV_NAME_ORE", "INV_DESC_ORE");
-        AddDefaultCountedItem("Rancid Egg", _defaultSprites["Rancid Egg"], "rancidEggs", "INV_NAME_RANCIDEGG", "INV_DESC_RANCIDEGG");
+        AddDefaultOneTwoBothItem("Dash", _defaultSprites["Dash"], _defaultSprites["ShadowDash"], _defaultSprites["ShadowDash"], nameof(PlayerData.hasDash), nameof(PlayerData.hasShadowDash), "INV_NAME_DASH", "INV_NAME_SHADOWDASH", "INV_NAME_SHADOWDASH", "INV_DESC_DASH", "INV_DESC_SHADOWDASH", "INV_DESC_SHADOWDASH");
+        AddDefaultNormalItem("Walljump", _defaultSprites["Walljump"], nameof(PlayerData.hasWalljump), "INV_NAME_WALLJUMP", "INV_DESC_WALLJUMP");
+        AddDefaultNormalItem("Super Dash", _defaultSprites["Super Dash"], nameof(PlayerData.hasSuperDash), "INV_NAME_SUPERDASH", "INV_DESC_SUPERDASH");
+        AddDefaultNormalItem("Double Jump", _defaultSprites["Double Jump"], nameof(PlayerData.hasDoubleJump), "INV_NAME_DOUBLEJUMP", "INV_DESC_DOUBLEJUMP");
+        AddDefaultNormalItem("Acid Armour", _defaultSprites["Acid Armour"], nameof(PlayerData.hasAcidArmour), "INV_NAME_ACIDARMOUR", "INV_DESC_ACIDARMOUR");
+        AddDefaultNormalItem("Lantern", _defaultSprites["Lantern"], nameof(PlayerData.hasLantern), "INV_NAME_LANTERN", "INV_DESC_LANTERN");
+        AddDefaultOneTwoBothItem("Map Quill", _defaultSprites["Map"], _defaultSprites["Quill"], _defaultSprites["MapQuill"], nameof(PlayerData.hasMap), nameof(PlayerData.hasQuill), "INV_NAME_MAP", "INV_NAME_QUILL", "INV_NAME_MAPQUILL", "INV_DESC_MAP", "INV_DESC_QUILL", "INV_DESC_MAPQUILL");
+        AddDefaultNormalItem("Kings Brand", _defaultSprites["Kings Brand"], nameof(PlayerData.hasKingsBrand), "INV_NAME_KINGSBRAND", "INV_DESC_KINGSBRAND");
+        AddDefaultNormalItem("Tram Pass", _defaultSprites["Tram Pass"], nameof(PlayerData.hasTramPass), "INV_NAME_TRAM_PASS", "INV_DESC_TRAM_PASS");
+        AddDefaultNormalItem("City Key", _defaultSprites["City Key"], nameof(PlayerData.hasCityKey), "INV_NAME_CITYKEY", "INV_DESC_CITYKEY");
+        AddDefaultNormalItem("Store Key", _defaultSprites["Store Key"], nameof(PlayerData.hasSlykey), "INV_NAME_STOREKEY", "INV_DESC_STOREKEY");
+        AddDefaultNormalItem("White Key", _defaultSprites["White Key"], nameof(PlayerData.hasWhiteKey), "INV_NAME_WHITEKEY", "INV_DESC_WHITEKEY");
+        AddDefaultNormalItem("Love Key", _defaultSprites["Love Key"], nameof(PlayerData.hasLoveKey), "INV_NAME_LOVEKEY", "INV_DESC_LOVEKEY");
+        AddDefaultFlowerItem("Xun Flower", _defaultSprites["Flower"], _defaultSprites["FlowerBroken"], nameof(PlayerData.hasXunFlower), nameof(PlayerData.extraFlowerAppear), nameof(PlayerData.xunFlowerBroken), "INV_NAME_FLOWER", "INV_NAME_FLOWER_BROKEN", "INV_DESC_FLOWER", "INV_DESC_FLOWER_BROKEN", "INV_DESC_FLOWER_QG", "INV_DESC_FLOWER_BROKEN_QG");
+        AddDefaultCountedItem("Simple Key", _defaultSprites["Simple Key"], nameof(PlayerData.simpleKeys), "INV_NAME_SIMPLEKEY", "INV_DESC_SIMPLEKEY");
+        AddDefaultCountedItem("Ore", _defaultSprites["Ore"], nameof(PlayerData.ore), "INV_NAME_ORE", "INV_DESC_ORE");
+        AddDefaultCountedItem("Rancid Egg", _defaultSprites["Rancid Egg"], nameof(PlayerData.rancidEggs), "INV_NAME_RANCIDEGG", "INV_DESC_RANCIDEGG");
 
         #endregion
 
