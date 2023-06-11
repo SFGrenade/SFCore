@@ -26,4 +26,25 @@ public class WavUtils
         audioClip.SetData(wavSoundData, 0);
         return audioClip;
     }
+
+    /// <summary>
+    /// Converts audio data from a file into an AudioClip using WavLib.
+    /// </summary>
+    /// <returns>The AudioClip.</returns>
+    /// <param name="filePath">The wav file</param>
+    public static AudioClip ToAudioClip(string filePath)
+    {
+        return ToAudioClip(File.Open(filePath, FileMode.Open), Path.GetFileNameWithoutExtension(filePath));
+    }
+
+    /// <summary>
+    /// Converts audio data from a byte array into an AudioClip using WavLib.
+    /// </summary>
+    /// <returns>The AudioClip.</returns>
+    /// <param name="wavData">The wav data</param>
+    public static AudioClip ToAudioClip(byte[] wavData, string origName = "")
+    {
+        MemoryStream memoryStream = new MemoryStream(wavData, false);
+        return ToAudioClip(memoryStream, origName);
+    }
 }
