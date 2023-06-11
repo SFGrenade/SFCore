@@ -13,7 +13,6 @@ namespace SFCore;
 /// </summary>
 public static class EnviromentParticleHelper
 {
-    private static PlayerData _pd;
     private static Dictionary<int, AudioClip> _customWalkAudio = new Dictionary<int, AudioClip>();
     private static Dictionary<int, AudioClip> _customRunAudio = new Dictionary<int, AudioClip>();
     private static Dictionary<int, GameObject> _customDashEffects = new Dictionary<int, GameObject>();
@@ -26,8 +25,6 @@ public static class EnviromentParticleHelper
 
     static EnviromentParticleHelper()
     {
-        _pd = PlayerData.instance;
-
         On.HeroController.checkEnvironment += OnHeroControllercheckEnvironment;
         On.DashEffect.OnEnable += OnDashEffectOnEnable;
         On.HardLandEffect.OnEnable += OnHardLandEffectOnEnable;
@@ -54,28 +51,28 @@ public static class EnviromentParticleHelper
                     if (callback == null)
                         continue;
                     var (enviromentType, runAudio) = ((int enviromentType, AudioClip runAudio)) callback.DynamicInvoke(self);
-                    AddRunAudio(enviromentType, runAudio);
+                    AddWalkAudio(enviromentType, runAudio);
                 }
             }
             if (_customRunAudio != null)
-                self.footStepsRunAudioSource.clip = _customRunAudio[_pd.GetInt("environmentType")];
+                self.footStepsRunAudioSource.clip = _customRunAudio[PlayerData.instance.GetInt("environmentType")];
         }
         catch (Exception)
         {}
         try
         {
-            if (AddCustomWalkAudioHook != null)
+            if (AddCustomRunAudioHook != null)
             {
-                foreach (var callback in AddCustomWalkAudioHook.GetInvocationList())
+                foreach (var callback in AddCustomRunAudioHook.GetInvocationList())
                 {
                     if (callback == null)
                         continue;
-                    var (enviromentType, walkAudio) = ((int enviromentType, AudioClip walkAudio)) callback.DynamicInvoke(self);
-                    AddWalkAudio(enviromentType, walkAudio);
+                    var (enviromentType, runAudio) = ((int enviromentType, AudioClip runAudio)) callback.DynamicInvoke(self);
+                    AddRunAudio(enviromentType, runAudio);
                 }
             }
-            if (_customWalkAudio != null)
-                self.footStepsWalkAudioSource.clip = _customWalkAudio[_pd.GetInt("environmentType")];
+            if (_customRunAudio != null)
+                self.footStepsWalkAudioSource.clip = _customRunAudio[PlayerData.instance.GetInt("environmentType")];
         }
         catch (Exception)
         {}
@@ -101,7 +98,7 @@ public static class EnviromentParticleHelper
                     AddDashEffects(enviromentType, dashEffects);
                 }
             }
-            GameObject dashEffectGo = _customDashEffects[_pd.GetInt("environmentType")];
+            GameObject dashEffectGo = _customDashEffects[PlayerData.instance.GetInt("environmentType")];
             self.heroDashPuff.SetActive(false);
             self.dashDust.SetActive(false);
             self.heroDashPuff_anim.Stop();
@@ -134,7 +131,7 @@ public static class EnviromentParticleHelper
                     AddHardLandEffects(enviromentType, hardLandEffects);
                 }
             }
-            GameObject hardLandEffectGo = _customHardLandEffects[_pd.GetInt("environmentType")];
+            GameObject hardLandEffectGo = _customHardLandEffects[PlayerData.instance.GetInt("environmentType")];
             hardLandEffectGo.transform.SetParent(self.transform);
             hardLandEffectGo.transform.localPosition = Vector3.zero;
             hardLandEffectGo.SetActive(true);
@@ -164,7 +161,7 @@ public static class EnviromentParticleHelper
                     AddJumpEffects(enviromentType, jumpEffects);
                 }
             }
-            GameObject jumpEffectGo = _customJumpEffects[_pd.GetInt("environmentType")];
+            GameObject jumpEffectGo = _customJumpEffects[PlayerData.instance.GetInt("environmentType")];
             self.dustEffects.SetActive(false);
 
             jumpEffectGo.transform.SetParent(self.transform);
@@ -196,7 +193,7 @@ public static class EnviromentParticleHelper
                     AddSoftLandEffects(enviromentType, softLandEffects);
                 }
             }
-            GameObject softLandEffectGo = _customSoftLandEffects[_pd.GetInt("environmentType")];
+            GameObject softLandEffectGo = _customSoftLandEffects[PlayerData.instance.GetInt("environmentType")];
             self.dustEffects.SetActive(false);
 
             softLandEffectGo.transform.SetParent(self.transform);
@@ -496,7 +493,6 @@ public static class EnviromentParticleHelper
     /// <param name="runEffectsPrefab">Existing run effects you want to have in your custom enviroment</param>
     public static void AddRunEffects(int enviromentType, string runEffectsPrefab)
     {
-
         if ((enviromentType >= 0) && (enviromentType < 7))
         {
             throw new ArgumentOutOfRangeException(nameof(enviromentType), "Only Integers smaller than 0 and larger than 6 are allowed");
