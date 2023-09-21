@@ -373,10 +373,10 @@ public static class CharmHelper
                 bbT2 = backboardsGo.Find($"BB {bbPrefabNum - 20}"); // "BB 1" - "BB 20"
                 bbPrefab = Object.Instantiate(bbT1, backboardsGo.transform, true);
                 AddToCharmFadeGroup(bbPrefab, backboardsGo.transform.parent.gameObject);
-                AddToCharmFadeGroup(bbPrefab.Find("New Item Orb"), backboardsGo.transform.parent.gameObject);
+                //AddToCharmFadeGroup(bbPrefab.Find("New Item Orb"), backboardsGo.transform.parent.gameObject);
                 bbPrefab.transform.localPosition = bbT1.transform.localPosition + ((bbT1.transform.localPosition - bbT2.transform.localPosition) * (((i / 10f) - (bbPrefabNum / 10f)) / 2f));
                 bbPrefab.name = $"BB {i}";
-                bbPrefab.SetActive(true);
+                bbPrefab.SetActive(bbT1.activeSelf);
 
                 var icb = bbPrefab.GetComponent<InvCharmBackboard>();
                 icb.charmNum = i;
@@ -416,6 +416,7 @@ public static class CharmHelper
                 ccPrefab = Object.Instantiate(ccT1.gameObject, collectedCharmsGo.transform, true);
                 ccPrefab.SetActive(false);
                 AddToCharmFadeGroup(ccPrefab.Find("Sprite"), collectedCharmsGo.transform.parent.gameObject);
+                AddToCharmFadeGroup(ccPrefab.Find("Glow"), collectedCharmsGo.transform.parent.gameObject);
                 ccT1.gameObject.SetActive(tmp);
                 ccPrefab.name = i.ToString();
 
@@ -426,14 +427,16 @@ public static class CharmHelper
                 ccFsmVars.GetFsmString("PD Bool Name").Value = "gotCharm_" + i;
                 ccFsmVars.GetFsmGameObject("Charm Sprite").Value = ccPrefab.Find("Sprite");
                 ccFsmVars.GetFsmGameObject("Glow").Value = ccPrefab.Find("Glow");
-                ccPrefab.SetActive(true);
+                ccPrefab.SetActive(ccT1.gameObject.activeSelf);
             }
             else if (collectedCharmsGo.Find(i.ToString()) != null)
             {
                 // Use already existing one and just change stuff
                 ccPrefab = collectedCharmsGo.Find(i.ToString());
+                bool tmpActive = ccPrefab.activeSelf;
                 ccPrefab.SetActive(false);
                 AddToCharmFadeGroup(ccPrefab.Find("Sprite"), collectedCharmsGo.transform.parent.gameObject);
+                AddToCharmFadeGroup(ccPrefab.Find("Glow"), collectedCharmsGo.transform.parent.gameObject);
                 ccPrefab.name = i.ToString();
 
                 charmShowFsm = ccPrefab.LocateMyFSM("charm_show_if_collected");
@@ -443,7 +446,7 @@ public static class CharmHelper
                 ccFsmVars.GetFsmString("PD Bool Name").Value = "gotCharm_" + i;
                 ccFsmVars.GetFsmGameObject("Charm Sprite").Value = ccPrefab.Find("Sprite");
                 ccFsmVars.GetFsmGameObject("Glow").Value = ccPrefab.Find("Glow");
-                ccPrefab.SetActive(true);
+                ccPrefab.SetActive(tmpActive);
             }
         }
 
@@ -531,25 +534,19 @@ public static class CharmHelper
             if (i < self.gameObjectList.Count)
                 tmplist.Add(self.gameObjectList[i]);
             else
-                tmplist.Add(default(GameObject));
-        }
-        #endregion
+            {
+                var equippedCharmPrefab = Object.Instantiate(tmplist[0]);
 
-        #region Fill nulls in tmplist with copies of tmplist[0], but adjusted Charm IDs
-        for (int i = 41; i <= 40 + CustomSprites.Count; i++)
-        {
-            var equippedCharmPrefab = Object.Instantiate(tmplist[0]);
+                SetInactive(equippedCharmPrefab);
+                equippedCharmPrefab.transform.position = new Vector3(-20000.0f, -20000.0f, -20000.0f);
+                equippedCharmPrefab.SetActive(tmplist[0].activeSelf);
+                equippedCharmPrefab.name = $"{i + 1}";
+                var ci = equippedCharmPrefab.GetComponent<CharmItem>();
+                var cd = equippedCharmPrefab.GetComponent<CharmDisplay>();
+                cd.id = i + 1;
 
-            SetInactive(equippedCharmPrefab);
-
-            equippedCharmPrefab.name = $"{i}";
-
-            var ci = equippedCharmPrefab.GetComponent<CharmItem>();
-
-            var cd = equippedCharmPrefab.GetComponent<CharmDisplay>();
-            cd.id = i;
-
-            tmplist[i - 1] = equippedCharmPrefab;
+                tmplist.Add(equippedCharmPrefab);
+            }
         }
         #endregion
 
