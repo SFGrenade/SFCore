@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using HutongGames.PlayMaker;
 using JetBrains.Annotations;
 using Logger = Modding.Logger;
@@ -84,7 +85,7 @@ public static class FsmUtil
     [UsedImplicitly]
     public static TAction GetFsmAction<TAction>(this PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction
     {
-        return (TAction) fsm.GetFsmState(stateName).Actions[index];
+        return (TAction)fsm.GetFsmState(stateName).Actions[index];
     }
 
     #endregion
@@ -426,23 +427,7 @@ public static class FsmUtil
     public static void RemoveTransition(this FsmState state, string eventName) => state.RemoveFsmTransition(eventName);
     /// <inheritdoc cref="RemoveTransition(FsmState, string)"/>
     [UsedImplicitly]
-    public static void RemoveFsmTransition(this FsmState state, string eventName)
-    {
-        FsmTransition[] origTransitions = state.Transitions;
-        FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - 1];
-        int i;
-        int foundInt = 0;
-        for (i = 0; i < newTransitions.Length; i++)
-        {
-            if (origTransitions[i].EventName == eventName)
-            {
-                foundInt = 1;
-            }
-            newTransitions[i] = origTransitions[i + foundInt];
-        }
-
-        state.Transitions = newTransitions;
-    }
+    public static void RemoveFsmTransition(this FsmState state, string eventName) => state.Transitions = state.Transitions.Where(t => t.EventName != eventName).ToArray();
 
     /// <summary>
     /// Removes a global transition in a PlayMakerFSM.
@@ -453,23 +438,7 @@ public static class FsmUtil
     public static void RemoveGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.RemoveFsmGlobalTransition(eventName);
     /// <inheritdoc cref="RemoveGlobalTransition(PlayMakerFSM, string)"/>
     [UsedImplicitly]
-    public static void RemoveFsmGlobalTransition(this PlayMakerFSM fsm, string eventName)
-    {
-        FsmTransition[] origTransitions = fsm.FsmGlobalTransitions;
-        FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - 1];
-        int i;
-        int foundInt = 0;
-        for (i = 0; i < newTransitions.Length; i++)
-        {
-            if (origTransitions[i].EventName == eventName)
-            {
-                foundInt = 1;
-            }
-            newTransitions[i] = origTransitions[i + foundInt];
-        }
-
-        fsm.Fsm.GlobalTransitions = newTransitions;
-    }
+    public static void RemoveFsmGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.Fsm.GlobalTransitions = fsm.Fsm.GlobalTransitions.Where(t => t.EventName != eventName).ToArray();
 
     /// <summary>
     /// Removes an action in a PlayMakerFSM.
