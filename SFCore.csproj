@@ -17,6 +17,7 @@
     <ExportDir Condition="$([MSBuild]::IsOSPlatform('Windows'))">E:/Documents/Projects/__Exports/</ExportDir>
     <DocumentationFile>$(OutputPath)/$(AssemblyTitle).xml</DocumentationFile>
   </PropertyGroup>
+  <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
   <Target Name="CopyMod" AfterTargets="PostBuildEvent">
     <RemoveDir Condition="Exists('$(ExportDir)/$(TargetName)/')" Directories="$(ExportDir)/$(TargetName)/" />
     <MakeDir Directories="$(ExportDir)/$(TargetName)/" />
