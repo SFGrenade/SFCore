@@ -408,6 +408,28 @@ public static class FsmUtil
         fsm.Fsm.States = newStates;
     }
 
+    private static FsmTransition[] RemoveTransition(FsmTransition[] orig, string eventName)
+    {
+        int index = -1;
+        for (int i = 0; i < orig.Length; i++)
+        {
+            if (orig[i].EventName == eventName)
+            {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) return orig;
+
+        FsmTransition[] newTransitions = new FsmTransition[orig.Length - 1];
+        for (int i = 0; i < orig.Length; i++)
+        {
+            if (i < index) newTransitions[i] = orig[i];
+            else if (i > index) newTransitions[i - 1] = orig[i];
+        }
+        return newTransitions;
+    }
+
     /// <summary>
     /// Removes a transition in a PlayMakerFSM.
     /// </summary>
@@ -426,19 +448,7 @@ public static class FsmUtil
     public static void RemoveTransition(this FsmState state, string eventName) => state.RemoveFsmTransition(eventName);
     /// <inheritdoc cref="RemoveTransition(FsmState, string)"/>
     [UsedImplicitly]
-    public static void RemoveFsmTransition(this FsmState state, string eventName)
-    {
-        FsmTransition[] origTransitions = state.Transitions;
-        int found = 0;
-        foreach (FsmTransition transition in origTransitions) if (transition.EventName == eventName) found++;
-
-        if (found == 0) return;
-        FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - found];
-
-        int index = 0;
-        foreach (FsmTransition transition in origTransitions) if (transition.EventName != eventName) newTransitions[index++] = transition;
-        state.Transitions = newTransitions;
-    }
+    public static void RemoveFsmTransition(this FsmState state, string eventName) => state.Transitions = RemoveTransition(state.Transitions, eventName);
 
     /// <summary>
     /// Removes a global transition in a PlayMakerFSM.
@@ -449,19 +459,7 @@ public static class FsmUtil
     public static void RemoveGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.RemoveFsmGlobalTransition(eventName);
     /// <inheritdoc cref="RemoveGlobalTransition(PlayMakerFSM, string)"/>
     [UsedImplicitly]
-    public static void RemoveFsmGlobalTransition(this PlayMakerFSM fsm, string eventName)
-    {
-        FsmTransition[] origTransitions = fsm.FsmGlobalTransitions;
-        int found = 0;
-        foreach (FsmTransition transition in origTransitions) if (transition.EventName == eventName) found++;
-
-        if (found == 0) return;
-        FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - found];
-
-        int index = 0;
-        foreach (FsmTransition transition in origTransitions) if (transition.EventName != eventName) newTransitions[index++] = transition;
-        fsm.Fsm.GlobalTransitions = newTransitions;
-    }
+    public static void RemoveFsmGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.Fsm.GlobalTransitions = RemoveTransition(fsm.FsmGlobalTransitions, eventName);
 
     /// <summary>
     /// Removes an action in a PlayMakerFSM.
