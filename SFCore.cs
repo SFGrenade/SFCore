@@ -1,6 +1,9 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using SFCore.Generics;
+using SFCore.MonoBehaviours;
 using SFCore.Utils;
+using UnityEngine;
 
 namespace SFCore;
 
@@ -35,10 +38,17 @@ public class SFCoreMod : FullSettingsMod<SFCoreSaveSettings, SFCoreGlobalSetting
     public override string GetVersion() => Util.GetVersion(Assembly.GetExecutingAssembly());
 
     /// <summary>
+    /// Get names of objects to preload.
+    /// </summary>
+    /// <returns>List of (scene, name) tuples to preload.</returns>
+    public override List<(string, string)> GetPreloadNames() => new() { ("Town", "_SceneManager") };
+
+    /// <summary>
     /// Main menu is loaded.
     /// </summary>
-    public override void Initialize()
+    public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
     {
+        SceneManagerPatcher.LoadPrefabs(preloadedObjects["Town"]["_SceneManager"].GetComponent<SceneManager>());
     }
 }
 

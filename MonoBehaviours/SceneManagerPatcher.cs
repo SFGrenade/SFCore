@@ -17,6 +17,17 @@ public class SceneManagerPatcher : MonoBehaviour
     private static AudioMixer _actorAm = null;
     private static AudioMixer _shadeAm = null;
 
+    private static GameObject _borderPrefab = null;
+    private static GameObject _hollowShadePrefab = null;
+    private static GameObject _dreamgatePrefab = null;
+
+    internal static void LoadPrefabs(SceneManager template)
+    {
+        _borderPrefab = template.borderPrefab;
+        _hollowShadePrefab = template.hollowShadeObject;
+        _dreamgatePrefab = template.dreamgateObject;
+    }
+
     /// <summary>
     /// The area of the map this scene belongs to.
     /// </summary>
@@ -278,10 +289,10 @@ public class SceneManagerPatcher : MonoBehaviour
         Modding.Logger.Log($"SsSnapshotName: {SsSnapshotName}");
         sm.shadeSnapshot = _shadeAm.FindSnapshot(SsSnapshotName);
         sm.transitionTime = transitionTime;
-        sm.borderPrefab = GameObject.Find("SceneBorder");
+        sm.borderPrefab = _borderPrefab;
         sm.manualMapTrigger = manualMapTrigger;
-        sm.hollowShadeObject = GameObject.Find("Hollow Shade");
-        sm.dreamgateObject = GameObject.Find("dream_gate_object");
+        sm.hollowShadeObject = _hollowShadePrefab;
+        sm.dreamgateObject = _dreamgatePrefab;
 
         smGo.SetActive(true);
     }
