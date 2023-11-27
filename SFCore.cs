@@ -41,14 +41,14 @@ public class SFCoreMod : FullSettingsMod<SFCoreSaveSettings, SFCoreGlobalSetting
     /// Get names of objects to preload.
     /// </summary>
     /// <returns>List of (scene, name) tuples to preload.</returns>
-    public override List<(string, string)> GetPreloadNames() => new() { ("Town", "_SceneManager") };
+    public override List<(string, string)> GetPreloadNames() => new() { ("Room_Mender_House", "_SceneManager") };
 
     /// <summary>
     /// Main menu is loaded.
     /// </summary>
     public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
     {
-        SceneManagerPatcher.LoadPrefabs(preloadedObjects["Town"]["_SceneManager"].GetComponent<SceneManager>());
+        SceneManagerPatcher.LoadPrefabs(preloadedObjects["Room_Mender_House"]["_SceneManager"].GetComponent<SceneManager>());
     }
 }
 
