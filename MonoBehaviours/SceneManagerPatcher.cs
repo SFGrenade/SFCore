@@ -295,6 +295,10 @@ public class SceneManagerPatcher : MonoBehaviour
         sm.dreamgateObject = _dreamgatePrefab;
 
         smGo.SetActive(true);
+
+        // Let the GameManager know about us.
+        smGo.tag = "SceneManager";
+        GameManager.instance?.SetupSceneRefs(false);
     }
 
     /// <summary>
