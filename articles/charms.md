@@ -10,16 +10,16 @@ First thing's first is to load the sprites you want your charms to have.
 
 You can do so doing:
 ```cs
-private static void Sprite LoadSprite(string spriteName) {
+private static Sprite LoadSprite(string spriteName) {
     // Important to get embedded resources
     Assembly asm = Assembly.GetExecutingAssembly();
     // Will contain the sprite
-    Sprite charmSprite = null;
+    Sprite charmSprite;
     // Open an embedded resource as a stream
     using (Stream s = asm.GetManifestResourceStream($"AssemblyName.Subfolder.{spriteName}.png"))
     {
-        // In case of typos do nothing
-        if (s == null) continue;
+        // In case of typos return null
+        if (s == null) return null;
         byte[] buffer = new byte[s.Length];
         s.Read(buffer, 0, buffer.Length);
         s.Dispose();
@@ -29,7 +29,7 @@ private static void Sprite LoadSprite(string spriteName) {
         // Create sprite from texture
         charmSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
     }
-    // Now `charmSprite` contains the sprite, or null if it couldn't be found
+    // Now `charmSprite` contains the sprite
     return charmSprite;
 }
 ```
