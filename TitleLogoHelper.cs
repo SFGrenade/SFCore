@@ -91,7 +91,7 @@ public static class TitleLogoHelper
 
         orig(self, index);
     }
-        
+
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[TitleLogoHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
     private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[TitleLogoHelper]");

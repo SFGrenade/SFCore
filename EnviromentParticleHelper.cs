@@ -519,7 +519,7 @@ public static class EnviromentParticleHelper
             go.SetActive(false);
         }
     }
-        
+
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[EnviromentParticleHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
     private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[EnviromentParticleHelper]");

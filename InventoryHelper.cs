@@ -105,7 +105,7 @@ public static class InventoryHelper
         };
         _customPaneDataCallbacks[eventName] = callback;
     }
-        
+
     private static void GameCamerasOnStart(On.GameCameras.orig_Start orig, GameCameras self)
     {
         orig(self);
@@ -151,7 +151,7 @@ public static class InventoryHelper
         {
             inventoryFsm.Preprocess();
         }
-            
+
         var newPaneGo = GameObject.Instantiate(inventoryGo.FindGameObjectInChildren(prefabGoName), inventoryGo.transform);
         newPaneGo.SetActive(false);
         newPaneGo.name = name;
@@ -201,7 +201,7 @@ public static class InventoryHelper
             }
 
             #endregion
-                
+
             for (int i = 0; i < 4; i++)
             {
                 emptyInventoryFsm.RemoveAction("Inactive", 1);
@@ -422,11 +422,11 @@ public static class InventoryHelper
         string fsmStateNext2Name = $"Next {name} 2";
         string fsmStateNext3Name = $"Next {name} 3";
         string fsmStateNextName = $"Next {name}";
-            
+
         inventoryFsm.AddGameObjectVariable(fsmVarNamePane);
-            
+
         int totalPanes = inventoryFsm.GetAction<IntSwitch>("Check Current Pane", 11).compareTo.Last().Value + 1;
-            
+
         #region Inv - UI Inventory - Any Other Panes?
 
         var origUiInventoryFsm = inventoryGo.FindGameObjectInChildren("Inv").LocateMyFSM("UI Inventory");
@@ -449,7 +449,7 @@ public static class InventoryHelper
         }, 12);
 
         #endregion
-            
+
         #region Inventory Control - Single Pane?
 
         inventoryFsm.InsertAction("Single Pane?", new PlayerDataBoolTest()
@@ -592,7 +592,7 @@ public static class InventoryHelper
 
         return newPaneGo;
     }
-        
+
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[InventoryHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
     private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[InventoryHelper]");

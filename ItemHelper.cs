@@ -263,7 +263,7 @@ public static class ItemHelper
         var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
         equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
         InitDefaultItems(equipmentGo);
-            
+
         var inventoryFsm = inventoryGo.LocateMyFSM("Inventory Control");
         var inventoryFsmVars = inventoryFsm.FsmVariables;
 
@@ -734,7 +734,7 @@ public static class ItemHelper
             descConvoBoth = descConvo4
         });
     }
-        
+
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[ItemHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
     private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[ItemHelper]");

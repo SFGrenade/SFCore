@@ -240,7 +240,7 @@ public static class MenuStyleHelper
             yield return null;
         }
     }
-        
+
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[MenuStyleHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
     private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[MenuStyleHelper]");

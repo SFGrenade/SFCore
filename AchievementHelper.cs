@@ -41,7 +41,7 @@ public struct SCustomAchievement
 public static class AchievementHelper
 {
     private static List<SCustomAchievement> _customAchievements = new List<SCustomAchievement>();
-        
+
     /// <summary>
     /// Constructs the helper, hooks needed methods.
     /// </summary>
@@ -95,7 +95,7 @@ public static class AchievementHelper
         });
         LogFine("~AddAchievement");
     }
-        
+
     /// <summary>
     /// Adds the contents of customAchievements to the given AchievementsList
     /// </summary>
@@ -114,7 +114,7 @@ public static class AchievementHelper
                 localizedText = ca.textConvo,
                 localizedTitle = ca.titleConvo
             };
-                
+
             if (list.achievements.FirstOrDefault(a => a.key == customAch.key) == default)
             {
                 list.achievements.Add(customAch);
@@ -122,7 +122,7 @@ public static class AchievementHelper
         }
         LogFine("~InitAchievements");
     }
-        
+
     /// <summary>
     /// On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
     /// </summary>
@@ -133,7 +133,7 @@ public static class AchievementHelper
         orig(self);
         LogFine("~OnUIManagerRefreshAchievementsList");
     }
-        
+
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[AchievementHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
     private static void LogDebug(string message) => InternalLogger.LogDebug(message, "[SFCore]:[AchievementHelper]");
