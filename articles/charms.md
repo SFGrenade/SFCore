@@ -1,10 +1,12 @@
 # Adding custom charms
 
+## CharmHelper
+
 The `CharmHelper` class is used to add custom charms to the inventory.
 
 A good example of a mod adding custom charms is the [MoreHealing](https://github.com/SFGrenade/MoreHealing) mod.
 
-## Loading charm sprites
+### Loading charm sprites
 
 First thing's first is to load the sprites you want your charms to have.
 
@@ -34,7 +36,7 @@ private static void Sprite LoadSprite(string spriteName) {
 }
 ```
 
-## Registering new charms
+### Registering new charms
 
 After we have all the important sprites loaded, we can supply them to `CharmHelper`.
 
@@ -61,7 +63,7 @@ The `List<int>` the method returns is a list of all charm IDs of the charms you 
 
 The handling of name, description, aquisition and cost of each charm is for the individual mod to handle, but here is one example.
 
-## Handling charm metadata
+### Handling charm metadata
 
 Charm metadata (name, description, aquisition and cost) has to be handled by mods, all of which can be done with `ModHooks`:
 ```cs
@@ -80,7 +82,7 @@ private void InitCallbacks()
 
 These look like a lot, but can be done relatively easily.
 
-### Name and description
+#### Name and description
 
 The following is one example how to handle the name and description of the custom charms.
 
@@ -131,7 +133,7 @@ private string OnLanguageGetHook(string key, string sheet, string orig)
 > This is one example, alternatives could be to load the text from a JSON file or comparable and use the loaded text.  
 > One example is how [Test of Teamwork handles language](https://github.com/SFGrenade/TestOfTeamwork/blob/a07d033b5dcde76314d0144ad0f9aa8399e10500/TestOfTeamwork.cs#L248-L252), which it does [with a JSON deserializer](https://github.com/SFGrenade/TestOfTeamwork/blob/a07d033b5dcde76314d0144ad0f9aa8399e10500/Consts/LanguageStrings.cs)
 
-### Getting aquisition
+#### Getting aquisition
 
 The following is one example how to handle getting the aquisition of the custom charms.
 
@@ -206,7 +208,7 @@ private bool OnGetPlayerBoolHook(string target, bool orig)
 }
 ```
 
-### Setting aquisition
+#### Setting aquisition
 
 The following is one example how to handle setting the aquisition states of the custom charms.
 
@@ -260,7 +262,7 @@ private bool OnSetPlayerBoolHook(string target, bool orig)
 }
 ```
 
-### Cost
+#### Cost
 
 The following is one example how to handle the cost of our custom charms.
 
@@ -284,9 +286,80 @@ private int OnGetPlayerIntHook(string target, int orig)
 }
 ```
 
-## Done
+### Done
 
 With handling of the charm metadata done, the basics of custom charms are done.
 They can be equipped and unequipped.
 
 If you want your charms to have special effects, that is more complicated and it is suggested to look at how other mods do it.
+
+## EasyCharm
+
+The abstract `EasyCharm` class can be used to more simply add custom charms.
+
+A good example of a mod adding custom charms is the [EasyCharmPrototype](https://github.com/PrashantMohta/EasyCharmPrototype) mod.
+
+### Registering new charms
+
+After we have all the important sprites loaded, we can construct the class subclassing `EasyCharm`:
+
+```cs
+public class CustomCharm1 : EasyCharm
+{
+    protected override int GetCharmCost() => 1;
+
+    protected override string GetDescription() => "Charm1 Description";
+
+    protected override string GetName() => "Charm1 Name";
+
+    protected override Sprite GetSpriteInternal()=> AssemblyUtils.GetSpriteFromResources("Charm1.png");
+}
+```
+
+Once the class is declared, we can use a instance of this class in the mod class:
+
+```cs
+/* inside class `CharmMod1` */
+internal Dictionary<string, EasyCharm> Charms = new Dictionary<string, EasyCharm>{
+    {"CustomCharm1", new CustomCharm1()},
+};
+```
+
+#### Setting aquisition
+
+The following is one example how to handle setting the aquisition states of the custom charms.
+
+```cs
+public class CharmMod1Settings {
+    public Dictionary<string, EasyCharmState> Charms;
+}
+public class CharmMod1 : Mod, ILocalSettings<CharmMod1Settings> {
+    public CharmMod1Settings SaveSettings = new CharmMod1Settings();
+    public void OnLoadLocal(settings s)
+    {
+        SaveSettings = s;
+        if (s.Charms != null)
+        {
+            foreach(var kvp in s.Charms)
+            {
+                if (Charms.TryGetValue(kvp.Key, out EasyCharm m))
+                {
+                    m.RestoreCharmState(kvp.Value);
+                }
+            }
+        }
+    }
+    public settings OnSaveLocal()
+    {
+        SaveSettings.Charms = new Dictionary<string, EasyCharmState>();
+        foreach (var kvp in Charms)
+        {
+            if (Charms.TryGetValue(kvp.Key, out EasyCharm m))
+            {
+                SaveSettings.Charms[kvp.Key] = m.GetCharmState();
+            }
+        }
+        return SaveSettings;
+    }
+}
+```
