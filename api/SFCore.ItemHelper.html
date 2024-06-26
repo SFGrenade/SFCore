@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ItemHelper
+ </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ItemHelper
+ ">
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SFCore.ItemHelper">
+
+
+  <h1 id="SFCore_ItemHelper" data-uid="SFCore.ItemHelper" class="text-break">Class ItemHelper
+</h1>
+  <div class="markdown level0 summary"><p>Item helper class for easily adding custom items.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>0 to 3 PlayerData bools per item</li>
+<li>0 to 1 PlayerData int per item</li>
+<li>1 to 3 name language strings per item</li>
+<li>1 to 4 description language strings per item</li>
+</ul>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ItemHelper</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="SFCore.html">SFCore</a></h6>
+  <h6><strong>Assembly</strong>: SFCore.dll</h6>
+  <h5 id="SFCore_ItemHelper_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ItemHelper</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper_AddCountedItem_Sprite_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper.AddCountedItem(Sprite%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L604">View Source</a>
+  </span>
+  <a id="SFCore_ItemHelper_AddCountedItem_" data-uid="SFCore.ItemHelper.AddCountedItem*"></a>
+  <h4 id="SFCore_ItemHelper_AddCountedItem_Sprite_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddCountedItem(Sprite,System.String,System.String,System.String)">AddCountedItem(Sprite, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a counted item. (e.g. Rancid Egg)
+You either have at least one, or you don't.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddCountedItem(Sprite sprite, string playerdataInt, string nameConvo, string descConvo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite</span></td>
+        <td><p>Sprite for the item</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataInt</span></td>
+        <td><p>Int used to determine if and how much of the item is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo</span></td>
+        <td><p>Language string for the name</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo</span></td>
+        <td><p>Language string for the description</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper_AddFlowerItem_Sprite_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper.AddFlowerItem(Sprite%2CSprite%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L634">View Source</a>
+  </span>
+  <a id="SFCore_ItemHelper_AddFlowerItem_" data-uid="SFCore.ItemHelper.AddFlowerItem*"></a>
+  <h4 id="SFCore_ItemHelper_AddFlowerItem_Sprite_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddFlowerItem(Sprite,Sprite,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">AddFlowerItem(Sprite, Sprite, string, string, string, string, string, string, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a flower item. (e.g. the Delicate Flower)
+You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
+(bool1 AND !(bool2 AND bool3)) and it will be displayed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddFlowerItem(Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite</span></td>
+        <td><p>Sprite for the 'normal' item</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite2</span></td>
+        <td><p>Sprite for the 'broken' item</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool1</span></td>
+        <td><p>Bool used to determine if the item is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool2</span></td>
+        <td><p>Bool used to determine if the item is broken</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool3</span></td>
+        <td><p>Bool used to determine if the item is from another source (e.g. Queen's Gardens flowers)</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo1</span></td>
+        <td><p>Language string for the 'normal' name</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo2</span></td>
+        <td><p>Language string for the 'broken' name</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo1</span></td>
+        <td><p>Language string for the 'normal' description</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo2</span></td>
+        <td><p>Language string for the 'broken' description</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo3</span></td>
+        <td><p>Language string for the 'normal, other source' description</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo4</span></td>
+        <td><p>Language string for the 'broken, other source' description</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper_AddNormalItem_Sprite_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper.AddNormalItem(Sprite%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L516">View Source</a>
+  </span>
+  <a id="SFCore_ItemHelper_AddNormalItem_" data-uid="SFCore.ItemHelper.AddNormalItem*"></a>
+  <h4 id="SFCore_ItemHelper_AddNormalItem_Sprite_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddNormalItem(Sprite,System.String,System.String,System.String)">AddNormalItem(Sprite, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a normal item. (e.g. King's Brand)
+You either have it, or you don't.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddNormalItem(Sprite sprite, string playerdataBool, string nameConvo, string descConvo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite</span></td>
+        <td><p>Sprite for the item</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool</span></td>
+        <td><p>Bool used to determine if the item is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo</span></td>
+        <td><p>Language string for the name</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo</span></td>
+        <td><p>Language string for the description</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper_AddOneTwoBothItem_Sprite_Sprite_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper.AddOneTwoBothItem(Sprite%2CSprite%2CSprite%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L575">View Source</a>
+  </span>
+  <a id="SFCore_ItemHelper_AddOneTwoBothItem_" data-uid="SFCore.ItemHelper.AddOneTwoBothItem*"></a>
+  <h4 id="SFCore_ItemHelper_AddOneTwoBothItem_Sprite_Sprite_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddOneTwoBothItem(Sprite,Sprite,Sprite,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">AddOneTwoBothItem(Sprite, Sprite, Sprite, string, string, string, string, string, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map and Quill)
+You can have one, the other, both or none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddOneTwoBothItem(Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite1</span></td>
+        <td><p>Sprite for the item 1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite2</span></td>
+        <td><p>Sprite for the item 2</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">spriteBoth</span></td>
+        <td><p>Sprite for the item both</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool1</span></td>
+        <td><p>Bool used to determine if item 1 is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool2</span></td>
+        <td><p>Bool used to determine if item 2 is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo1</span></td>
+        <td><p>Language string for name 1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo2</span></td>
+        <td><p>Language string for name 2</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvoBoth</span></td>
+        <td><p>Language string for name both</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo1</span></td>
+        <td><p>Language string for description 1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo2</span></td>
+        <td><p>Language string for description 2</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvoBoth</span></td>
+        <td><p>Language string for description both</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper_AddOneTwoItem_Sprite_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper.AddOneTwoItem(Sprite%2CSprite%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L542">View Source</a>
+  </span>
+  <a id="SFCore_ItemHelper_AddOneTwoItem_" data-uid="SFCore.ItemHelper.AddOneTwoItem*"></a>
+  <h4 id="SFCore_ItemHelper_AddOneTwoItem_Sprite_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddOneTwoItem(Sprite,Sprite,System.String,System.String,System.String,System.String,System.String,System.String)">AddOneTwoItem(Sprite, Sprite, string, string, string, string, string, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a item of type OneTwo. (Not used ingame)
+You either have one, the other or none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddOneTwoItem(Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite1</span></td>
+        <td><p>Sprite for the item 1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Sprite</span></td>
+        <td><span class="parametername">sprite2</span></td>
+        <td><p>Sprite for the item 2</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool1</span></td>
+        <td><p>Bool used to determine if item 1 is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">playerdataBool2</span></td>
+        <td><p>Bool used to determine if item 2 is acquired</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo1</span></td>
+        <td><p>Language string for name 1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">nameConvo2</span></td>
+        <td><p>Language string for name 2</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo1</span></td>
+        <td><p>Language string for description 1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">descConvo2</span></td>
+        <td><p>Language string for description 2</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper_unusedInit.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper.unusedInit%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L162">View Source</a>
+  </span>
+  <a id="SFCore_ItemHelper_unusedInit_" data-uid="SFCore.ItemHelper.unusedInit*"></a>
+  <h4 id="SFCore_ItemHelper_unusedInit" data-uid="SFCore.ItemHelper.unusedInit">unusedInit()</h4>
+  <div class="markdown level1 summary"><p>Used for static initialization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void unusedInit()</code></pre>
+  </div>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/SFGrenade/SFCore/blob/master/ItemHelper.cs/#L59" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

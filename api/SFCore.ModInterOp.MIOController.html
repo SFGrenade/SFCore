@@ -1,0 +1,3745 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MIOController
+ </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MIOController
+ ">
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SFCore.ModInterOp.MIOController">
+
+
+  <h1 id="SFCore_ModInterOp_MIOController" data-uid="SFCore.ModInterOp.MIOController" class="text-break">Class MIOController
+</h1>
+  <div class="markdown level0 summary"><p>Class that handles mod interop.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">MIOController</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="SFCore.html">SFCore</a>.<a class="xref" href="SFCore.ModInterOp.html">ModInterOp</a></h6>
+  <h6><strong>Assembly</strong>: SFCore.dll</h6>
+  <h5 id="SFCore_ModInterOp_MIOController_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class MIOController</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction_Action_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction(Action%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L37">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction_Action_System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction(Action,System.String)">AddAction(Action, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction(Action a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action</span></td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with no arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__1_Action___0__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%601(Action%7B%60%600%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L42">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__1_Action___0__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``1(Action{``0},System.String)">AddAction&lt;T1&gt;(Action&lt;T1&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1&gt;(Action&lt;T1&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;&gt;</span>&lt;T1&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 1 argument and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__10_Action___0___1___2___3___4___5___6___7___8___9__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6010(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L87">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__10_Action___0___1___2___3___4___5___6___7___8___9__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``10(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 10 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__11_Action___0___1___2___3___4___5___6___7___8___9___10__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6011(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L92">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__11_Action___0___1___2___3___4___5___6___7___8___9___10__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``11(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 11 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__12_Action___0___1___2___3___4___5___6___7___8___9___10___11__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6012(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L97">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__12_Action___0___1___2___3___4___5___6___7___8___9___10___11__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``12(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 12 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__13_Action___0___1___2___3___4___5___6___7___8___9___10___11___12__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6013(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L102">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__13_Action___0___1___2___3___4___5___6___7___8___9___10___11___12__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``13(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 13 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__14_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6014(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L107">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__14_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``14(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 14 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T14</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__15_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6015(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L112">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__15_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``15(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 15 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T14</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T15</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__16_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%6016(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%2C%60%6015%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L117">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__16_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``16(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 16 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T14</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T15</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T16</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__2_Action___0___1__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%602(Action%7B%60%600%2C%60%601%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L47">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__2_Action___0___1__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``2(Action{``0,``1},System.String)">AddAction&lt;T1, T2&gt;(Action&lt;T1, T2&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2&gt;(Action&lt;T1, T2&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, &gt;</span>&lt;T1, T2&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 2 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__3_Action___0___1___2__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%603(Action%7B%60%600%2C%60%601%2C%60%602%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L52">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__3_Action___0___1___2__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``3(Action{``0,``1,``2},System.String)">AddAction&lt;T1, T2, T3&gt;(Action&lt;T1, T2, T3&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3&gt;(Action&lt;T1, T2, T3&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , &gt;</span>&lt;T1, T2, T3&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 3 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__4_Action___0___1___2___3__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%604(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L57">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__4_Action___0___1___2___3__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``4(Action{``0,``1,``2,``3},System.String)">AddAction&lt;T1, T2, T3, T4&gt;(Action&lt;T1, T2, T3, T4&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4&gt;(Action&lt;T1, T2, T3, T4&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , &gt;</span>&lt;T1, T2, T3, T4&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 4 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__5_Action___0___1___2___3___4__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%605(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L62">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__5_Action___0___1___2___3___4__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``5(Action{``0,``1,``2,``3,``4},System.String)">AddAction&lt;T1, T2, T3, T4, T5&gt;(Action&lt;T1, T2, T3, T4, T5&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5&gt;(Action&lt;T1, T2, T3, T4, T5&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , &gt;</span>&lt;T1, T2, T3, T4, T5&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 5 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__6_Action___0___1___2___3___4___5__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%606(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L67">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__6_Action___0___1___2___3___4___5__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``6(Action{``0,``1,``2,``3,``4,``5},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6&gt;(Action&lt;T1, T2, T3, T4, T5, T6&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6&gt;(Action&lt;T1, T2, T3, T4, T5, T6&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 6 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__7_Action___0___1___2___3___4___5___6__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%607(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L72">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__7_Action___0___1___2___3___4___5___6__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``7(Action{``0,``1,``2,``3,``4,``5,``6},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 7 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__8_Action___0___1___2___3___4___5___6___7__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%608(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L77">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__8_Action___0___1___2___3___4___5___6___7__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``8(Action{``0,``1,``2,``3,``4,``5,``6,``7},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 8 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddAction__9_Action___0___1___2___3___4___5___6___7___8__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddAction%60%609(Action%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L82">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddAction__9_Action___0___1___2___3___4___5___6___7___8__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``9(Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.String)">AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Action&lt;, , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 9 arguments and no return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddDelegate_Delegate_System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddDelegate(Delegate%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L21">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddDelegate_" data-uid="SFCore.ModInterOp.MIOController.AddDelegate*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddDelegate_Delegate_System_String_" data-uid="SFCore.ModInterOp.MIOController.AddDelegate(Delegate,System.String)">AddDelegate(Delegate, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddDelegate(Delegate d, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Delegate</span></td>
+        <td><span class="parametername">d</span></td>
+        <td><p>The Delegate that is going to be invoked.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__1_Func___0__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%601(Func%7B%60%600%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L122">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__1_Func___0__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``1(Func{``0},System.String)">AddFunc&lt;TRes&gt;(Func&lt;TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;TRes&gt;(Func&lt;TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;&gt;</span>&lt;TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with no arguments but with a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__10_Func___0___1___2___3___4___5___6___7___8___9__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6010(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L167">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__10_Func___0___1___2___3___4___5___6___7___8___9__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``10(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 9 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__11_Func___0___1___2___3___4___5___6___7___8___9___10__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6011(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L172">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__11_Func___0___1___2___3___4___5___6___7___8___9___10__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``11(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 10 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__12_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6012(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L177">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__12_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``12(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 11 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__13_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6013(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L182">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__13_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``13(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 12 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__14_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6014(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L187">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__14_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``14(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 13 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__15_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6015(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L192">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__15_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``15(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 14 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T14</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__16_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6016(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%2C%60%6015%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L197">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__16_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``16(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 15 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T14</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T15</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__17_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15___16__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%6017(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%2C%60%6015%2C%60%6016%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L202">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__17_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15___16__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``17(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , , , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 16 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T9</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T13</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T14</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T15</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T16</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__2_Func___0___1__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%602(Func%7B%60%600%2C%60%601%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L127">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__2_Func___0___1__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``2(Func{``0,``1},System.String)">AddFunc&lt;T1, TRes&gt;(Func&lt;T1, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, TRes&gt;(Func&lt;T1, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, &gt;</span>&lt;T1, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 1 argument and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__3_Func___0___1___2__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%603(Func%7B%60%600%2C%60%601%2C%60%602%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L132">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__3_Func___0___1___2__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``3(Func{``0,``1,``2},System.String)">AddFunc&lt;T1, T2, TRes&gt;(Func&lt;T1, T2, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, TRes&gt;(Func&lt;T1, T2, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , &gt;</span>&lt;T1, T2, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 2 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__4_Func___0___1___2___3__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%604(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L137">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__4_Func___0___1___2___3__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``4(Func{``0,``1,``2,``3},System.String)">AddFunc&lt;T1, T2, T3, TRes&gt;(Func&lt;T1, T2, T3, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, TRes&gt;(Func&lt;T1, T2, T3, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , &gt;</span>&lt;T1, T2, T3, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 3 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__5_Func___0___1___2___3___4__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%605(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L142">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__5_Func___0___1___2___3___4__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``5(Func{``0,``1,``2,``3,``4},System.String)">AddFunc&lt;T1, T2, T3, T4, TRes&gt;(Func&lt;T1, T2, T3, T4, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, TRes&gt;(Func&lt;T1, T2, T3, T4, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , &gt;</span>&lt;T1, T2, T3, T4, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 4 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__6_Func___0___1___2___3___4___5__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%606(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L147">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__6_Func___0___1___2___3___4___5__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``6(Func{``0,``1,``2,``3,``4,``5},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 5 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__7_Func___0___1___2___3___4___5___6__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%607(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L152">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__7_Func___0___1___2___3___4___5___6__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``7(Func{``0,``1,``2,``3,``4,``5,``6},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 6 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__8_Func___0___1___2___3___4___5___6___7__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%608(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L157">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__8_Func___0___1___2___3___4___5___6___7__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``8(Func{``0,``1,``2,``3,``4,``5,``6,``7},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 7 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_AddFunc__9_Func___0___1___2___3___4___5___6___7___8__System_String_.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.AddFunc%60%609(Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%7D%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L162">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_AddFunc__9_Func___0___1___2___3___4___5___6___7___8__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``9(Func{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.String)">AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;, string)</h4>
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt; a, string n)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func&lt;, , , , , , , , &gt;</span>&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;</td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A method with 8 arguments and a return value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">n</span></td>
+        <td><p>The unique name that is used to invoke the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was added, False if the name was already used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T6</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T7</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T8</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_CallAction_System_String_System_Object___.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.CallAction(System.String%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L222">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_CallAction_" data-uid="SFCore.ModInterOp.MIOController.CallAction*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_CallAction_System_String_System_Object___" data-uid="SFCore.ModInterOp.MIOController.CallAction(System.String,System.Object[])">CallAction(string, object[])</h4>
+  <div class="markdown level1 summary"><p>Invokes a Delegate of the Mod Interop Enviroment that has no return value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool CallAction(string name, object[] @params = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The unique name of the Delegate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">object</span>[]</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>The parameters that are given to the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was invoked, False if the Delegate wasn't found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController_CallFunc__1_System_String___0__System_Object___.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController.CallFunc%60%601(System.String%2C%60%600%40%2CSystem.Object%5B%5D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L243">View Source</a>
+  </span>
+  <a id="SFCore_ModInterOp_MIOController_CallFunc_" data-uid="SFCore.ModInterOp.MIOController.CallFunc*"></a>
+  <h4 id="SFCore_ModInterOp_MIOController_CallFunc__1_System_String___0__System_Object___" data-uid="SFCore.ModInterOp.MIOController.CallFunc``1(System.String,``0@,System.Object[])">CallFunc&lt;TRes&gt;(string, out TRes, object[])</h4>
+  <div class="markdown level1 summary"><p>Invokes a Delegate of the Mod Interop Enviroment that has a return value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool CallFunc&lt;TRes&gt;(string name, out TRes res, object[] @params = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">string</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The unique name of the Delegate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TRes</span></td>
+        <td><span class="parametername">res</span></td>
+        <td><p>The return value of the Delegate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">object</span>[]</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>The parameters that are given to the Delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">bool</span></td>
+        <td><p>True if the Delegate was invoked, False if the Delegate wasn't found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TRes</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/SFGrenade/SFCore/blob/master/ModInterOp/MIOController.cs/#L11" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

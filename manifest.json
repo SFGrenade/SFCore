@@ -1,0 +1,836 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/SFCore/SFCore/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.AchievementHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.AchievementHelper.html",
+          "hash": "J21QpZzCGJ4NK/QRokLjzzRDbISeEZNcYTeepVS680Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.CharmHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.CharmHelper.html",
+          "hash": "NCqILdXd+3V9/lvgiKOKoj9b0LEMpqq3DV5l8e5sJOs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EasyCharm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EasyCharm.html",
+          "hash": "wFcqwwwHka70N/wpMgYoypaZMLPtrgyuUqPtaWRhf6A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EasyCharmState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EasyCharmState.html",
+          "hash": "6X6mYpxAMgqnG2L6W0uasaeqfS0/SuDK0NxXJxSCWqY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.html",
+          "hash": "8TPHCr8dGiXTJ2rIOew7HaIfq3rmOjjKEZbZ5/hrqHk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.html",
+          "hash": "tmLZs/OZ1u412Bj1ADlSntP9s6Pg+Rbk/s5dniXEPX0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.html",
+          "hash": "a07vLEdegP7rzlt+YaF9UkChCR7nJ63URo3yhIO2RJ0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.html",
+          "hash": "MlCeWbrNi70cNHzI+Vl+PdGyg2ChPfE8TrmcbKwEPU0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.html",
+          "hash": "i5jQbTYwfjS5xQS3/IIMF1hzJiaso4z5oy7uEc/2O4I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.html",
+          "hash": "uWTh2Ym+qyb9zESJsQ+m7H1PAjKSCsVlfNB6R2QHGyA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.html",
+          "hash": "V1wXVQ8nqOzdCG2dQbNVVtPw0+AKlKc6JjbGMxmA+ig="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.html",
+          "hash": "5QbFjw3UWwLjNG+2IgErtiGu4s8R8q768Xi8DY5bars="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.FullSettingsMod-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.FullSettingsMod-2.html",
+          "hash": "ehdMaFUQKA614Lj8wRhJUJcirfgkAsLWv++qLu7b8AM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.GlobalSettingsMod-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.GlobalSettingsMod-1.html",
+          "hash": "/8MQIBj/ahl7905E92O99k5WGZlzxNIlJOibpUni5YI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.SaveSettingsMod-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.SaveSettingsMod-1.html",
+          "hash": "TopHCe14wFcwX6AukO9svGNAtjwBCh6+gDO1At8b1aA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.html",
+          "hash": "SNfOmydzNHtK48scU1KJXmeldLl9guEGpkMjY8QUJpw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.InventoryHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.InventoryHelper.html",
+          "hash": "SiPENnjYV8/ytm7xzxDqCAm9EUHsKqFdiA0zrGufbpA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.InventoryPageType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.InventoryPageType.html",
+          "hash": "dnqMj9uPSQSrCOnWH0jNtqY0APoo8pDiBIlirNcID1Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemHelper.Item.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemHelper.Item.html",
+          "hash": "xcvpKIeam7T1tFdbo0fRzyFytu+fEmEE//uUV0GVjjo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemHelper.html",
+          "hash": "pd+LRsVhsN3JZKz33UTd3RoOtMTXqM5sr2u3NGVh0v0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemType.html",
+          "hash": "dzTL64FVNdSxd2zeM1JFRxMVFGmTSoMQBjAY/pzdyiM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MenuStyleHelper.Hook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MenuStyleHelper.Hook.html",
+          "hash": "Xn1d1S3x2nhbEbHy+gmXEYVNHtl16DVDRp81+1KyFnM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MenuStyleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MenuStyleHelper.html",
+          "hash": "QppMVpLAPYi/5WiQmYSFAyYoHS0kEhmLnqnSN+ywF9I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ModInterOp.MIOController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ModInterOp.MIOController.html",
+          "hash": "5qDm3E36BLNd4rEMazK8qlFQUZqfv4qfDlkWOPrPP9I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ModInterOp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ModInterOp.html",
+          "hash": "nx0DMzWPrzjP8hUEvqzjssIcAmz9Mh+crmr72oY495c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.BlurPlanePatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.BlurPlanePatcher.html",
+          "hash": "clUFSfvX2j0Gslw5z7D2SGM6ArOGI70TgoP6f+QHL/g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.CueHolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.CueHolder.html",
+          "hash": "WL3oacdxr2P/UgjoFRo2kinQWKSkMPUr45AO9aUREcg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.CustomItemList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.CustomItemList.html",
+          "hash": "x9PCzjlKmsqEzZtYXEXbLH8tBksif/2p8AsbEZLS0lA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.PatchMusicRegions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.PatchMusicRegions.html",
+          "hash": "vFW/M1aGR/mPBM5HmOWVhpXzsVCDqbFfZ2JdnED7K/g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.html",
+          "hash": "KPywgzKcHOWKM5UKuOONvOuHi8BNwW0NHBch42Ga6hU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.html",
+          "hash": "snnTkALZ7gPHh5ARfieSh2YMA7+WgcxOLa52uLJgt/s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.html",
+          "hash": "TC+buQ/fJ1vV8t1AKdRXO2FlrQL4ODLfDb8l5t3TKa4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.html",
+          "hash": "EeUVQ286hXrdknuhaZPw6GJTs3GKsCj6OXvAafbUFHI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.html",
+          "hash": "wHz3jTZD2Ccew0wMLg86Ih7R7rOrpUKwfKZo8/3iS90="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.html",
+          "hash": "60nbIR1UWMPSSH43qxMYIQUIVo2e9rtRz+xF1+Wzmjw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.html",
+          "hash": "goerw6Iq66aG9wiYqwPbNqH0tyNM/nF8O7hieEV+cnY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.html",
+          "hash": "B2d+gM8lZDrV1vm6Y+nFKWxbGG5qhaq5kA/Hqe/KI7c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.html",
+          "hash": "RAItlHD9X0C1pq8tHlRKYuZDCGdymMtqLxRAeias6g4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.html",
+          "hash": "OF8flMULe7xoQIWSkDe5atnPgIM3qkZFL/lg3crBEdw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.html",
+          "hash": "Zf0+QfdekrjV31I8yKAWlhmeWVp0VENBM3RZX4T3ILQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SCustomAchievement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SCustomAchievement.html",
+          "hash": "nO995VYtF5De4VOciVjyv7BlYda570OwCQUXmng9fDE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreGlobalSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreGlobalSettings.html",
+          "hash": "RJeBKAAyyg9Dc2jGE0BnvyDmWcQn0/P91eWzWbCFyAA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreMod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreMod.html",
+          "hash": "AeKxHgaqzkGkRka3f7eE8hbSu+NP20oKEVX7TLrg6ME="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreSaveSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreSaveSettings.html",
+          "hash": "rxxKFBFHj/+L2DqEHOtaLE09G8egyMF6eTnMmCDDVV8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.TitleLogoHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.TitleLogoHelper.html",
+          "hash": "fJLeMHbAvsGHGtZOWo21DAbvXW72d7UFGQQfTSG/kNU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.FsmUtil.html",
+          "hash": "aDLSL90GsHJUXegn+fvm2S1Nu2DcFAwCnhjnNTWbi/4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.FunctionAction-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.FunctionAction-1.html",
+          "hash": "M3E3XswTFhjWNOJ0dzeNswwZNqskLLYZwpizG4KzrVM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.LanguageStrings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.LanguageStrings.html",
+          "hash": "NJXjqtFp5frTXULALV6A0KA5hCZ7DQCj3Pf9AzpH6oY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.LogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.LogAction.html",
+          "hash": "50oJWWPE/mww3I20rFBkbIL1H5t2Q4ZZW8WKIzVCVDo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.MethodAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.MethodAction.html",
+          "hash": "o598gBOIZBEQTRta2ruEGfOnboHi3e+ex+hIbjNJbY0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.MiscCreator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.MiscCreator.html",
+          "hash": "SdFSkR7jSgc9DOq1SszgTJIXtfPjI5vPsdxqIatEnnQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.SpriteUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.SpriteUtil.html",
+          "hash": "pt7Q3LNcDWFs4vLAWezls0bxGYs5b/naHN8lSRB2MdU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.StatusLog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.StatusLog.html",
+          "hash": "Wkflif25uHnVb4S/paAMCkB9/iQ+dOs9zageBMPA9bY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.USceneUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.USceneUtil.html",
+          "hash": "39FXByfq13mSzFhsrmHeXHSc/9ya4XmcgXIesxmG51c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.Util.html",
+          "hash": "Os8usmE10mo0VwEI2O+YT6EjxtXRg3VymH02T/NPBzY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.WavUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.WavUtils.html",
+          "hash": "c2WS9trov+3Ka8kdmvUcMszHUdKXuGfB+43uoB9my8c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.html",
+          "hash": "9q+N9WhSwDuEzg6/aNqqfdYS211AS4jI91sCAT0Qir8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.html",
+          "hash": "qjgKVuL0pGDMMeCNMeDXW+W5V3EBi6LP2/O5ekQNVb0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "IfGc9pbqSzoXQq/JrxYamsw2FHiLKQqVSBHCJRkyhJE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "5o14C/3ClqTqpY1Rp1xtLAuIb33vnGcb8JIaOdN2BXY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/charms.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/charms.html",
+          "hash": "jTHqbmh7gEuVunpPWX5NgH06OPXpr5BGLfhVu2K5DnM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "eQKq0ioihQS0/XYvtrvGhDJptooZ7iYVCu4X8jshKkk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "yOgpp04l6AHz+i5S66FGver+OhcAT6WecRmY6VUA7Eg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "0CXg892k1ru4jhiAqForuwAoUWV/49OQbkIHSxHd3PA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "aVe9U1RxWP3P5E5X/x2rL8jCuFlqix3bHKxtkjZ3zxg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 4,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 58,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
