@@ -312,7 +312,7 @@ public class CustomCharm1 : EasyCharm
 
     protected override string GetName() => "Charm1 Name";
 
-    protected override Sprite GetSpriteInternal()=> AssemblyUtils.GetSpriteFromResources("Charm1.png");
+    protected override Sprite GetSpriteInternal() => LoadSprite("Charm1");
 }
 ```
 
