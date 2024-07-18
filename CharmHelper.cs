@@ -48,11 +48,13 @@ public static class CharmHelper
         // workaround, since above isn't working
         BuildEquippedCharms_Start_hook = new MonoMod.RuntimeDetour.Detour(typeof(BuildEquippedCharms).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(OnBuildEquippedCharmsStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
         BuildEquippedCharms_Start_hook.Apply();
+
         On.GameManager.Start += OnGameManagerStart;
         ModHooks.AfterSavegameLoadHook += ModHooksOnAfterSavegameLoadHook;
         ModHooks.BeforeSavegameSaveHook += ModHooksOnBeforeSavegameSaveHook;
         ModHooks.SavegameSaveHook += ModHooksOnSavegameSaveHook;
 
+        // On.GameCameras.Start ???
         GameCameras_Start_hook = new MonoMod.RuntimeDetour.Hook(typeof(GameCameras).GetMethod("Start", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic), typeof(CharmHelper).GetMethod(nameof(GameCamerasStart_single), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic));
         GameCameras_Start_hook.Apply();
         if (GameCameras.instance != null)
@@ -162,16 +164,16 @@ public static class CharmHelper
         SFCoreMod.GlobalSettings.MaxCustomCharms = Mathf.Max(SFCoreMod.GlobalSettings.MaxCustomCharms, CustomSprites.Count);
         orig(self);
 
-        ClearModdedCharms();
+        ClearModdedCharmsFromUiCharms();
         LogFine("~OnGameManagerStart");
     }
 
     /// <summary>
-    /// Adds custom charms to the charm board.
+    /// Removes custom charms to the charm board.
     /// </summary>
-    private static void ClearModdedCharms()
+    private static void ClearModdedCharmsFromUiCharms()
     {
-        LogFine("!ClearModdedCharms");
+        LogFine("!ClearModdedCharmsFromUiCharms");
         #region CharmIconList Start
 
         var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
@@ -285,15 +287,15 @@ public static class CharmHelper
         }
 
         #endregion
-        LogFine("~ClearModdedCharms");
+        LogFine("~ClearModdedCharmsFromUiCharms");
     }
 
     /// <summary>
     /// Adds custom charms to the charm board.
     /// </summary>
-    private static void Init()
+    private static void InitUiCharms()
     {
-        LogFine("!Init");
+        LogFine("!InitUiCharms");
         #region CharmIconList Start
 
         var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
@@ -497,7 +499,7 @@ public static class CharmHelper
         }
 
         #endregion
-        LogFine("~Init");
+        LogFine("~InitUiCharms");
     }
 
     /// <summary>
@@ -561,11 +563,11 @@ public static class CharmHelper
     private static void OnBuildEquippedCharmsStart_single()
     {
         LogFine("!OnBuildEquippedCharmsStart_single");
-        Init();
+        InitUiCharms();
 
         //orig(self);
 
-        InitBuildEquippedCharms(UnityEngine.Object.FindObjectOfType<BuildEquippedCharms>(true));
+        //InitBuildEquippedCharms(UnityEngine.Object.FindObjectOfType<BuildEquippedCharms>(true));
         LogFine("~OnBuildEquippedCharmsStart_single");
     }
 
