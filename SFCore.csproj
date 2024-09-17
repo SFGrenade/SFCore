@@ -13,6 +13,7 @@
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <OutputPath>bin/$(Configuration)/</OutputPath>
     <LangVersion>latest</LangVersion>
+    <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
     <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
     <HollowKnightRefs />
     <ExportDir />
