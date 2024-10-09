@@ -458,8 +458,9 @@ public static class CharmHelper
         float rowMultiplicator = Mathf.Ceil(((float)numCharms / 10.0f) / ((float)rows));
         // Vanilla has 4 rows
         float rowDeltaMultiplicator = 4.0f / ((float)rows);
+        float sizeForCharmScaling = Mathf.Pow(rowDeltaMultiplicator, 1f / 2f);
         GameObject backBoardTile, collectedCharmTile;
-        Vector3 bbOldPos, ccOldPos;
+        Vector3 bbOldPos, bbOldScale, ccOldPos, ccOldScale;
         for (int i = 0; i <= rows; i++)
         {
             for (int j = 1; j <= 10; j++)
@@ -468,8 +469,10 @@ public static class CharmHelper
                 if (backBoardTile != null)
                 {
                     bbOldPos = backBoardTile.transform.localPosition;
+                    bbOldScale = backBoardTile.transform.localScale;
                     float y = ((bbOldPos.y - (-8.37f)) * rowDeltaMultiplicator) + (-8.37f);
                     backBoardTile.transform.localPosition = new Vector3(bbOldPos.x, y, bbOldPos.z);
+                    backBoardTile.transform.localScale = new Vector3(sizeForCharmScaling, sizeForCharmScaling, bbOldScale.z);
                     if (((10 * i) + j) > finalCharmAmount)
                     {
                         backBoardTile.GetComponent<SpriteRenderer>().color = new Color(116f / 255f, 116f / 255f, 116f / 255f, 0f / 255f);
@@ -483,16 +486,20 @@ public static class CharmHelper
                 if (collectedCharmTile != null)
                 {
                     ccOldPos = collectedCharmTile.transform.localPosition;
+                    ccOldScale = collectedCharmTile.transform.localScale;
                     if (i <= 3)
                     {
                         float y = ((ccOldPos.y - (-8.34f)) * rowDeltaMultiplicator) + (-8.34f);
                         collectedCharmTile.transform.localPosition = new Vector3(ccOldPos.x, y, ccOldPos.z);
+                        collectedCharmTile.transform.localScale = new Vector3(sizeForCharmScaling, sizeForCharmScaling, ccOldScale.z);
                     }
                     else
                     {
                         float xLeft = ((i % 2) == 0) ? -7.92f : -7.01f;
+                        // xLeft = (-7.92f) + ((((i % 2) == 0) ? 0.0f : 0.5f) * 1.5f);
                         float y = (-8.37f) - (i * 1.42f * rowDeltaMultiplicator);
                         collectedCharmTile.transform.localPosition = new Vector3(xLeft + ((j - 1) * 1.5f), y, ccOldPos.z);
+                        collectedCharmTile.transform.localScale = new Vector3(sizeForCharmScaling, sizeForCharmScaling, ccOldScale.z);
                     }
                 }
             }
