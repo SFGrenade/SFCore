@@ -7,7 +7,7 @@
     <AssemblyTitle>SFCore</AssemblyTitle>
     <Description>A Hollow Knight Mod Library</Description>
     <Copyright>Copyright © SFGrenade 2024</Copyright>
-    <AssemblyVersion>1.5.12.4</AssemblyVersion>
+    <AssemblyVersion>1.5.12.5</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <ImplicitUsings>false</ImplicitUsings>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
@@ -39,6 +39,6 @@
     <EmbeddedResource Include="Resources/Language.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WavLib" Version="1.0.2" />
+    <PackageReference Include="WavLib" Version="1.*" />
   </ItemGroup>
 </Project>
