@@ -15,7 +15,7 @@ internal static class InternalLogger
     {
         string formattedMessage = FormatOriginator(originator, message);
         Modding.Logger.LogFine(formattedMessage);
-        UnityEngine.Debug.Log(formattedMessage);
+        // UnityEngine.Debug.Log(formattedMessage);
     }
     internal static void LogDebug(string message, object originator = null)
     {

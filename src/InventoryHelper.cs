@@ -147,7 +147,7 @@ public static class InventoryHelper
         GameObject inventoryGo = cameras.gameObject.Find("Inventory");
         var inventoryFsm = inventoryGo.LocateMyFSM("Inventory Control");
         var inventoryFsmVars = inventoryFsm.FsmVariables;
-        if (inventoryFsm.GetState("Closed").Fsm == null)
+        if (inventoryFsm.FsmStates[0].Fsm == null)
         {
             inventoryFsm.Preprocess();
         }
@@ -184,6 +184,10 @@ public static class InventoryHelper
         if (type == InventoryPageType.Empty)
         {
             var emptyInventoryFsm = newPaneGo.LocateMyFSM("UI Inventory");
+            if (emptyInventoryFsm.FsmStates[0].Fsm == null)
+            {
+                emptyInventoryFsm.Preprocess();
+            }
 
             #region State Init
 
@@ -397,23 +401,43 @@ public static class InventoryHelper
         else if (type == InventoryPageType.Inventory)
         {
             var uiInventoryFsm = newPaneGo.LocateMyFSM("UI Inventory");
+            if (uiInventoryFsm.FsmStates[0].Fsm == null)
+            {
+                uiInventoryFsm.Preprocess();
+            }
             uiInventoryFsm.FsmName = "UI Inventory Custom";
         }
         else if (type == InventoryPageType.Charms)
         {
             var uiInventoryFsm = newPaneGo.LocateMyFSM("UI Charms");
+            if (uiInventoryFsm.FsmStates[0].Fsm == null)
+            {
+                uiInventoryFsm.Preprocess();
+            }
             uiInventoryFsm.FsmName = "UI Charms Custom";
         }
         else if (type == InventoryPageType.Journal)
         {
             var uiInventoryFsm = newPaneGo.LocateMyFSM("UI Journal");
+            if (uiInventoryFsm.FsmStates[0].Fsm == null)
+            {
+                uiInventoryFsm.Preprocess();
+            }
             uiInventoryFsm.FsmName = "UI Journal Custom";
             var itemListControlFsm = newPaneGo.Find("Enemy List").LocateMyFSM("Item List Control");
+            if (itemListControlFsm.FsmStates[0].Fsm == null)
+            {
+                itemListControlFsm.Preprocess();
+            }
             itemListControlFsm.FsmName = "Item List Control Custom";
         }
         else if (type == InventoryPageType.Map)
         {
             var uiInventoryFsm = newPaneGo.Find("World Map").LocateMyFSM("UI Control");
+            if (uiInventoryFsm.FsmStates[0].Fsm == null)
+            {
+                uiInventoryFsm.Preprocess();
+            }
             uiInventoryFsm.FsmName = "UI Control Custom";
         }
 
@@ -430,6 +454,10 @@ public static class InventoryHelper
         #region Inv - UI Inventory - Any Other Panes?
 
         var origUiInventoryFsm = inventoryGo.FindGameObjectInChildren("Inv").LocateMyFSM("UI Inventory");
+        if (origUiInventoryFsm.FsmStates[0].Fsm == null)
+        {
+            origUiInventoryFsm.Preprocess();
+        }
         origUiInventoryFsm.InsertAction("Any Other Panes?", new PlayerDataBoolTest()
         {
             gameObject = origUiInventoryFsm.GetAction<PlayerDataBoolTest>("Any Other Panes?", 2).gameObject,

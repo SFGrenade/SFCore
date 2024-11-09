@@ -201,8 +201,12 @@ public static class ItemHelper
     private static void InitDefaultItems(GameObject equipmentGo)
     {
         var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
+        if (equipmentFsm.FsmStates[0].Fsm == null)
+        {
+            equipmentFsm.Preprocess();
+        }
 
-        if (equipmentFsm.GetState("Dash").Fsm == null || _initialized) return;
+        if (_initialized) return;
 
         #region Populate sprite dictionary
 
@@ -261,13 +265,17 @@ public static class ItemHelper
 
         GameObject equipmentGo = inventoryGo.transform.Find("Inv").Find("Equipment").gameObject;
         var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
+        if (equipmentFsm.FsmStates[0].Fsm == null)
+        {
+            equipmentFsm.Preprocess();
+        }
         equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
         InitDefaultItems(equipmentGo);
 
         var inventoryFsm = inventoryGo.LocateMyFSM("Inventory Control");
         var inventoryFsmVars = inventoryFsm.FsmVariables;
 
-        if (inventoryFsm.GetState("Closed").Fsm == null)
+        if (inventoryFsm.FsmStates[0].Fsm == null)
         {
             inventoryFsm.Preprocess();
         }
@@ -305,9 +313,17 @@ public static class ItemHelper
         inventoryFsm.AddGameObjectVariable("ItemList List");
 
         var newListFsm = newListGo.LocateMyFSM("Item List Control Custom");
+        if (newListFsm.FsmStates[0].Fsm == null)
+        {
+            newListFsm.Preprocess();
+        }
         var newListFsmVars = newListFsm.FsmVariables;
 
         var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal Custom");
+        if (uiJournalFsm.FsmStates[0].Fsm == null)
+        {
+            uiJournalFsm.Preprocess();
+        }
 
         #region Inventory Control - Init Enemy List
 

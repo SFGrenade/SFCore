@@ -50,17 +50,7 @@ public static class AchievementHelper
         LogFine("!cctor");
         On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
         //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
-        On.DesktopPlatform.IsAchievementUnlocked += (orig, self, key) => {
-            LogFine("!OnDesktopPlatformIsAchievementUnlocked");
-            bool? isUnlocked = orig(self, key);
-            if (isUnlocked == null || isUnlocked == false)
-            {
-                // just check again, to be sure
-                isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
-            }
-            LogFine("~OnDesktopPlatformIsAchievementUnlocked");
-            return isUnlocked;
-        };
+        On.DesktopPlatform.IsAchievementUnlocked += OnDesktopPlatformOnIsAchievementUnlocked;
         LogFine("~cctor");
     }
 
@@ -105,18 +95,17 @@ public static class AchievementHelper
         LogFine("!InitAchievements");
         foreach (var ca in _customAchievements)
         {
-            Achievement customAch = new Achievement
+            if (!list.achievements.Exists(a => a.key == ca.key))
             {
-                key = ca.key,
-                type = ca.hidden ? AchievementType.Hidden : AchievementType.Normal,
-                earnedIcon = ca.sprite,
-                unearnedIcon = ca.sprite,
-                localizedText = ca.textConvo,
-                localizedTitle = ca.titleConvo
-            };
-
-            if (list.achievements.FirstOrDefault(a => a.key == customAch.key) == default)
-            {
+                Achievement customAch = new Achievement
+                {
+                    key = ca.key,
+                    type = ca.hidden ? AchievementType.Hidden : AchievementType.Normal,
+                    earnedIcon = ca.sprite,
+                    unearnedIcon = ca.sprite,
+                    localizedText = ca.textConvo,
+                    localizedTitle = ca.titleConvo
+                };
                 list.achievements.Add(customAch);
             }
         }
@@ -133,6 +122,23 @@ public static class AchievementHelper
         orig(self);
         LogFine("~OnUIManagerRefreshAchievementsList");
     }
+
+    /// <summary>
+    /// On hook that checks for custom achievements and looks into EncryptedSharedData for them.
+    /// </summary>
+    private static bool? OnDesktopPlatformOnIsAchievementUnlocked(On.DesktopPlatform.orig_IsAchievementUnlocked orig, DesktopPlatform self, string key)
+    {
+        LogFine("!OnDesktopPlatformIsAchievementUnlocked");
+        bool? isUnlocked = orig(self, key);
+        if (_customAchievements.Exists(x => x.key == key))
+        {
+            // just check again, to be sure
+            isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
+        }
+        LogFine("~OnDesktopPlatformIsAchievementUnlocked");
+        return isUnlocked;
+    }
+
 
     private static void LogFine(string message) => InternalLogger.LogFine(message, "[SFCore]:[AchievementHelper]");
     private static void LogFine(object message) => LogFine($"{message}");
