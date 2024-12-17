@@ -5,10 +5,8 @@ using UnityEngine;
 namespace SFCore.MonoBehaviours;
 
 [UsedImplicitly]
-class SpritePatcher : MonoBehaviour
+public class SpritePatcher : MonoBehaviour
 {
-    private static Dictionary<string, Material> _materials;
-
     [UsedImplicitly]
     public string shader = "Sprites/Default";
     [UsedImplicitly]

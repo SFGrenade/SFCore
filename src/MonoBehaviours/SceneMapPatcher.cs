@@ -4,12 +4,8 @@ using UnityEngine;
 namespace SFCore.MonoBehaviours;
 
 [UsedImplicitly]
-class SceneMapPatcher : MonoBehaviour
+public class SceneMapPatcher : MonoBehaviour
 {
-    [UsedImplicitly]
-    private Material _sceneMapMaterial;
-    [UsedImplicitly]
-    private bool _initialized = false;
     [UsedImplicitly]
     public Texture tex;
 
