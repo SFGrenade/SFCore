@@ -5,10 +5,8 @@ namespace SFCore.MonoBehaviours;
 /// <summary>
 /// Patching SceneMap MeshRenderer
 /// </summary>
-class SceneMapPatcher : MonoBehaviour
+public class SceneMapPatcher : MonoBehaviour
 {
-    private Material _sceneMapMaterial;
-    private bool _initialized = false;
     /// <summary>
     /// Texture to apply to all MeshRenderers on this GameObject and children
     /// </summary>
@@ -19,17 +17,10 @@ class SceneMapPatcher : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        if (!_initialized)
-        {
-            _sceneMapMaterial = new Material(Shader.Find("tk2d/BlendVertexColor"));
-            _sceneMapMaterial.SetTexture(Shader.PropertyToID("_MainTex"), tex);
-
-            _initialized = true;
-        }
-
         foreach (var cMr in gameObject.GetComponentsInChildren<MeshRenderer>(false))
         {
-            cMr.material = _sceneMapMaterial;
+            cMr.material.shader = Shader.Find("tk2d/BlendVertexColor");
+            cMr.material.SetTexture(Shader.PropertyToID("_MainTex"), tex);
         }
     }
 }
