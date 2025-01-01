@@ -6,7 +6,7 @@
     <AssemblyName>SFCore</AssemblyName>
     <AssemblyTitle>SFCore</AssemblyTitle>
     <Description>A Hollow Knight Mod Library</Description>
-    <Copyright>Copyright © SFGrenade 2024</Copyright>
+    <Copyright>Copyright © SFGrenade 2025</Copyright>
     <AssemblyVersion>1.5.14.1</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <ImplicitUsings>false</ImplicitUsings>
