@@ -1,15 +1,18 @@
 <Project>
     <Target Name="Copy mod to unity project dirs" AfterTargets="PostBuildEvent">
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/Ancinia/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/BossModCore/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/DreamKing/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/Mountain_of_Misery/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/PvpArena/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/StoriesOfaHkPlayer-Ch2/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/TestOfTeamwork/Assets/Assemblies/" SkipUnchangedFiles="true" />
-        <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/TorvusBog/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/Ancinia/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/Ancinia/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/BossModCore/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/BossModCore/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/DreamKing/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/DreamKing/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/Mountain_of_Misery/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/Mountain_of_Misery/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/PvpArena/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/PvpArena/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/StoriesOfaHkPlayer-Ch2/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/StoriesOfaHkPlayer-Ch2/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/TestOfTeamwork/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/TestOfTeamwork/Assets/Assemblies/" SkipUnchangedFiles="true" />
+        <Copy Condition="Exists('E:/Documents/Hollow Knight Stuff/Unity-Projects/TorvusBog/Assets/Assemblies/')" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="E:/Documents/Hollow Knight Stuff/Unity-Projects/TorvusBog/Assets/Assemblies/" SkipUnchangedFiles="true" />
     </Target>
     <Target Name="Copy mod to export dir" AfterTargets="PostBuildEvent">
+        <RemoveDir Condition="Exists('$(ExportDir)/$(TargetName)/')" Directories="$(ExportDir)/$(TargetName)/" />
+        <MakeDir Directories="$(ExportDir)/$(TargetName)/" />
+
         <!-- Copy built .dll into the export folder -->
         <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(ExportDir)/$(TargetName)/SFCoreUnity.dll" />
     </Target>
