@@ -14,13 +14,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout master
         uses: actions/checkout@v4
         with:
           ref: master
           path: master
 
-      - name: Checkout
+      - name: Checkout MonoBehaviour
         uses: actions/checkout@v4
         with:
           ref: MonoBehaviour
@@ -35,29 +35,29 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
 
-      - name: Install dependencies
+      - name: Install dependencies master
         run: dotnet restore
         working-directory: master
 
-      - name: Install dependencies
+      - name: Install dependencies MonoBehaviour
         run: dotnet restore
         working-directory: MonoBehaviour
 
-      - name: Build
+      - name: Build master
         run: dotnet build -c Release
         working-directory: master
 
-      - name: Build
+      - name: Build MonoBehaviour
         run: dotnet build -c Release
         working-directory: MonoBehaviour
 
-      - name: Prepare artifacts for release
+      - name: Prepare master artifacts for release
         uses: actions/upload-artifact@v4
         with:
           name: Publish-Master
           path: master/bin/Publish
 
-      - name: Prepare artifacts for release
+      - name: Prepare MonoBehaviour artifacts for release
         uses: actions/upload-artifact@v4
         with:
           name: Publish-MonoBehaviour
