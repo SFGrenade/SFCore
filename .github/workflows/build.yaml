@@ -80,7 +80,7 @@ jobs:
         # this assumes that an MSBuild task that writes the SHA256 of the zip file to SHA.txt, and the mod version (usually
         # the same as the assembly version) to version.txt. The contents of these files are read to step outputs for use in release
         run: |
-          $sha = (Get-Content artifacts/Publish-Master/SHA.txt)[3]
+          $sha = (Get-Content artifacts/Publish-Master/SFCore/SHA.txt)[3]
           $ver = "${{  github.ref_name }}"
           echo "archiveHash=$sha" >> $env:GITHUB_OUTPUT
           echo "buildVersion=$ver" >> $env:GITHUB_OUTPUT
