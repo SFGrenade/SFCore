@@ -91,7 +91,7 @@ jobs:
           draft: false
           generate_release_notes: true
           fail_on_unmatched_files: true
-          tag_name: v${{ steps.details.outputs.buildVersion }}
+          tag_name: ${{ steps.details.outputs.buildVersion }}
           body: |
             SHA256 of SFCore.zip: ${{ steps.details.outputs.archiveHash }}  
             Attachments:  
