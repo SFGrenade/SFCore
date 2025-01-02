@@ -80,7 +80,7 @@ jobs:
         # this assumes that an MSBuild task that writes the SHA256 of the zip file to SHA.txt, and the mod version (usually
         # the same as the assembly version) to version.txt. The contents of these files are read to step outputs for use in release
         run: |
-          $sha = (Get-Content artifacts/Publish/SHA.txt)[3]
+          $sha = (Get-Content artifacts/Publish-Master/SHA.txt)[3]
           $ver = "${{  github.ref_name }}"
           echo "archiveHash=$sha" >> $env:GITHUB_OUTPUT
           echo "buildVersion=$ver" >> $env:GITHUB_OUTPUT
@@ -93,8 +93,15 @@ jobs:
           fail_on_unmatched_files: true
           tag_name: v${{ steps.details.outputs.buildVersion }}
           body: |
-            SHA256: ${{ steps.details.outputs.archiveHash }}
+            SHA256 of SFCore.zip: ${{ steps.details.outputs.archiveHash }}  
+            Attachments:  
+            - SFCore.zip
+              - to be used for the ModInstaller
+            - SFCore.dll
+              - the mod, also inside SFCore.zip
+            - SFCoreUnity.dll
+              - the mod, to be used in a Unity project for the use of its MonoBehaviours
           files: |
-            artifacts/Publish-Master/SFCore.dll
-            artifacts/Publish-Master/SFCore.zip
-            artifacts/Publish-MonoBehaviour/SFCoreUnity.dll
+            artifacts/Publish-Master/SFCore/SFCore.zip
+            artifacts/Publish-Master/SFCore/SFCore.dll
+            artifacts/Publish-MonoBehaviour/SFCore/SFCoreUnity.dll
