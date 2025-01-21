@@ -29,6 +29,10 @@ public static class CueHolder
     /// <returns>The MusicCue.</returns>
     public static MusicCue GetMusicCue(string set, AudioMixerSnapshot snapshot, AudioClip[] clips, SceneManagerPatcher.MusicChannelSync[] syncs)
     {
+        if (set == "")
+        {
+            return null;
+        }
         if (!MusicCues.ContainsKey(set))
         {
             var tmpMc = ScriptableObject.CreateInstance<MusicCue>();
@@ -68,6 +72,10 @@ public static class CueHolder
     /// <returns>The AtmosCue.</returns>
     public static AtmosCue GetAtmosCue(string set, AudioMixerSnapshot snapshot, bool[] isChannelEnabled)
     {
+        if (set == "")
+        {
+            return null;
+        }
         if (!AtmosCues.ContainsKey(set))
         {
             var tmpAc = ScriptableObject.CreateInstance<AtmosCue>();
