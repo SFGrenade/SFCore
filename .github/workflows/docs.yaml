@@ -10,20 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repo
+      - name: Checkout master
         uses: actions/checkout@v4
         with:
           ref: master
+          path: master
+
       - name: Checkout docs
         uses: actions/checkout@v4
         with:
           ref: docs
-          path: docs
+          path: master/docs
+
+      - name: Setup MAPI
+        uses: BadMagic100/setup-hk@v2
+        with:
+          apiPath: HkRefs
+          dependencyFilePath: master/ModDependencies.txt
 
       - name: Build docs
         uses: nunit/docfx-action@v3.4.2
         with:
-          args: docs/docfx.json
+          args: master/docs/docfx.json
 
       #- name: Setup .NET
       #  uses: actions/setup-dotnet@v3
