@@ -11,29 +11,34 @@ jobs:
     
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: master
       - name: Checkout docs
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: docs
           path: docs
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-      - name: Setup ms-build, mono
-        run: sudo apt-get install -y nuget mono-devel mono-xbuild
-      - name: Download DocFX
-        working-directory: docs
-        run: |
-          wget https://github.com/dotnet/docfx/releases/download/v2.61.0/docfx-linux-x64-v2.61.0.zip -O docfx.zip
-          unzip docfx.zip -d docfx
+
       - name: Build docs
-        working-directory: docs
-        run: |
-          docfx/docfx
+        uses: nunit/docfx-action@v3.4.2
+
+      #- name: Setup .NET
+      #  uses: actions/setup-dotnet@v3
+      #- name: Setup ms-build, mono
+      #  run: sudo apt-get install -y nuget mono-devel mono-xbuild
+      #- name: Download DocFX
+      #  working-directory: docs
+      #  run: |
+      #    wget https://github.com/dotnet/docfx/releases/download/v2.61.0/docfx-linux-x64-v2.61.0.zip -O docfx.zip
+      #    unzip docfx.zip -d docfx
+      #- name: Build docs
+      #  working-directory: docs
+      #  run: |
+      #    docfx/docfx
+
       - name: Publish
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_site
