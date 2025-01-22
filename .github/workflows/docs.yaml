@@ -22,7 +22,8 @@ jobs:
 
       - name: Build docs
         uses: nunit/docfx-action@v3.4.2
-        working-directory: docs
+        with:
+          args: docs/docfx.json
 
       #- name: Setup .NET
       #  uses: actions/setup-dotnet@v3
