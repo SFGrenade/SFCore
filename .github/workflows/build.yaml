@@ -39,11 +39,11 @@ jobs:
           dependencyFilePath: master/ModDependencies.txt
 
       # should be part of the installed software of the runner
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 9
-          cache: true
+      #- name: Setup .NET
+      #  uses: actions/setup-dotnet@v4
+      #  with:
+      #    dotnet-version: 9
+      #    cache: true
 
       - name: Install dependencies MonoBehaviour
         run: dotnet restore
