@@ -41,6 +41,10 @@ jobs:
       # should be part of the installed software of the runner
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9
+          dotnet-quality: validated
+          cache: true
 
       - name: Install dependencies MonoBehaviour
         run: dotnet restore
