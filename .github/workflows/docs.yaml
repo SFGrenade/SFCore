@@ -6,9 +6,8 @@ on:
 
 jobs:
   docfx:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout master
         uses: actions/checkout@v4
@@ -27,6 +26,10 @@ jobs:
         with:
           apiPath: HkRefs
           dependencyFilePath: master/ModDependencies.txt
+
+      # should be part of the installed software of the runner
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
 
       - name: Build docs
         uses: nunit/docfx-action@v3.4.2
