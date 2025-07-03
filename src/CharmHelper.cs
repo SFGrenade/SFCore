@@ -393,27 +393,30 @@ public static class CharmHelper
                 bbPrefab.SetActive(bbT1.activeSelf);
             }
 
-            GameObject bbGo = backboardsGo.Find($"BB {i}");
-            bool bbGoActiveSelf = bbGo.activeSelf; 
-            bbGo.SetActive(false);
-            var icb = bbGo.GetComponent<InvCharmBackboard>();
-            icb.charmNum = i;
-            icb.charmNumString = i.ToString();
-            if (i > (40 + CustomSprites.Count))
+            if (i > 40)
             {
-                // manual blank
-                icb.gotCharmString = "";
-                icb.newCharmString = "";
-                icb.GetAttr<InvCharmBackboard, SpriteRenderer>("spriteRenderer").sprite = icb.blankSprite;
-                icb.SetAttr("blanked", false);  // false because gotCharmString will evaluate to false and so we don't let the backboard reappear
+                GameObject bbGo = backboardsGo.Find($"BB {i}");
+                bool bbGoActiveSelf = bbGo.activeSelf; 
+                bbGo.SetActive(false);
+                var icb = bbGo.GetComponent<InvCharmBackboard>();
+                icb.charmNum = i;
+                icb.charmNumString = i.ToString();
+                if (i > (40 + CustomSprites.Count))
+                {
+                    // manual blank
+                    icb.gotCharmString = "";
+                    icb.newCharmString = "";
+                    icb.GetAttr<InvCharmBackboard, SpriteRenderer>("spriteRenderer").sprite = icb.blankSprite;
+                    icb.SetAttr("blanked", false);  // false because gotCharmString will evaluate to false and so we don't let the backboard reappear
+                }
+                else
+                {
+                    icb.SetAttr("blanked", true);
+                    icb.gotCharmString = "gotCharm_" + i;
+                    icb.newCharmString = "newCharm_" + i;
+                }
+                bbGo.SetActive(bbGoActiveSelf);
             }
-            else
-            {
-                icb.SetAttr("blanked", true);
-                icb.gotCharmString = "gotCharm_" + i;
-                icb.newCharmString = "newCharm_" + i;
-            }
-            bbGo.SetActive(bbGoActiveSelf);
         }
 
         #endregion
