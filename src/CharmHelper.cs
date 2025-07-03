@@ -177,11 +177,23 @@ public static class CharmHelper
         #region CharmIconList Start
 
         var invGo = GameCameras.instance.hudCamera.gameObject.Find("Inventory");
-        if (invGo == null) return;
+        if (invGo == null)
+        {
+            LogFine("~ClearModdedCharmsFromUiCharms EARLY (invGo == null)");
+            return;
+        }
         var charmsGo = invGo.Find("Charms");
-        if (charmsGo == null) return;
+        if (charmsGo == null)
+        {
+            LogFine("~ClearModdedCharmsFromUiCharms EARLY (charmsGo == null)");
+            return;
+        }
         var charmsFsm = charmsGo.LocateMyFSM("UI Charms");
-        if (charmsFsm == null) return;
+        if (charmsFsm == null)
+        {
+            LogFine("~ClearModdedCharmsFromUiCharms EARLY (charmsFsm == null)");
+            return;
+        }
 
         var tmpCollectedCharmsGo = charmsGo.Find("Collected Charms");
 
@@ -366,7 +378,7 @@ public static class CharmHelper
         GameObject bbPrefab;
         int bbPrefabNum;
         GameObject bbT1, bbT2;
-        for (int i = (numCharms + 1); i <= (rows * 10); i++)
+        for (int i = (0 + 1); i <= (rows * 10); i++)
         {
             bbPrefabNum = ((i - 1) % 20) + 21;
             if (backboardsGo.Find($"BB {i}") == null)
@@ -379,22 +391,29 @@ public static class CharmHelper
                 bbPrefab.transform.localPosition = bbT1.transform.localPosition + ((bbT1.transform.localPosition - bbT2.transform.localPosition) * (((i / 10f) - (bbPrefabNum / 10f)) / 2f));
                 bbPrefab.name = $"BB {i}";
                 bbPrefab.SetActive(bbT1.activeSelf);
+            }
 
-                var icb = bbPrefab.GetComponent<InvCharmBackboard>();
-                icb.charmNum = i;
-                icb.charmNumString = i.ToString();
-                if (i > (40 + CustomSprites.Count))
-                {
-                    icb.SetAttr("blanked", false);
-                    icb.gotCharmString = "";
-                }
-                else
-                {
-                    icb.SetAttr("blanked", true);
-                }
+            GameObject bbGo = backboardsGo.Find($"BB {i}");
+            bool bbGoActiveSelf = bbGo.activeSelf; 
+            bbGo.SetActive(false);
+            var icb = bbGo.GetComponent<InvCharmBackboard>();
+            icb.charmNum = i;
+            icb.charmNumString = i.ToString();
+            if (i > (40 + CustomSprites.Count))
+            {
+                // manual blank
+                icb.gotCharmString = "";
+                icb.newCharmString = "";
+                icb.GetAttr<InvCharmBackboard, SpriteRenderer>("spriteRenderer").sprite = icb.blankSprite;
+                icb.SetAttr("blanked", false);  // false because gotCharmString will evaluate to false and so we don't let the backboard reappear
+            }
+            else
+            {
+                icb.SetAttr("blanked", true);
                 icb.gotCharmString = "gotCharm_" + i;
                 icb.newCharmString = "newCharm_" + i;
             }
+            bbGo.SetActive(bbGoActiveSelf);
         }
 
         #endregion
