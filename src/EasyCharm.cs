@@ -172,6 +172,38 @@ public abstract class EasyCharm
     /// </summary>
     public void TakeCharm()
     {
+        // first, check if equipped, then do the funny business of properly unequipping it before setting the pd vals to false
+        if (PlayerData.instance.GetBool($"gotCharm_{Id}") && PlayerData.instance.GetBool($"equippedCharm_{Id}"))
+        {
+            // "Return Points"
+            int thisCharmCost = PlayerData.instance.GetInt($"charmCost_{Id}");
+            int prevCharmSlotsFilled = PlayerData.instance.GetInt("charmSlotsFilled");
+            PlayerData.instance.SetInt("charmSlotsFilled", prevCharmSlotsFilled - thisCharmCost);
+            // "End Overcharm?"
+            if (PlayerData.instance.GetBool("overcharmed"))
+            {
+                if (PlayerData.instance.GetInt("charmSlotsFilled") > PlayerData.instance.GetInt("charmSlots"))
+                {
+                    // "Remain Overcharmed"
+                }
+                else
+                {
+                    // "End Overcharm"
+                    PlayerData.instance.SetBool("overcharmed", false);
+                }
+            }
+            // "Tween Down"
+            // "Unequip"
+            PlayerData.instance.SetBool($"equippedCharm_{Id}", false);
+            GameManager.instance.UnequipCharm(Id);
+            ReflectionHelper.CallMethod<BuildEquippedCharms>(UnityEngine.Object.FindObjectOfType<BuildEquippedCharms>(),
+                "BuildCharmList");
+            // "End Overcharm Indicator"
+            // "Open Notch?"
+            // "Unequip Return"
+        }
+        
+        // set pd vals to false
         PlayerData.instance.SetBool($"gotCharm_{Id}", false);
         PlayerData.instance.SetBool($"newCharm_{Id}", false);
         PlayerData.instance.SetBool($"equippedCharm_{Id}", false);
