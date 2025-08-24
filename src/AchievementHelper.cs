@@ -74,6 +74,16 @@ public static class AchievementHelper
     public static void AddAchievement(string key, Sprite sprite, string titleConvo, string textConvo, bool hidden)
     {
         LogFine("!AddAchievement");
+        foreach (SCustomAchievement achievement in _customAchievements)
+        {
+            // length check first because unity's framework472 is trash and doesn't do it itself
+            if ((achievement.key.Length == key.Length) && (achievement.key == key))
+            {
+                LogError($"Achievement with key '{key}' already exists! It's defined as ('{achievement.key}', {achievement.sprite}, '{achievement.titleConvo}', '{achievement.textConvo}', {achievement.hidden})!");
+                LogFine("~AddAchievement");
+                return;
+            }
+        }
         LogDebug($"Adding achievement '{key}'");
         _customAchievements.Add(new SCustomAchievement()
         {
@@ -95,7 +105,8 @@ public static class AchievementHelper
         LogFine("!InitAchievements");
         foreach (var ca in _customAchievements)
         {
-            if (!list.achievements.Exists(a => a.key == ca.key))
+            // length check first because unity's framework472 is trash and doesn't do it itself
+            if (!list.achievements.Exists(a => ((a.key.Length == ca.key.Length) && (a.key == ca.key))))
             {
                 Achievement customAch = new Achievement
                 {
@@ -130,7 +141,8 @@ public static class AchievementHelper
     {
         LogFine("!OnDesktopPlatformIsAchievementUnlocked");
         bool? isUnlocked = orig(self, key);
-        if (_customAchievements.Exists(x => x.key == key))
+        // length check first because unity's framework472 is trash and doesn't do it itself
+        if (_customAchievements.Exists(x => ((x.key.Length == key.Length) && (x.key == key))))
         {
             // just check again, to be sure
             isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
