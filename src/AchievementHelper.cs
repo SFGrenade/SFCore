@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using SFCore.Utils;
 
 namespace SFCore;
 
@@ -48,7 +49,8 @@ public static class AchievementHelper
     static AchievementHelper()
     {
         LogFine("!cctor");
-        On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
+        On.MenuAchievementsList.PreInit += OnMenuAchievementsListPreInit;
+        //On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
         //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
         On.DesktopPlatform.IsAchievementUnlocked += OnDesktopPlatformOnIsAchievementUnlocked;
         LogFine("~cctor");
@@ -103,10 +105,11 @@ public static class AchievementHelper
     private static void InitAchievements(AchievementsList list)
     {
         LogFine("!InitAchievements");
+        List<Achievement> achievements = list.GetAttr<AchievementsList, List<Achievement>>("achievements");
         foreach (var ca in _customAchievements)
         {
             // length check first because unity's framework472 is trash and doesn't do it itself
-            if (!list.achievements.Exists(a => ((a.key.Length == ca.key.Length) && (a.key == ca.key))))
+            if (!achievements.Exists(a => ((a.key.Length == ca.key.Length) && (a.key == ca.key))))
             {
                 Achievement customAch = new Achievement
                 {
@@ -117,22 +120,34 @@ public static class AchievementHelper
                     localizedText = ca.textConvo,
                     localizedTitle = ca.titleConvo
                 };
-                list.achievements.Add(customAch);
+                achievements.Add(customAch);
             }
         }
+        list.SetAttr<AchievementsList, List<Achievement>>("achievements", achievements);
         LogFine("~InitAchievements");
     }
 
     /// <summary>
     /// On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
     /// </summary>
-    private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
+    private static void OnMenuAchievementsListPreInit(On.MenuAchievementsList.orig_PreInit orig, MenuAchievementsList self)
     {
-        LogFine("!OnUIManagerRefreshAchievementsList");
-        InitAchievements(GameManager.instance.achievementHandler.achievementsList);
+        LogFine("!OnMenuAchievementsListPreInit");
+        InitAchievements(GameManager.instance.achievementHandler.AchievementsList);
         orig(self);
-        LogFine("~OnUIManagerRefreshAchievementsList");
+        LogFine("~OnMenuAchievementsListPreInit");
     }
+
+    // /// <summary>
+    // /// On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
+    // /// </summary>
+    // private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
+    // {
+    //     LogFine("!OnUIManagerRefreshAchievementsList");
+    //     InitAchievements(GameManager.instance.achievementHandler.achievementsList);
+    //     orig(self);
+    //     LogFine("~OnUIManagerRefreshAchievementsList");
+    // }
 
     /// <summary>
     /// On hook that checks for custom achievements and looks into EncryptedSharedData for them.
@@ -145,7 +160,7 @@ public static class AchievementHelper
         if (_customAchievements.Exists(x => ((x.key.Length == key.Length) && (x.key == key))))
         {
             // just check again, to be sure
-            isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
+            isUnlocked = self.RoamingSharedData.GetBool(key, def: false);
         }
         LogFine("~OnDesktopPlatformIsAchievementUnlocked");
         return isUnlocked;

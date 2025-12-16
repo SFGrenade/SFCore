@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Modding;
-using TMPro;
+using TMProOld;
 using UObject = UnityEngine.Object;
 using SFCore.MonoBehaviours;
 

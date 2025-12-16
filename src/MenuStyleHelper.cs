@@ -202,9 +202,9 @@ public static class MenuStyleHelper
         }
         self.styles = tmpList.ToArray();
 
-        int tmpInt = Platform.Current.EncryptedSharedData.GetInt("menuStyle", 0);
+        int tmpInt = Platform.Current.RoamingSharedData.GetInt("menuStyle", 0);
         if (tmpInt >= self.styles.Length)
-            Platform.Current.EncryptedSharedData.SetInt("menuStyle", 0);
+            Platform.Current.RoamingSharedData.SetInt("menuStyle", 0);
     }
 
     private static IEnumerator OnMenuStylesFade(On.MenuStyles.orig_Fade orig, MenuStyles self, int styleindex, int fadetype, bool fade, AudioSource[] audiosources)
@@ -219,7 +219,7 @@ public static class MenuStyleHelper
         if (index < 0 || index >= 10)
         {
             orig(self, index, fade, false);
-            Platform.Current.EncryptedSharedData.SetInt("menuStyle", 0);
+            Platform.Current.RoamingSharedData.SetInt("menuStyle", 0);
         }
         else
         {
