@@ -15,12 +15,6 @@ jobs:
           ref: master
           path: master
 
-      - name: Checkout docs
-        uses: actions/checkout@v4
-        with:
-          ref: docs
-          path: master/docs
-
       - name: Setup MAPI
         uses: BadMagic100/setup-hk@v2
         with:
