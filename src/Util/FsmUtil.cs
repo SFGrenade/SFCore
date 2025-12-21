@@ -450,20 +450,19 @@ public static partial class FsmUtil
     /// <param name="stateName">The name of the state in which the method is added</param>
     /// <param name="method">The method that will be invoked with the action as the parameter</param>
     [PublicAPI]
-    public static void AddMethod(this PlayMakerFSM fsm, string stateName, Action<FsmStateAction> method) => fsm.GetState(stateName)!.AddMethod(method);
+    public static void AddMethod(this PlayMakerFSM fsm, string stateName, Action method) => fsm.GetState(stateName)!.AddMethod(method);
 
-    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action)"/>
     [PublicAPI]
-    public static void AddMethod(this Fsm fsm, string stateName, Action<FsmStateAction> method) => fsm.GetState(stateName)!.AddMethod(method);
+    public static void AddMethod(this Fsm fsm, string stateName, Action method) => fsm.GetState(stateName)!.AddMethod(method);
 
-    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="method">The method that will be invoked with the action as the parameter</param>
     [PublicAPI]
-    public static void AddMethod(this FsmState state, Action<FsmStateAction> method)
+    public static void AddMethod(this FsmState state, Action method)
     {
-        FunctionAction<FsmStateAction> action = new FunctionAction<FsmStateAction> { action = method };
-        action.arg = action;
+        MethodAction action = new MethodAction { method = method };
         state.AddAction(action);
     }
 
@@ -596,33 +595,32 @@ public static partial class FsmUtil
     /// <param name="index">The index to place the action in</param>
     /// <returns>bool that indicates whether the insertion was successful</returns>
     [PublicAPI]
-    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, Action<FsmStateAction> method, int index) => fsm.GetState(stateName)!.InsertMethod(index, method);
+    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetState(stateName)!.InsertMethod(index, method);
 
-    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
     [PublicAPI]
-    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, int index, Action<FsmStateAction> method) => fsm.GetState(stateName)!.InsertMethod(index, method);
+    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, int index, Action method) => fsm.GetState(stateName)!.InsertMethod(index, method);
 
-    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
     [PublicAPI]
-    public static void InsertMethod(this Fsm fsm, string stateName, Action<FsmStateAction> method, int index) => fsm.GetState(stateName)!.InsertMethod(index, method);
+    public static void InsertMethod(this Fsm fsm, string stateName, Action method, int index) => fsm.GetState(stateName)!.InsertMethod(index, method);
 
-    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
     [PublicAPI]
-    public static void InsertMethod(this Fsm fsm, string stateName, int index, Action<FsmStateAction> method) => fsm.GetState(stateName)!.InsertMethod(index, method);
+    public static void InsertMethod(this Fsm fsm, string stateName, int index, Action method) => fsm.GetState(stateName)!.InsertMethod(index, method);
 
-    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="method">The method that will be invoked</param>
     /// <param name="index">The index to place the action in</param>
     [PublicAPI]
-    public static void InsertMethod(this FsmState state, Action<FsmStateAction> method, int index) => state.InsertMethod(index, method);
+    public static void InsertMethod(this FsmState state, Action method, int index) => state.InsertMethod(index, method);
 
-    /// <inheritdoc cref="InsertMethod(FsmState, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(FsmState, Action, int)"/>
     [PublicAPI]
-    public static void InsertMethod(this FsmState state, int index, Action<FsmStateAction> method)
+    public static void InsertMethod(this FsmState state, int index, Action method)
     {
-        FunctionAction<FsmStateAction> action = new FunctionAction<FsmStateAction> { action = method };
-        action.arg = action;
+        MethodAction action = new MethodAction { method = method };
         state.InsertAction(action, index);
     }
 
@@ -673,7 +671,7 @@ public static partial class FsmUtil
     /// <param name="method">The method to execute.
     /// The argument will be the FsmStateAction which is being added.</param>
     [PublicAPI]
-    public static void InsertMethodBefore(this FsmStateAction action, Action<FsmStateAction> method)
+    public static void InsertMethodBefore(this FsmStateAction action, Action method)
     {
         FsmState state = action.State;
         int idx = Array.IndexOf(state.Actions, action);
@@ -687,7 +685,7 @@ public static partial class FsmUtil
     /// <param name="method">The method to execute.
     /// The argument will be the FsmStateAction which is being added.</param>
     [PublicAPI]
-    public static void InsertMethodAfter(this FsmStateAction action, Action<FsmStateAction> method)
+    public static void InsertMethodAfter(this FsmStateAction action, Action method)
     {
         FsmState state = action.State;
         int idx = Array.IndexOf(state.Actions, action);
@@ -1646,7 +1644,7 @@ public static partial class FsmUtil
                 fsm.InsertAction(s.Name, new LogAction { text = $"{i}" }, i);
                 if (additionalLogging)
                 {
-                    fsm.InsertMethod(s.Name, (_) =>
+                    fsm.InsertMethod(s.Name, () =>
                     {
                         var fsmVars = fsm.Variables;
                         foreach (var variable in fsmVars.FloatVariables)

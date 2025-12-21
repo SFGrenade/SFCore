@@ -203,20 +203,20 @@ public static partial class FsmUtil
     [Obsolete("Use method `AddActions(FsmState, params FsmStateAction[])` instead!")]
     public static void AddFsmActions(this FsmState state, params FsmStateAction[] actions) => AddActions(state, actions);
 
-    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `AddMethod(PlayMakerFSM, string, Action<FsmStateAction>)` instead!")]
-    public static void AddFsmMethod(this PlayMakerFSM fsm, string stateName, Action<FsmStateAction> method) => AddMethod(fsm, stateName, method);
+    [Obsolete("Use method `AddMethod(PlayMakerFSM, string, Action)` instead!")]
+    public static void AddFsmMethod(this PlayMakerFSM fsm, string stateName, Action method) => AddMethod(fsm, stateName, method);
 
-    /// <inheritdoc cref="AddMethod(Fsm, string, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="AddMethod(Fsm, string, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `AddMethod(Fsm, string, Action<FsmStateAction>)` instead!")]
-    public static void AddFsmMethod(this Fsm fsm, string stateName, Action<FsmStateAction> method) => AddMethod(fsm, stateName, method);
+    [Obsolete("Use method `AddMethod(Fsm, string, Action)` instead!")]
+    public static void AddFsmMethod(this Fsm fsm, string stateName, Action method) => AddMethod(fsm, stateName, method);
 
-    /// <inheritdoc cref="AddMethod(FsmState, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="AddMethod(FsmState, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `AddMethod(FsmState, Action<FsmStateAction>)` instead!")]
-    public static void AddFsmMethod(this FsmState state, Action<FsmStateAction> method) => AddMethod(state, method);
+    [Obsolete("Use method `AddMethod(FsmState, Action)` instead!")]
+    public static void AddFsmMethod(this FsmState state, Action method) => AddMethod(state, method);
 
     /// <inheritdoc cref="AddLambdaMethod(PlayMakerFSM, string, Action{Action})"/>
     [PublicAPI]
@@ -278,35 +278,35 @@ public static partial class FsmUtil
     [Obsolete("Use method `InsertActions(FsmState, int, params FsmStateAction[])` instead!")]
     public static void InsertFsmActions(this FsmState state, int index, params FsmStateAction[] actions) => InsertActions(state, index, actions);
 
-    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethod(PlayMakerFSM, string, Action<FsmStateAction>, int)` instead!")]
-    public static void InsertFsmMethod(this PlayMakerFSM fsm, string stateName, Action<FsmStateAction> method, int index) => InsertMethod(fsm, stateName, method, index);
+    [Obsolete("Use method `InsertMethod(PlayMakerFSM, string, Action, int)` instead!")]
+    public static void InsertFsmMethod(this PlayMakerFSM fsm, string stateName, Action method, int index) => InsertMethod(fsm, stateName, method, index);
 
-    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, int, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, int, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethod(PlayMakerFSM, string, int, Action<FsmStateAction>)` instead!")]
-    public static void InsertFsmMethod(this PlayMakerFSM fsm, string stateName, int index, Action<FsmStateAction> method) => InsertMethod(fsm, stateName, index, method);
+    [Obsolete("Use method `InsertMethod(PlayMakerFSM, string, int, Action)` instead!")]
+    public static void InsertFsmMethod(this PlayMakerFSM fsm, string stateName, int index, Action method) => InsertMethod(fsm, stateName, index, method);
 
-    /// <inheritdoc cref="InsertMethod(Fsm, string, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(Fsm, string, Action, int)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethod(Fsm, string, Action<FsmStateAction>, int)` instead!")]
-    public static void InsertFsmMethod(this Fsm fsm, string stateName, Action<FsmStateAction> method, int index) => InsertMethod(fsm, stateName, method, index);
+    [Obsolete("Use method `InsertMethod(Fsm, string, Action, int)` instead!")]
+    public static void InsertFsmMethod(this Fsm fsm, string stateName, Action method, int index) => InsertMethod(fsm, stateName, method, index);
 
-    /// <inheritdoc cref="InsertMethod(Fsm, string, int, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="InsertMethod(Fsm, string, int, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethod(Fsm, string, int, Action<FsmStateAction>)` instead!")]
-    public static void InsertFsmMethod(this Fsm fsm, string stateName, int index, Action<FsmStateAction> method) => InsertMethod(fsm, stateName, index, method);
+    [Obsolete("Use method `InsertMethod(Fsm, string, int, Action)` instead!")]
+    public static void InsertFsmMethod(this Fsm fsm, string stateName, int index, Action method) => InsertMethod(fsm, stateName, index, method);
 
-    /// <inheritdoc cref="InsertMethod(FsmState, Action{FsmStateAction}, int)"/>
+    /// <inheritdoc cref="InsertMethod(FsmState, Action, int)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethod(FsmState, Action<FsmStateAction>, int)` instead!")]
-    public static void InsertFsmMethod(this FsmState state, Action<FsmStateAction> method, int index) => InsertMethod(state, method, index);
+    [Obsolete("Use method `InsertMethod(FsmState, Action, int)` instead!")]
+    public static void InsertFsmMethod(this FsmState state, Action method, int index) => InsertMethod(state, method, index);
 
-    /// <inheritdoc cref="InsertMethod(FsmState, int, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="InsertMethod(FsmState, int, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethod(FsmState, int, Action<FsmStateAction>)` instead!")]
-    public static void InsertFsmMethod(this FsmState state, int index, Action<FsmStateAction> method) => InsertMethod(state, index, method);
+    [Obsolete("Use method `InsertMethod(FsmState, int, Action)` instead!")]
+    public static void InsertFsmMethod(this FsmState state, int index, Action method) => InsertMethod(state, index, method);
 
     /// <inheritdoc cref="InsertLambdaMethod(PlayMakerFSM, string, Action{Action}, int)"/>
     [PublicAPI]
@@ -338,15 +338,15 @@ public static partial class FsmUtil
     [Obsolete("Use method `InsertLambdaMethod(FsmState, int, Action<Action>)` instead!")]
     public static void InsertFsmLambdaMethod(this FsmState state, int index, Action<Action> method) => InsertLambdaMethod(state, index, method);
 
-    /// <inheritdoc cref="InsertMethodBefore(FsmStateAction, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="InsertMethodBefore(FsmStateAction, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethodBefore(FsmStateAction, Action<FsmStateAction>)` instead!")]
-    public static void InsertFsmMethodBefore(this FsmStateAction action, Action<FsmStateAction> method) => InsertMethodBefore(action, method);
+    [Obsolete("Use method `InsertMethodBefore(FsmStateAction, Action)` instead!")]
+    public static void InsertFsmMethodBefore(this FsmStateAction action, Action method) => InsertMethodBefore(action, method);
 
-    /// <inheritdoc cref="InsertMethodAfter(FsmStateAction, Action{FsmStateAction})"/>
+    /// <inheritdoc cref="InsertMethodAfter(FsmStateAction, Action)"/>
     [PublicAPI]
-    [Obsolete("Use method `InsertMethodAfter(FsmStateAction, Action<FsmStateAction>)` instead!")]
-    public static void InsertFsmMethodAfter(this FsmStateAction action, Action<FsmStateAction> method) => InsertMethodAfter(action, method);
+    [Obsolete("Use method `InsertMethodAfter(FsmStateAction, Action)` instead!")]
+    public static void InsertFsmMethodAfter(this FsmStateAction action, Action method) => InsertMethodAfter(action, method);
 
     /// <inheritdoc cref="InsertActionBefore(FsmStateAction, FsmStateAction)"/>
     [PublicAPI]
