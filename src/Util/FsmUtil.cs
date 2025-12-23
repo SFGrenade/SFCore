@@ -1641,7 +1641,7 @@ public static partial class FsmUtil
         {
             for (int i = s.Actions.Length - 1; i >= 0; i--)
             {
-                fsm.InsertAction(s.Name, new LogAction { text = $"{i}" }, i);
+                fsm.InsertAction(s.Name, new StatusLog { text = $"{i} - {s.Actions[i].GetType().FullName}" }, i);
                 if (additionalLogging)
                 {
                     fsm.InsertMethod(s.Name, () =>

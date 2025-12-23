@@ -200,11 +200,7 @@ public static class ItemHelper
 
     private static void InitDefaultItems(GameObject equipmentGo)
     {
-        var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
-        if (equipmentFsm.FsmStates[0].Fsm == null)
-        {
-            equipmentFsm.Preprocess();
-        }
+        var equipmentFsm = equipmentGo.GetFsmPreprocessed("Build Equipment List");
 
         if (_initialized) return;
 
@@ -264,21 +260,12 @@ public static class ItemHelper
         GameObject inventoryGo = newPaneGo.transform.parent.gameObject;
 
         GameObject equipmentGo = inventoryGo.transform.Find("Inv").Find("Equipment").gameObject;
-        var equipmentFsm = equipmentGo.LocateMyFSM("Build Equipment List");
-        if (equipmentFsm.FsmStates[0].Fsm == null)
-        {
-            equipmentFsm.Preprocess();
-        }
+        var equipmentFsm = equipmentGo.GetFsmPreprocessed("Build Equipment List");
         equipmentFsm.ChangeTransition("Init", "FINISHED", "Pause");
         InitDefaultItems(equipmentGo);
 
-        var inventoryFsm = inventoryGo.LocateMyFSM("Inventory Control");
+        var inventoryFsm = inventoryGo.GetFsmPreprocessed("Inventory Control");
         var inventoryFsmVars = inventoryFsm.FsmVariables;
-
-        if (inventoryFsm.FsmStates[0].Fsm == null)
-        {
-            inventoryFsm.Preprocess();
-        }
 
         var newPaneFod = new FsmOwnerDefault()
         {
@@ -312,18 +299,10 @@ public static class ItemHelper
         inventoryFsm.AddGameObjectVariable("ItemList Pane");
         inventoryFsm.AddGameObjectVariable("ItemList List");
 
-        var newListFsm = newListGo.LocateMyFSM("Item List Control Custom");
-        if (newListFsm.FsmStates[0].Fsm == null)
-        {
-            newListFsm.Preprocess();
-        }
+        var newListFsm = newListGo.GetFsmPreprocessed("Item List Control Custom");
         var newListFsmVars = newListFsm.FsmVariables;
 
-        var uiJournalFsm = newPaneGo.LocateMyFSM("UI Journal Custom");
-        if (uiJournalFsm.FsmStates[0].Fsm == null)
-        {
-            uiJournalFsm.Preprocess();
-        }
+        var uiJournalFsm = newPaneGo.GetFsmPreprocessed("UI Journal Custom");
 
         #region Inventory Control - Init Enemy List
 
@@ -454,7 +433,7 @@ public static class ItemHelper
 
         #region Journal go copy - UI Journal fsm
 
-        Object.Destroy(newPaneGo.Find("Text Encountered"));
+        UObject.Destroy(newPaneGo.Find("Text Encountered"));
         newPaneGo.Find("Text Completion").GetComponent<SetTextMeshProGameText>().convName = "ITEMS_COLLECTED";
 
         uiJournalFsm.RemoveAction("Init", 6);
