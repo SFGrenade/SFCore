@@ -2,765 +2,1618 @@
 using HutongGames.PlayMaker;
 using JetBrains.Annotations;
 using Logger = Modding.Logger;
+using UGameObject = UnityEngine.GameObject;
 
 namespace SFCore.Utils;
 
 /// <summary>
 /// Utils specifically for PlayMakerFSMs.
 /// </summary>
-public static class FsmUtil
+public static partial class FsmUtil
 {
-    #region Get
+    #region Get a FSM
 
     /// <summary>
-    /// Gets a state in a PlayMakerFSM.
+    ///     Locates a PlayMakerFSM by name.
     /// </summary>
-    /// <param name="fsm">The fsm</param>
-    /// <param name="stateName">The name of the state</param>
-    /// <returns>The found state, null if none are found.</returns>
-    [UsedImplicitly]
-    public static FsmState GetState(this PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName);
-    /// <inheritdoc cref="GetState(PlayMakerFSM, string)"/>
-    [UsedImplicitly]
-    public static FsmState GetFsmState(this PlayMakerFSM fsm, string stateName)
+    /// <param name="go">The GameObject to search on</param>
+    /// <param name="fsmName">The name of the FSM</param>
+    /// <returns>The found FSM, null if not found</returns>
+    [PublicAPI]
+    public static PlayMakerFSM GetFsm(this UGameObject go, string fsmName)
     {
-        var fsmStates = fsm.FsmStates;
-        int fsmStatesCount = fsmStates.Length;
-        int i;
-        for (i = 0; i < fsmStatesCount; i++)
+        foreach (PlayMakerFSM fsm in go.GetComponents<PlayMakerFSM>())
         {
-            if (fsmStates[i].Name == stateName)
+            if (fsm.FsmName == fsmName)
             {
-                return fsmStates[i];
+                return fsm;
             }
         }
         return null;
     }
 
     /// <summary>
-    /// Gets a transtition in a PlayMakerFSM.
+    ///     Locates a PlayMakerFSM by name and preprocesses it.
     /// </summary>
-    /// <param name="fsm">The fsm</param>
-    /// <param name="stateName">The name of the from state</param>
-    /// <param name="eventName">The name of the event</param>
-    /// <returns>The found transtition, null if none are found.</returns>
-    [UsedImplicitly]
-    public static FsmTransition GetTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetFsmTransition(stateName, eventName);
-    /// <inheritdoc cref="GetTransition(PlayMakerFSM, string, string)"/>
-    [UsedImplicitly]
-    public static FsmTransition GetFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetFsmState(stateName).GetFsmTransition(eventName);
-    /// <inheritdoc cref="GetTransition(PlayMakerFSM, string, string)"/>
-    /// <param name="state">The state</param>
-    /// <param name="eventName">The name of the event</param>
-    [UsedImplicitly]
-    public static FsmTransition GetTransition(this FsmState state, string eventName) => state.GetFsmTransition(eventName);
-    /// <inheritdoc cref="GetTransition(FsmState, string)"/>
-    [UsedImplicitly]
-    public static FsmTransition GetFsmTransition(this FsmState state, string eventName)
+    /// <param name="go">The GameObject to search on</param>
+    /// <param name="fsmName">The name of the FSM</param>
+    /// <returns>The found FSM, null if not found</returns>
+    [PublicAPI]
+    public static PlayMakerFSM GetFsmPreprocessed(this UGameObject go, string fsmName)
     {
-        var transitions = state.Transitions;
-        var transitionsCount = transitions.Length;
-        int i;
-        for (i = 0; i < transitionsCount; i++)
+        foreach (PlayMakerFSM fsm in go.GetComponents<PlayMakerFSM>())
         {
-            if (transitions[i].EventName == eventName)
+            if (fsm.FsmName == fsmName)
             {
-                return transitions[i];
+                fsm.Preprocess();
+                return fsm;
             }
         }
         return null;
-    }
-
-    /// <summary>
-    /// Gets an action in a PlayMakerFSM.
-    /// </summary>
-    /// <param name="fsm">The fsm</param>
-    /// <param name="stateName">The name of the state</param>
-    /// <param name="index">The index of the action</param>
-    /// <returns>The action.</returns>
-    [UsedImplicitly]
-    public static TAction GetAction<TAction>(this PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction => fsm.GetFsmAction<TAction>(stateName, index);
-    /// <inheritdoc cref="GetAction{TAction}(PlayMakerFSM, string, int)"/>
-    [UsedImplicitly]
-    public static TAction GetFsmAction<TAction>(this PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction
-    {
-        return (TAction)fsm.GetFsmState(stateName).Actions[index];
     }
 
     #endregion
 
-    #region Add
+    #region Get
+
+    private static TVal GetItemFromArray<TVal>(TVal[] origArray, Func<TVal, bool> isItemCheck) where TVal : class
+    {
+        foreach (TVal item in origArray)
+        {
+            if (isItemCheck(item))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private static TVal[] GetItemsFromArray<TVal>(TVal[] origArray, Func<TVal, bool> isItemCheck) where TVal : class
+    {
+        int foundItems = 0;
+        foreach (TVal item in origArray)
+        {
+            if (isItemCheck(item))
+            {
+                foundItems++;
+            }
+        }
+        if (foundItems == origArray.Length)
+        {
+            return origArray;
+        }
+        if (foundItems == 0)
+        {
+            return [];
+        }
+        TVal[] retArray = new TVal[foundItems];
+        int foundProgress = 0;
+        foreach (TVal item in origArray)
+        {
+            if (isItemCheck(item))
+            {
+                retArray[foundProgress] = item;
+                foundProgress++;
+            }
+        }
+        return retArray;
+    }
 
     /// <summary>
-    /// Adds a state in a PlayMakerFSM.
+    ///     Gets a state in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state</param>
-    /// <returns>The created state.</returns>
-    [UsedImplicitly]
-    public static FsmState AddState(this PlayMakerFSM fsm, string stateName) => fsm.AddFsmState(stateName);
+    /// <returns>The found state, null if none are found</returns>
+    [PublicAPI]
+    public static FsmState GetState(this PlayMakerFSM fsm, string stateName) => GetItemFromArray(fsm.FsmStates, x => x.Name == stateName);
+
+    /// <inheritdoc cref="GetState(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmState GetState(this Fsm fsm, string stateName) => GetItemFromArray(fsm.States, x => x.Name == stateName);
+
+    /// <summary>
+    ///     Gets a transition in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the from state</param>
+    /// <param name="eventName">The name of the event</param>
+    /// <returns>The found transition, null if none are found</returns>
+    [PublicAPI]
+    public static FsmTransition GetTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetState(stateName)!.GetTransition(eventName);
+
+    /// <inheritdoc cref="GetTransition(PlayMakerFSM, string, string)"/>
+    [PublicAPI]
+    public static FsmTransition GetTransition(this Fsm fsm, string stateName, string eventName) => fsm.GetState(stateName)!.GetTransition(eventName);
+
+    /// <inheritdoc cref="GetTransition(PlayMakerFSM, string, string)"/>
+    /// <param name="state">The state</param>
+    /// <param name="eventName">The name of the event</param>
+    [PublicAPI]
+    public static FsmTransition GetTransition(this FsmState state, string eventName) => GetItemFromArray(state.Transitions, x => x.EventName == eventName);
+
+    /// <summary>
+    ///     Gets a global transition in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="globalEventName">The name of the event</param>
+    /// <returns>The found global transition, null if none are found</returns>
+    [PublicAPI]
+    public static FsmTransition GetGlobalTransition(this PlayMakerFSM fsm, string globalEventName) => fsm.Fsm.GetGlobalTransition(globalEventName);
+
+    /// <inheritdoc cref="GetGlobalTransition(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmTransition GetGlobalTransition(this Fsm fsm, string globalEventName) => GetItemFromArray(fsm.GlobalTransitions, x => x.EventName == globalEventName);
+
+    /// <summary>
+    ///     Gets an action in a PlayMakerFSM.
+    /// </summary>
+    /// <typeparam name="TAction">The type of the action that is wanted</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state</param>
+    /// <param name="index">The index of the action</param>
+    /// <returns>The action, null if it can't be found</returns>
+    [PublicAPI]
+    public static TAction GetAction<TAction>(this PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetAction<TAction>(index);
+
+    /// <inheritdoc cref="GetAction{TAction}(PlayMakerFSM, string, int)"/>
+    [PublicAPI]
+    public static TAction GetAction<TAction>(this Fsm fsm, string stateName, int index) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetAction<TAction>(index);
+
+    /// <inheritdoc cref="GetAction{TAction}(PlayMakerFSM, string, int)"/>
+    /// <param name="state">The state</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static TAction GetAction<TAction>(this FsmState state, int index) where TAction : FsmStateAction => state.Actions[index] as TAction;
+
+    /// <inheritdoc cref="GetAction{TAction}(PlayMakerFSM, string, int)"/>
+    [PublicAPI]
+    public static FsmStateAction GetStateAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetState(stateName)!.GetStateAction(index);
+
+    /// <inheritdoc cref="GetAction{TAction}(Fsm, string, int)"/>
+    [PublicAPI]
+    public static FsmStateAction GetStateAction(this Fsm fsm, string stateName, int index) => fsm.GetState(stateName)!.GetStateAction(index);
+
+    /// <inheritdoc cref="GetAction{TAction}(FsmState, int)"/>
+    [PublicAPI]
+    public static FsmStateAction GetStateAction(this FsmState state, int index) => state.Actions[index];
+
+    /// <summary>
+    ///     Gets an action in a PlayMakerFSM.
+    /// </summary>
+    /// <typeparam name="TAction">The type of the action that is wanted</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state</param>
+    /// <returns>An array of actions</returns>
+    [PublicAPI]
+    public static TAction[] GetActionsOfType<TAction>(this PlayMakerFSM fsm, string stateName) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetActionsOfType<TAction>();
+
+    /// <inheritdoc cref="GetActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static TAction[] GetActionsOfType<TAction>(this Fsm fsm, string stateName) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetActionsOfType<TAction>();
+
+    /// <inheritdoc cref="GetActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The state</param>
+    [PublicAPI]
+    public static TAction[] GetActionsOfType<TAction>(this FsmState state) where TAction : FsmStateAction => Array.ConvertAll(GetItemsFromArray<FsmStateAction>(state.Actions, x => x is TAction), x => (TAction)x);
+
+    /// <summary>
+    ///     Gets first action of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to remove</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to get the actions from</param>
+    [PublicAPI]
+    public static TAction GetFirstActionOfType<TAction>(this PlayMakerFSM fsm, string stateName) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetFirstActionOfType<TAction>();
+
+    /// <inheritdoc cref="GetFirstActionOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static TAction GetFirstActionOfType<TAction>(this Fsm fsm, string stateName) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetFirstActionOfType<TAction>();
+
+    /// <inheritdoc cref="GetFirstActionOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static TAction GetFirstActionOfType<TAction>(this FsmState state) where TAction : FsmStateAction
+    {
+        int firstActionIndex = -1;
+        for (int i = 0; i < state.Actions.Length; i++)
+        {
+            if (state.Actions[i] is TAction)
+            {
+                firstActionIndex = i;
+                break;
+            }
+        }
+
+        if (firstActionIndex == -1)
+            return null;
+        return state.GetAction<TAction>(firstActionIndex);
+    }
+
+    /// <summary>
+    ///     Gets last action of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to remove</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to get the actions from</param>
+    [PublicAPI]
+    public static TAction GetLastActionOfType<TAction>(this PlayMakerFSM fsm, string stateName) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetLastActionOfType<TAction>();
+
+    /// <inheritdoc cref="GetLastActionOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static TAction GetLastActionOfType<TAction>(this Fsm fsm, string stateName) where TAction : FsmStateAction => fsm.GetState(stateName)!.GetLastActionOfType<TAction>();
+
+    /// <inheritdoc cref="GetLastActionOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static TAction GetLastActionOfType<TAction>(this FsmState state) where TAction : FsmStateAction
+    {
+        int lastActionIndex = -1;
+        for (int i = state.Actions.Length - 1; i >= 0; i--)
+        {
+            if (state.Actions[i] is TAction)
+            {
+                lastActionIndex = i;
+                break;
+            }
+        }
+
+        if (lastActionIndex == -1)
+            return null;
+        return state.GetAction<TAction>(lastActionIndex);
+    }
+
+    #endregion Get
+
+    #region Add
+
+    private static TVal[] AddItemToArray<TVal>(TVal[] origArray, TVal value)
+    {
+        TVal[] newArray = new TVal[origArray.Length + 1];
+        origArray.CopyTo(newArray, 0);
+        newArray[origArray.Length] = value;
+        return newArray;
+    }
+
+    /// <summary>
+    ///     Adds a state in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state</param>
+    /// <returns>The created state</returns>
+    [PublicAPI]
+    public static FsmState AddState(this PlayMakerFSM fsm, string stateName) => fsm.Fsm.AddState(new FsmState(fsm.Fsm) { Name = stateName });
+
     /// <inheritdoc cref="AddState(PlayMakerFSM, string)"/>
-    [UsedImplicitly]
-    public static FsmState AddFsmState(this PlayMakerFSM fsm, string stateName) => fsm.AddFsmState(new FsmState(fsm.Fsm) { Name = stateName });
+    [PublicAPI]
+    public static FsmState AddState(this Fsm fsm, string stateName) => fsm.AddState(new FsmState(fsm) { Name = stateName });
+
     /// <inheritdoc cref="AddState(PlayMakerFSM, string)"/>
     /// <param name="fsm">The fsm</param>
     /// <param name="state">The state</param>
-    [UsedImplicitly]
-    public static FsmState AddState(this PlayMakerFSM fsm, FsmState state) => fsm.AddFsmState(state);
+    [PublicAPI]
+    public static FsmState AddState(this PlayMakerFSM fsm, FsmState state) => fsm.Fsm.AddState(state);
+
     /// <inheritdoc cref="AddState(PlayMakerFSM, FsmState)"/>
-    [UsedImplicitly]
-    public static FsmState AddFsmState(this PlayMakerFSM fsm, FsmState state)
+    [PublicAPI]
+    public static FsmState AddState(this Fsm fsm, FsmState state)
     {
-        FsmState[] origStates = fsm.FsmStates;
-        FsmState[] states = new FsmState[origStates.Length + 1];
-        origStates.CopyTo(states, 0);
-        states[origStates.Length] = state;
-        fsm.Fsm.States = states;
+        FsmState[] origStates = fsm.States;
+        FsmState[] states = AddItemToArray(origStates, state);
+        fsm.States = states;
+        // TODO: CHECK: is this necessary? afaik it saves data for each state, which might be needed for copying/applying state changes for other things
+        fsm.SaveActions();
         return states[origStates.Length];
     }
 
     /// <summary>
-    /// Copies a state in a PlayMakerFSM.
+    ///     Copies a state in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="fromState">The name of the state to copy</param>
     /// <param name="toState">The name of the new state</param>
-    /// <returns>The new state.</returns>
-    [UsedImplicitly]
-    public static FsmState CopyState(this PlayMakerFSM fsm, string fromState, string toState) => fsm.CopyFsmState(fromState, toState);
+    /// <returns>The new state</returns>
+    [PublicAPI]
+    public static FsmState CopyState(this PlayMakerFSM fsm, string fromState, string toState) => fsm.Fsm.CopyState(fromState, toState);
+
     /// <inheritdoc cref="CopyState(PlayMakerFSM, string, string)"/>
-    [UsedImplicitly]
-    public static FsmState CopyFsmState(this PlayMakerFSM fsm, string fromState, string toState)
+    [PublicAPI]
+    public static FsmState CopyState(this Fsm fsm, string fromState, string toState)
     {
-        FsmState copy = new FsmState(fsm.GetFsmState(fromState))
+        FsmState from = fsm.GetState(fromState);
+        // save the actions before we create a new state from this, as the copy constructor will create the new actions from the saved action data from the state we put in, and that is only updated if we call .SaveActions()
+        from.SaveActions();
+        FsmState copy = new FsmState(from)
         {
             Name = toState
         };
-        FsmTransition[] transitions = copy.Transitions;
-        int transitionsCount = transitions.Length;
-        int i;
-        for (i = 0; i < transitionsCount; i++)
+        foreach (FsmTransition transition in copy.Transitions)
         {
-            // because playmaker is bad, so this has to be done extra
-            transitions[i].ToFsmState = fsm.GetFsmState(transitions[i].ToState);
+            // This is because playmaker is bad, it has to be done extra
+            transition.ToFsmState = fsm.GetState(transition.ToState);
         }
-        fsm.AddFsmState(copy);
+        fsm.AddState(copy);
         return copy;
     }
 
     /// <summary>
-    /// Adds a transition in a PlayMakerFSM.
+    ///     Adds a transition in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state from which the transition starts</param>
     /// <param name="eventName">The name of transition event</param>
     /// <param name="toState">The name of the new state</param>
-    /// <returns>The event of the transition.</returns>
-    [UsedImplicitly]
-    public static FsmEvent AddTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.AddFsmTransition(stateName, eventName, toState);
+    /// <returns>The event of the transition</returns>
+    [PublicAPI]
+    public static FsmEvent AddTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.AddTransition(eventName, toState);
+
     /// <inheritdoc cref="AddTransition(PlayMakerFSM, string, string, string)"/>
-    [UsedImplicitly]
-    public static FsmEvent AddFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetFsmState(stateName).AddFsmTransition(eventName, toState);
+    [PublicAPI]
+    public static FsmEvent AddTransition(this Fsm fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.AddTransition(eventName, toState);
+
     /// <inheritdoc cref="AddTransition(PlayMakerFSM, string, string, string)"/>
-    /// <param name="state">The fsm state</param>
+    /// <param name="state">The state from which the transition starts</param>
     /// <param name="eventName">The name of transition event</param>
     /// <param name="toState">The name of the new state</param>
-    [UsedImplicitly]
-    public static FsmEvent AddTransition(this FsmState state, string eventName, string toState) => state.AddFsmTransition(eventName, toState);
-    /// <inheritdoc cref="AddTransition(FsmState, string, string)"/>
-    [UsedImplicitly]
-    public static FsmEvent AddFsmTransition(this FsmState state, string eventName, string toState)
+    [PublicAPI]
+    public static FsmEvent AddTransition(this FsmState state, string eventName, string toState)
     {
         var ret = FsmEvent.GetFsmEvent(eventName);
-        FsmTransition[] origTransitions = state.Transitions;
-        FsmTransition[] transitions = new FsmTransition[origTransitions.Length + 1];
-        origTransitions.CopyTo(transitions, 0);
-        transitions[origTransitions.Length] = new FsmTransition
+        FsmTransition[] transitions = AddItemToArray(state.Transitions, new FsmTransition
         {
             ToState = toState,
             ToFsmState = state.Fsm.GetState(toState),
             FsmEvent = ret
-        };
+        });
         state.Transitions = transitions;
         return ret;
     }
 
     /// <summary>
-    /// Adds a global transition in a PlayMakerFSM.
+    ///     Adds a global transition in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="globalEventName">The name of transition event</param>
     /// <param name="toState">The name of the new state</param>
-    /// <returns>The event of the transition.</returns>
-    [UsedImplicitly]
-    public static FsmEvent AddGlobalTransition(this PlayMakerFSM fsm, string globalEventName, string toState) => fsm.AddFsmGlobalTransitions(globalEventName, toState);
+    /// <returns>The event of the transition</returns>
+    [PublicAPI]
+    public static FsmEvent AddGlobalTransition(this PlayMakerFSM fsm, string globalEventName, string toState) => fsm.Fsm.AddGlobalTransition(globalEventName, toState);
+
     /// <inheritdoc cref="AddGlobalTransition(PlayMakerFSM, string, string)"/>
-    [UsedImplicitly]
-    public static FsmEvent AddFsmGlobalTransitions(this PlayMakerFSM fsm, string globalEventName, string toState)
+    [PublicAPI]
+    public static FsmEvent AddGlobalTransition(this Fsm fsm, string globalEventName, string toState)
     {
-        var ret = FsmEvent.GetFsmEvent(globalEventName);
-        FsmTransition[] origTransitions = fsm.FsmGlobalTransitions;
-        FsmTransition[] transitions = new FsmTransition[origTransitions.Length + 1];
-        origTransitions.CopyTo(transitions, 0);
-        transitions[origTransitions.Length] = new FsmTransition
+        var ret = new FsmEvent(globalEventName) { IsGlobal = true };
+        FsmTransition[] transitions = AddItemToArray(fsm.GlobalTransitions, new FsmTransition
         {
             ToState = toState,
             ToFsmState = fsm.GetState(toState),
             FsmEvent = ret
-        };
-        fsm.Fsm.GlobalTransitions = transitions;
+        });
+        fsm.GlobalTransitions = transitions;
         return ret;
     }
 
     /// <summary>
-    /// Adds an action in a PlayMakerFSM.
+    ///     Adds an action in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state in which the action is added</param>
     /// <param name="action">The action</param>
-    [UsedImplicitly]
-    public static void AddAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action) => fsm.AddFsmAction(stateName, action);
+    [PublicAPI]
+    public static void AddAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action) => fsm.GetState(stateName)!.AddAction(action);
+
     /// <inheritdoc cref="AddAction(PlayMakerFSM, string, FsmStateAction)"/>
-    [UsedImplicitly]
-    public static void AddFsmAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action) => fsm.GetFsmState(stateName).AddFsmAction(action);
+    [PublicAPI]
+    public static void AddAction(this Fsm fsm, string stateName, FsmStateAction action) => fsm.GetState(stateName)!.AddAction(action);
+
     /// <inheritdoc cref="AddAction(PlayMakerFSM, string, FsmStateAction)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="action">The action</param>
-    [UsedImplicitly]
-    public static void AddAction(this FsmState state, FsmStateAction action) => state.AddFsmAction(action);
-    /// <inheritdoc cref="AddAction(FsmState, FsmStateAction)"/>
-    [UsedImplicitly]
-    public static void AddFsmAction(this FsmState state, FsmStateAction action)
+    [PublicAPI]
+    public static void AddAction(this FsmState state, FsmStateAction action)
     {
-        FsmStateAction[] origActions = state.Actions;
-        FsmStateAction[] actions = new FsmStateAction[origActions.Length + 1];
-        origActions.CopyTo(actions, 0);
-        actions[origActions.Length] = action;
+        FsmStateAction[] actions = AddItemToArray(state.Actions, action);
         state.Actions = actions;
         action.Init(state);
     }
 
     /// <summary>
-    /// Adds a method in a PlayMakerFSM.
+    ///     Adds a list of actions in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the action is added</param>
+    /// <param name="actions">The actions</param>
+    [PublicAPI]
+    public static void AddActions(this PlayMakerFSM fsm, string stateName, params FsmStateAction[] actions) => fsm.GetState(stateName)!.AddActions(actions);
+
+    /// <inheritdoc cref="AddActions(PlayMakerFSM, string, FsmStateAction[])"/>
+    [PublicAPI]
+    public static void AddActions(this Fsm fsm, string stateName, params FsmStateAction[] actions) => fsm.GetState(stateName)!.AddActions(actions);
+
+    /// <inheritdoc cref="AddActions(PlayMakerFSM, string, FsmStateAction[])"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="actions">The actions</param>
+    [PublicAPI]
+    public static void AddActions(this FsmState state, params FsmStateAction[] actions)
+    {
+        foreach (FsmStateAction action in actions)
+        {
+            state.AddAction(action);
+        }
+    }
+
+    /// <summary>
+    ///     Adds a method in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state in which the method is added</param>
-    /// <param name="method">The method that will be invoked</param>
-    [UsedImplicitly]
-    public static void AddMethod(this PlayMakerFSM fsm, string stateName, Action method) => fsm.GetFsmState(stateName).AddMethod(method);
+    /// <param name="method">The method that will be invoked with the action as the parameter</param>
+    [PublicAPI]
+    public static void AddMethod(this PlayMakerFSM fsm, string stateName, Action method) => fsm.GetState(stateName)!.AddMethod(method);
+
+    /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action)"/>
+    [PublicAPI]
+    public static void AddMethod(this Fsm fsm, string stateName, Action method) => fsm.GetState(stateName)!.AddMethod(method);
+
     /// <inheritdoc cref="AddMethod(PlayMakerFSM, string, Action)"/>
     /// <param name="state">The fsm state</param>
-    /// <param name="method">The method that will be invoked</param>
-    [UsedImplicitly]
+    /// <param name="method">The method that will be invoked with the action as the parameter</param>
+    [PublicAPI]
     public static void AddMethod(this FsmState state, Action method)
     {
-        state.AddFsmAction(new MethodAction() { method = method });
+        MethodAction action = new MethodAction { method = method };
+        state.AddAction(action);
     }
 
-    #endregion
+    /// <summary>
+    ///     Adds a method with a parameter in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the method is added</param>
+    /// <param name="method">The method that will be invoked with the finish action as the parameter</param>
+    [PublicAPI]
+    public static void AddLambdaMethod(this PlayMakerFSM fsm, string stateName, Action<Action> method) => fsm.GetState(stateName)!.AddLambdaMethod(method);
+
+    /// <inheritdoc cref="AddLambdaMethod(PlayMakerFSM, string, Action{Action})"/>
+    [PublicAPI]
+    public static void AddLambdaMethod(this Fsm fsm, string stateName, Action<Action> method) => fsm.GetState(stateName)!.AddLambdaMethod(method);
+
+    /// <inheritdoc cref="AddLambdaMethod(PlayMakerFSM, string, Action{Action})"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="method">The method that will be invoked with the finish action as the parameter</param>
+    [PublicAPI]
+    public static void AddLambdaMethod(this FsmState state, Action<Action> method)
+    {
+        FunctionAction<Action> action = new FunctionAction<Action> { action = method };
+        action.arg = action.Finish;
+        state.AddAction(action);
+    }
+
+    #endregion Add
 
     #region Insert
 
+    private static TVal[] InsertItemIntoArray<TVal>(TVal[] origArray, TVal value, int index)
+    {
+        int origArrayCount = origArray.Length;
+        if (index < 0 || index > (origArrayCount + 1))
+        {
+            throw new ArgumentOutOfRangeException($"Index {index} was out of range for array with length {origArrayCount}!");
+        }
+        TVal[] actions = new TVal[origArrayCount + 1];
+        int i;
+        for (i = 0; i < index; i++)
+        {
+            actions[i] = origArray[i];
+        }
+        actions[index] = value;
+        for (i = index; i < origArrayCount; i++)
+        {
+            actions[i + 1] = origArray[i];
+        }
+        return actions;
+    }
+
     /// <summary>
-    /// Inserts an action in a PlayMakerFSM.
+    ///     Inserts an action in a PlayMakerFSM.  
+    ///     Trying to insert an action out of bounds will cause a `ArgumentOutOfRangeException`.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state in which the action is added</param>
     /// <param name="action">The action</param>
     /// <param name="index">The index to place the action in</param>
-    [UsedImplicitly]
-    public static void InsertAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.InsertFsmAction(stateName, action, index);
+    /// <returns>bool that indicates whether the insertion was successful</returns>
+    [PublicAPI]
+    public static void InsertAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetState(stateName)!.InsertAction(index, action);
+
     /// <inheritdoc cref="InsertAction(PlayMakerFSM, string, FsmStateAction, int)"/>
-    [UsedImplicitly]
-    public static void InsertFsmAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).InsertFsmAction(action, index);
+    [PublicAPI]
+    public static void InsertAction(this PlayMakerFSM fsm, string stateName, int index, FsmStateAction action) => fsm.GetState(stateName)!.InsertAction(index, action);
+
+    /// <inheritdoc cref="InsertAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void InsertAction(this Fsm fsm, string stateName, FsmStateAction action, int index) => fsm.GetState(stateName)!.InsertAction(index, action);
+
+    /// <inheritdoc cref="InsertAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void InsertAction(this Fsm fsm, string stateName, int index, FsmStateAction action) => fsm.GetState(stateName)!.InsertAction(index, action);
+
     /// <inheritdoc cref="InsertAction(PlayMakerFSM, string, FsmStateAction, int)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="action">The action</param>
     /// <param name="index">The index to place the action in</param>
-    [UsedImplicitly]
-    public static void InsertAction(this FsmState state, FsmStateAction action, int index) => state.InsertFsmAction(action, index);
-    /// <inheritdoc cref="InsertAction(FsmState, FsmStateAction, int)"/>
-    [UsedImplicitly]
-    public static void InsertFsmAction(this FsmState state, FsmStateAction action, int index)
-    {
-        FsmStateAction[] origActions = state.Actions;
-        FsmStateAction[] actions = new FsmStateAction[origActions.Length + 1];
-        int i;
-        for (i = 0; i < index; i++)
-        {
-            actions[i] = origActions[i];
-        }
-        actions[index] = action;
-        for (i = index; i < origActions.Length; i++)
-        {
-            actions[i + 1] = origActions[i];
-        }
+    [PublicAPI]
+    public static void InsertAction(this FsmState state, FsmStateAction action, int index) => state.InsertAction(index, action);
 
+    /// <inheritdoc cref="InsertAction(FsmState, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void InsertAction(this FsmState state, int index, FsmStateAction action)
+    {
+        FsmStateAction[] actions = InsertItemIntoArray(state.Actions, action, index);
         state.Actions = actions;
         action.Init(state);
     }
 
     /// <summary>
-    /// Inserts an action in a PlayMakerFSM.
+    ///     Inserts a set of actions in a PlayMakerFSM.  
+    ///     Trying to insert an action out of bounds will cause a `ArgumentOutOfRangeException`.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the actions are added</param>
+    /// <param name="actions">The actions</param>
+    /// <param name="index">The index to place the actions in</param>
+    /// <returns>bool that indicates whether the insertion was successful</returns>
+    [PublicAPI]
+    public static void InsertActions(this PlayMakerFSM fsm, string stateName, int index, params FsmStateAction[] actions) => fsm.GetState(stateName)!.InsertActions(index, actions);
+
+    /// <inheritdoc cref="InsertActions(PlayMakerFSM, string, int, FsmStateAction[])"/>
+    [PublicAPI]
+    public static void InsertActions(this Fsm fsm, string stateName, int index, params FsmStateAction[] actions) => fsm.GetState(stateName)!.InsertActions(index, actions);
+
+    /// <inheritdoc cref="InsertActions(PlayMakerFSM, string, int, FsmStateAction[])"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="actions">The actions</param>
+    /// <param name="index">The index to place the actions in</param>
+    [PublicAPI]
+    public static void InsertActions(this FsmState state, int index, params FsmStateAction[] actions)
+    {
+        foreach (FsmStateAction action in actions)
+        {
+            state.InsertAction(action, index);
+            index++;  // preserves order
+        }
+    }
+
+    /// <summary>
+    ///     Inserts a method in a PlayMakerFSM.
+    ///     Trying to insert a method out of bounds will cause a `ArgumentOutOfRangeException`.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state in which the method is added</param>
     /// <param name="method">The method that will be invoked</param>
     /// <param name="index">The index to place the action in</param>
-    [UsedImplicitly]
-    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetFsmState(stateName).InsertMethod(method, index);
+    /// <returns>bool that indicates whether the insertion was successful</returns>
+    [PublicAPI]
+    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetState(stateName)!.InsertMethod(index, method);
+
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
+    [PublicAPI]
+    public static void InsertMethod(this PlayMakerFSM fsm, string stateName, int index, Action method) => fsm.GetState(stateName)!.InsertMethod(index, method);
+
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
+    [PublicAPI]
+    public static void InsertMethod(this Fsm fsm, string stateName, Action method, int index) => fsm.GetState(stateName)!.InsertMethod(index, method);
+
+    /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
+    [PublicAPI]
+    public static void InsertMethod(this Fsm fsm, string stateName, int index, Action method) => fsm.GetState(stateName)!.InsertMethod(index, method);
+
     /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="method">The method that will be invoked</param>
     /// <param name="index">The index to place the action in</param>
-    [UsedImplicitly]
-    public static void InsertMethod(this FsmState state, Action method, int index)
+    [PublicAPI]
+    public static void InsertMethod(this FsmState state, Action method, int index) => state.InsertMethod(index, method);
+
+    /// <inheritdoc cref="InsertMethod(FsmState, Action, int)"/>
+    [PublicAPI]
+    public static void InsertMethod(this FsmState state, int index, Action method)
     {
-        state.InsertFsmAction(new MethodAction() { method = method }, index);
+        MethodAction action = new MethodAction { method = method };
+        state.InsertAction(action, index);
     }
 
-    #endregion
+    /// <summary>
+    ///     Inserts a method with a parameter in a PlayMakerFSM.
+    ///     Trying to insert a method out of bounds will cause a `ArgumentOutOfRangeException`.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the method is added</param>
+    /// <param name="method">The method that will be invoked</param>
+    /// <param name="index">The index to place the action in</param>
+    /// <returns>bool that indicates whether the insertion was successful</returns>
+    [PublicAPI]
+    public static void InsertLambdaMethod(this PlayMakerFSM fsm, string stateName, Action<Action> method, int index) => fsm.GetState(stateName)!.InsertLambdaMethod(index, method);
+
+    /// <inheritdoc cref="InsertLambdaMethod(PlayMakerFSM, string, Action{Action}, int)"/>
+    [PublicAPI]
+    public static void InsertLambdaMethod(this PlayMakerFSM fsm, string stateName, int index, Action<Action> method) => fsm.GetState(stateName)!.InsertLambdaMethod(index, method);
+
+    /// <inheritdoc cref="InsertLambdaMethod(PlayMakerFSM, string, Action{Action}, int)"/>
+    [PublicAPI]
+    public static void InsertLambdaMethod(this Fsm fsm, string stateName, Action<Action> method, int index) => fsm.GetState(stateName)!.InsertLambdaMethod(index, method);
+
+    /// <inheritdoc cref="InsertLambdaMethod(PlayMakerFSM, string, Action{Action}, int)"/>
+    [PublicAPI]
+    public static void InsertLambdaMethod(this Fsm fsm, string stateName, int index, Action<Action> method) => fsm.GetState(stateName)!.InsertLambdaMethod(index, method);
+
+    /// <inheritdoc cref="InsertLambdaMethod(PlayMakerFSM, string, Action{Action}, int)"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="method">The method that will be invoked</param>
+    /// <param name="index">The index to place the action in</param>
+    [PublicAPI]
+    public static void InsertLambdaMethod(this FsmState state, Action<Action> method, int index) => state.InsertLambdaMethod(index, method);
+
+    /// <inheritdoc cref="InsertLambdaMethod(FsmState, Action{Action}, int)"/>
+    [PublicAPI]
+    public static void InsertLambdaMethod(this FsmState state, int index, Action<Action> method)
+    {
+        FunctionAction<Action> action = new FunctionAction<Action> { action = method };
+        action.arg = action.Finish;
+        state.InsertAction(action, index);
+    }
+
+    /// <summary>
+    /// Insert a method to run before the specified FsmStateAction.
+    /// </summary>
+    /// <param name="action">The action to insert before.</param>
+    /// <param name="method">The method to execute.
+    /// The argument will be the FsmStateAction which is being added.</param>
+    [PublicAPI]
+    public static void InsertMethodBefore(this FsmStateAction action, Action method)
+    {
+        FsmState state = action.State;
+        int idx = Array.IndexOf(state.Actions, action);
+        state.InsertMethod(idx, method);
+    }
+
+    /// <summary>
+    /// Insert a method to run after the specified FsmStateAction.
+    /// </summary>
+    /// <param name="action">The action to insert after.</param>
+    /// <param name="method">The method to execute.
+    /// The argument will be the FsmStateAction which is being added.</param>
+    [PublicAPI]
+    public static void InsertMethodAfter(this FsmStateAction action, Action method)
+    {
+        FsmState state = action.State;
+        int idx = Array.IndexOf(state.Actions, action);
+        state.InsertMethod(idx + 1, method);
+    }
+
+    /// <summary>
+    /// Insert an action to run before the specified FsmStateAction.
+    /// </summary>
+    /// <param name="action">The action to insert before.</param>
+    /// <param name="newAction">The action to add.</param>
+    [PublicAPI]
+    public static void InsertActionBefore(this FsmStateAction action, FsmStateAction newAction)
+    {
+        FsmState state = action.State;
+        int idx = Array.IndexOf(state.Actions, action);
+        state.InsertAction(idx, newAction);
+    }
+
+    /// <summary>
+    /// Insert an action to run after the specified FsmStateAction.
+    /// </summary>
+    /// <param name="action">The action to insert after.</param>
+    /// <param name="newAction">The action to add.</param>
+    [PublicAPI]
+    public static void InsertActionAfter(this FsmStateAction action, FsmStateAction newAction)
+    {
+        FsmState state = action.State;
+        int idx = Array.IndexOf(state.Actions, action);
+        state.InsertAction(idx + 1, newAction);
+    }
+
+    #endregion Insert
+
+    #region Replace
+
+    /// <summary>
+    ///     Replaces an action in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the action is replaced</param>
+    /// <param name="action">The action</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static void ReplaceAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetState(stateName)!.ReplaceAction(index, action);
+
+    /// <inheritdoc cref="ReplaceAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void ReplaceAction(this PlayMakerFSM fsm, string stateName, int index, FsmStateAction action) => fsm.GetState(stateName)!.ReplaceAction(index, action);
+
+    /// <inheritdoc cref="ReplaceAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void ReplaceAction(this Fsm fsm, string stateName, FsmStateAction action, int index) => fsm.GetState(stateName)!.ReplaceAction(index, action);
+
+    /// <inheritdoc cref="ReplaceAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void ReplaceAction(this Fsm fsm, string stateName, int index, FsmStateAction action) => fsm.GetState(stateName)!.ReplaceAction(index, action);
+
+    /// <inheritdoc cref="ReplaceAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    /// <param name="state">The state in which the action is replaced</param>
+    /// <param name="action">The action</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static void ReplaceAction(this FsmState state, FsmStateAction action, int index) => state.ReplaceAction(index, action);
+
+    /// <inheritdoc cref="ReplaceAction(FsmState, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void ReplaceAction(this FsmState state, int index, FsmStateAction action)
+    {
+        state.Actions[index] = action;
+        action.Init(state);
+    }
+
+    /// <summary>
+    ///     Replaces all actions in a PlayMakerFSM state.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the actions are to be replaced</param>
+    /// <param name="actions">The new actions of the state</param>
+    [PublicAPI]
+    public static void ReplaceAllActions(this PlayMakerFSM fsm, string stateName, params FsmStateAction[] actions) => fsm.GetState(stateName)!.ReplaceAllActions(actions);
+
+    /// <inheritdoc cref="ReplaceAllActions(PlayMakerFSM, string, FsmStateAction[])"/>
+    [PublicAPI]
+    public static void ReplaceAllActions(this Fsm fsm, string stateName, params FsmStateAction[] actions) => fsm.GetState(stateName)!.ReplaceAllActions(actions);
+
+    /// <inheritdoc cref="ReplaceAllActions(PlayMakerFSM, string, FsmStateAction[])"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="actions">The action</param>
+    [PublicAPI]
+    public static void ReplaceAllActions(this FsmState state, params FsmStateAction[] actions)
+    {
+        state.Actions = actions;
+        foreach (FsmStateAction action in actions)
+        {
+            action.Init(state);
+        }
+    }
+
+    #endregion Replace
 
     #region Change
 
     /// <summary>
-    /// Changes a transition endpoint in a PlayMakerFSM.
+    ///     Changes a transition endpoint in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state from which the transition starts</param>
     /// <param name="eventName">The event of the transition</param>
     /// <param name="toState">The new endpoint of the transition</param>
-    [UsedImplicitly]
-    public static void ChangeTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.ChangeFsmTransition(stateName, eventName, toState);
+    /// <returns>bool that indicates whether the change was successful</returns>
+    [PublicAPI]
+    public static bool ChangeTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.ChangeTransition(eventName, toState);
+
     /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
-    [UsedImplicitly]
-    public static void ChangeFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetFsmState(stateName).ChangeFsmTransition(eventName, toState);
+    [PublicAPI]
+    public static bool ChangeTransition(this Fsm fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.ChangeTransition(eventName, toState);
+
     /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="eventName">The event of the transition</param>
     /// <param name="toState">The new endpoint of the transition</param>
-    [UsedImplicitly]
-    public static void ChangeTransition(this FsmState state, string eventName, string toState) => state.ChangeFsmTransition(eventName, toState);
-    /// <inheritdoc cref="ChangeTransition(FsmState, string, string)"/>
-    [UsedImplicitly]
-    public static void ChangeFsmTransition(this FsmState state, string eventName, string toState)
+    [PublicAPI]
+    public static bool ChangeTransition(this FsmState state, string eventName, string toState)
     {
-        var transition = state.GetFsmTransition(eventName);
+        var transition = state.GetTransition(eventName);
+        if (transition == null)
+        {
+            return false;
+        }
         transition.ToState = toState;
         transition.ToFsmState = state.Fsm.GetState(toState);
+        return true;
     }
 
-    #endregion
+    /// <summary>
+    ///     Changes a global transition in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="globalEventName">The name of transition event</param>
+    /// <param name="toState">The name of the new state</param>
+    /// <returns>bool that indicates whether the change was successful</returns>
+    [PublicAPI]
+    public static bool ChangeGlobalTransition(this PlayMakerFSM fsm, string globalEventName, string toState) => fsm.Fsm.ChangeGlobalTransition(globalEventName, toState);
+
+    /// <inheritdoc cref="ChangeGlobalTransition(PlayMakerFSM, string, string)"/>
+    [PublicAPI]
+    public static bool ChangeGlobalTransition(this Fsm fsm, string globalEventName, string toState)
+    {
+        var transition = fsm.GetGlobalTransition(globalEventName);
+        if (transition == null)
+        {
+            return false;
+        }
+        transition.ToState = toState;
+        transition.ToFsmState = fsm.GetState(toState);
+        return true;
+    }
+
+    #endregion Change
 
     #region Remove
 
+    private static TVal[] RemoveItemsFromArray<TVal>(TVal[] origArray, Func<TVal, bool> shouldBeRemovedCallback)
+    {
+        int amountOfRemoved = 0;
+        foreach (TVal tmpValue in origArray)
+        {
+            if (shouldBeRemovedCallback(tmpValue))
+            {
+                amountOfRemoved++;
+            }
+        }
+        if (amountOfRemoved == 0)
+        {
+            return origArray;
+        }
+        TVal[] newArray = new TVal[origArray.Length - amountOfRemoved];
+        for (int i = origArray.Length - 1; i >= 0; i--)
+        {
+            TVal tmpValue = origArray[i];
+            if (shouldBeRemovedCallback(tmpValue))
+            {
+                amountOfRemoved--;
+                continue;
+            }
+            newArray[i - amountOfRemoved] = tmpValue;
+        }
+        return newArray;
+    }
+
     /// <summary>
-    /// Removes a state in a PlayMakerFSM.
+    ///     Removes a state in a PlayMakerFSM.  
+    ///     Trying to remove a state that doesn't exist will result in the states not being changed.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state to remove</param>
-    [UsedImplicitly]
-    public static void RemoveState(this PlayMakerFSM fsm, string stateName) => fsm.RemoveFsmState(stateName);
+    [PublicAPI]
+    public static void RemoveState(this PlayMakerFSM fsm, string stateName) => fsm.Fsm.RemoveState(stateName);
+
     /// <inheritdoc cref="RemoveState(PlayMakerFSM, string)"/>
-    [UsedImplicitly]
-    public static void RemoveFsmState(this PlayMakerFSM fsm, string stateName)
-    {
-        FsmState[] origStates = fsm.FsmStates;
-        FsmState[] newStates = new FsmState[origStates.Length - 1];
-        int i;
-        int foundInt = 0;
-        FsmTransition[] origTransitions;
-        FsmTransition[] newTransitions;
-        int j;
-        int newTransitionDifference;
-        int newTransitionOffset;
-        for (i = 0; i < newStates.Length; i++)
-        {
-            if (origStates[i].Name == stateName)
-            {
-                foundInt = 1;
-            }
-            newStates[i] = origStates[i + foundInt];
-
-            origTransitions = newStates[i].Transitions;
-            newTransitionDifference = 0;
-            for (j = 0; j < origTransitions.Length; j++)
-            {
-                if (origTransitions[j].ToState == stateName)
-                {
-                    newTransitionDifference++;
-                }
-            }
-            if (newTransitionDifference == 0) continue;
-            newTransitions = new FsmTransition[origTransitions.Length - newTransitionDifference];
-            newTransitionOffset = 0;
-            for (j = 0; j < newTransitions.Length; j++)
-            {
-                if (origTransitions[j].ToState == stateName)
-                {
-                    newTransitionOffset++;
-                }
-                newTransitions[j] = origTransitions[j + newTransitionOffset];
-            }
-            newStates[i].Transitions = newTransitions;
-        }
-
-        fsm.Fsm.States = newStates;
-    }
-
-    private static FsmTransition[] RemoveTransition(FsmTransition[] orig, string eventName)
-    {
-        int index = -1;
-        for (int i = 0; i < orig.Length; i++)
-        {
-            if (orig[i].EventName == eventName)
-            {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) return orig;
-
-        FsmTransition[] newTransitions = new FsmTransition[orig.Length - 1];
-        for (int i = 0; i < orig.Length; i++)
-        {
-            if (i < index) newTransitions[i] = orig[i];
-            else if (i > index) newTransitions[i - 1] = orig[i];
-        }
-        return newTransitions;
-    }
+    [PublicAPI]
+    public static void RemoveState(this Fsm fsm, string stateName) => fsm.States = RemoveItemsFromArray(fsm.States, x => x.Name == stateName);
 
     /// <summary>
-    /// Removes a transition in a PlayMakerFSM.
+    ///     Removes a transition in a PlayMakerFSM.  
+    ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state from which the transition starts</param>
     /// <param name="eventName">The event of the transition</param>
-    [UsedImplicitly]
-    public static void RemoveTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.RemoveFsmTransition(stateName, eventName);
+    [PublicAPI]
+    public static void RemoveTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetState(stateName)!.RemoveTransition(eventName);
+
     /// <inheritdoc cref="RemoveTransition(PlayMakerFSM, string, string)"/>
-    [UsedImplicitly]
-    public static void RemoveFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetState(stateName).RemoveFsmTransition(eventName);
+    [PublicAPI]
+    public static void RemoveTransition(this Fsm fsm, string stateName, string eventName) => fsm.GetState(stateName)!.RemoveTransition(eventName);
+
     /// <inheritdoc cref="RemoveTransition(PlayMakerFSM, string, string)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="eventName">The event of the transition</param>
-    [UsedImplicitly]
-    public static void RemoveTransition(this FsmState state, string eventName) => state.RemoveFsmTransition(eventName);
-    /// <inheritdoc cref="RemoveTransition(FsmState, string)"/>
-    [UsedImplicitly]
-    public static void RemoveFsmTransition(this FsmState state, string eventName) => state.Transitions = RemoveTransition(state.Transitions, eventName);
+    [PublicAPI]
+    public static void RemoveTransition(this FsmState state, string eventName) => state.Transitions = RemoveItemsFromArray(state.Transitions, x => x.EventName == eventName);
 
     /// <summary>
-    /// Removes a global transition in a PlayMakerFSM.
+    ///     Removes a global transition in a PlayMakerFSM.  
+    ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
     /// </summary>
     /// <param name="fsm">The fsm</param>
-    /// <param name="eventName">The event of the global transition</param>
-    [UsedImplicitly]
-    public static void RemoveGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.RemoveFsmGlobalTransition(eventName);
+    /// <param name="globalEventName">The event of the transition</param>
+    [PublicAPI]
+    public static void RemoveGlobalTransition(this PlayMakerFSM fsm, string globalEventName) => fsm.Fsm.RemoveGlobalTransition(globalEventName);
+
     /// <inheritdoc cref="RemoveGlobalTransition(PlayMakerFSM, string)"/>
-    [UsedImplicitly]
-    public static void RemoveFsmGlobalTransition(this PlayMakerFSM fsm, string eventName) => fsm.Fsm.GlobalTransitions = RemoveTransition(fsm.FsmGlobalTransitions, eventName);
+    [PublicAPI]
+    public static void RemoveGlobalTransition(this Fsm fsm, string globalEventName)
+    {
+        fsm.GlobalTransitions = RemoveItemsFromArray(fsm.GlobalTransitions, x => x.EventName == globalEventName);
+    }
 
     /// <summary>
-    /// Removes an action in a PlayMakerFSM.
+    ///     Removes all transitions to a specified transition in a PlayMakerFSM.  
+    ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="toState">The target of the transition</param>
+    [PublicAPI]
+    public static void RemoveTransitionsTo(this PlayMakerFSM fsm, string toState) => fsm.Fsm.RemoveTransitionsTo(toState);
+
+    /// <inheritdoc cref="RemoveTransitionsTo(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void RemoveTransitionsTo(this Fsm fsm, string toState)
+    {
+        foreach (FsmState state in fsm.States)
+        {
+            state.RemoveTransitionsTo(toState);
+        }
+    }
+
+    /// <summary>
+    ///     Removes all transitions from a state to another specified state in a PlayMakerFSM.  
+    ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state from which the transition starts</param>
+    /// <param name="toState">The target of the transition</param>
+    [PublicAPI]
+    public static void RemoveTransitionsTo(this PlayMakerFSM fsm, string stateName, string toState) => fsm.GetState(stateName)!.RemoveTransitionsTo(toState);
+
+    /// <inheritdoc cref="RemoveTransitionsTo(PlayMakerFSM, string, string)"/>
+    [PublicAPI]
+    public static void RemoveTransitionsTo(this Fsm fsm, string stateName, string toState) => fsm.GetState(stateName)!.RemoveTransitionsTo(toState);
+
+    /// <inheritdoc cref="RemoveTransitionsTo(PlayMakerFSM, string, string)"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="toState">The event of the transition</param>
+    [PublicAPI]
+    public static void RemoveTransitionsTo(this FsmState state, string toState) => state.Transitions = RemoveItemsFromArray(state.Transitions, x => x.ToState == toState);
+
+    /// <summary>
+    ///     Removes all transitions from a state in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state from which the transition starts</param>
+    [PublicAPI]
+    public static void RemoveTransitions(this PlayMakerFSM fsm, string stateName) => fsm.GetState(stateName)!.RemoveTransitions();
+
+    /// <inheritdoc cref="RemoveTransitions(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void RemoveTransitions(this Fsm fsm, string stateName) => fsm.GetState(stateName)!.RemoveTransitions();
+
+    /// <inheritdoc cref="RemoveTransitions(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static void RemoveTransitions(this FsmState state) => state.Transitions = [];
+
+    /// <summary>
+    ///     Removes an action in a PlayMakerFSM.  
+    ///     Trying to remove an action that doesn't exist will result in the actions not being changed.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="stateName">The name of the state with the action</param>
     /// <param name="index">The index of the action</param>
-    [UsedImplicitly]
-    public static void RemoveAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.RemoveFsmAction(stateName, index);
+    [PublicAPI]
+    public static bool RemoveAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetState(stateName)!.RemoveAction(index);
+
     /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
-    [UsedImplicitly]
-    public static void RemoveFsmAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).RemoveFsmAction(index);
+    [PublicAPI]
+    public static bool RemoveAction(this Fsm fsm, string stateName, int index) => fsm.GetState(stateName)!.RemoveAction(index);
+
     /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="index">The index of the action</param>
-    [UsedImplicitly]
-    public static void RemoveAction(this FsmState state, int index) => state.RemoveFsmAction(index);
-    /// <inheritdoc cref="RemoveAction(FsmState, int)"/>
-    [UsedImplicitly]
-    public static void RemoveFsmAction(this FsmState state, int index)
+    [PublicAPI]
+    public static bool RemoveAction(this FsmState state, int index)
     {
         FsmStateAction[] origActions = state.Actions;
-        FsmStateAction[] actions = new FsmStateAction[origActions.Length - 1];
+        if (index < 0 || index >= origActions.Length)
+        {
+            return false;
+        }
+        FsmStateAction[] newActions = new FsmStateAction[origActions.Length - 1];
+        int newActionsCount = newActions.Length;
         int i;
         for (i = 0; i < index; i++)
         {
-            actions[i] = origActions[i];
+            newActions[i] = origActions[i];
         }
-        for (i = index; i < actions.Length; i++)
+        for (i = index; i < newActionsCount; i++)
         {
-            actions[i] = origActions[i + 1];
+            newActions[i] = origActions[i + 1];
         }
 
-        state.Actions = actions;
+        state.Actions = newActions;
+        return true;
     }
 
-    #endregion
+    /// <summary>
+    ///     Removes all actions of a given type in a PlayMakerFSM.
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to remove</typeparam>
+    /// <param name="fsm">The fsm</param>
+    [PublicAPI]
+    public static void RemoveActionsOfType<TAction>(this PlayMakerFSM fsm) => fsm.Fsm.RemoveActionsOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM)"/>
+    [PublicAPI]
+    public static void RemoveActionsOfType<TAction>(this Fsm fsm)
+    {
+        foreach (FsmState state in fsm.States)
+        {
+            state.RemoveActionsOfType<TAction>();
+        }
+    }
+
+    /// <summary>
+    ///     Removes all actions of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to remove</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to remove the actions from</param>
+    [PublicAPI]
+    public static void RemoveActionsOfType<TAction>(this PlayMakerFSM fsm, string stateName) => fsm.GetState(stateName)!.RemoveActionsOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void RemoveActionsOfType<TAction>(this Fsm fsm, string stateName) => fsm.GetState(stateName)!.RemoveActionsOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static void RemoveActionsOfType<TAction>(this FsmState state) => state.Actions = RemoveItemsFromArray(state.Actions, x => x is TAction);
+
+    /// <summary>
+    ///     Removes first action of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to remove</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to remove the actions from</param>
+    [PublicAPI]
+    public static void RemoveFirstActionOfType<TAction>(this PlayMakerFSM fsm, string stateName) => fsm.GetState(stateName)!.RemoveFirstActionOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveFirstActionOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void RemoveFirstActionOfType<TAction>(this Fsm fsm, string stateName) => fsm.GetState(stateName)!.RemoveFirstActionOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveFirstActionOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static void RemoveFirstActionOfType<TAction>(this FsmState state)
+    {
+        int firstActionIndex = -1;
+        for (int i = 0; i < state.Actions.Length; i++)
+        {
+            if (state.Actions[i] is TAction)
+            {
+                firstActionIndex = i;
+                break;
+            }
+        }
+
+        if (firstActionIndex == -1)
+            return;
+        state.RemoveAction(firstActionIndex);
+    }
+
+    /// <summary>
+    ///     Removes last action of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to remove</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to remove the actions from</param>
+    [PublicAPI]
+    public static void RemoveLastActionOfType<TAction>(this PlayMakerFSM fsm, string stateName) => fsm.GetState(stateName)!.RemoveLastActionOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveLastActionOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void RemoveLastActionOfType<TAction>(this Fsm fsm, string stateName) => fsm.GetState(stateName)!.RemoveLastActionOfType<TAction>();
+
+    /// <inheritdoc cref="RemoveLastActionOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static void RemoveLastActionOfType<TAction>(this FsmState state)
+    {
+        int lastActionIndex = -1;
+        for (int i = state.Actions.Length - 1; i >= 0; i--)
+        {
+            if (state.Actions[i] is TAction)
+            {
+                lastActionIndex = i;
+                break;
+            }
+        }
+
+        if (lastActionIndex == -1)
+            return;
+        state.RemoveAction(lastActionIndex);
+    }
+
+    #endregion Remove
+
+    #region Disable
+
+    /// <summary>
+    ///     Disables an action in a PlayMakerFSM.  
+    ///     Trying to disable an action that doesn't exist will result in the actions not being changed.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state with the action</param>
+    /// <param name="index">The index of the action</param>
+    /// <returns>bool that indicates whether the disabling was successful</returns>
+    [PublicAPI]
+    public static bool DisableAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetState(stateName)!.DisableAction(index);
+
+    /// <inheritdoc cref="DisableAction(PlayMakerFSM, string, int)"/>
+    [PublicAPI]
+    public static bool DisableAction(this Fsm fsm, string stateName, int index) => fsm.GetState(stateName)!.DisableAction(index);
+
+    /// <inheritdoc cref="DisableAction(PlayMakerFSM, string, int)"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static bool DisableAction(this FsmState state, int index)
+    {
+        if (index < 0 || index >= state.Actions.Length)
+        {
+            return false;
+        }
+        state.Actions[index].Enabled = false;
+        return true;
+    }
+
+    /// <summary>
+    ///     Disables a set of actions in a PlayMakerFSM.  
+    ///     Trying to disable an action that doesn't exist will result in the actions not being changed.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state with the action</param>
+    /// <param name="indices">The indices of the action</param>
+    /// <returns>bool that indicates whether all the disablings were successful</returns>
+    [PublicAPI]
+    public static bool DisableActions(this PlayMakerFSM fsm, string stateName, params int[] indices) => fsm.GetState(stateName)!.DisableActions(indices);
+
+    /// <inheritdoc cref="DisableActions(PlayMakerFSM, string, int[])"/>
+    [PublicAPI]
+    public static bool DisableActions(this Fsm fsm, string stateName, params int[] indices) => fsm.GetState(stateName)!.DisableActions(indices);
+
+    /// <inheritdoc cref="DisableActions(PlayMakerFSM, string, int[])"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="indices">The indices of the action</param>
+    [PublicAPI]
+    public static bool DisableActions(this FsmState state, params int[] indices)
+    {
+        bool ret = true;
+        foreach (int index in indices)
+        {
+            ret = ret && state.DisableAction(index);
+        }
+        return ret;
+    }
+
+    /// <summary>
+    ///     Disables all actions of a given type in a PlayMakerFSM.
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to disable</typeparam>
+    /// <param name="fsm">The fsm</param>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(this PlayMakerFSM fsm) => fsm.Fsm.DisableActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(PlayMakerFSM)"/>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(this Fsm fsm)
+    {
+        foreach (FsmState state in fsm.States)
+        {
+            state.DisableActionsOfType<TAction>();
+        }
+    }
+
+    /// <summary>
+    ///     Disables all actions of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to disable</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to disable the actions from</param>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(this PlayMakerFSM fsm, string stateName) => fsm.GetState(stateName)!.DisableActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(this Fsm fsm, string stateName) => fsm.GetState(stateName)!.DisableActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(this FsmState state)
+    {
+        foreach (FsmStateAction action in state.Actions)
+        {
+            if (action is TAction)
+            {
+                action.Enabled = false;
+            }
+        }
+    }
+
+    #endregion Disable
 
     #region FSM Variables
 
-    private static TVar[] makeNewVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
+    private static TVar[] MakeNewVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
     {
         TVar[] newArray = new TVar[orig.Length + 1];
         orig.CopyTo(newArray, 0);
-        newArray[orig.Length] = new TVar() { Name = name };
+        newArray[orig.Length] = new TVar { Name = name };
         return newArray;
     }
+
     /// <summary>
-    /// Adds a fsm variable in a PlayMakerFSM.
+    ///     Adds a fsm variable in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="name">The name of the new variable</param>
-    /// <returns>The newly created variable.</returns>
-    public static FsmFloat AddFloatVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmFloatVariable(name);
+    /// <returns>The newly created variable</returns>
+    [PublicAPI]
+    public static FsmFloat AddFloatVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddFloatVariable(name);
+
     /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmFloat AddFsmFloatVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmFloat AddFloatVariable(this Fsm fsm, string name)
     {
-        var tmp = makeNewVariableArray<FsmFloat>(fsm.FsmVariables.FloatVariables, name);
-        fsm.FsmVariables.FloatVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmInt AddIntVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmIntVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmInt AddFsmIntVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmInt>(fsm.FsmVariables.IntVariables, name);
-        fsm.FsmVariables.IntVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmBool AddBoolVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmBoolVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmBool AddFsmBoolVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmBool>(fsm.FsmVariables.BoolVariables, name);
-        fsm.FsmVariables.BoolVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmString AddStringVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmStringVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmString AddFsmStringVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmString>(fsm.FsmVariables.StringVariables, name);
-        fsm.FsmVariables.StringVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector2 AddVector2Variable(this PlayMakerFSM fsm, string name) => fsm.AddFsmVector2Variable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector2 AddFsmVector2Variable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmVector2>(fsm.FsmVariables.Vector2Variables, name);
-        fsm.FsmVariables.Vector2Variables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector3 AddVector3Variable(this PlayMakerFSM fsm, string name) => fsm.AddFsmVector3Variable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector3 AddFsmVector3Variable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmVector3>(fsm.FsmVariables.Vector3Variables, name);
-        fsm.FsmVariables.Vector3Variables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmColor AddColorVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmColorVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmColor AddFsmColorVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmColor>(fsm.FsmVariables.ColorVariables, name);
-        fsm.FsmVariables.ColorVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmRect AddRectVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmRectVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmRect AddFsmRectVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmRect>(fsm.FsmVariables.RectVariables, name);
-        fsm.FsmVariables.RectVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmQuaternion AddQuaternionVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmQuaternionVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmQuaternion AddFsmQuaternionVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmQuaternion>(fsm.FsmVariables.QuaternionVariables, name);
-        fsm.FsmVariables.QuaternionVariables = tmp;
-        return tmp[tmp.Length - 1];
-    }
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmGameObject AddGameObjectVariable(this PlayMakerFSM fsm, string name) => fsm.AddFsmGameObjectVariable(name);
-    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmGameObject AddFsmGameObjectVariable(this PlayMakerFSM fsm, string name)
-    {
-        var tmp = makeNewVariableArray<FsmGameObject>(fsm.FsmVariables.GameObjectVariables, name);
-        fsm.FsmVariables.GameObjectVariables = tmp;
+        var tmp = MakeNewVariableArray(fsm.Variables.FloatVariables, name);
+        fsm.Variables.FloatVariables = tmp;
         return tmp[tmp.Length - 1];
     }
 
-    private static TVar findInVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmInt AddIntVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddIntVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmInt AddIntVariable(this Fsm fsm, string name)
     {
-        int count = orig.Length;
-        int i;
-        for (i = 0; i < count; i++)
+        var tmp = MakeNewVariableArray(fsm.Variables.IntVariables, name);
+        fsm.Variables.IntVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmBool AddBoolVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddBoolVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmBool AddBoolVariable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.BoolVariables, name);
+        fsm.Variables.BoolVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmString AddStringVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddStringVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmString AddStringVariable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.StringVariables, name);
+        fsm.Variables.StringVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector2 AddVector2Variable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddVector2Variable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector2 AddVector2Variable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.Vector2Variables, name);
+        fsm.Variables.Vector2Variables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector3 AddVector3Variable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddVector3Variable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector3 AddVector3Variable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.Vector3Variables, name);
+        fsm.Variables.Vector3Variables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmColor AddColorVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddColorVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmColor AddColorVariable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.ColorVariables, name);
+        fsm.Variables.ColorVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmRect AddRectVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddRectVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmRect AddRectVariable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.RectVariables, name);
+        fsm.Variables.RectVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmQuaternion AddQuaternionVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddQuaternionVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmQuaternion AddQuaternionVariable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.QuaternionVariables, name);
+        fsm.Variables.QuaternionVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmGameObject AddGameObjectVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.AddGameObjectVariable(name);
+
+    /// <inheritdoc cref="AddFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmGameObject AddGameObjectVariable(this Fsm fsm, string name)
+    {
+        var tmp = MakeNewVariableArray(fsm.Variables.GameObjectVariables, name);
+        fsm.Variables.GameObjectVariables = tmp;
+        return tmp[tmp.Length - 1];
+    }
+
+    private static TVar FindInVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
+    {
+        foreach (TVar item in orig)
         {
-            if (orig[i].Name == name)
+            if (item.Name == name)
             {
-                return orig[i];
+                return item;
             }
         }
         return null;
     }
-    /// <summary>
-    /// Finds a fsm variable in a PlayMakerFSM.
-    /// </summary>
-    /// <param name="fsm">The fsm</param>
-    /// <param name="name">The name of the variable</param>
-    /// <returns>The variable, null if not found.</returns>
-    public static FsmFloat FindFloatVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmFloatVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmFloat FindFsmFloatVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmFloat>(fsm.FsmVariables.FloatVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmInt FindIntVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmIntVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmInt FindFsmIntVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmInt>(fsm.FsmVariables.IntVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmBool FindBoolVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmBoolVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmBool FindFsmBoolVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmBool>(fsm.FsmVariables.BoolVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmString FindStringVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmStringVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmString FindFsmStringVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmString>(fsm.FsmVariables.StringVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector2 FindVector2Variable(this PlayMakerFSM fsm, string name) => fsm.FindFsmVector2Variable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector2 FindFsmVector2Variable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmVector2>(fsm.FsmVariables.Vector2Variables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector3 FindVector3Variable(this PlayMakerFSM fsm, string name) => fsm.FindFsmVector3Variable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector3 FindFsmVector3Variable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmVector3>(fsm.FsmVariables.Vector3Variables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmColor FindColorVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmColorVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmColor FindFsmColorVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmColor>(fsm.FsmVariables.ColorVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmRect FindRectVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmRectVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmRect FindFsmRectVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmRect>(fsm.FsmVariables.RectVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmQuaternion FindQuaternionVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmQuaternionVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmQuaternion FindFsmQuaternionVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmQuaternion>(fsm.FsmVariables.QuaternionVariables, name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmGameObject FindGameObjectVariable(this PlayMakerFSM fsm, string name) => fsm.FindFsmGameObjectVariable(name);
-    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmGameObject FindFsmGameObjectVariable(this PlayMakerFSM fsm, string name) => findInVariableArray<FsmGameObject>(fsm.FsmVariables.GameObjectVariables, name);
 
     /// <summary>
-    /// Gets a fsm variable in a PlayMakerFSM. Creates a new one if none with the name are present.
+    ///     Finds a fsm variable in a PlayMakerFSM.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="name">The name of the variable</param>
-    /// <returns>The variable.</returns>
-    public static FsmFloat GetFloatVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmFloatVariable(name);
+    /// <returns>The variable, null if not found</returns>
+    [PublicAPI]
+    public static FsmFloat FindFloatVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindFloatVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmFloat FindFloatVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.FloatVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmInt FindIntVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindIntVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmInt FindIntVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.IntVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmBool FindBoolVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindBoolVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmBool FindBoolVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.BoolVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmString FindStringVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindStringVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmString FindStringVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.StringVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector2 FindVector2Variable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindVector2Variable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector2 FindVector2Variable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.Vector2Variables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector3 FindVector3Variable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindVector3Variable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmVector3 FindVector3Variable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.Vector3Variables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmColor FindColorVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindColorVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmColor FindColorVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.ColorVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmRect FindRectVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindRectVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmRect FindRectVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.RectVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmQuaternion FindQuaternionVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindQuaternionVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmQuaternion FindQuaternionVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.QuaternionVariables, name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmGameObject FindGameObjectVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.FindGameObjectVariable(name);
+
+    /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static FsmGameObject FindGameObjectVariable(this Fsm fsm, string name) => FindInVariableArray(fsm.Variables.GameObjectVariables, name);
+
+    /// <summary>
+    ///     Gets a fsm variable in a PlayMakerFSM. Creates a new one if none with the name are present.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="name">The name of the variable</param>
+    /// <returns>The variable</returns>
+    [PublicAPI]
+    public static FsmFloat GetFloatVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetFloatVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmFloat GetFsmFloatVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmFloat GetFloatVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindFloatVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddFloatVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmInt GetIntVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmIntVariable(name);
+    [PublicAPI]
+    public static FsmInt GetIntVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetIntVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmInt GetFsmIntVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmInt GetIntVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindIntVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddIntVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmBool GetBoolVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmBoolVariable(name);
+    [PublicAPI]
+    public static FsmBool GetBoolVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetBoolVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmBool GetFsmBoolVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmBool GetBoolVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindBoolVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddBoolVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmString GetStringVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmStringVariable(name);
+    [PublicAPI]
+    public static FsmString GetStringVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetStringVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmString GetFsmStringVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmString GetStringVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindStringVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddStringVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector2 GetVector2Variable(this PlayMakerFSM fsm, string name) => fsm.GetFsmVector2Variable(name);
+    [PublicAPI]
+    public static FsmVector2 GetVector2Variable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetVector2Variable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector2 GetFsmVector2Variable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmVector2 GetVector2Variable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindVector2Variable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddVector2Variable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector3 GetVector3Variable(this PlayMakerFSM fsm, string name) => fsm.GetFsmVector3Variable(name);
+    [PublicAPI]
+    public static FsmVector3 GetVector3Variable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetVector3Variable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmVector3 GetFsmVector3Variable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmVector3 GetVector3Variable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindVector3Variable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddVector3Variable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmColor GetColorVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmColorVariable(name);
+    [PublicAPI]
+    public static FsmColor GetColorVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetColorVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmColor GetFsmColorVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmColor GetColorVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindColorVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddColorVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmRect GetRectVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmRectVariable(name);
+    [PublicAPI]
+    public static FsmRect GetRectVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetRectVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmRect GetFsmRectVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmRect GetRectVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindRectVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddRectVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmQuaternion GetQuaternionVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmQuaternionVariable(name);
+    [PublicAPI]
+    public static FsmQuaternion GetQuaternionVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetQuaternionVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmQuaternion GetFsmQuaternionVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmQuaternion GetQuaternionVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindQuaternionVariable(name);
         if (tmp != null)
             return tmp;
         return fsm.AddQuaternionVariable(name);
     }
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmGameObject GetGameObjectVariable(this PlayMakerFSM fsm, string name) => fsm.GetFsmGameObjectVariable(name);
+    [PublicAPI]
+    public static FsmGameObject GetGameObjectVariable(this PlayMakerFSM fsm, string name) => fsm.Fsm.GetGameObjectVariable(name);
+
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
-    public static FsmGameObject GetFsmGameObjectVariable(this PlayMakerFSM fsm, string name)
+    [PublicAPI]
+    public static FsmGameObject GetGameObjectVariable(this Fsm fsm, string name)
     {
         var tmp = fsm.FindGameObjectVariable(name);
         if (tmp != null)
@@ -768,59 +1621,52 @@ public static class FsmUtil
         return fsm.AddGameObjectVariable(name);
     }
 
-    #endregion
+    #endregion FSM Variables
 
     #region Log
 
     /// <summary>
-    /// Adds actions to a PlayMakerFSM so it gives a log message before and after every single normal action.
+    ///     Adds actions to a PlayMakerFSM so it gives a log message before and after every single normal action.
     /// </summary>
     /// <param name="fsm">The fsm</param>
     /// <param name="additionalLogging">Flag if, additionally, every log should also log the state of all fsm variables</param>
-    public static void MakeLog(this PlayMakerFSM fsm, bool additionalLogging = false)
+    [PublicAPI]
+    public static void MakeLog(this PlayMakerFSM fsm, bool additionalLogging = false) => fsm.Fsm.MakeLog(additionalLogging);
+
+    /// <inheritdoc cref="MakeLog(PlayMakerFSM, bool)"/>
+    [PublicAPI]
+    public static void MakeLog(this Fsm fsm, bool additionalLogging = false)
     {
-        foreach (var s in fsm.FsmStates)
+        foreach (var s in fsm.States)
         {
             for (int i = s.Actions.Length - 1; i >= 0; i--)
             {
-                string actionTypeName = fsm.GetState(s.Name).Actions[i].GetType().FullName;
-                fsm.InsertAction(s.Name, new StatusLog() { text = $"{i} - {actionTypeName}" }, i);
+                fsm.InsertAction(s.Name, new LogAction { text = $"{i}" }, i);
                 if (additionalLogging)
                 {
                     fsm.InsertMethod(s.Name, () =>
                     {
-                        var fsmVars = fsm.FsmVariables;
-                        var origFloatVariables = fsmVars.FloatVariables;
-                        var origIntVariables = fsmVars.IntVariables;
-                        var origBoolVariables = fsmVars.BoolVariables;
-                        var origStringVariables = fsmVars.StringVariables;
-                        var origVector2Variables = fsmVars.Vector2Variables;
-                        var origVector3Variables = fsmVars.Vector3Variables;
-                        var origColorVariables = fsmVars.ColorVariables;
-                        var origRectVariables = fsmVars.RectVariables;
-                        var origQuaternionVariables = fsmVars.QuaternionVariables;
-                        var origGameObjectVariables = fsmVars.GameObjectVariables;
-                        int i;
-                        for (i = 0; i < origFloatVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "FloatVariables", $"'{origFloatVariables[i].Name}': '{origFloatVariables[i].Value}'");
-                        for (i = 0; i < origIntVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "IntVariables", $"'{origIntVariables[i].Name}': '{origIntVariables[i].Value}'");
-                        for (i = 0; i < origBoolVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "BoolVariables", $"'{origBoolVariables[i].Name}': '{origBoolVariables[i].Value}'");
-                        for (i = 0; i < origStringVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "StringVariables", $"'{origStringVariables[i].Name}': '{origStringVariables[i].Value}'");
-                        for (i = 0; i < origVector2Variables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "Vector2Variables", $"'{origVector2Variables[i].Name}': '({origVector2Variables[i].Value.x}, {origVector2Variables[i].Value.y})'");
-                        for (i = 0; i < origVector3Variables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "Vector3Variables", $"'{origVector3Variables[i].Name}': '({origVector3Variables[i].Value.x}, {origVector3Variables[i].Value.y}, {origVector3Variables[i].Value.z})'");
-                        for (i = 0; i < origColorVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "ColorVariables", $"'{origColorVariables[i].Name}': '{origColorVariables[i].Value}'");
-                        for (i = 0; i < origRectVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "RectVariables", $"'{origRectVariables[i].Name}': '{origRectVariables[i].Value}'");
-                        for (i = 0; i < origQuaternionVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "QuaternionVariables", $"'{origQuaternionVariables[i].Name}': '{origQuaternionVariables[i].Value}'");
-                        for (i = 0; i < origGameObjectVariables.Length; i++)
-                            Log(fsm.gameObject.name, fsm.FsmName, "GameObjectVariables", $"'{origGameObjectVariables[i].Name}': '{origGameObjectVariables[i].Value}'");
+                        var fsmVars = fsm.Variables;
+                        foreach (var variable in fsmVars.FloatVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[FloatVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.IntVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[IntVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.BoolVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[BoolVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.StringVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[StringVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.Vector2Variables)
+                            InternalLogger.Log($"[{fsm.Name}]:[Vector2Variables] - '{variable.Name}': '({variable.Value.x}, {variable.Value.y})'");
+                        foreach (var variable in fsmVars.Vector3Variables)
+                            InternalLogger.Log($"[{fsm.Name}]:[Vector3Variables] - '{variable.Name}': '({variable.Value.x}, {variable.Value.y}, {variable.Value.z})'");
+                        foreach (var variable in fsmVars.ColorVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[ColorVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.RectVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[RectVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.QuaternionVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[QuaternionVariables] - '{variable.Name}': '{variable.Value}'");
+                        foreach (var variable in fsmVars.GameObjectVariables)
+                            InternalLogger.Log($"[{fsm.Name}]:[GameObjectVariables] - '{variable.Name}': '{variable.Value}'");
                     }, i + 1);
                 }
             }
@@ -828,14 +1674,19 @@ public static class FsmUtil
     }
 
     /// <summary>
-    /// Logs the fsm and its states, transitions and variables.
+    ///     Logs the fsm and its states and transitions.
     /// </summary>
     /// <param name="fsm">The fsm</param>
-    public static void Log(this PlayMakerFSM fsm)
+    [PublicAPI]
+    public static void Log(this PlayMakerFSM fsm) => fsm.Fsm.Log(fsm.gameObject.name);
+
+    /// <inheritdoc cref="Log(PlayMakerFSM)"/>
+    [PublicAPI]
+    public static void Log(this Fsm fsm, string gameObjectName = "")
     {
-        Log($"FSM \"{fsm.FsmName}\" on \"{fsm.gameObject.name}\"");
-        Log($"\t{fsm.FsmStates.Length} States");
-        foreach (var s in fsm.FsmStates)
+        Log($"FSM \"{fsm.Name}\" on \"{gameObjectName}\"");
+        Log($"\t{fsm.States.Length} States");
+        foreach (var s in fsm.States)
         {
             Log($"\t\tState \"{s.Name}\"");
             foreach (var t in s.Transitions)
@@ -843,13 +1694,13 @@ public static class FsmUtil
                 Log($"\t\t\t-> \"{t.ToState}\" via \"{t.EventName}\"");
             }
         }
-        Log($"\t{fsm.FsmGlobalTransitions.Length} Global Transitions");
-        foreach (var t in fsm.FsmGlobalTransitions)
+        Log($"\t{fsm.GlobalTransitions.Length} Global Transitions");
+        foreach (var t in fsm.GlobalTransitions)
         {
             Log($"\t\tGlobal Transition \"{t.EventName}\" to \"{t.ToState}\"");
         }
         Log($"\tVariables");
-        var fsmVar = fsm.FsmVariables;
+        var fsmVar = fsm.Variables;
         foreach (var t in fsmVar.ArrayVariables)
         {
             Log($"\t\tArray \"{t.Name}\": \"{String.Join(", ", t.objectReferences as object[])}\"");
@@ -927,5 +1778,5 @@ public static class FsmUtil
         Log($"{msg}");
     }
 
-    #endregion
+    #endregion Log
 }

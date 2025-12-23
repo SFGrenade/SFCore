@@ -32,7 +32,14 @@ public class FunctionAction<TArg> : FsmStateAction
     /// </summary>
     public override void OnEnter()
     {
-        if (action != null) action.Invoke(arg);
-        Finish();
+        if (action != null && arg != null)
+        {
+            action.Invoke(arg);
+        }
+
+        if ((!(arg is Action tmpAction)) || (tmpAction != Finish))
+        {
+            Finish();
+        }
     }
 }
