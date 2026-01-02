@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Adding Custom Charms </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Adding Custom Charms ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SFGrenade/SFCore/blob/master/docs/articles/charms.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="adding-custom-charms">Adding Custom Charms</h1>
+
+<h2 id="charmhelper">CharmHelper</h2>
+<p>The <code>CharmHelper</code> class is used to add custom charms to the inventory.</p>
+<p>A good example of a mod adding custom charms is the <a href="https://github.com/SFGrenade/MoreHealing">MoreHealing</a> mod.</p>
+<h3 id="loading-charm-sprites">Loading charm sprites</h3>
+<p>First thing's first is to load the sprites you want your charms to have.</p>
+<p>You can do so doing:</p>
+<pre><code class="lang-cs">private static Sprite LoadSprite(string spriteName) {
+    // Important to get embedded resources
+    Assembly asm = Assembly.GetExecutingAssembly();
+    // Will contain the sprite
+    Sprite charmSprite;
+    // Open an embedded resource as a stream
+    using (Stream s = asm.GetManifestResourceStream($&quot;AssemblyName.Subfolder.{spriteName}.png&quot;))
+    {
+        // In case of typos return null
+        if (s == null) return null;
+        byte[] buffer = new byte[s.Length];
+        s.Read(buffer, 0, buffer.Length);
+        s.Dispose();
+        // Create texture from bytes
+        var tex = new Texture2D(2, 2);
+        tex.LoadImage(buffer, true);
+        // Create sprite from texture
+        charmSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+    }
+    // Now `charmSprite` contains the sprite
+    return charmSprite;
+}
+</code></pre>
+<h3 id="registering-new-charms">Registering new charms</h3>
+<p>After we have all the important sprites loaded, we can supply them to <code>CharmHelper</code>.</p>
+<p>For this, we use the <code>CharmHelper.AddSprites(...)</code> method:</p>
+<pre><code class="lang-cs">// This will contain the charm id of our charms
+public List&lt;int&gt; CharmIDs { get; private set; }
+// These will have the sprites we are going to use
+private Sprite Charm1Sprite = LoadSprite(&quot;Charm1&quot;);
+private Sprite Charm2Sprite = LoadSprite(&quot;Charm2&quot;);
+public override void Initialize()
+{
+    CharmIDs = CharmHelper.AddSprites(Charm1Sprite, Charm2Sprite);
+    // Will be explained in a bit
+    InitCallbacks();
+}
+</code></pre>
+<p>This method takes any amount of <code>Sprite</code>s.</p>
+<blockquote>
+<p>At the moment, charms that have multiple sprites for different states are not supported.</p>
+</blockquote>
+<p>The <code>List&lt;int&gt;</code> the method returns is a list of all charm IDs of the charms you have registered.</p>
+<p>The handling of name, description, aquisition and cost of each charm is for the individual mod to handle, but here is one example.</p>
+<h3 id="handling-charm-metadata">Handling charm metadata</h3>
+<p>Charm metadata (name, description, aquisition and cost) has to be handled by mods, all of which can be done with <code>ModHooks</code>:</p>
+<pre><code class="lang-cs">private void InitCallbacks()
+{
+    // This hook will handle name and description
+    ModHooks.LanguageGetHook += OnLanguageGetHook;
+    // This hook will handle getting aquisition
+    ModHooks.GetPlayerBoolHook += OnGetPlayerBoolHook;
+    // This hook will handle setting aquisition
+    ModHooks.SetPlayerBoolHook += OnSetPlayerBoolHook;
+    // This hook will handle cost
+    ModHooks.GetPlayerIntHook += OnGetPlayerIntHook;
+}
+</code></pre>
+<p>These look like a lot, but can be done relatively easily.</p>
+<h4 id="name-and-description">Name and description</h4>
+<p>The following is one example how to handle the name and description of the custom charms.</p>
+<pre><code class="lang-cs">// Contains the names we want our charms to have
+private string[] _charmNames =
+{
+    &quot;Charm1 Name&quot;,
+    &quot;Charm2 Name&quot;
+};
+// Contains the descriptions we want our charms to have
+private string[] _charmDescriptions =
+{
+    &quot;Charm1 Description&quot;,
+    &quot;Charm2 Description&quot;
+};
+private string OnLanguageGetHook(string key, string sheet, string orig)
+{
+    // Check if the charm name is wanted
+    if (key.StartsWith(&quot;CHARM_NAME_&quot;))
+    {
+        // Split CHARM_NAME_# into ('CHARM', 'NAME', '#') and parse '#' as an int
+        int charmNum = int.Parse(key.Split('_')[2]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Return the name of our charm from the array above
+            return _charmNames[CharmIDs.IndexOf(charmNum)];
+        }
+    }
+    // Check if the charm description is wanted
+    else if (key.StartsWith(&quot;CHARM_DESC_&quot;))
+    {
+        // Split CHARM_DESC_# into ('CHARM', 'DESC', '#') and parse '#' as an int
+        int charmNum = int.Parse(key.Split('_')[2]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Return the description of our charm from the array above
+            return _charmDescriptions[CharmIDs.IndexOf(charmNum)];
+        }
+    }
+    // Return orig if we don't want to make any changes
+    return orig;
+}
+</code></pre>
+<blockquote>
+<p>This is one example, alternatives could be to load the text from a JSON file or comparable and use the loaded text.<br>
+One example is how <a href="https://github.com/SFGrenade/TestOfTeamwork/blob/a07d033b5dcde76314d0144ad0f9aa8399e10500/TestOfTeamwork.cs#L248-L252">Test of Teamwork handles language</a>, which it does <a href="https://github.com/SFGrenade/TestOfTeamwork/blob/a07d033b5dcde76314d0144ad0f9aa8399e10500/Consts/LanguageStrings.cs">with a JSON deserializer</a></p>
+</blockquote>
+<h4 id="getting-aquisition">Getting aquisition</h4>
+<p>The following is one example how to handle getting the aquisition of the custom charms.</p>
+<p>One thing to note, is that we need a class for save settings if we want our charms to save across play sessions.</p>
+<p>This save settings class can look like the following.</p>
+<pre><code class="lang-cs">class ModSaveSettings
+{
+    // Flags if the charms have been aquired by default
+    public bool[] gotCharms = new[] { false, false };
+    // Flags if the charms are considered new (they will show a small blue dot in the inventory)
+    public bool[] newCharms = new[] { false, false };
+    // Flags if the charms are equipped
+    public bool[] equippedCharms = new[] { false, false };
+    // How many notches the charms cost
+    public int[] charmCosts = new[] { 1, 2 };
+}
+</code></pre>
+<p>This save settings class can be used by the mod by having the mod declaration utilize the <code>SaveSettingsMod&lt;T&gt;</code> class.</p>
+<pre><code class="lang-cs">class ModClass : SaveSettingsMod&lt;ModSaveSettings&gt;
+</code></pre>
+<p>Instead of the normal:</p>
+<pre><code class="lang-cs">class ModClass : Mod
+</code></pre>
+<p>After this has been done, we can implement the modhooks.</p>
+<pre><code class="lang-cs">private bool OnGetPlayerBoolHook(string target, bool orig)
+{
+    // Check if the charm gotten flag is wanted
+    if (target.StartsWith(&quot;gotCharm_&quot;))
+    {
+        // Split gotCharm_# into ('gotCharm', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Return the flag if our charm has been aquired
+            return SaveSettings.gotCharms[CharmIDs.IndexOf(charmNum)];
+        }
+    }
+    // Check if the charm new flag is wanted
+    if (target.StartsWith(&quot;newCharm_&quot;))
+    {
+        // Split newCharm_# into ('newCharm', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Return the flag if our charm is considered new
+            return SaveSettings.newCharms[CharmIDs.IndexOf(charmNum)];
+        }
+    }
+    // Check if the charm equipped flag is wanted
+    if (target.StartsWith(&quot;equippedCharm_&quot;))
+    {
+        // Split equippedCharm_# into ('equippedCharm', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Return the flag if our charm is equipped
+            return SaveSettings.equippedCharms[CharmIDs.IndexOf(charmNum)];
+        }
+    }
+    // Return orig if we don't want to make any changes
+    return orig;
+}
+</code></pre>
+<h4 id="setting-aquisition">Setting aquisition</h4>
+<p>The following is one example how to handle setting the aquisition states of the custom charms.</p>
+<pre><code class="lang-cs">private bool OnSetPlayerBoolHook(string target, bool orig)
+{
+    // Check if the charm gotten flag is wanted
+    if (target.StartsWith(&quot;gotCharm_&quot;))
+    {
+        // Split gotCharm_# into ('gotCharm', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Save the flag if our charm has been aquired
+            SaveSettings.gotCharms[CharmIDs.IndexOf(charmNum)] = orig;
+            // Always return orig in set hooks, unless you specifically want to change what is saved
+            return orig;
+        }
+    }
+    // Check if the charm new flag is wanted
+    if (target.StartsWith(&quot;newCharm_&quot;))
+    {
+        // Split newCharm_# into ('newCharm', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Save the flag if our charm is considered new
+            SaveSettings.newCharms[CharmIDs.IndexOf(charmNum)] = orig;
+            // Always return orig in set hooks, unless you specifically want to change what is saved
+            return orig;
+        }
+    }
+    // Check if the charm equipped flag is wanted
+    if (target.StartsWith(&quot;equippedCharm_&quot;))
+    {
+        // Split equippedCharm_# into ('equippedCharm', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Save the flag if our charm is equipped
+            SaveSettings.equippedCharms[CharmIDs.IndexOf(charmNum)] = orig;
+            // Always return orig in set hooks, unless you specifically want to change what is saved
+            return orig;
+        }
+    }
+    // Always return orig in set hooks, unless you specifically want to change what is saved
+    return orig;
+}
+</code></pre>
+<h4 id="cost">Cost</h4>
+<p>The following is one example how to handle the cost of our custom charms.</p>
+<pre><code class="lang-cs">private int OnGetPlayerIntHook(string target, int orig)
+{
+    // Check if the charm cost is wanted
+    if (target.StartsWith(&quot;charmCost_&quot;))
+    {
+        // Split charmCost_# into ('charmCost', '#') and parse '#' as an int
+        int charmNum = int.Parse(target.Split('_')[1]);
+        // Check if `charmNum` is one of our registered charm IDs
+        if (CharmIDs.Contains(charmNum))
+        {
+            // Return the cost of our charm
+            return SaveSettings.charmCosts[CharmIDs.IndexOf(charmNum)];
+        }
+    }
+    // Return orig if we don't want to make any changes
+    return orig;
+}
+</code></pre>
+<h3 id="done">Done</h3>
+<p>With handling of the charm metadata done, the basics of custom charms are done.
+They can be equipped and unequipped.</p>
+<p>If you want your charms to have special effects, that is more complicated and it is suggested to look at how other mods do it.</p>
+<h2 id="easycharm">EasyCharm</h2>
+<p>The abstract <code>EasyCharm</code> class can be used to more simply add custom charms.</p>
+<p>A good example of a mod adding custom charms is the <a href="https://github.com/PrashantMohta/EasyCharmPrototype">EasyCharmPrototype</a> mod.</p>
+<h3 id="registering-new-charms-1">Registering new charms</h3>
+<p>After we have all the important sprites loaded, we can construct the class subclassing <code>EasyCharm</code>:</p>
+<pre><code class="lang-cs">public class CustomCharm1 : EasyCharm
+{
+    protected override int GetCharmCost() =&gt; 1;
+
+    protected override string GetDescription() =&gt; &quot;Charm1 Description&quot;;
+
+    protected override string GetName() =&gt; &quot;Charm1 Name&quot;;
+
+    protected override Sprite GetSpriteInternal() =&gt; LoadSprite(&quot;Charm1&quot;);
+}
+</code></pre>
+<p>Once the class is declared, we can use a instance of this class in the mod class:</p>
+<pre><code class="lang-cs">/* inside class `CharmMod1` */
+internal Dictionary&lt;string, EasyCharm&gt; Charms = new Dictionary&lt;string, EasyCharm&gt;{
+    {&quot;CustomCharm1&quot;, new CustomCharm1()},
+};
+</code></pre>
+<h4 id="setting-aquisition-1">Setting aquisition</h4>
+<p>The following is one example how to handle setting the aquisition states of the custom charms.</p>
+<pre><code class="lang-cs">public class CharmMod1Settings {
+    public Dictionary&lt;string, EasyCharmState&gt; Charms;
+}
+public class CharmMod1 : Mod, ILocalSettings&lt;CharmMod1Settings&gt; {
+    public CharmMod1Settings SaveSettings = new CharmMod1Settings();
+    public void OnLoadLocal(settings s)
+    {
+        SaveSettings = s;
+        if (s.Charms != null)
+        {
+            foreach(var kvp in s.Charms)
+            {
+                if (Charms.TryGetValue(kvp.Key, out EasyCharm m))
+                {
+                    m.RestoreCharmState(kvp.Value);
+                }
+            }
+        }
+    }
+    public settings OnSaveLocal()
+    {
+        SaveSettings.Charms = new Dictionary&lt;string, EasyCharmState&gt;();
+        foreach (var kvp in Charms)
+        {
+            if (Charms.TryGetValue(kvp.Key, out EasyCharm m))
+            {
+                SaveSettings.Charms[kvp.Key] = m.GetCharmState();
+            }
+        }
+        return SaveSettings;
+    }
+}
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SFGrenade/SFCore/blob/master/docs/articles/charms.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

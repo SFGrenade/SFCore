@@ -1,0 +1,2457 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MIOController </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MIOController ">
+      
+      <meta name="description" content="Class that handles mod interop.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ModInterOp_MIOController.md&amp;value=---%0Auid%3A%20SFCore.ModInterOp.MIOController%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SFCore.ModInterOp.MIOController">
+
+
+
+  <h1 id="SFCore_ModInterOp_MIOController" data-uid="SFCore.ModInterOp.MIOController" class="text-break">
+Class MIOController  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SFCore.html">SFCore</a>.<a class="xref" href="SFCore.ModInterOp.html">ModInterOp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SFCore.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Class that handles mod interop.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class MIOController</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">MIOController</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction_System_Action_System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction(System.Action,System.String)">
+  AddAction(Action, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction(Action a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></dt>
+    <dd><p>A method with no arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__1_System_Action___0__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``1(System.Action{``0},System.String)">
+  AddAction&lt;T1&gt;(Action&lt;T1&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1&gt;(Action&lt;T1&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T1&gt;</dt>
+    <dd><p>A method with 1 argument and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__10_System_Action___0___1___2___3___4___5___6___7___8___9__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-10">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10&gt;</dt>
+    <dd><p>A method with 10 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__11_System_Action___0___1___2___3___4___5___6___7___8___9___10__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-11">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11&gt;</dt>
+    <dd><p>A method with 11 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__12_System_Action___0___1___2___3___4___5___6___7___8___9___10___11__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-12">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12&gt;</dt>
+    <dd><p>A method with 12 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__13_System_Action___0___1___2___3___4___5___6___7___8___9___10___11___12__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-13">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13&gt;</dt>
+    <dd><p>A method with 13 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__14_System_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-14">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14&gt;</dt>
+    <dd><p>A method with 14 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>T14</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__15_System_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-15">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15&gt;</dt>
+    <dd><p>A method with 15 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>T14</code></dt>
+    <dd></dd>
+    <dt><code>T15</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__16_System_Action___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-16">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16&gt;</dt>
+    <dd><p>A method with 16 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>T14</code></dt>
+    <dd></dd>
+    <dt><code>T15</code></dt>
+    <dd></dd>
+    <dt><code>T16</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__2_System_Action___0___1__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``2(System.Action{``0,``1},System.String)">
+  AddAction&lt;T1, T2&gt;(Action&lt;T1, T2&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2&gt;(Action&lt;T1, T2&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;T1, T2&gt;</dt>
+    <dd><p>A method with 2 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__3_System_Action___0___1___2__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``3(System.Action{``0,``1,``2},System.String)">
+  AddAction&lt;T1, T2, T3&gt;(Action&lt;T1, T2, T3&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3&gt;(Action&lt;T1, T2, T3&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;T1, T2, T3&gt;</dt>
+    <dd><p>A method with 3 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__4_System_Action___0___1___2___3__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``4(System.Action{``0,``1,``2,``3},System.String)">
+  AddAction&lt;T1, T2, T3, T4&gt;(Action&lt;T1, T2, T3, T4&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4&gt;(Action&lt;T1, T2, T3, T4&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-4">Action</a>&lt;T1, T2, T3, T4&gt;</dt>
+    <dd><p>A method with 4 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__5_System_Action___0___1___2___3___4__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``5(System.Action{``0,``1,``2,``3,``4},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5&gt;(Action&lt;T1, T2, T3, T4, T5&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5&gt;(Action&lt;T1, T2, T3, T4, T5&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-5">Action</a>&lt;T1, T2, T3, T4, T5&gt;</dt>
+    <dd><p>A method with 5 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__6_System_Action___0___1___2___3___4___5__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``6(System.Action{``0,``1,``2,``3,``4,``5},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6&gt;(Action&lt;T1, T2, T3, T4, T5, T6&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6&gt;(Action&lt;T1, T2, T3, T4, T5, T6&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-6">Action</a>&lt;T1, T2, T3, T4, T5, T6&gt;</dt>
+    <dd><p>A method with 6 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__7_System_Action___0___1___2___3___4___5___6__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``7(System.Action{``0,``1,``2,``3,``4,``5,``6},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-7">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7&gt;</dt>
+    <dd><p>A method with 7 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__8_System_Action___0___1___2___3___4___5___6___7__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-8">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8&gt;</dt>
+    <dd><p>A method with 8 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddAction_" data-uid="SFCore.ModInterOp.MIOController.AddAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddAction__9_System_Action___0___1___2___3___4___5___6___7___8__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddAction``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.String)">
+  AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddAction&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;(Action&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-9">Action</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9&gt;</dt>
+    <dd><p>A method with 9 arguments and no return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddDelegate_" data-uid="SFCore.ModInterOp.MIOController.AddDelegate*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddDelegate_System_Delegate_System_String_" data-uid="SFCore.ModInterOp.MIOController.AddDelegate(System.Delegate,System.String)">
+  AddDelegate(Delegate, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddDelegate(Delegate d, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>d</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.delegate">Delegate</a></dt>
+    <dd><p>The Delegate that is going to be invoked.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__1_System_Func___0__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``1(System.Func{``0},System.String)">
+  AddFunc&lt;TRes&gt;(Func&lt;TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;TRes&gt;(Func&lt;TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TRes&gt;</dt>
+    <dd><p>A method with no arguments but with a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__10_System_Func___0___1___2___3___4___5___6___7___8___9__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L167"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-10">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TRes&gt;</dt>
+    <dd><p>A method with 9 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__11_System_Func___0___1___2___3___4___5___6___7___8___9___10__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-11">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TRes&gt;</dt>
+    <dd><p>A method with 10 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__12_System_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L177"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-12">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TRes&gt;</dt>
+    <dd><p>A method with 11 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__13_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-13">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TRes&gt;</dt>
+    <dd><p>A method with 12 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__14_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-14">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TRes&gt;</dt>
+    <dd><p>A method with 13 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__15_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-15">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TRes&gt;</dt>
+    <dd><p>A method with 14 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>T14</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__16_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-16">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TRes&gt;</dt>
+    <dd><p>A method with 15 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>T14</code></dt>
+    <dd></dd>
+    <dt><code>T15</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__17_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15___16__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-17">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TRes&gt;</dt>
+    <dd><p>A method with 16 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>T9</code></dt>
+    <dd></dd>
+    <dt><code>T10</code></dt>
+    <dd></dd>
+    <dt><code>T11</code></dt>
+    <dd></dd>
+    <dt><code>T12</code></dt>
+    <dd></dd>
+    <dt><code>T13</code></dt>
+    <dd></dd>
+    <dt><code>T14</code></dt>
+    <dd></dd>
+    <dt><code>T15</code></dt>
+    <dd></dd>
+    <dt><code>T16</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__2_System_Func___0___1__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``2(System.Func{``0,``1},System.String)">
+  AddFunc&lt;T1, TRes&gt;(Func&lt;T1, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, TRes&gt;(Func&lt;T1, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T1, TRes&gt;</dt>
+    <dd><p>A method with 1 argument and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__3_System_Func___0___1___2__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``3(System.Func{``0,``1,``2},System.String)">
+  AddFunc&lt;T1, T2, TRes&gt;(Func&lt;T1, T2, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, TRes&gt;(Func&lt;T1, T2, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;T1, T2, TRes&gt;</dt>
+    <dd><p>A method with 2 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__4_System_Func___0___1___2___3__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``4(System.Func{``0,``1,``2,``3},System.String)">
+  AddFunc&lt;T1, T2, T3, TRes&gt;(Func&lt;T1, T2, T3, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, TRes&gt;(Func&lt;T1, T2, T3, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;T1, T2, T3, TRes&gt;</dt>
+    <dd><p>A method with 3 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__5_System_Func___0___1___2___3___4__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``5(System.Func{``0,``1,``2,``3,``4},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, TRes&gt;(Func&lt;T1, T2, T3, T4, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L142"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, TRes&gt;(Func&lt;T1, T2, T3, T4, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;T1, T2, T3, T4, TRes&gt;</dt>
+    <dd><p>A method with 4 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__6_System_Func___0___1___2___3___4___5__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``6(System.Func{``0,``1,``2,``3,``4,``5},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-6">Func</a>&lt;T1, T2, T3, T4, T5, TRes&gt;</dt>
+    <dd><p>A method with 5 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__7_System_Func___0___1___2___3___4___5___6__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``7(System.Func{``0,``1,``2,``3,``4,``5,``6},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-7">Func</a>&lt;T1, T2, T3, T4, T5, T6, TRes&gt;</dt>
+    <dd><p>A method with 6 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__8_System_Func___0___1___2___3___4___5___6___7__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-8">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, TRes&gt;</dt>
+    <dd><p>A method with 7 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_AddFunc_" data-uid="SFCore.ModInterOp.MIOController.AddFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_AddFunc__9_System_Func___0___1___2___3___4___5___6___7___8__System_String_" data-uid="SFCore.ModInterOp.MIOController.AddFunc``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.String)">
+  AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a Delegate with a unique Identifier to the Mod Interop Enviroment.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool AddFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;(Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt; a, string n)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-9">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, TRes&gt;</dt>
+    <dd><p>A method with 8 arguments and a return value.</p>
+</dd>
+    <dt><code>n</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name that is used to invoke the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was added, False if the name was already used.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd></dd>
+    <dt><code>T2</code></dt>
+    <dd></dd>
+    <dt><code>T3</code></dt>
+    <dd></dd>
+    <dt><code>T4</code></dt>
+    <dd></dd>
+    <dt><code>T5</code></dt>
+    <dd></dd>
+    <dt><code>T6</code></dt>
+    <dd></dd>
+    <dt><code>T7</code></dt>
+    <dd></dd>
+    <dt><code>T8</code></dt>
+    <dd></dd>
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_CallAction_" data-uid="SFCore.ModInterOp.MIOController.CallAction*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_CallAction_System_String_System_Object___" data-uid="SFCore.ModInterOp.MIOController.CallAction(System.String,System.Object[])">
+  CallAction(string, object[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Invokes a Delegate of the Mod Interop Enviroment that has no return value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool CallAction(string name, object[] @params = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name of the Delegate.</p>
+</dd>
+    <dt><code>params</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd><p>The parameters that are given to the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was invoked, False if the Delegate wasn't found.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ModInterOp_MIOController_CallFunc_" data-uid="SFCore.ModInterOp.MIOController.CallFunc*"></a>
+
+  <h3 id="SFCore_ModInterOp_MIOController_CallFunc__1_System_String___0__System_Object___" data-uid="SFCore.ModInterOp.MIOController.CallFunc``1(System.String,``0@,System.Object[])">
+  CallFunc&lt;TRes&gt;(string, out TRes, object[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L243"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Invokes a Delegate of the Mod Interop Enviroment that has a return value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public static bool CallFunc&lt;TRes&gt;(string name, out TRes res, object[] @params = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The unique name of the Delegate.</p>
+</dd>
+    <dt><code>res</code> <span class="xref">TRes</span></dt>
+    <dd><p>The return value of the Delegate.</p>
+</dd>
+    <dt><code>params</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd><p>The parameters that are given to the Delegate.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if the Delegate was invoked, False if the Delegate wasn't found.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TRes</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SFGrenade/SFCore/blob/master/src/ModInterOp/MIOController.cs/#L11" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

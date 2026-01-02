@@ -1,0 +1,485 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ItemHelper </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ItemHelper ">
+      
+      <meta name="description" content="Item helper class for easily adding custom items. The mod using this needs to handle the following:  0 to 3 PlayerData bools per item 0 to 1 PlayerData int per item 1 to 3 name language strings per item 1 to 4 description language strings per item">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_ItemHelper.md&amp;value=---%0Auid%3A%20SFCore.ItemHelper%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SFCore.ItemHelper">
+
+
+
+  <h1 id="SFCore_ItemHelper" data-uid="SFCore.ItemHelper" class="text-break">
+Class ItemHelper  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SFCore.html">SFCore</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SFCore.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Item helper class for easily adding custom items.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>0 to 3 PlayerData bools per item</li>
+<li>0 to 1 PlayerData int per item</li>
+<li>1 to 3 name language strings per item</li>
+<li>1 to 4 description language strings per item</li>
+</ul>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class ItemHelper</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ItemHelper</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SFCore_ItemHelper_AddCountedItem_" data-uid="SFCore.ItemHelper.AddCountedItem*"></a>
+
+  <h3 id="SFCore_ItemHelper_AddCountedItem_UnityEngine_Sprite_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddCountedItem(UnityEngine.Sprite,System.String,System.String,System.String)">
+  AddCountedItem(Sprite, string, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L620"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a counted item. (e.g. Rancid Egg)
+You either have at least one, or you don't.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddCountedItem(Sprite sprite, string playerdataInt, string nameConvo, string descConvo)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sprite</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item</p>
+</dd>
+    <dt><code>playerdataInt</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Int used to determine if and how much of the item is acquired</p>
+</dd>
+    <dt><code>nameConvo</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the name</p>
+</dd>
+    <dt><code>descConvo</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the description</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ItemHelper_AddFlowerItem_" data-uid="SFCore.ItemHelper.AddFlowerItem*"></a>
+
+  <h3 id="SFCore_ItemHelper_AddFlowerItem_UnityEngine_Sprite_UnityEngine_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddFlowerItem(UnityEngine.Sprite,UnityEngine.Sprite,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+  AddFlowerItem(Sprite, Sprite, string, string, string, string, string, string, string, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L650"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a flower item. (e.g. the Delicate Flower)
+You have it, it can be broken, but it won't be displayed if you have it from another source and it's broken.
+(bool1 AND !(bool2 AND bool3)) and it will be displayed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddFlowerItem(Sprite sprite, Sprite sprite2, string playerdataBool1, string playerdataBool2, string playerdataBool3, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2, string descConvo3, string descConvo4)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sprite</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the 'normal' item</p>
+</dd>
+    <dt><code>sprite2</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the 'broken' item</p>
+</dd>
+    <dt><code>playerdataBool1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if the item is acquired</p>
+</dd>
+    <dt><code>playerdataBool2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if the item is broken</p>
+</dd>
+    <dt><code>playerdataBool3</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if the item is from another source (e.g. Queen's Gardens flowers)</p>
+</dd>
+    <dt><code>nameConvo1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the 'normal' name</p>
+</dd>
+    <dt><code>nameConvo2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the 'broken' name</p>
+</dd>
+    <dt><code>descConvo1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the 'normal' description</p>
+</dd>
+    <dt><code>descConvo2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the 'broken' description</p>
+</dd>
+    <dt><code>descConvo3</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the 'normal, other source' description</p>
+</dd>
+    <dt><code>descConvo4</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the 'broken, other source' description</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ItemHelper_AddNormalItem_" data-uid="SFCore.ItemHelper.AddNormalItem*"></a>
+
+  <h3 id="SFCore_ItemHelper_AddNormalItem_UnityEngine_Sprite_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddNormalItem(UnityEngine.Sprite,System.String,System.String,System.String)">
+  AddNormalItem(Sprite, string, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L532"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a normal item. (e.g. King's Brand)
+You either have it, or you don't.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddNormalItem(Sprite sprite, string playerdataBool, string nameConvo, string descConvo)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sprite</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item</p>
+</dd>
+    <dt><code>playerdataBool</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if the item is acquired</p>
+</dd>
+    <dt><code>nameConvo</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the name</p>
+</dd>
+    <dt><code>descConvo</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for the description</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ItemHelper_AddOneTwoBothItem_" data-uid="SFCore.ItemHelper.AddOneTwoBothItem*"></a>
+
+  <h3 id="SFCore_ItemHelper_AddOneTwoBothItem_UnityEngine_Sprite_UnityEngine_Sprite_UnityEngine_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddOneTwoBothItem(UnityEngine.Sprite,UnityEngine.Sprite,UnityEngine.Sprite,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+  AddOneTwoBothItem(Sprite, Sprite, Sprite, string, string, string, string, string, string, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L591"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a item of type OneTwoBoth. (e.g. Map, Quill and Map and Quill)
+You can have one, the other, both or none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddOneTwoBothItem(Sprite sprite1, Sprite sprite2, Sprite spriteBoth, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string nameConvoBoth, string descConvo1, string descConvo2, string descConvoBoth)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sprite1</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item 1</p>
+</dd>
+    <dt><code>sprite2</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item 2</p>
+</dd>
+    <dt><code>spriteBoth</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item both</p>
+</dd>
+    <dt><code>playerdataBool1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if item 1 is acquired</p>
+</dd>
+    <dt><code>playerdataBool2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if item 2 is acquired</p>
+</dd>
+    <dt><code>nameConvo1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for name 1</p>
+</dd>
+    <dt><code>nameConvo2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for name 2</p>
+</dd>
+    <dt><code>nameConvoBoth</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for name both</p>
+</dd>
+    <dt><code>descConvo1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for description 1</p>
+</dd>
+    <dt><code>descConvo2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for description 2</p>
+</dd>
+    <dt><code>descConvoBoth</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for description both</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ItemHelper_AddOneTwoItem_" data-uid="SFCore.ItemHelper.AddOneTwoItem*"></a>
+
+  <h3 id="SFCore_ItemHelper_AddOneTwoItem_UnityEngine_Sprite_UnityEngine_Sprite_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="SFCore.ItemHelper.AddOneTwoItem(UnityEngine.Sprite,UnityEngine.Sprite,System.String,System.String,System.String,System.String,System.String,System.String)">
+  AddOneTwoItem(Sprite, Sprite, string, string, string, string, string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Adds a item of type OneTwo. (Not used ingame)
+You either have one, the other or none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddOneTwoItem(Sprite sprite1, Sprite sprite2, string playerdataBool1, string playerdataBool2, string nameConvo1, string nameConvo2, string descConvo1, string descConvo2)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sprite1</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item 1</p>
+</dd>
+    <dt><code>sprite2</code> <a class="xref" href="https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Sprite.html">Sprite</a></dt>
+    <dd><p>Sprite for the item 2</p>
+</dd>
+    <dt><code>playerdataBool1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if item 1 is acquired</p>
+</dd>
+    <dt><code>playerdataBool2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Bool used to determine if item 2 is acquired</p>
+</dd>
+    <dt><code>nameConvo1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for name 1</p>
+</dd>
+    <dt><code>nameConvo2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for name 2</p>
+</dd>
+    <dt><code>descConvo1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for description 1</p>
+</dd>
+    <dt><code>descConvo2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Language string for description 2</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_ItemHelper_unusedInit_" data-uid="SFCore.ItemHelper.unusedInit*"></a>
+
+  <h3 id="SFCore_ItemHelper_unusedInit" data-uid="SFCore.ItemHelper.unusedInit">
+  unusedInit()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Used for static initialization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void unusedInit()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SFGrenade/SFCore/blob/master/src/ItemHelper.cs/#L59" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
