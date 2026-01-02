@@ -50,12 +50,12 @@ public static class EnviromentParticleHelper
                 {
                     if (callback == null)
                         continue;
-                    var (enviromentType, runAudio) = ((int enviromentType, AudioClip runAudio)) callback.DynamicInvoke(self);
-                    AddWalkAudio(enviromentType, runAudio);
+                    var (enviromentType, walkAudio) = ((int enviromentType, AudioClip runAudio)) callback.DynamicInvoke(self);
+                    AddWalkAudio(enviromentType, walkAudio);
                 }
             }
-            if (_customRunAudio != null)
-                self.footStepsRunAudioSource.clip = _customRunAudio[PlayerData.instance.GetInt("environmentType")];
+            if (_customWalkAudio != null)
+                self.footStepsWalkAudioSource.clip = _customWalkAudio[PlayerData.instance.GetInt("environmentType")];
         }
         catch (Exception)
         {}
@@ -72,7 +72,7 @@ public static class EnviromentParticleHelper
                 }
             }
             if (_customRunAudio != null)
-                self.footStepsWalkAudioSource.clip = _customRunAudio[PlayerData.instance.GetInt("environmentType")];
+                self.footStepsRunAudioSource.clip = _customRunAudio[PlayerData.instance.GetInt("environmentType")];
         }
         catch (Exception)
         {}
