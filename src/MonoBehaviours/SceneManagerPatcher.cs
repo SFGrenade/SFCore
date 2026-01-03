@@ -280,13 +280,9 @@ public class SceneManagerPatcher : MonoBehaviour
         sm.SetAttr("musicSnapshot", _musicAm.FindSnapshot(MsSnapshotName));
         sm.SetAttr("musicDelayTime", musicDelayTime);
         sm.SetAttr("musicTransitionTime", musicTransitionTime);
-        Modding.Logger.Log($"AtsSnapshotName: {AtsSnapshotName}");
         sm.atmosSnapshot = _atmosAm.FindSnapshot(AtsSnapshotName);
-        Modding.Logger.Log($"EsSnapshotName: {EsSnapshotName}");
         sm.enviroSnapshot = _enviroAm.FindSnapshot(EsSnapshotName);
-        Modding.Logger.Log($"AcsSnapshotName: {AcsSnapshotName}");
         sm.actorSnapshot = _actorAm.FindSnapshot(AcsSnapshotName);
-        Modding.Logger.Log($"SsSnapshotName: {SsSnapshotName}");
         sm.shadeSnapshot = _shadeAm.FindSnapshot(SsSnapshotName);
         sm.transitionTime = transitionTime;
         sm.borderPrefab = _borderPrefab;

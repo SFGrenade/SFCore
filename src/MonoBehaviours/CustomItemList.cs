@@ -62,24 +62,18 @@ public class CustomItemList : MonoBehaviour
     /// <summary>
     /// Total item amount
     /// </summary>
-    public int TotalItemAmount()
-    {
-        return List.Count;
-    }
+    public int TotalItemAmount() => List.Count;
+
     /// <summary>
     /// Amount of gotten items
     /// </summary>
-    public int GotItemAmount()
-    {
-        return ItemCount + 1;
-    }
+    public int GotItemAmount() => ItemCount + 1;
 
     /// <summary>
     /// Build the inv list
     /// </summary>
     public void BuildItemList()
     {
-        Log($"[CustomItem] - Build item list");
         _pd = PlayerData.instance;
         FirstNewItem = -1;
         ItemCount = -1;
@@ -109,7 +103,6 @@ public class CustomItemList : MonoBehaviour
     {
         if (!_built) BuildItemList();
 
-        Log($"[CustomItem] - Update Item List");
         FirstNewItem = 0;
         ItemCount = -1;
         float num = 0f;
@@ -231,11 +224,7 @@ public class CustomItemList : MonoBehaviour
     /// <summary>
     /// Gets ItemCount
     /// </summary>
-    public int GetItemCount()
-    {
-        Log($"[CustomItem] - Itemcount: {ItemCount}");
-        return ItemCount;
-    }
+    public int GetItemCount() => ItemCount;
 
     /// <summary>
     /// Gets description for a specific item
@@ -243,7 +232,6 @@ public class CustomItemList : MonoBehaviour
     public string GetDescConvo(int itemNum)
     {
         var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
-        Log($"[CustomItem] - Desc: {itemNum}/{List.Count}");
 
         switch (item.type)
         {
@@ -290,7 +278,6 @@ public class CustomItemList : MonoBehaviour
     public string GetNameConvo(int itemNum)
     {
         var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
-        Log($"[CustomItem] - Name: {itemNum}/{List.Count}");
 
         switch (item.type)
         {
@@ -322,29 +309,17 @@ public class CustomItemList : MonoBehaviour
     /// <summary>
     /// Gets sprite for a specific item
     /// </summary>
-    public Sprite GetSprite(int itemNum)
-    {
-        Log($"[CustomItem] - get sprite");
-        return _currentList[itemNum].GetComponentInChildren<SpriteRenderer>().sprite;
-    }
+    public Sprite GetSprite(int itemNum) => _currentList[itemNum].GetComponentInChildren<SpriteRenderer>().sprite;
 
     /// <summary>
     /// Get y distance
     /// </summary>
-    public float GetYDistance()
-    {
-        Log($"[CustomItem] - get y: {YDistance}");
-        return YDistance;
-    }
+    public float GetYDistance() => YDistance;
 
     /// <summary>
     /// Get index of first new item
     /// </summary>
-    public int GetFirstNewItem()
-    {
-        Log($"[CustomItem] - get new: {FirstNewItem}");
-        return FirstNewItem;
-    }
+    public int GetFirstNewItem() => FirstNewItem;
 
     /// <summary>
     /// Get amount of counted items
@@ -352,7 +327,6 @@ public class CustomItemList : MonoBehaviour
     public string GetPlayerDataKillsName(int itemNum)
     {
         var item = List.First(x => x.uniqueName.Equals(_currentList[itemNum].name));
-        Log($"[CustomItem] - get int name: {item.type}");
 
         if (item.type != ItemType.Counted) return "0Return";
         return item.playerdataInt;
