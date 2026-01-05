@@ -12,11 +12,11 @@ namespace SFCore;
 public static class TitleLogoHelper
 {
     private static bool _instanceChanged = false;
+    private static MenuStyleTitle _lastInstance = null;
     private static List<Sprite> _customLogos = new List<Sprite>();
 
     static TitleLogoHelper()
     {
-        On.MenuStyleTitle.ctor += OnMenuStyleTitleConstructor;
         On.MenuStyleTitle.SetTitle += OnMenuStyleTitleSetTitle;
     }
     /// <summary>
@@ -35,16 +35,28 @@ public static class TitleLogoHelper
         return _customLogos.Count;
     }
 
-    private static void OnMenuStyleTitleConstructor(On.MenuStyleTitle.orig_ctor orig, MenuStyleTitle self)
-    {
-        orig(self);
-        _instanceChanged = false;
-    }
-
     private static void OnMenuStyleTitleSetTitle(On.MenuStyleTitle.orig_SetTitle orig, MenuStyleTitle self, int index)
     {
+        if (self == null)
+        {
+            orig(self, index);
+            return;
+        }
+
+        if (!ReferenceEquals(_lastInstance, self))
+        {
+            _lastInstance = self;
+            _instanceChanged = false;
+        }
+
         if (!_instanceChanged)
         {
+            if (self.TitleSprites == null)
+            {
+                orig(self, index);
+                return;
+            }
+
             RuntimePlatform[] allPlatforms = new[]
             {
                 RuntimePlatform.OSXPlayer,
