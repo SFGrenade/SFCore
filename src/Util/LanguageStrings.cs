@@ -81,6 +81,10 @@ public class LanguageStrings
     /// <returns>True if the language string is present, False if not.</returns>
     public bool ContainsKey(string key, string sheet)
     {
+        if (GameManager.instance == null)
+        {
+            return false;
+        }
         GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;
         if (!_jsonDict.ContainsKey(lang.ToString()))
         {

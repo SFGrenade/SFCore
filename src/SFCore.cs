@@ -4,6 +4,7 @@ using SFCore.Generics;
 using SFCore.MonoBehaviours;
 using SFCore.Utils;
 using UnityEngine;
+using UObject = UnityEngine.Object;
 
 namespace SFCore;
 
