@@ -7,7 +7,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Modding;
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+using TMPro;
+#else
 using TMProOld;
+#endif
 using UObject = UnityEngine.Object;
 using SFCore.MonoBehaviours;
 

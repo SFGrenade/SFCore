@@ -1,7 +1,11 @@
 ﻿using SFCore.Utils;
 using System.Collections.Generic;
 using System.Linq;
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+using TMPro;
+#else
 using TMProOld;
+#endif
 using UnityEngine;
 using Logger = Modding.Logger;
 

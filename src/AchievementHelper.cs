@@ -49,8 +49,11 @@ public static class AchievementHelper
     static AchievementHelper()
     {
         LogFine("!cctor");
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+        On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
+#else
         On.MenuAchievementsList.PreInit += OnMenuAchievementsListPreInit;
-        //On.UIManager.RefreshAchievementsList += OnUIManagerRefreshAchievementsList;
+#endif
         //On.AchievementHandler.CanAwardAchievement += (orig, self, key) => { orig(self, key); return true; };
         On.DesktopPlatform.IsAchievementUnlocked += OnDesktopPlatformOnIsAchievementUnlocked;
         LogFine("~cctor");
@@ -105,11 +108,18 @@ public static class AchievementHelper
     private static void InitAchievements(AchievementsList list)
     {
         LogFine("!InitAchievements");
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+#else
         List<Achievement> achievements = list.GetAttr<AchievementsList, List<Achievement>>("achievements");
+#endif
         foreach (var ca in _customAchievements)
         {
             // length check first because unity's framework472 is trash and doesn't do it itself
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+            if (!list.achievements.Exists(a => ((a.key.Length == ca.key.Length) && (a.key == ca.key))))
+#else
             if (!achievements.Exists(a => ((a.key.Length == ca.key.Length) && (a.key == ca.key))))
+#endif
             {
                 Achievement customAch = new Achievement
                 {
@@ -120,16 +130,32 @@ public static class AchievementHelper
                     localizedText = ca.textConvo,
                     localizedTitle = ca.titleConvo
                 };
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+                list.achievements.Add(customAch);
+#else
                 achievements.Add(customAch);
+#endif
             }
         }
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+#else
         list.SetAttr<AchievementsList, List<Achievement>>("achievements", achievements);
+#endif
         LogFine("~InitAchievements");
     }
 
     /// <summary>
     /// On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
     /// </summary>
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
+    {
+        LogFine("!OnUIManagerRefreshAchievementsList");
+        InitAchievements(GameManager.instance.achievementHandler.achievementsList);
+        orig(self);
+        LogFine("~OnUIManagerRefreshAchievementsList");
+    }
+#else
     private static void OnMenuAchievementsListPreInit(On.MenuAchievementsList.orig_PreInit orig, MenuAchievementsList self)
     {
         LogFine("!OnMenuAchievementsListPreInit");
@@ -137,17 +163,7 @@ public static class AchievementHelper
         orig(self);
         LogFine("~OnMenuAchievementsListPreInit");
     }
-
-    // /// <summary>
-    // /// On hook that initializes achievements and achivements in the menu and unhooks itself afterwards.
-    // /// </summary>
-    // private static void OnUIManagerRefreshAchievementsList(On.UIManager.orig_RefreshAchievementsList orig, UIManager self)
-    // {
-    //     LogFine("!OnUIManagerRefreshAchievementsList");
-    //     InitAchievements(GameManager.instance.achievementHandler.achievementsList);
-    //     orig(self);
-    //     LogFine("~OnUIManagerRefreshAchievementsList");
-    // }
+#endif
 
     /// <summary>
     /// On hook that checks for custom achievements and looks into EncryptedSharedData for them.
@@ -160,7 +176,11 @@ public static class AchievementHelper
         if (_customAchievements.Exists(x => ((x.key.Length == key.Length) && (x.key == key))))
         {
             // just check again, to be sure
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+            isUnlocked = self.EncryptedSharedData.GetBool(key, def: false);
+#else
             isUnlocked = self.RoamingSharedData.GetBool(key, def: false);
+#endif
         }
         LogFine("~OnDesktopPlatformIsAchievementUnlocked");
         return isUnlocked;

@@ -202,9 +202,15 @@ public static class MenuStyleHelper
         }
         self.styles = tmpList.ToArray();
 
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+        int tmpInt = Platform.Current.EncryptedSharedData.GetInt("menuStyle", 0);
+        if (tmpInt >= self.styles.Length)
+            Platform.Current.EncryptedSharedData.SetInt("menuStyle", 0);
+#else
         int tmpInt = Platform.Current.RoamingSharedData.GetInt("menuStyle", 0);
         if (tmpInt >= self.styles.Length)
             Platform.Current.RoamingSharedData.SetInt("menuStyle", 0);
+#endif
     }
 
     private static IEnumerator OnMenuStylesFade(On.MenuStyles.orig_Fade orig, MenuStyles self, int styleindex, int fadetype, bool fade, AudioSource[] audiosources)
@@ -219,7 +225,11 @@ public static class MenuStyleHelper
         if (index < 0 || index >= 10)
         {
             orig(self, index, fade, false);
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+            Platform.Current.EncryptedSharedData.SetInt("menuStyle", 0);
+#else
             Platform.Current.RoamingSharedData.SetInt("menuStyle", 0);
+#endif
         }
         else
         {

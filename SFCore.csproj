@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <DefineConstants>$(DefineConstants);OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED</DefineConstants>
     <TargetFramework>net472</TargetFramework>
     <Product>SFCore</Product>
     <RootNamespace>SFCore</RootNamespace>
