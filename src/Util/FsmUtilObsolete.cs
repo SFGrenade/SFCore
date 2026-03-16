@@ -688,16 +688,6 @@ public static partial class FsmUtil
     [Obsolete("Use method `AddVector3Variable(Fsm, string)` instead!")]
     public static FsmVector3 AddFsmVector3Variable(this Fsm fsm, string name) => AddVector3Variable(fsm, name);
 
-    /// <inheritdoc cref="AddColorVariable(PlayMakerFSM, string)"/>
-    [PublicAPI]
-    [Obsolete("Use method `AddColorVariable(PlayMakerFSM, string)` instead!")]
-    public static FsmColor AddFsmColorVariable(this PlayMakerFSM fsm, string name) => AddColorVariable(fsm, name);
-
-    /// <inheritdoc cref="AddColorVariable(Fsm, string)"/>
-    [PublicAPI]
-    [Obsolete("Use method `AddColorVariable(Fsm, string)` instead!")]
-    public static FsmColor AddFsmColorVariable(this Fsm fsm, string name) => AddColorVariable(fsm, name);
-
     /// <inheritdoc cref="AddRectVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
     [Obsolete("Use method `AddRectVariable(PlayMakerFSM, string)` instead!")]
@@ -718,6 +708,16 @@ public static partial class FsmUtil
     [Obsolete("Use method `AddQuaternionVariable(Fsm, string)` instead!")]
     public static FsmQuaternion AddFsmQuaternionVariable(this Fsm fsm, string name) => AddQuaternionVariable(fsm, name);
 
+    /// <inheritdoc cref="AddColorVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddColorVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmColor AddFsmColorVariable(this PlayMakerFSM fsm, string name) => AddColorVariable(fsm, name);
+
+    /// <inheritdoc cref="AddColorVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddColorVariable(Fsm, string)` instead!")]
+    public static FsmColor AddFsmColorVariable(this Fsm fsm, string name) => AddColorVariable(fsm, name);
+
     /// <inheritdoc cref="AddGameObjectVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
     [Obsolete("Use method `AddGameObjectVariable(PlayMakerFSM, string)` instead!")]
@@ -727,6 +727,56 @@ public static partial class FsmUtil
     [PublicAPI]
     [Obsolete("Use method `AddGameObjectVariable(Fsm, string)` instead!")]
     public static FsmGameObject AddFsmGameObjectVariable(this Fsm fsm, string name) => AddGameObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="AddArrayVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddArrayVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmArray AddFsmArrayVariable(this PlayMakerFSM fsm, string name) => AddArrayVariable(fsm, name);
+
+    /// <inheritdoc cref="AddArrayVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddArrayVariable(Fsm, string)` instead!")]
+    public static FsmArray AddFsmArrayVariable(this Fsm fsm, string name) => AddArrayVariable(fsm, name);
+
+    /// <inheritdoc cref="AddEnumVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddEnumVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmEnum AddFsmEnumVariable(this PlayMakerFSM fsm, string name) => AddEnumVariable(fsm, name);
+
+    /// <inheritdoc cref="AddEnumVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddEnumVariable(Fsm, string)` instead!")]
+    public static FsmEnum AddFsmEnumVariable(this Fsm fsm, string name) => AddEnumVariable(fsm, name);
+
+    /// <inheritdoc cref="AddObjectVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddObjectVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmObject AddFsmObjectVariable(this PlayMakerFSM fsm, string name) => AddObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="AddObjectVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddObjectVariable(Fsm, string)` instead!")]
+    public static FsmObject AddFsmObjectVariable(this Fsm fsm, string name) => AddObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="AddMaterialVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddMaterialVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmMaterial AddFsmMaterialVariable(this PlayMakerFSM fsm, string name) => AddMaterialVariable(fsm, name);
+
+    /// <inheritdoc cref="AddMaterialVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddMaterialVariable(Fsm, string)` instead!")]
+    public static FsmMaterial AddFsmMaterialVariable(this Fsm fsm, string name) => AddMaterialVariable(fsm, name);
+
+    /// <inheritdoc cref="AddTextureVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddTextureVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmTexture AddFsmTextureVariable(this PlayMakerFSM fsm, string name) => AddTextureVariable(fsm, name);
+
+    /// <inheritdoc cref="AddTextureVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `AddTextureVariable(Fsm, string)` instead!")]
+    public static FsmTexture AddFsmTextureVariable(this Fsm fsm, string name) => AddTextureVariable(fsm, name);
 
     /// <inheritdoc cref="FindFloatVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
@@ -788,16 +838,6 @@ public static partial class FsmUtil
     [Obsolete("Use method `FindVector3Variable(Fsm, string)` instead!")]
     public static FsmVector3 FindFsmVector3Variable(this Fsm fsm, string name) => FindVector3Variable(fsm, name);
 
-    /// <inheritdoc cref="FindColorVariable(PlayMakerFSM, string)"/>
-    [PublicAPI]
-    [Obsolete("Use method `FindColorVariable(PlayMakerFSM, string)` instead!")]
-    public static FsmColor FindFsmColorVariable(this PlayMakerFSM fsm, string name) => FindColorVariable(fsm, name);
-
-    /// <inheritdoc cref="FindColorVariable(Fsm, string)"/>
-    [PublicAPI]
-    [Obsolete("Use method `FindColorVariable(Fsm, string)` instead!")]
-    public static FsmColor FindFsmColorVariable(this Fsm fsm, string name) => FindColorVariable(fsm, name);
-
     /// <inheritdoc cref="FindRectVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
     [Obsolete("Use method `FindRectVariable(PlayMakerFSM, string)` instead!")]
@@ -818,6 +858,16 @@ public static partial class FsmUtil
     [Obsolete("Use method `FindQuaternionVariable(Fsm, string)` instead!")]
     public static FsmQuaternion FindFsmQuaternionVariable(this Fsm fsm, string name) => FindQuaternionVariable(fsm, name);
 
+    /// <inheritdoc cref="FindColorVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindColorVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmColor FindFsmColorVariable(this PlayMakerFSM fsm, string name) => FindColorVariable(fsm, name);
+
+    /// <inheritdoc cref="FindColorVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindColorVariable(Fsm, string)` instead!")]
+    public static FsmColor FindFsmColorVariable(this Fsm fsm, string name) => FindColorVariable(fsm, name);
+
     /// <inheritdoc cref="FindGameObjectVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
     [Obsolete("Use method `FindGameObjectVariable(PlayMakerFSM, string)` instead!")]
@@ -827,6 +877,56 @@ public static partial class FsmUtil
     [PublicAPI]
     [Obsolete("Use method `FindGameObjectVariable(Fsm, string)` instead!")]
     public static FsmGameObject FindFsmGameObjectVariable(this Fsm fsm, string name) => FindGameObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="FindArrayVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindArrayVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmArray FindFsmArrayVariable(this PlayMakerFSM fsm, string name) => FindArrayVariable(fsm, name);
+
+    /// <inheritdoc cref="FindArrayVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindArrayVariable(Fsm, string)` instead!")]
+    public static FsmArray FindFsmArrayVariable(this Fsm fsm, string name) => FindArrayVariable(fsm, name);
+
+    /// <inheritdoc cref="FindEnumVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindEnumVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmEnum FindFsmEnumVariable(this PlayMakerFSM fsm, string name) => FindEnumVariable(fsm, name);
+
+    /// <inheritdoc cref="FindEnumVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindEnumVariable(Fsm, string)` instead!")]
+    public static FsmEnum FindFsmEnumVariable(this Fsm fsm, string name) => FindEnumVariable(fsm, name);
+
+    /// <inheritdoc cref="FindObjectVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindObjectVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmObject FindFsmObjectVariable(this PlayMakerFSM fsm, string name) => FindObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="FindObjectVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindObjectVariable(Fsm, string)` instead!")]
+    public static FsmObject FindFsmObjectVariable(this Fsm fsm, string name) => FindObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="FindMaterialVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindMaterialVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmMaterial FindFsmMaterialVariable(this PlayMakerFSM fsm, string name) => FindMaterialVariable(fsm, name);
+
+    /// <inheritdoc cref="FindMaterialVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindMaterialVariable(Fsm, string)` instead!")]
+    public static FsmMaterial FindFsmMaterialVariable(this Fsm fsm, string name) => FindMaterialVariable(fsm, name);
+
+    /// <inheritdoc cref="FindTextureVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindTextureVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmTexture FindFsmTextureVariable(this PlayMakerFSM fsm, string name) => FindTextureVariable(fsm, name);
+
+    /// <inheritdoc cref="FindTextureVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `FindTextureVariable(Fsm, string)` instead!")]
+    public static FsmTexture FindFsmTextureVariable(this Fsm fsm, string name) => FindTextureVariable(fsm, name);
 
     /// <inheritdoc cref="GetFloatVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
@@ -888,16 +988,6 @@ public static partial class FsmUtil
     [Obsolete("Use method `GetVector3Variable(Fsm, string)` instead!")]
     public static FsmVector3 GetFsmVector3Variable(this Fsm fsm, string name) => GetVector3Variable(fsm, name);
 
-    /// <inheritdoc cref="GetColorVariable(PlayMakerFSM, string)"/>
-    [PublicAPI]
-    [Obsolete("Use method `GetColorVariable(PlayMakerFSM, string)` instead!")]
-    public static FsmColor GetFsmColorVariable(this PlayMakerFSM fsm, string name) => GetColorVariable(fsm, name);
-
-    /// <inheritdoc cref="GetColorVariable(Fsm, string)"/>
-    [PublicAPI]
-    [Obsolete("Use method `GetColorVariable(Fsm, string)` instead!")]
-    public static FsmColor GetFsmColorVariable(this Fsm fsm, string name) => GetColorVariable(fsm, name);
-
     /// <inheritdoc cref="GetRectVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
     [Obsolete("Use method `GetRectVariable(PlayMakerFSM, string)` instead!")]
@@ -918,6 +1008,16 @@ public static partial class FsmUtil
     [Obsolete("Use method `GetQuaternionVariable(Fsm, string)` instead!")]
     public static FsmQuaternion GetFsmQuaternionVariable(this Fsm fsm, string name) => GetQuaternionVariable(fsm, name);
 
+    /// <inheritdoc cref="GetColorVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetColorVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmColor GetFsmColorVariable(this PlayMakerFSM fsm, string name) => GetColorVariable(fsm, name);
+
+    /// <inheritdoc cref="GetColorVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetColorVariable(Fsm, string)` instead!")]
+    public static FsmColor GetFsmColorVariable(this Fsm fsm, string name) => GetColorVariable(fsm, name);
+
     /// <inheritdoc cref="GetGameObjectVariable(PlayMakerFSM, string)"/>
     [PublicAPI]
     [Obsolete("Use method `GetGameObjectVariable(PlayMakerFSM, string)` instead!")]
@@ -927,6 +1027,56 @@ public static partial class FsmUtil
     [PublicAPI]
     [Obsolete("Use method `GetGameObjectVariable(Fsm, string)` instead!")]
     public static FsmGameObject GetFsmGameObjectVariable(this Fsm fsm, string name) => GetGameObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="GetArrayVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetArrayVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmArray GetFsmArrayVariable(this PlayMakerFSM fsm, string name) => GetArrayVariable(fsm, name);
+
+    /// <inheritdoc cref="GetArrayVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetArrayVariable(Fsm, string)` instead!")]
+    public static FsmArray GetFsmArrayVariable(this Fsm fsm, string name) => GetArrayVariable(fsm, name);
+
+    /// <inheritdoc cref="GetEnumVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetEnumVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmEnum GetFsmEnumVariable(this PlayMakerFSM fsm, string name) => GetEnumVariable(fsm, name);
+
+    /// <inheritdoc cref="GetEnumVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetEnumVariable(Fsm, string)` instead!")]
+    public static FsmEnum GetFsmEnumVariable(this Fsm fsm, string name) => GetEnumVariable(fsm, name);
+
+    /// <inheritdoc cref="GetObjectVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetObjectVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmObject GetFsmObjectVariable(this PlayMakerFSM fsm, string name) => GetObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="GetObjectVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetObjectVariable(Fsm, string)` instead!")]
+    public static FsmObject GetFsmObjectVariable(this Fsm fsm, string name) => GetObjectVariable(fsm, name);
+
+    /// <inheritdoc cref="GetMaterialVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetMaterialVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmMaterial GetFsmMaterialVariable(this PlayMakerFSM fsm, string name) => GetMaterialVariable(fsm, name);
+
+    /// <inheritdoc cref="GetMaterialVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetMaterialVariable(Fsm, string)` instead!")]
+    public static FsmMaterial GetFsmMaterialVariable(this Fsm fsm, string name) => GetMaterialVariable(fsm, name);
+
+    /// <inheritdoc cref="GetTextureVariable(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetTextureVariable(PlayMakerFSM, string)` instead!")]
+    public static FsmTexture GetFsmTextureVariable(this PlayMakerFSM fsm, string name) => GetTextureVariable(fsm, name);
+
+    /// <inheritdoc cref="GetTextureVariable(Fsm, string)"/>
+    [PublicAPI]
+    [Obsolete("Use method `GetTextureVariable(Fsm, string)` instead!")]
+    public static FsmTexture GetFsmTextureVariable(this Fsm fsm, string name) => GetTextureVariable(fsm, name);
 
     /// <inheritdoc cref="MakeLog(PlayMakerFSM, bool)"/>
     [PublicAPI]
