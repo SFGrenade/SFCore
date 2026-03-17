@@ -406,17 +406,29 @@ public static partial class FsmUtil
     /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
     [PublicAPI]
     [Obsolete("Use method `ChangeTransition(PlayMakerFSM, string, string, string)` instead!")]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void ChangeFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => ChangeTransition(fsm, stateName, eventName, toState);
+#else
     public static bool ChangeFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => ChangeTransition(fsm, stateName, eventName, toState);
+#endif
 
     /// <inheritdoc cref="ChangeTransition(Fsm, string, string, string)"/>
     [PublicAPI]
     [Obsolete("Use method `ChangeTransition(Fsm, string, string, string)` instead!")]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void ChangeFsmTransition(this Fsm fsm, string stateName, string eventName, string toState) => ChangeTransition(fsm, stateName, eventName, toState);
+#else
     public static bool ChangeFsmTransition(this Fsm fsm, string stateName, string eventName, string toState) => ChangeTransition(fsm, stateName, eventName, toState);
+#endif
 
     /// <inheritdoc cref="ChangeTransition(FsmState, string, string)"/>
     [PublicAPI]
     [Obsolete("Use method `ChangeTransition(FsmState, string, string)` instead!")]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void ChangeFsmTransition(this FsmState state, string eventName, string toState) => ChangeTransition(state, eventName, toState);
+#else
     public static bool ChangeFsmTransition(this FsmState state, string eventName, string toState) => ChangeTransition(state, eventName, toState);
+#endif
 
     /// <inheritdoc cref="ChangeGlobalTransition(PlayMakerFSM, string, string)"/>
     [PublicAPI]
@@ -506,17 +518,29 @@ public static partial class FsmUtil
     /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
     [PublicAPI]
     [Obsolete("Use method `RemoveAction(PlayMakerFSM, string, int)` instead!")]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void RemoveFsmAction(this PlayMakerFSM fsm, string stateName, int index) => RemoveAction(fsm, stateName, index);
+#else
     public static bool RemoveFsmAction(this PlayMakerFSM fsm, string stateName, int index) => RemoveAction(fsm, stateName, index);
+#endif
 
     /// <inheritdoc cref="RemoveAction(Fsm, string, int)"/>
     [PublicAPI]
     [Obsolete("Use method `RemoveAction(Fsm, string, int)` instead!")]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void RemoveFsmAction(this Fsm fsm, string stateName, int index) => RemoveAction(fsm, stateName, index);
+#else
     public static bool RemoveFsmAction(this Fsm fsm, string stateName, int index) => RemoveAction(fsm, stateName, index);
+#endif
 
     /// <inheritdoc cref="RemoveAction(FsmState, int)"/>
     [PublicAPI]
     [Obsolete("Use method `RemoveAction(FsmState, int)` instead!")]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void RemoveFsmAction(this FsmState state, int index) => RemoveAction(state, index);
+#else
     public static bool RemoveFsmAction(this FsmState state, int index) => RemoveAction(state, index);
+#endif
 
     /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM)"/>
     [PublicAPI]

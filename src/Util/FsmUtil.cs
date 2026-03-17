@@ -798,27 +798,47 @@ public static partial class FsmUtil
     /// <param name="toState">The new endpoint of the transition</param>
     /// <returns>bool that indicates whether the change was successful</returns>
     [PublicAPI]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void ChangeTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.ChangeTransition(eventName, toState);
+#else
     public static bool ChangeTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.ChangeTransition(eventName, toState);
+#endif
 
     /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
     [PublicAPI]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void ChangeTransition(this Fsm fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.ChangeTransition(eventName, toState);
+#else
     public static bool ChangeTransition(this Fsm fsm, string stateName, string eventName, string toState) => fsm.GetState(stateName)!.ChangeTransition(eventName, toState);
+#endif
 
     /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="eventName">The event of the transition</param>
     /// <param name="toState">The new endpoint of the transition</param>
     [PublicAPI]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void ChangeTransition(this FsmState state, string eventName, string toState)
+#else
     public static bool ChangeTransition(this FsmState state, string eventName, string toState)
+#endif
     {
         var transition = state.GetTransition(eventName);
         if (transition == null)
         {
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+            return;
+#else
             return false;
+#endif
         }
         transition.ToState = toState;
         transition.ToFsmState = state.Fsm.GetState(toState);
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+        return;
+#else
         return true;
+#endif
     }
 
     /// <summary>
@@ -990,22 +1010,38 @@ public static partial class FsmUtil
     /// <param name="stateName">The name of the state with the action</param>
     /// <param name="index">The index of the action</param>
     [PublicAPI]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void RemoveAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetState(stateName)!.RemoveAction(index);
+#else
     public static bool RemoveAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetState(stateName)!.RemoveAction(index);
+#endif
 
     /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
     [PublicAPI]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void RemoveAction(this Fsm fsm, string stateName, int index) => fsm.GetState(stateName)!.RemoveAction(index);
+#else
     public static bool RemoveAction(this Fsm fsm, string stateName, int index) => fsm.GetState(stateName)!.RemoveAction(index);
+#endif
 
     /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
     /// <param name="state">The fsm state</param>
     /// <param name="index">The index of the action</param>
     [PublicAPI]
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+    public static void RemoveAction(this FsmState state, int index)
+#else
     public static bool RemoveAction(this FsmState state, int index)
+#endif
     {
         FsmStateAction[] origActions = state.Actions;
         if (index < 0 || index >= origActions.Length)
         {
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+            return;
+#else
             return false;
+#endif
         }
         FsmStateAction[] newActions = new FsmStateAction[origActions.Length - 1];
         int newActionsCount = newActions.Length;
@@ -1020,7 +1056,11 @@ public static partial class FsmUtil
         }
 
         state.Actions = newActions;
+#if OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED
+        return;
+#else
         return true;
+#endif
     }
 
     /// <summary>
