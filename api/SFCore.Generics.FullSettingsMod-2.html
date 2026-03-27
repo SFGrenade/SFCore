@@ -1,0 +1,541 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class FullSettingsMod&lt;TSave, TGlobal&gt; </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class FullSettingsMod&lt;TSave, TGlobal&gt; ">
+      
+      <meta name="description" content="Abstract class to avoid boilerplate code. This adds easy SaveSettings and GlobalSettings functionality.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_Generics_FullSettingsMod_2.md&amp;value=---%0Auid%3A%20SFCore.Generics.FullSettingsMod%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SFCore.Generics.FullSettingsMod`2">
+
+
+
+  <h1 id="SFCore_Generics_FullSettingsMod_2" data-uid="SFCore.Generics.FullSettingsMod`2" class="text-break">
+Class FullSettingsMod&lt;TSave, TGlobal&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SFCore.html">SFCore</a>.<a class="xref" href="SFCore.Generics.html">Generics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SFCore.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Abstract class to avoid boilerplate code.
+This adds easy SaveSettings and GlobalSettings functionality.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class FullSettingsMod&lt;TSave, TGlobal&gt; : Mod, IMod, ILogger, ILocalSettings&lt;TSave&gt;, IGlobalSettings&lt;TGlobal&gt; where TSave : new() where TGlobal : new()</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TSave</code></dt>
+    <dd></dd>
+    <dt><code>TGlobal</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Loggable</span></div>
+      <div><span class="xref">Mod</span></div>
+      <div><span class="xref">FullSettingsMod&lt;TSave, TGlobal&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><span class="xref">IMod</span></div>
+      <div><span class="xref">ILogger</span></div>
+      <div><span class="xref">ILocalSettings</span>&lt;TSave&gt;</div>
+      <div><span class="xref">IGlobalSettings</span>&lt;TGlobal&gt;</div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="SFCore.SFCoreMod.html">SFCoreMod</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <span class="xref">Mod.Name</span>
+    </div>
+    <div>
+      <span class="xref">Mod.GetName()</span>
+    </div>
+    <div>
+      <span class="xref">Mod.GetPreloadNames()</span>
+    </div>
+    <div>
+      <span class="xref">Mod.PreloadSceneHooks()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Mod.Initialize(Dictionary&lt;string, Dictionary&lt;string, GameObject&gt;&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">Mod.GetVersion()</span>
+    </div>
+    <div>
+      <span class="xref">Mod.LoadPriority()</span>
+    </div>
+    <div>
+      <span class="xref">Mod.Initialize()</span>
+    </div>
+    <div>
+      <span class="xref">Mod.GetMenuButtonText()</span>
+    </div>
+    <div>
+      <span class="xref">Mod.SaveGlobalSettings()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Loggable.LogFine(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Loggable.LogFine(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Loggable.LogDebug(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Loggable.LogDebug(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Loggable.Log(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Loggable.Log(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Loggable.LogWarn(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Loggable.LogWarn(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">Loggable.LogError(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Loggable.LogError(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="SFCore.Utils.Util.html#SFCore_Utils_Util_GetAttr__2___0_System_String_">Util.GetAttr&lt;TSelf, TVal&gt;(TSelf, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.Util.html#SFCore_Utils_Util_SetAttr__2___0_System_String___1_">Util.SetAttr&lt;TSelf, TVal&gt;(TSelf, string, TVal)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2__ctor_" data-uid="SFCore.Generics.FullSettingsMod`2.#ctor*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2__ctor" data-uid="SFCore.Generics.FullSettingsMod`2.#ctor">
+  FullSettingsMod()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Constructor of this abstract class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FullSettingsMod()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2__ctor_" data-uid="SFCore.Generics.FullSettingsMod`2.#ctor*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2__ctor_System_String_" data-uid="SFCore.Generics.FullSettingsMod`2.#ctor(System.String)">
+  FullSettingsMod(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Constructor of this abstract class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FullSettingsMod(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Name of the mod, how it's going to be displayed in the main and pause menus.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2_GlobalSettings_" data-uid="SFCore.Generics.FullSettingsMod`2.GlobalSettings*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2_GlobalSettings" data-uid="SFCore.Generics.FullSettingsMod`2.GlobalSettings">
+  GlobalSettings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The global settings for this mod. The settings load will only occur once
+so a static field should be used to prevent loss of data</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TGlobal GlobalSettings { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TGlobal</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2_SaveSettings_" data-uid="SFCore.Generics.FullSettingsMod`2.SaveSettings*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2_SaveSettings" data-uid="SFCore.Generics.FullSettingsMod`2.SaveSettings">
+  SaveSettings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The save data specific to a certain savefile. This setting will be loaded each time a save is opened.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TSave SaveSettings { get; protected set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TSave</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2_OnLoadGlobal_" data-uid="SFCore.Generics.FullSettingsMod`2.OnLoadGlobal*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2_OnLoadGlobal__1_" data-uid="SFCore.Generics.FullSettingsMod`2.OnLoadGlobal(`1)">
+  OnLoadGlobal(TGlobal)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Loads the saved GlobalSettings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnLoadGlobal(TGlobal s)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">TGlobal</span></dt>
+    <dd><p>The settings that are being loaded</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2_OnLoadLocal_" data-uid="SFCore.Generics.FullSettingsMod`2.OnLoadLocal*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2_OnLoadLocal__0_" data-uid="SFCore.Generics.FullSettingsMod`2.OnLoadLocal(`0)">
+  OnLoadLocal(TSave)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Loads the saved SaveSettings of the save.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnLoadLocal(TSave s)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">TSave</span></dt>
+    <dd><p>The settings that are being loaded</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2_OnSaveGlobal_" data-uid="SFCore.Generics.FullSettingsMod`2.OnSaveGlobal*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2_OnSaveGlobal" data-uid="SFCore.Generics.FullSettingsMod`2.OnSaveGlobal">
+  OnSaveGlobal()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the current SaveSettings to save them to the disk.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TGlobal OnSaveGlobal()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TGlobal</span></dt>
+    <dd><p>The settings that are going to be saved.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_Generics_FullSettingsMod_2_OnSaveLocal_" data-uid="SFCore.Generics.FullSettingsMod`2.OnSaveLocal*"></a>
+
+  <h3 id="SFCore_Generics_FullSettingsMod_2_OnSaveLocal" data-uid="SFCore.Generics.FullSettingsMod`2.OnSaveLocal">
+  OnSaveLocal()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the current SaveSettings to save them to the disk.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TSave OnSaveLocal()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TSave</span></dt>
+    <dd><p>The settings that are going to be saved.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SFGrenade/SFCore/blob/master/src/Generics/FullSettingsMod.cs/#L9" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,688 @@
+{
+  "source_base_path": "/github/workspace/master/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.AchievementHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.AchievementHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.CharmHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.CharmHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.DlcIconHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.DlcIconHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EasyCharm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EasyCharm.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EasyCharmState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EasyCharmState.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.FullSettingsMod-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.FullSettingsMod-2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.GlobalSettingsMod-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.GlobalSettingsMod-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.SaveSettingsMod-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.SaveSettingsMod-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.InventoryHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.InventoryHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.InventoryPageType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.InventoryPageType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemHelper.Item.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemHelper.Item.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MenuStyleHelper.Hook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MenuStyleHelper.Hook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MenuStyleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MenuStyleHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ModInterOp.MIOController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ModInterOp.MIOController.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ModInterOp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ModInterOp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.BlurPlanePatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.BlurPlanePatcher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.CueHolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.CueHolder.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.CustomItemList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.CustomItemList.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.PatchMusicRegions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.PatchMusicRegions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneMapPatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneMapPatcher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SpritePatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SpritePatcher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SCustomAchievement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SCustomAchievement.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreGlobalSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreGlobalSettings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreMod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreMod.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreSaveSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreSaveSettings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.TitleLogoHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.TitleLogoHelper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.FsmUtil.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.FunctionAction-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.FunctionAction-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.LanguageStrings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.LanguageStrings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.LogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.LogAction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.MethodAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.MethodAction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.MiscCreator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.MiscCreator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.SpriteUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.SpriteUtil.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.StatusLog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.StatusLog.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.USceneUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.USceneUtil.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.Util.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.WavUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.WavUtils.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/charms.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/charms.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

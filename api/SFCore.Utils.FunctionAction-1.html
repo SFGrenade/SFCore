@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class FunctionAction&lt;TArg&gt; </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class FunctionAction&lt;TArg&gt; ">
+      
+      <meta name="description" content="FsmStateAction that invokes methods with an argument.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/SFGrenade/SFCore/new/master/apiSpec/new?filename=SFCore_Utils_FunctionAction_1.md&amp;value=---%0Auid%3A%20SFCore.Utils.FunctionAction%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SFCore.Utils.FunctionAction`1">
+
+
+
+  <h1 id="SFCore_Utils_FunctionAction_1" data-uid="SFCore.Utils.FunctionAction`1" class="text-break">
+Class FunctionAction&lt;TArg&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Util/FunctionAction.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="SFCore.html">SFCore</a>.<a class="xref" href="SFCore.Utils.html">Utils</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>SFCore.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>FsmStateAction that invokes methods with an argument.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class FunctionAction&lt;TArg&gt; : FsmStateAction, IFsmStateAction</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TArg</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">FsmStateAction</span></div>
+      <div><span class="xref">FunctionAction&lt;TArg&gt;</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><span class="xref">IFsmStateAction</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <span class="xref">FsmStateAction.ActiveHighlightColor</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Repaint</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Init(FsmState)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.InitEditor(Fsm)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnPreprocess()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Awake()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Event(FsmEvent)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Finish()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerator">FsmStateAction.StartCoroutine(IEnumerator)</a>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.StopCoroutine(Coroutine)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnFixedUpdate()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnUpdate()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnGUI()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnLateUpdate()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnExit()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnDrawActionGizmos()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.OnDrawActionGizmosSelected()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.AutoName()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">FsmStateAction.OnActionTargetInvoked(object)</a>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.GetProgress()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoCollisionEnter(Collision)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoCollisionStay(Collision)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoCollisionExit(Collision)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoTriggerEnter(Collider)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoTriggerStay(Collider)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoTriggerExit(Collider)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoParticleCollision(GameObject)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoCollisionEnter2D(Collision2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoCollisionStay2D(Collision2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoCollisionExit2D(Collision2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoTriggerEnter2D(Collider2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoTriggerStay2D(Collider2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoTriggerExit2D(Collider2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoControllerColliderHit(ControllerColliderHit)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">FsmStateAction.DoJointBreak(float)</a>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoJointBreak2D(Joint2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DoAnimatorMove()</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">FsmStateAction.DoAnimatorIK(int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">FsmStateAction.Log(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">FsmStateAction.LogWarning(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">FsmStateAction.LogError(string)</a>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.ErrorCheck()</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.TagMatches(FsmString, Component)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.TagMatches(FsmString, Collision)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.TagMatches(FsmString, Collision2D)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.TagMatches(FsmString, ControllerColliderHit)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.TagMatches(FsmString, GameObject)</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Name</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.DisplayName</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Fsm</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Owner</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.State</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Enabled</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.IsOpen</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.IsAutoNamed</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Entered</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Finished</span>
+    </div>
+    <div>
+      <span class="xref">FsmStateAction.Active</span>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertActionAfter_HutongGames_PlayMaker_FsmStateAction_HutongGames_PlayMaker_FsmStateAction_">FsmUtil.InsertActionAfter(FsmStateAction, FsmStateAction)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertActionBefore_HutongGames_PlayMaker_FsmStateAction_HutongGames_PlayMaker_FsmStateAction_">FsmUtil.InsertActionBefore(FsmStateAction, FsmStateAction)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertFsmActionAfter_HutongGames_PlayMaker_FsmStateAction_HutongGames_PlayMaker_FsmStateAction_">FsmUtil.InsertFsmActionAfter(FsmStateAction, FsmStateAction)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertFsmActionBefore_HutongGames_PlayMaker_FsmStateAction_HutongGames_PlayMaker_FsmStateAction_">FsmUtil.InsertFsmActionBefore(FsmStateAction, FsmStateAction)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertFsmMethodAfter_HutongGames_PlayMaker_FsmStateAction_System_Action_">FsmUtil.InsertFsmMethodAfter(FsmStateAction, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertFsmMethodBefore_HutongGames_PlayMaker_FsmStateAction_System_Action_">FsmUtil.InsertFsmMethodBefore(FsmStateAction, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertMethodAfter_HutongGames_PlayMaker_FsmStateAction_System_Action_">FsmUtil.InsertMethodAfter(FsmStateAction, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.FsmUtil.html#SFCore_Utils_FsmUtil_InsertMethodBefore_HutongGames_PlayMaker_FsmStateAction_System_Action_">FsmUtil.InsertMethodBefore(FsmStateAction, Action)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.Util.html#SFCore_Utils_Util_GetAttr__2___0_System_String_">Util.GetAttr&lt;TSelf, TVal&gt;(TSelf, string)</a>
+  </div>
+  <div>
+      <a class="xref" href="SFCore.Utils.Util.html#SFCore_Utils_Util_SetAttr__2___0_System_String___1_">Util.SetAttr&lt;TSelf, TVal&gt;(TSelf, string, TVal)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="SFCore_Utils_FunctionAction_1_action" data-uid="SFCore.Utils.FunctionAction`1.action">
+  action
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Util/FunctionAction.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The method to invoke.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Action&lt;TArg&gt; action</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;TArg&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="SFCore_Utils_FunctionAction_1_arg" data-uid="SFCore.Utils.FunctionAction`1.arg">
+  arg
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Util/FunctionAction.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The argument.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TArg arg</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TArg</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="SFCore_Utils_FunctionAction_1_OnEnter_" data-uid="SFCore.Utils.FunctionAction`1.OnEnter*"></a>
+
+  <h3 id="SFCore_Utils_FunctionAction_1_OnEnter" data-uid="SFCore.Utils.FunctionAction`1.OnEnter">
+  OnEnter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Util/FunctionAction.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Called when the action is being processed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnEnter()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="SFCore_Utils_FunctionAction_1_Reset_" data-uid="SFCore.Utils.FunctionAction`1.Reset*"></a>
+
+  <h3 id="SFCore_Utils_FunctionAction_1_Reset" data-uid="SFCore.Utils.FunctionAction`1.Reset">
+  Reset()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/SFGrenade/SFCore/blob/master/src/Util/FunctionAction.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Resets the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Reset()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/SFGrenade/SFCore/blob/master/src/Util/FunctionAction.cs/#L9" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

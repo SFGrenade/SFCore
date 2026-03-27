@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace SFCore </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace SFCore ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="SFCore">
+
+  <h1 id="SFCore" data-uid="SFCore" class="text-break">Namespace SFCore</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.AchievementHelper.html">AchievementHelper</a></dt>
+      <dd><p>Achievement helper class for easily adding custom achievements.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>titleConvo Language string(s)</li>
+<li>textConvo Language string(s)</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.CharmHelper.html">CharmHelper</a></dt>
+      <dd><p>Charm helper class for easily adding custom charms.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>&quot;CHARM_NAME_{ID}&quot; Language string(s)</li>
+<li>&quot;CHARM_DESC_{ID}&quot; Language string(s)</li>
+<li>&quot;gotCharm_{ID}&quot; PlayerData bool(s)</li>
+<li>&quot;newCharm_{ID}&quot; PlayerData bool(s)</li>
+<li>&quot;equippedCharm_{ID}&quot; PlayerData bool(s)</li>
+<li>&quot;charmCost_{ID}&quot; PlayerData int(s)</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.DlcIconHelper.html">DlcIconHelper</a></dt>
+      <dd><p>DLC icon helper class for easily adding custom dlc icons.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EasyCharm.html">EasyCharm</a></dt>
+      <dd><p>An Abstract class representing an EasyCharm</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EasyCharmState.html">EasyCharmState</a></dt>
+      <dd><p>Serializable state of an EasyCharm</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.html">EnviromentParticleHelper</a></dt>
+      <dd><p>Enviroment particle helper class for easily adding custom enviroment particles.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.InventoryHelper.html">InventoryHelper</a></dt>
+      <dd><p>Helper class for easily adding new inventory pages.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>1 name language string per page</li>
+<li>0 to 1 PlayerData bools per page</li>
+<li>0 to 1 events per item</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.ItemHelper.html">ItemHelper</a></dt>
+      <dd><p>Item helper class for easily adding custom items.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>0 to 3 PlayerData bools per item</li>
+<li>0 to 1 PlayerData int per item</li>
+<li>1 to 3 name language strings per item</li>
+<li>1 to 4 description language strings per item</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.MenuStyleHelper.html">MenuStyleHelper</a></dt>
+      <dd><p>Menu style helper class for easily adding custom menu styles.
+The mod using this needs to handle the following:
+1 language string per menu style
+up to 1 title logo index per menu style</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.SFCoreGlobalSettings.html">SFCoreGlobalSettings</a></dt>
+      <dd><p>Global settings for SFCore</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.SFCoreMod.html">SFCoreMod</a></dt>
+      <dd><p>Used for static initialization.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.SFCoreSaveSettings.html">SFCoreSaveSettings</a></dt>
+      <dd><p>Save specific settings for SFCore</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.TitleLogoHelper.html">TitleLogoHelper</a></dt>
+      <dd><p>Title logo helper class for easily adding custom title logos.
+The mod using this needs to handle the following:</p>
+<ul>
+<li>save title logo IDs</li>
+</ul>
+</dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.ItemHelper.Item.html">ItemHelper.Item</a></dt>
+      <dd><p>Data of one item.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.SCustomAchievement.html">SCustomAchievement</a></dt>
+      <dd><p>Structure of data for a single achievement.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.InventoryPageType.html">InventoryPageType</a></dt>
+      <dd><p>Enum to determine type of the inventory page.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.ItemType.html">ItemType</a></dt>
+      <dd><p>Enum to determine type of item.</p>
+</dd>
+    </dl>
+    <h3 id="delegates">
+Delegates
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomDashEffectsHook.html">EnviromentParticleHelper.CustomDashEffectsHook</a></dt>
+      <dd><p>Hook to add custom dash effects.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.html">EnviromentParticleHelper.CustomHardLandEffectsHook</a></dt>
+      <dd><p>Hook to add custom hard land effects.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.html">EnviromentParticleHelper.CustomJumpEffectsHook</a></dt>
+      <dd><p>Hook to add custom jump effects.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomRunAudioHook.html">EnviromentParticleHelper.CustomRunAudioHook</a></dt>
+      <dd><p>Hook to add custom run audio.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomRunEffectsHook.html">EnviromentParticleHelper.CustomRunEffectsHook</a></dt>
+      <dd><p>Hook to add custom run effects.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.html">EnviromentParticleHelper.CustomSoftLandEffectsHook</a></dt>
+      <dd><p>Hook to add custom soft land effects.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.EnviromentParticleHelper.CustomWalkAudioHook.html">EnviromentParticleHelper.CustomWalkAudioHook</a></dt>
+      <dd><p>Hook to add custom walk audio.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="SFCore.MenuStyleHelper.Hook.html">MenuStyleHelper.Hook</a></dt>
+      <dd><p>Hook to add custom run audio.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
