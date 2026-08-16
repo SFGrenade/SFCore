@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout master
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: master
           path: master
@@ -23,18 +23,18 @@ jobs:
 
       # should be part of the installed software of the runner
       #- name: Setup .NET
-      #  uses: actions/setup-dotnet@v4
+      #  uses: actions/setup-dotnet@v6
       #  with:
       #    dotnet-version: 9
       #    cache: true
 
       - name: Build docs
-        uses: nunit/docfx-action@v3.4.2
+        uses: nunit/docfx-action@v4.1.0
         with:
           args: master/docs/docfx.json
 
       #- name: Setup .NET
-      #  uses: actions/setup-dotnet@v3
+      #  uses: actions/setup-dotnet@v6
       #- name: Setup ms-build, mono
       #  run: sudo apt-get install -y nuget mono-devel mono-xbuild
       #- name: Download DocFX
