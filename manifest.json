@@ -1,0 +1,932 @@
+{
+  "source_base_path": "/github/workspace/master/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.AchievementHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.AchievementHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.AchievementHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.AchievementHelper.yml\" sourcestartlinenumber=\"1\">Achievement helper class for easily adding custom achievements.\nThe mod using this needs to handle the following:</p>\n<ul sourcefile=\"api/SFCore.AchievementHelper.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"api/SFCore.AchievementHelper.yml\" sourcestartlinenumber=\"3\">titleConvo Language string(s)</li>\n<li sourcefile=\"api/SFCore.AchievementHelper.yml\" sourcestartlinenumber=\"4\">textConvo Language string(s)</li>\n</ul>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.CharmHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.CharmHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.CharmHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"1\">Charm helper class for easily adding custom charms.\nThe mod using this needs to handle the following:</p>\n<ul sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"3\">&quot;CHARM_NAME_{ID}&quot; Language string(s)</li>\n<li sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"4\">&quot;CHARM_DESC_{ID}&quot; Language string(s)</li>\n<li sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"5\">&quot;gotCharm_{ID}&quot; PlayerData bool(s)</li>\n<li sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"6\">&quot;newCharm_{ID}&quot; PlayerData bool(s)</li>\n<li sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"7\">&quot;equippedCharm_{ID}&quot; PlayerData bool(s)</li>\n<li sourcefile=\"api/SFCore.CharmHelper.yml\" sourcestartlinenumber=\"8\">&quot;charmCost_{ID}&quot; PlayerData int(s)</li>\n</ul>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.DlcIconHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.DlcIconHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.DlcIconHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.DlcIconHelper.yml\" sourcestartlinenumber=\"1\">DLC icon helper class for easily adding custom dlc icons.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EasyCharm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EasyCharm.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EasyCharm",
+      "Summary": "<p sourcefile=\"api/SFCore.EasyCharm.yml\" sourcestartlinenumber=\"1\">An Abstract class representing an EasyCharm</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EasyCharmState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EasyCharmState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EasyCharmState",
+      "Summary": "<p sourcefile=\"api/SFCore.EasyCharmState.yml\" sourcestartlinenumber=\"1\">Serializable state of an EasyCharm</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomDashEffectsHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomDashEffectsHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom dash effects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomHardLandEffectsHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom hard land effects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomJumpEffectsHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomJumpEffectsHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom jump effects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomRunAudioHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomRunAudioHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom run audio.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomRunEffectsHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomRunEffectsHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom run effects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomSoftLandEffectsHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom soft land effects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper.CustomWalkAudioHook",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.CustomWalkAudioHook.yml\" sourcestartlinenumber=\"1\">Hook to add custom walk audio.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.EnviromentParticleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.EnviromentParticleHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.EnviromentParticleHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.EnviromentParticleHelper.yml\" sourcestartlinenumber=\"1\">Enviroment particle helper class for easily adding custom enviroment particles.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.FullSettingsMod-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.FullSettingsMod-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Generics.FullSettingsMod<TSave, TGlobal>",
+      "Summary": "<p sourcefile=\"api/SFCore.Generics.FullSettingsMod-2.yml\" sourcestartlinenumber=\"1\">Abstract class to avoid boilerplate code.\nThis adds easy SaveSettings and GlobalSettings functionality.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.GlobalSettingsMod-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.GlobalSettingsMod-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Generics.GlobalSettingsMod<TGlobal>",
+      "Summary": "<p sourcefile=\"api/SFCore.Generics.GlobalSettingsMod-1.yml\" sourcestartlinenumber=\"1\">Abstract class to avoid boilerplate code.\nThis adds easy GlobalSettings functionality.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.SaveSettingsMod-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.SaveSettingsMod-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Generics.SaveSettingsMod<TSave>",
+      "Summary": "<p sourcefile=\"api/SFCore.Generics.SaveSettingsMod-1.yml\" sourcestartlinenumber=\"1\">Abstract class to avoid boilerplate code.\nThis adds easy SaveSettings functionality.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Generics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Generics.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Generics",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.InventoryHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.InventoryHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.InventoryHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.InventoryHelper.yml\" sourcestartlinenumber=\"1\">Helper class for easily adding new inventory pages.\nThe mod using this needs to handle the following:</p>\n<ul sourcefile=\"api/SFCore.InventoryHelper.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"api/SFCore.InventoryHelper.yml\" sourcestartlinenumber=\"3\">1 name language string per page</li>\n<li sourcefile=\"api/SFCore.InventoryHelper.yml\" sourcestartlinenumber=\"4\">0 to 1 PlayerData bools per page</li>\n<li sourcefile=\"api/SFCore.InventoryHelper.yml\" sourcestartlinenumber=\"5\">0 to 1 events per item</li>\n</ul>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.InventoryPageType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.InventoryPageType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.InventoryPageType",
+      "Summary": "<p sourcefile=\"api/SFCore.InventoryPageType.yml\" sourcestartlinenumber=\"1\">Enum to determine type of the inventory page.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemHelper.Item.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemHelper.Item.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.ItemHelper.Item",
+      "Summary": "<p sourcefile=\"api/SFCore.ItemHelper.Item.yml\" sourcestartlinenumber=\"1\">Data of one item.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.ItemHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.ItemHelper.yml\" sourcestartlinenumber=\"1\">Item helper class for easily adding custom items.\nThe mod using this needs to handle the following:</p>\n<ul sourcefile=\"api/SFCore.ItemHelper.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"api/SFCore.ItemHelper.yml\" sourcestartlinenumber=\"3\">0 to 3 PlayerData bools per item</li>\n<li sourcefile=\"api/SFCore.ItemHelper.yml\" sourcestartlinenumber=\"4\">0 to 1 PlayerData int per item</li>\n<li sourcefile=\"api/SFCore.ItemHelper.yml\" sourcestartlinenumber=\"5\">1 to 3 name language strings per item</li>\n<li sourcefile=\"api/SFCore.ItemHelper.yml\" sourcestartlinenumber=\"6\">1 to 4 description language strings per item</li>\n</ul>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ItemType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ItemType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.ItemType",
+      "Summary": "<p sourcefile=\"api/SFCore.ItemType.yml\" sourcestartlinenumber=\"1\">Enum to determine type of item.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MenuStyleHelper.Hook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MenuStyleHelper.Hook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MenuStyleHelper.Hook",
+      "Summary": "<p sourcefile=\"api/SFCore.MenuStyleHelper.Hook.yml\" sourcestartlinenumber=\"1\">Hook to add custom run audio.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MenuStyleHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MenuStyleHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MenuStyleHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.MenuStyleHelper.yml\" sourcestartlinenumber=\"1\">Menu style helper class for easily adding custom menu styles.\nThe mod using this needs to handle the following:\n1 language string per menu style\nup to 1 title logo index per menu style</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ModInterOp.MIOController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ModInterOp.MIOController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.ModInterOp.MIOController",
+      "Summary": "<p sourcefile=\"api/SFCore.ModInterOp.MIOController.yml\" sourcestartlinenumber=\"1\">Class that handles mod interop.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.ModInterOp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.ModInterOp.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.ModInterOp",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.BlurPlanePatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.BlurPlanePatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.BlurPlanePatcher",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.BlurPlanePatcher.yml\" sourcestartlinenumber=\"1\">Patching BlurPlane</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.CueHolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.CueHolder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.CueHolder",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.CueHolder.yml\" sourcestartlinenumber=\"1\">This class is for managing dynamically created MusicCue and AtmosCue instances</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.CustomItemList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.CustomItemList.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.CustomItemList",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.CustomItemList.yml\" sourcestartlinenumber=\"1\">Custom Item List for ItemHelper</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.PatchMusicRegions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.PatchMusicRegions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.PatchMusicRegions",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.PatchMusicRegions.yml\" sourcestartlinenumber=\"1\">Patching MusicRegion</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.ActorChoices.yml\" sourcestartlinenumber=\"1\">Replacement for AudioMixerSnapshots</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChannels.yml\" sourcestartlinenumber=\"1\">Replacement for private ingame enums</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.AtmosChoices.yml\" sourcestartlinenumber=\"1\">Replacement for AudioMixerSnapshots</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.DarknessLevel.yml\" sourcestartlinenumber=\"1\">Replacement for private ingame enums</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviroChoices.yml\" sourcestartlinenumber=\"1\">Replacement for AudioMixerSnapshots</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.EnviromentType.yml\" sourcestartlinenumber=\"1\">Replacement for private ingame enums</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChannelSync.yml\" sourcestartlinenumber=\"1\">Replacement for private ingame enums</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.MusicChoices.yml\" sourcestartlinenumber=\"1\">Replacement for AudioMixerSnapshots</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.ShadeChoices.yml\" sourcestartlinenumber=\"1\">Replacement for AudioMixerSnapshots</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneManagerPatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneManagerPatcher",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneManagerPatcher.yml\" sourcestartlinenumber=\"1\">Patching SceneManager</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SceneMapPatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SceneMapPatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SceneMapPatcher",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SceneMapPatcher.yml\" sourcestartlinenumber=\"1\">Patching SceneMap MeshRenderer</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.SpritePatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.SpritePatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours.SpritePatcher",
+      "Summary": "<p sourcefile=\"api/SFCore.MonoBehaviours.SpritePatcher.yml\" sourcestartlinenumber=\"1\">Patching Sprites from assetbundles</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.MonoBehaviours.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.MonoBehaviours.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.MonoBehaviours",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SCustomAchievement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SCustomAchievement.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.SCustomAchievement",
+      "Summary": "<p sourcefile=\"api/SFCore.SCustomAchievement.yml\" sourcestartlinenumber=\"1\">Structure of data for a single achievement.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreGlobalSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreGlobalSettings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.SFCoreGlobalSettings",
+      "Summary": "<p sourcefile=\"api/SFCore.SFCoreGlobalSettings.yml\" sourcestartlinenumber=\"1\">Global settings for SFCore</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreMod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreMod.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.SFCoreMod",
+      "Summary": "<p sourcefile=\"api/SFCore.SFCoreMod.yml\" sourcestartlinenumber=\"1\">Used for static initialization.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.SFCoreSaveSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.SFCoreSaveSettings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.SFCoreSaveSettings",
+      "Summary": "<p sourcefile=\"api/SFCore.SFCoreSaveSettings.yml\" sourcestartlinenumber=\"1\">Save specific settings for SFCore</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.TitleLogoHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.TitleLogoHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.TitleLogoHelper",
+      "Summary": "<p sourcefile=\"api/SFCore.TitleLogoHelper.yml\" sourcestartlinenumber=\"1\">Title logo helper class for easily adding custom title logos.\nThe mod using this needs to handle the following:</p>\n<ul sourcefile=\"api/SFCore.TitleLogoHelper.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"api/SFCore.TitleLogoHelper.yml\" sourcestartlinenumber=\"3\">save title logo IDs</li>\n</ul>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.FsmUtil.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.FsmUtil",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.FsmUtil.yml\" sourcestartlinenumber=\"1\">Utils specifically for PlayMakerFSMs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.FunctionAction-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.FunctionAction-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.FunctionAction<TArg>",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.FunctionAction-1.yml\" sourcestartlinenumber=\"1\">FsmStateAction that invokes methods with an argument.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.LanguageStrings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.LanguageStrings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.LanguageStrings",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.LanguageStrings.yml\" sourcestartlinenumber=\"1\">Helper class to load language strings from a JSON resource.\nSupports multiple languages.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.LogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.LogAction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.LogAction",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.LogAction.yml\" sourcestartlinenumber=\"1\">FsmStateAction that logs the value of an FsmString.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.MethodAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.MethodAction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.MethodAction",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.MethodAction.yml\" sourcestartlinenumber=\"1\">FsmStateAction that invokes methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.MiscCreator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.MiscCreator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.MiscCreator",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.MiscCreator.yml\" sourcestartlinenumber=\"1\">Utils specifically for creating or resetting Hollow Knight MonoBehaviours.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.SpriteUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.SpriteUtil.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.SpriteUtil",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.SpriteUtil.yml\" sourcestartlinenumber=\"1\">Utils specifically for Sprites and Textures.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.StatusLog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.StatusLog.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.StatusLog",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.StatusLog.yml\" sourcestartlinenumber=\"1\">FsmStateAction that logs the value of an FsmString and gives context of which GameObject with which Fsm in which State produces the log.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.USceneUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.USceneUtil.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.USceneUtil",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.USceneUtil.yml\" sourcestartlinenumber=\"1\">Utils specifically for Unity Scenes and GameObjects.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.Util.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.Util",
+      "Summary": "<p sourcefile=\"api/SFCore.Utils.Util.yml\" sourcestartlinenumber=\"1\">Misc utils to use.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.WavUtils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.WavUtils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils.WavUtils",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.Utils.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore.Utils",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SFCore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SFCore.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SFCore",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/charms.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/charms.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "articles/toc.json"
+        },
+        ".html": {
+          "relative_path": "articles/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
